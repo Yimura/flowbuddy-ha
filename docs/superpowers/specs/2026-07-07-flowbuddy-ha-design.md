@@ -65,17 +65,30 @@ flowbuddy-ha/                                # sibling to HA/ at /home/andre/Doc
 ├── LICENSE                                  # MIT
 ├── hacs.json                                # HACS manifest
 ├── info.md                                  # HACS install screen
-├── pyproject.toml                           # dev deps (ruff, pytest, mypy), Python 3.13
+├── pyproject.toml                           # dev deps (ruff, pytest, mypy, openapi-python-client)
+├── Makefile                                 # `make regen` -> re-run codegen from pinned spec
+├── openapi/
+│   ├── flexmon-v1.json                      # vendored OpenAPI spec, pinned by version+sha256
+│   └── flexmon-v1.sha256                    # integrity guard; CI fails if spec drifts
 ├── .github/workflows/
 │   ├── validate.yml                         # hassfest + HACS validation on PR
-│   └── tests.yml                            # pytest + coverage
+│   ├── tests.yml                            # pytest + coverage
+│   └── regen-check.yml                      # runs `make regen` -> fails if generated diff
 ├── custom_components/flowbuddy/
 │   ├── __init__.py                          # async_setup_entry, coordinator wiring
 │   ├── manifest.json                        # domain, version, iot_class=cloud_polling
 │   ├── const.py                             # DOMAIN, defaults, Keycloak URL constants
 │   ├── config_flow.py                       # UI flow: auth mode → creds → installation
-│   ├── api.py                               # FlowBuddyClient (aiohttp), auth + refresh
-│   ├── coordinator.py                       # FlowBuddyLiveCoordinator + DailyCoordinator
+│   ├── _generated/                          # openapi-python-client output (VENDORED, DO NOT EDIT)
+│   │   ├── __init__.py                      # regen header: spec version + generator version
+│   │   ├── client.py                        # AuthenticatedClient / Client (httpx-based)
+│   │   ├── models/                          # attrs models per schema (217 files)
+│   │   ├── api/                             # one module per tag (e.g. api/installation_apis/)
+│   │   ├── types.py
+│   │   └── errors.py
+│   ├── auth.py                              # KeycloakTokenProvider + httpx.Auth adapter
+│   ├── api.py                               # FlowBuddyClient — thin facade over _generated
+│   ├── coordinator.py                       # FlowBuddyLiveCoordinator + DailyCoordinator + AlarmsCoordinator
 │   ├── discovery.py                         # measurementtypes+meters → EntityDescription list
 │   ├── entity.py                            # FlowBuddyEntity base (device wiring, via_device)
 │   ├── sensor.py                            # dynamic sensors from discovery
@@ -88,14 +101,35 @@ flowbuddy-ha/                                # sibling to HA/ at /home/andre/Doc
 │   ├── translations/{en,nl,fr}.json         # match SIMPL languages
 │   └── diagnostics.py                       # redacted config + last-seen data dump
 └── tests/
-    ├── conftest.py                          # aioresponses fixtures + sample JSON
+    ├── conftest.py                          # respx (httpx mock) fixtures + sample JSON
     ├── fixtures/                            # captured API responses (redacted)
     ├── test_config_flow.py
-    ├── test_api_auth.py                     # token refresh, 401 retry, single-flight lock
+    ├── test_auth.py                         # token refresh, 401 retry, single-flight lock
+    ├── test_api_facade.py                   # api.py wraps generated calls correctly
     ├── test_coordinator.py                  # partial failure + adaptive backoff
     ├── test_discovery.py                    # every unit/isIncremental combo
     └── test_sensor.py
 ```
+
+### 4.1.1 Code generation
+
+The upstream OpenAPI 3.0.1 spec is the source of truth for models, request/response shapes, and endpoint URLs. All of that code is **generated, never handwritten**.
+
+- **Generator**: [`openapi-python-client`](https://github.com/openapi-generators/openapi-python-client) (async, typed, `attrs`-based models, `httpx` transport). Chosen over `openapi-generator` (JVM-based, less idiomatic Python) and `datamodel-code-generator` (models only, no client).
+- **Vendored output**: generated code is committed to `custom_components/flowbuddy/_generated/`. Vendoring (vs generating at install time) matters because:
+  1. HACS installs the component as-is — no build step available at the user's HA host.
+  2. Users' HA runtime cannot depend on `openapi-python-client` (dev-only tool).
+  3. `hassfest` validates only what's committed.
+- **Spec pinning**: `openapi/flexmon-v1.json` is committed alongside a `flexmon-v1.sha256`. The `regen-check.yml` workflow re-downloads the spec from the vendor URL, compares the hash, and if it drifts opens a "spec updated upstream" issue rather than silently regenerating. This prevents an upstream breaking change from being auto-merged.
+- **Regen command**: `make regen` runs, in order:
+  1. `python -m openapi_python_client generate --path openapi/flexmon-v1.json --output-path custom_components/flowbuddy/_generated --overwrite --meta none`
+  2. `ruff format` + `ruff check --fix` on the generated tree (removes generator noise, applies project style).
+  3. `python -m scripts.check_generated_header` — asserts `_generated/__init__.py` records `spec_version` + `generator_version` for provenance.
+- **CI enforcement**: `regen-check.yml` runs `make regen` on every PR and fails if the working tree has any diff — guarantees generated code always matches the pinned spec. Prevents drift where someone hand-edits `_generated/` and the next regen would silently overwrite it.
+- **What stays hand-written**:
+  - `auth.py` — Keycloak token acquisition + refresh + single-flight lock. Generated client's default auth is trivial bearer; ours needs OIDC lifecycle management.
+  - `api.py` — thin facade that (a) constructs the generated `AuthenticatedClient` with the HA-provided `httpx.AsyncClient` and our auth adapter, and (b) exposes convenience methods (`list_installations()`, `instant_values(installation_id)`, `set_charge_power(battery_id, watts)`) that delegate to the generated per-endpoint functions. This isolates the rest of the integration from generator API-shape churn.
+  - `coordinator.py`, `discovery.py`, entity platforms, config flow — pure integration logic, uses generated *types* but not generator-specific transport primitives.
 
 ### 4.2 Authentication
 
@@ -114,11 +148,17 @@ Two auth modes are supported via config flow. Both use the same token endpoint:
 - Token request: `grant_type=password&username=…&password=…&client_id=…&scope=openid profile email`.
 - Refresh via `grant_type=refresh_token` — the password grant returns a refresh token; client_credentials does not, so the credentials flow simply re-authenticates on expiry.
 
-**Token lifecycle**:
+**Token lifecycle** — implemented in `auth.py` as `KeycloakTokenProvider`:
 
-- Access token cached in `FlowBuddyClient._token` with `expires_at` timestamp.
-- On every request, if `expires_at < now + 60s`, refresh (or re-auth for client_credentials) inside an `asyncio.Lock` so concurrent requests don't stampede.
-- On `401` from a request, invalidate the token, retry once with a fresh token, then raise `ConfigEntryAuthFailed` (HA triggers the re-auth flow automatically).
+- Access token + `expires_at` held in the provider instance.
+- On every request (or ahead of it, when refresh timer fires) if `expires_at < now + 60s`, refresh (or re-auth for `client_credentials`) inside an `asyncio.Lock` so concurrent requests don't stampede.
+- On `401` from a downstream request, invalidate the token, retry once with a fresh token, then raise `ConfigEntryAuthFailed` (HA triggers the re-auth flow automatically).
+
+**HTTP transport + auth adapter**:
+
+- Uses HA's shared httpx client via `homeassistant.helpers.httpx_client.get_async_client(hass)` — first-class HA helper that inherits proxy config, cert store, and lifecycle management. No separate connection pool.
+- `KeycloakTokenProvider` exposes `httpx_auth() -> httpx.Auth`. That adapter implements httpx's `auth_flow` generator: yields a request with the current bearer, if response is `401` refreshes and yields the request again (single retry). Plugs directly into the generated `AuthenticatedClient` via its `token=` / `auth=` hook.
+- Token refresh **does not** go through the generated client — it hits `POST .../protocol/openid-connect/token` directly with `httpx.AsyncClient` (Keycloak isn't in the FlexMon OpenAPI spec).
 
 **Secret storage**: HA's `ConfigEntry.data` (encrypted at rest by the storage layer). Never logged. `diagnostics.py` uses `async_redact_data` on `client_secret`, `password`, `refresh_token`, `access_token`.
 
@@ -238,14 +278,16 @@ Once the user picks these in the Energy setup UI, the Energy Distribution card, 
 
 ### 4.8 Testing
 
-- Unit tests use `aioresponses` (or `aiohttp`'s test utilities) with captured JSON fixtures (redacted before commit — installation UUIDs replaced with `00000000-0000-0000-0000-000000000000`, serial numbers replaced with `TEST-SN-…`, email/personal-name fields replaced).
-- Coverage floor: 85% for `api.py`, `coordinator.py`, `discovery.py`; 70% for entity platforms.
+- Unit tests use `respx` (httpx transport mock) with captured JSON fixtures (redacted before commit — installation UUIDs replaced with `00000000-0000-0000-0000-000000000000`, serial numbers replaced with `TEST-SN-…`, email/personal-name fields replaced).
+- Generated code under `_generated/` is not directly unit-tested (generator is authoritative); tests exercise `api.py`, `auth.py`, `coordinator.py`, `discovery.py`, and entity platforms.
+- Coverage floor: 85% for `api.py`, `auth.py`, `coordinator.py`, `discovery.py`; 70% for entity platforms. `_generated/` excluded from coverage.
 - **`test_config_flow.py`**: both auth modes; wrong creds; installation picker (0, 1, N installations); duplicate config prevention.
-- **`test_api_auth.py`**: token refresh; 401 → retry → success; 401 → retry → 401 → `ConfigEntryAuthFailed`; concurrent requests during refresh (single-flight lock).
+- **`test_auth.py`**: token refresh; 401 → retry → success; 401 → retry → 401 → `ConfigEntryAuthFailed`; concurrent requests during refresh (single-flight lock); httpx.Auth adapter contract.
+- **`test_api_facade.py`**: `api.py` invokes the correct generated endpoint function with correct params; response typing round-trips via generated `attrs` models.
 - **`test_coordinator.py`**: normal update; per-measurement missing value; full failure; `429` backoff; `5xx` backoff; recovery halves interval.
 - **`test_discovery.py`**: every row of the mapping table; unknown unit still creates sensor; SOC vs generic `%`; kW↔W unit scaling.
 - **`test_sensor.py`**: state updates from coordinator; unavailable when coordinator failed; correct `device_class` + `state_class` per fixture.
-- CI: `hassfest` (`home-assistant/actions/hassfest@master`) + `hacs/action@main` on every PR; pytest + coverage on Python 3.13; ruff + mypy strict.
+- CI: `hassfest` (`home-assistant/actions/hassfest@master`) + `hacs/action@main` + `regen-check.yml` on every PR; pytest + coverage on Python 3.13; ruff + mypy strict (with `_generated/` excluded from mypy strict but included in ruff format check).
 
 Manual E2E on the owner's live HA:
 
@@ -274,6 +316,7 @@ These do not block the design but must be answered before v1 ships. They are cal
 5. **HVAC mode enum** — verify the `hvac` schema's mode field name and allowed values against a live response before finalising the `climate` entity's `hvac_modes`.
 6. **`instantvalues` vs `measurementvalues`** — confirm `/instantvalues` returns latest-per-measurement (assumed from name); if not, fall back to `/measurementvalues?sortby=-timestart&pagesize=1` per measurement (worse — N requests per poll).
 7. **`installation` filter on `/instantvalues`** — the spec parameters list didn't include `installation` for `/instantvalues` (unlike `/measurementvalues`). Confirm with a live call; if unsupported, filter client-side or iterate per meter.
+8. **Codegen output review** — first `make regen` output will land ~200 model files + ~40 API modules under `_generated/`. Sanity-check bundle size (target < 2 MB) and that `openapi-python-client` handles the spec's `application/hal+json` responses (HAL-specific unmarshalling may need a small custom decoder in `api.py`). If HAL breaks generator, fall back to `application/problem+json` variant (spec offers both content types on same responses).
 
 ## 6. Success criteria
 
@@ -293,3 +336,5 @@ The integration is considered successful when:
 - **`password` grant may be disabled** on the Keycloak client used by the SPA. Mitigation: `client_credentials` is documented and preferred; password is the fallback only.
 - **Feature-flag heterogeneity**: `env-config.js` shows many features can be tenant-disabled. Mitigation: skip-on-403 and skip-on-empty-response behaviour, no hard-coded per-feature assumptions.
 - **HVAC / battery control mis-operation** could damage equipment or cause discomfort. Mitigation: `number` entities constrained by the vendor-reported ranges (`maxPower`, `maxChargePower`), no default automation shipped, README warns to test before wiring into automations.
+- **Vendored generated code bloat**: `_generated/` may add hundreds of files (~217 model files, ~40 tag-grouped API modules). Mitigation: `make regen` post-processes with `ruff format` + `ruff check --fix`; a pre-commit gate rejects PRs where `_generated/` was hand-edited (checked via `regen-check.yml`). Component still loads fine in HA — Python import cost is a one-time hit at HA start.
+- **Generator abandonment / spec incompatibility**: `openapi-python-client` may struggle with FlexMon's HAL+JSON responses, or drop maintenance. Mitigation: `api.py` facade isolates the rest of the code from generator specifics; swapping to `datamodel-code-generator` (types only) + handwritten aiohttp calls is a bounded change that touches only `api.py` and `_generated/`.
