@@ -25,7 +25,9 @@
     },
     "abort": {
       "already_configured": "Deze installatie is al geconfigureerd.",
-      "no_installations": "Er zijn geen installaties gevonden voor dit account."
+      "no_installations": "Er zijn geen installaties gevonden voor dit account.",
+      "reauth_successful": "Inloggegevens succesvol bijgewerkt.",
+      "unique_id_mismatch": "Deze installatie komt niet overeen met de opnieuw te authenticeren configuratie."
     }
   },
   "services": {

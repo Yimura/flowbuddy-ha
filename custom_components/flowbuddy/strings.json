@@ -25,7 +25,9 @@
     },
     "abort": {
       "already_configured": "This installation is already configured.",
-      "no_installations": "No installations were found for this account."
+      "no_installations": "No installations were found for this account.",
+      "reauth_successful": "Credentials updated successfully.",
+      "unique_id_mismatch": "This installation does not match the entry being re-authenticated."
     }
   },
   "services": {

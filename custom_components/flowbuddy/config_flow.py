@@ -50,6 +50,13 @@ class FlowBuddyConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
     ) -> config_entries.ConfigFlowResult:
+        """Standard SOURCE_USER entry point; delegates to the named auth_mode step."""
+        return await self.async_step_auth_mode(user_input)
+
+    async def async_step_auth_mode(
+        self, user_input: dict[str, Any] | None = None
+    ) -> config_entries.ConfigFlowResult:
+        """Show the auth-mode picker (mapped to the config.step.auth_mode translation)."""
         if user_input is not None:
             self._auth_mode = user_input["mode"]
             return await self.async_step_credentials()
@@ -61,7 +68,7 @@ class FlowBuddyConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 )
             }
         )
-        return self.async_show_form(step_id="user", data_schema=schema)
+        return self.async_show_form(step_id="auth_mode", data_schema=schema)
 
     # -- Step 2: credentials -------------------------------------------------
 

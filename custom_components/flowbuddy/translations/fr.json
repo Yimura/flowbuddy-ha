@@ -25,7 +25,9 @@
     },
     "abort": {
       "already_configured": "Cette installation est déjà configurée.",
-      "no_installations": "Aucune installation n'a été trouvée pour ce compte."
+      "no_installations": "Aucune installation n'a été trouvée pour ce compte.",
+      "reauth_successful": "Identifiants mis à jour avec succès.",
+      "unique_id_mismatch": "Cette installation ne correspond pas à l'entrée en cours de réauthentification."
     }
   },
   "services": {

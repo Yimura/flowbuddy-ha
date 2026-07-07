@@ -40,7 +40,7 @@ async def test_client_creds_happy_path_single_installation(hass, load_fixture, r
 
     result = await _start_user_flow(hass)
     assert result["type"] == data_entry_flow.FlowResultType.FORM
-    assert result["step_id"] == "user"
+    assert result["step_id"] == "auth_mode"
 
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"], {"mode": AUTH_MODE_CLIENT_CREDS}
