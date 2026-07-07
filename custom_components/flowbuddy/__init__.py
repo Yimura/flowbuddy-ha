@@ -28,6 +28,7 @@ from homeassistant.exceptions import (
     ServiceValidationError,
 )
 from homeassistant.helpers import config_validation as cv
+from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers import issue_registry as ir
 from homeassistant.helpers.httpx_client import create_async_httpx_client
@@ -47,6 +48,7 @@ from .coordinator import (
     FlowBuddyDailyCoordinator,
     FlowBuddyInstantCoordinator,
 )
+from .entity import communicator_device_info
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
@@ -373,6 +375,16 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         "alarms_coord": FlowBuddyAlarmsCoordinator(hass, api, installation_id),
     }
     hass.data.setdefault(DOMAIN, {})[entry.entry_id] = entry_data
+
+    # Register communicator devices eagerly so the Devices UI shows firmware
+    # + serial as soon as discovery finishes -- independent of whether the
+    # button platform manages to attach an entity to each communicator.
+    dev_reg = dr.async_get(hass)
+    for comm in communicators:
+        dev_reg.async_get_or_create(
+            config_entry_id=entry.entry_id,
+            **communicator_device_info(comm, installation),
+        )
 
     try:
         # Prime every coordinator before forwarding to platforms: button.py

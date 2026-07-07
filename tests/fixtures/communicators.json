@@ -4,8 +4,15 @@
       {
         "resourceUri": "/communicators/comm-1",
         "logicalDeviceName": "COMM-1",
-        "status": "ACTIVE",
-        "externalId": "comm-1"
+        "firmWareVersion": "XMX_EMSA_V0.8.4",
+        "status": "Registered",
+        "externalId": "comm-1",
+        "type": {
+          "resourceUri": "/communicatortypes/lewiz",
+          "name": "Lewiz",
+          "externalId": "lewiz"
+        },
+        "sim": null
       }
     ]
   },

@@ -8,7 +8,12 @@ from homeassistant.components.button import ButtonEntity
 
 from .api import installation_id as _iid
 from .const import DOMAIN
-from .entity import FlowBuddyEntity, installation_device_info
+from .entity import (
+    FlowBuddyEntity,
+    _first_str,
+    communicator_device_info,
+    installation_device_info,
+)
 
 if TYPE_CHECKING:
     from homeassistant.config_entries import ConfigEntry
@@ -90,14 +95,22 @@ class RequestConnectionTestButton(FlowBuddyEntity, ButtonEntity):
         communicator: Any,
         installation: Any,
     ) -> None:
-        communicator_id = _communicator_field(communicator, "id")
+        # Live tenant payloads carry externalId (uuid), never a top-level id.
+        # Prefer that; fall back to logicalDeviceName; last resort is a
+        # synthetic id-of() so unique_id is never :None:connection_test.
+        communicator_id = (
+            _communicator_field(communicator, "id")
+            or _first_str(getattr(communicator, "external_id", None))
+            or _first_str(getattr(communicator, "logical_device_name", None))
+            or f"unknown-{id(communicator)}"
+        )
         super().__init__(
             coordinator,
             unique_id=f"{_iid(installation) or 'unknown'}:communicator:{communicator_id}:connection_test",
         )
         self._api = api
         self._communicator_id = communicator_id
-        self._attr_device_info = installation_device_info(installation)
+        self._attr_device_info = communicator_device_info(communicator, installation)
 
     async def async_press(self) -> None:
         """Request a connection test for the communicator."""

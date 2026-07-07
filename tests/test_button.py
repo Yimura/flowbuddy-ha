@@ -102,7 +102,8 @@ async def test_alarm_ack_button_calls_close_alarm(load_fixture):
 
 
 async def test_request_connection_test_button_unique_id():
-    """Test RequestConnectionTestButton has correct unique_id."""
+    """Test RequestConnectionTestButton has correct unique_id derived from
+    the live-tenant payload shape (externalId, not id)."""
     from unittest.mock import MagicMock
 
     from custom_components.flowbuddy._generated.models.communicator_output_model import (
@@ -112,7 +113,8 @@ async def test_request_connection_test_button_unique_id():
     communicator = CommunicatorOutputModel.from_dict(
         {
             "resourceUri": "/communicators/c-1",
-            "id": "comm-1",
+            "logicalDeviceName": "XMX-1",
+            "externalId": "comm-1",
         }
     )
     installation = MagicMock(uuid="00000000-0000-0000-0000-000000000001")
@@ -141,7 +143,8 @@ async def test_request_connection_test_button_calls_api():
     communicator = CommunicatorOutputModel.from_dict(
         {
             "resourceUri": "/communicators/c-1",
-            "id": "comm-1",
+            "logicalDeviceName": "XMX-1",
+            "externalId": "comm-1",
         }
     )
     installation = MagicMock(uuid="00000000-0000-0000-0000-000000000001")
@@ -156,3 +159,36 @@ async def test_request_connection_test_button_calls_api():
     )
     await button.async_press()
     api.request_connection_test.assert_awaited_once_with("comm-1")
+
+
+async def test_request_connection_test_button_attaches_to_communicator_device():
+    """Button must live under the communicator device (its owner), not the
+    installation device. Confirms the DeviceInfo identifier tuple matches
+    what communicator_device_info produces."""
+    from unittest.mock import MagicMock
+
+    from custom_components.flowbuddy._generated.models.communicator_output_model import (
+        CommunicatorOutputModel,
+    )
+    from custom_components.flowbuddy.const import DOMAIN
+
+    communicator = CommunicatorOutputModel.from_dict(
+        {
+            "resourceUri": "/communicators/c-1",
+            "logicalDeviceName": "XMX-1",
+            "firmWareVersion": "V0.1",
+            "externalId": "comm-1",
+            "type": {"resourceUri": "/t/1", "name": "Lewiz", "externalId": "t1"},
+        }
+    )
+    installation = MagicMock(uuid="00000000-0000-0000-0000-000000000001")
+    coordinator = MagicMock()
+    coordinator.data = [communicator]
+    button = RequestConnectionTestButton(
+        coordinator=coordinator,
+        api=AsyncMock(),
+        communicator=communicator,
+        installation=installation,
+    )
+    assert button.device_info["identifiers"] == {(DOMAIN, "communicator:comm-1")}
+    assert button.device_info["sw_version"] == "V0.1"

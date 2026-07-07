@@ -68,15 +68,8 @@ def _mock_full_discovery(respx_mock, load_fixture) -> None:
     respx_mock.get(f"{API_BASE}/hvacs").mock(
         return_value=httpx.Response(200, json=load_fixture("hvacs.json"))
     )
-    # NOTE: button.py resolves a communicator's id via `communicator.id`, which
-    # is not a field CommunicatorOutputModel actually types (only present via
-    # additional_properties) -- a pre-existing gap outside this task's scope
-    # (see report). Ship an empty communicators list here so the happy-path
-    # test exercises real button.py setup without tripping that latent bug.
     respx_mock.get(f"{API_BASE}/communicators").mock(
-        return_value=httpx.Response(
-            200, json={"_embedded": {"communicators": []}, "page": {"totalElements": 0}}
-        )
+        return_value=httpx.Response(200, json=load_fixture("communicators.json"))
     )
     respx_mock.get(f"{API_BASE}/realtimevalues").mock(
         return_value=httpx.Response(200, json=load_fixture("realtimevalues.json"))
@@ -112,7 +105,8 @@ async def test_setup_entry_happy_path(hass, load_fixture, respx_mock):
     assert len(data["batteries"]) == 1
     assert len(data["inverters"]) == 1
     assert len(data["hvacs"]) == 1
-    assert data["communicators"] == []
+    assert len(data["communicators"]) == 1
+    assert data["communicators"][0].logical_device_name == "COMM-1"
 
     # -- coordinators created + primed (first refresh already ran) --------------
     assert data["instant_coord"].data
@@ -125,7 +119,30 @@ async def test_setup_entry_happy_path(hass, load_fixture, respx_mock):
     assert len(hass.states.async_entity_ids("binary_sensor")) == 1
     assert len(hass.states.async_entity_ids("number")) == 2
     assert len(hass.states.async_entity_ids("climate")) == 1
-    assert len(hass.states.async_entity_ids("button")) == 1
+    # 1 alarm-ack button + 1 connection-test button (from populated communicators fixture)
+    assert len(hass.states.async_entity_ids("button")) == 2
+
+
+async def test_setup_entry_registers_communicator_device(hass, load_fixture, respx_mock):
+    """After async_setup_entry, the HA device registry should already
+    contain the communicator device row -- even before any entity gets
+    a chance to attach to it -- so the Devices UI shows firmware +
+    serial as soon as setup finishes."""
+    from homeassistant.helpers import device_registry as dr
+
+    _mock_full_discovery(respx_mock, load_fixture)
+    entry = MockConfigEntry(domain=DOMAIN, unique_id=IID, data=_entry_data())
+    entry.add_to_hass(hass)
+
+    assert await hass.config_entries.async_setup(entry.entry_id)
+    await hass.async_block_till_done()
+
+    device_reg = dr.async_get(hass)
+    comm_device = device_reg.async_get_device(identifiers={(DOMAIN, "communicator:comm-1")})
+    assert comm_device is not None
+    assert comm_device.sw_version == "XMX_EMSA_V0.8.4"
+    assert comm_device.model == "Lewiz"
+    assert comm_device.serial_number == "COMM-1"
 
 
 async def test_setup_entry_invalid_creds_raises_auth_failed(hass, load_fixture, respx_mock):
