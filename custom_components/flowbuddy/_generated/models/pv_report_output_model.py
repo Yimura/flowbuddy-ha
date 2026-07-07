@@ -26,7 +26,7 @@ class PvReportOutputModel:
     Attributes:
         resource_uri (str | Unset):
         create_report (str | Unset):
-        last_report_sent_date (datetime.datetime | Unset):
+        last_report_sent_date (datetime.datetime | None | Unset):
         external_id (str | Unset):
         installation (InstallationReferenceModel | Unset):
         template (NotifierTemplateReferenceModel | Unset):
@@ -34,7 +34,7 @@ class PvReportOutputModel:
 
     resource_uri: str | Unset = UNSET
     create_report: str | Unset = UNSET
-    last_report_sent_date: datetime.datetime | Unset = UNSET
+    last_report_sent_date: datetime.datetime | None | Unset = UNSET
     external_id: str | Unset = UNSET
     installation: InstallationReferenceModel | Unset = UNSET
     template: NotifierTemplateReferenceModel | Unset = UNSET
@@ -48,9 +48,13 @@ class PvReportOutputModel:
 
         create_report = self.create_report
 
-        last_report_sent_date: str | Unset = UNSET
-        if not isinstance(self.last_report_sent_date, Unset):
+        last_report_sent_date: None | str | Unset
+        if isinstance(self.last_report_sent_date, Unset):
+            last_report_sent_date = UNSET
+        elif isinstance(self.last_report_sent_date, datetime.datetime):
             last_report_sent_date = self.last_report_sent_date.isoformat()
+        else:
+            last_report_sent_date = self.last_report_sent_date
 
         external_id = self.external_id
 
@@ -90,12 +94,22 @@ class PvReportOutputModel:
 
         create_report = d.pop("createReport", UNSET)
 
-        _last_report_sent_date = d.pop("lastReportSentDate", UNSET)
-        last_report_sent_date: datetime.datetime | Unset
-        if isinstance(_last_report_sent_date, Unset):
-            last_report_sent_date = UNSET
-        else:
-            last_report_sent_date = datetime.datetime.fromisoformat(_last_report_sent_date)
+        def _parse_last_report_sent_date(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                last_report_sent_date_type_0 = datetime.datetime.fromisoformat(data)
+
+                return last_report_sent_date_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        last_report_sent_date = _parse_last_report_sent_date(d.pop("lastReportSentDate", UNSET))
 
         external_id = d.pop("externalId", UNSET)
 

@@ -24,11 +24,12 @@ class PvProductionTestOutputModel:
     """
     Attributes:
         resource_uri (str | Unset):
-        entered_on (datetime.datetime | Unset):
+        entered_on (datetime.datetime | None | Unset):
         status (str | Unset):
         result_message (str | Unset):
-        test_start_on (datetime.datetime | Unset): Time of first connection with the `communicator` and start of test
-        test_end_on (datetime.datetime | Unset):
+        test_start_on (datetime.datetime | None | Unset): Time of first connection with the `communicator` and start of
+            test
+        test_end_on (datetime.datetime | None | Unset):
         breaker_initial_status (str | Unset):
         start_export_value (float | Unset): Cumulative export value in Wh as reported on the display of `communicator`
         start_import_value (float | Unset): Cumulative import value in Wh as reported on the display of `communicator`.
@@ -48,11 +49,11 @@ class PvProductionTestOutputModel:
     """
 
     resource_uri: str | Unset = UNSET
-    entered_on: datetime.datetime | Unset = UNSET
+    entered_on: datetime.datetime | None | Unset = UNSET
     status: str | Unset = UNSET
     result_message: str | Unset = UNSET
-    test_start_on: datetime.datetime | Unset = UNSET
-    test_end_on: datetime.datetime | Unset = UNSET
+    test_start_on: datetime.datetime | None | Unset = UNSET
+    test_end_on: datetime.datetime | None | Unset = UNSET
     breaker_initial_status: str | Unset = UNSET
     start_export_value: float | Unset = UNSET
     start_import_value: float | Unset = UNSET
@@ -71,21 +72,33 @@ class PvProductionTestOutputModel:
 
         resource_uri = self.resource_uri
 
-        entered_on: str | Unset = UNSET
-        if not isinstance(self.entered_on, Unset):
+        entered_on: None | str | Unset
+        if isinstance(self.entered_on, Unset):
+            entered_on = UNSET
+        elif isinstance(self.entered_on, datetime.datetime):
             entered_on = self.entered_on.isoformat()
+        else:
+            entered_on = self.entered_on
 
         status = self.status
 
         result_message = self.result_message
 
-        test_start_on: str | Unset = UNSET
-        if not isinstance(self.test_start_on, Unset):
+        test_start_on: None | str | Unset
+        if isinstance(self.test_start_on, Unset):
+            test_start_on = UNSET
+        elif isinstance(self.test_start_on, datetime.datetime):
             test_start_on = self.test_start_on.isoformat()
+        else:
+            test_start_on = self.test_start_on
 
-        test_end_on: str | Unset = UNSET
-        if not isinstance(self.test_end_on, Unset):
+        test_end_on: None | str | Unset
+        if isinstance(self.test_end_on, Unset):
+            test_end_on = UNSET
+        elif isinstance(self.test_end_on, datetime.datetime):
             test_end_on = self.test_end_on.isoformat()
+        else:
+            test_end_on = self.test_end_on
 
         breaker_initial_status = self.breaker_initial_status
 
@@ -158,30 +171,60 @@ class PvProductionTestOutputModel:
         d = dict(src_dict)
         resource_uri = d.pop("resourceUri", UNSET)
 
-        _entered_on = d.pop("enteredOn", UNSET)
-        entered_on: datetime.datetime | Unset
-        if isinstance(_entered_on, Unset):
-            entered_on = UNSET
-        else:
-            entered_on = datetime.datetime.fromisoformat(_entered_on)
+        def _parse_entered_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                entered_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return entered_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        entered_on = _parse_entered_on(d.pop("enteredOn", UNSET))
 
         status = d.pop("status", UNSET)
 
         result_message = d.pop("resultMessage", UNSET)
 
-        _test_start_on = d.pop("testStartOn", UNSET)
-        test_start_on: datetime.datetime | Unset
-        if isinstance(_test_start_on, Unset):
-            test_start_on = UNSET
-        else:
-            test_start_on = datetime.datetime.fromisoformat(_test_start_on)
+        def _parse_test_start_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                test_start_on_type_0 = datetime.datetime.fromisoformat(data)
 
-        _test_end_on = d.pop("testEndOn", UNSET)
-        test_end_on: datetime.datetime | Unset
-        if isinstance(_test_end_on, Unset):
-            test_end_on = UNSET
-        else:
-            test_end_on = datetime.datetime.fromisoformat(_test_end_on)
+                return test_start_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        test_start_on = _parse_test_start_on(d.pop("testStartOn", UNSET))
+
+        def _parse_test_end_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                test_end_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return test_end_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        test_end_on = _parse_test_end_on(d.pop("testEndOn", UNSET))
 
         breaker_initial_status = d.pop("breakerInitialStatus", UNSET)
 

@@ -26,17 +26,17 @@ class MeasurementOutputModel:
     Attributes:
         resource_uri (str | Unset):
         status (str | Unset): Registration status of Measurement
-        first_registered_on (datetime.datetime | Unset): First time when measurement was linked to an meter
+        first_registered_on (datetime.datetime | None | Unset): First time when measurement was linked to an meter
         polling (bool | Unset): Indicates if data is processed for this measurement (overrule from meter)
         last_polled_value (float | Unset): Last valid meter reading. (correspondig to the latest cumulative value
             registered by the physical device)
-        last_polled_time_stamp (datetime.datetime | Unset): Last timestamp that was processed
-        last_aggregation_on (datetime.datetime | Unset): Last timestamp that was aggregated
+        last_polled_time_stamp (datetime.datetime | None | Unset): Last timestamp that was processed
+        last_aggregation_on (datetime.datetime | None | Unset): Last timestamp that was aggregated
         validating_quality (bool | Unset):
-        last_run_measurement_quality_engine_on (datetime.datetime | Unset):
+        last_run_measurement_quality_engine_on (datetime.datetime | None | Unset):
         alarm_status (str | Unset):
         last_polled_realtime_value (float | Unset): Last realtime value that was processed
-        last_polled_realtime_time_stamp (datetime.datetime | Unset): Last realtime timestamp that was processed
+        last_polled_realtime_time_stamp (datetime.datetime | None | Unset): Last realtime timestamp that was processed
         external_id (str | Unset):
         meter (MeterReferenceModel | Unset):
         measurement_type (MeasurementTypeReferenceModel | Unset):
@@ -44,16 +44,16 @@ class MeasurementOutputModel:
 
     resource_uri: str | Unset = UNSET
     status: str | Unset = UNSET
-    first_registered_on: datetime.datetime | Unset = UNSET
+    first_registered_on: datetime.datetime | None | Unset = UNSET
     polling: bool | Unset = UNSET
     last_polled_value: float | Unset = UNSET
-    last_polled_time_stamp: datetime.datetime | Unset = UNSET
-    last_aggregation_on: datetime.datetime | Unset = UNSET
+    last_polled_time_stamp: datetime.datetime | None | Unset = UNSET
+    last_aggregation_on: datetime.datetime | None | Unset = UNSET
     validating_quality: bool | Unset = UNSET
-    last_run_measurement_quality_engine_on: datetime.datetime | Unset = UNSET
+    last_run_measurement_quality_engine_on: datetime.datetime | None | Unset = UNSET
     alarm_status: str | Unset = UNSET
     last_polled_realtime_value: float | Unset = UNSET
-    last_polled_realtime_time_stamp: datetime.datetime | Unset = UNSET
+    last_polled_realtime_time_stamp: datetime.datetime | None | Unset = UNSET
     external_id: str | Unset = UNSET
     meter: MeterReferenceModel | Unset = UNSET
     measurement_type: MeasurementTypeReferenceModel | Unset = UNSET
@@ -67,37 +67,57 @@ class MeasurementOutputModel:
 
         status = self.status
 
-        first_registered_on: str | Unset = UNSET
-        if not isinstance(self.first_registered_on, Unset):
+        first_registered_on: None | str | Unset
+        if isinstance(self.first_registered_on, Unset):
+            first_registered_on = UNSET
+        elif isinstance(self.first_registered_on, datetime.datetime):
             first_registered_on = self.first_registered_on.isoformat()
+        else:
+            first_registered_on = self.first_registered_on
 
         polling = self.polling
 
         last_polled_value = self.last_polled_value
 
-        last_polled_time_stamp: str | Unset = UNSET
-        if not isinstance(self.last_polled_time_stamp, Unset):
+        last_polled_time_stamp: None | str | Unset
+        if isinstance(self.last_polled_time_stamp, Unset):
+            last_polled_time_stamp = UNSET
+        elif isinstance(self.last_polled_time_stamp, datetime.datetime):
             last_polled_time_stamp = self.last_polled_time_stamp.isoformat()
+        else:
+            last_polled_time_stamp = self.last_polled_time_stamp
 
-        last_aggregation_on: str | Unset = UNSET
-        if not isinstance(self.last_aggregation_on, Unset):
+        last_aggregation_on: None | str | Unset
+        if isinstance(self.last_aggregation_on, Unset):
+            last_aggregation_on = UNSET
+        elif isinstance(self.last_aggregation_on, datetime.datetime):
             last_aggregation_on = self.last_aggregation_on.isoformat()
+        else:
+            last_aggregation_on = self.last_aggregation_on
 
         validating_quality = self.validating_quality
 
-        last_run_measurement_quality_engine_on: str | Unset = UNSET
-        if not isinstance(self.last_run_measurement_quality_engine_on, Unset):
+        last_run_measurement_quality_engine_on: None | str | Unset
+        if isinstance(self.last_run_measurement_quality_engine_on, Unset):
+            last_run_measurement_quality_engine_on = UNSET
+        elif isinstance(self.last_run_measurement_quality_engine_on, datetime.datetime):
             last_run_measurement_quality_engine_on = (
                 self.last_run_measurement_quality_engine_on.isoformat()
             )
+        else:
+            last_run_measurement_quality_engine_on = self.last_run_measurement_quality_engine_on
 
         alarm_status = self.alarm_status
 
         last_polled_realtime_value = self.last_polled_realtime_value
 
-        last_polled_realtime_time_stamp: str | Unset = UNSET
-        if not isinstance(self.last_polled_realtime_time_stamp, Unset):
+        last_polled_realtime_time_stamp: None | str | Unset
+        if isinstance(self.last_polled_realtime_time_stamp, Unset):
+            last_polled_realtime_time_stamp = UNSET
+        elif isinstance(self.last_polled_realtime_time_stamp, datetime.datetime):
             last_polled_realtime_time_stamp = self.last_polled_realtime_time_stamp.isoformat()
+        else:
+            last_polled_realtime_time_stamp = self.last_polled_realtime_time_stamp
 
         external_id = self.external_id
 
@@ -155,54 +175,110 @@ class MeasurementOutputModel:
 
         status = d.pop("status", UNSET)
 
-        _first_registered_on = d.pop("firstRegisteredOn", UNSET)
-        first_registered_on: datetime.datetime | Unset
-        if isinstance(_first_registered_on, Unset):
-            first_registered_on = UNSET
-        else:
-            first_registered_on = datetime.datetime.fromisoformat(_first_registered_on)
+        def _parse_first_registered_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                first_registered_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return first_registered_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        first_registered_on = _parse_first_registered_on(d.pop("firstRegisteredOn", UNSET))
 
         polling = d.pop("polling", UNSET)
 
         last_polled_value = d.pop("lastPolledValue", UNSET)
 
-        _last_polled_time_stamp = d.pop("lastPolledTimeStamp", UNSET)
-        last_polled_time_stamp: datetime.datetime | Unset
-        if isinstance(_last_polled_time_stamp, Unset):
-            last_polled_time_stamp = UNSET
-        else:
-            last_polled_time_stamp = datetime.datetime.fromisoformat(_last_polled_time_stamp)
+        def _parse_last_polled_time_stamp(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                last_polled_time_stamp_type_0 = datetime.datetime.fromisoformat(data)
 
-        _last_aggregation_on = d.pop("lastAggregationOn", UNSET)
-        last_aggregation_on: datetime.datetime | Unset
-        if isinstance(_last_aggregation_on, Unset):
-            last_aggregation_on = UNSET
-        else:
-            last_aggregation_on = datetime.datetime.fromisoformat(_last_aggregation_on)
+                return last_polled_time_stamp_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        last_polled_time_stamp = _parse_last_polled_time_stamp(d.pop("lastPolledTimeStamp", UNSET))
+
+        def _parse_last_aggregation_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                last_aggregation_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return last_aggregation_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        last_aggregation_on = _parse_last_aggregation_on(d.pop("lastAggregationOn", UNSET))
 
         validating_quality = d.pop("validatingQuality", UNSET)
 
-        _last_run_measurement_quality_engine_on = d.pop("lastRunMeasurementQualityEngineOn", UNSET)
-        last_run_measurement_quality_engine_on: datetime.datetime | Unset
-        if isinstance(_last_run_measurement_quality_engine_on, Unset):
-            last_run_measurement_quality_engine_on = UNSET
-        else:
-            last_run_measurement_quality_engine_on = datetime.datetime.fromisoformat(
-                _last_run_measurement_quality_engine_on
-            )
+        def _parse_last_run_measurement_quality_engine_on(
+            data: object,
+        ) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                last_run_measurement_quality_engine_on_type_0 = datetime.datetime.fromisoformat(
+                    data
+                )
+
+                return last_run_measurement_quality_engine_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        last_run_measurement_quality_engine_on = _parse_last_run_measurement_quality_engine_on(
+            d.pop("lastRunMeasurementQualityEngineOn", UNSET)
+        )
 
         alarm_status = d.pop("alarmStatus", UNSET)
 
         last_polled_realtime_value = d.pop("lastPolledRealtimeValue", UNSET)
 
-        _last_polled_realtime_time_stamp = d.pop("lastPolledRealtimeTimeStamp", UNSET)
-        last_polled_realtime_time_stamp: datetime.datetime | Unset
-        if isinstance(_last_polled_realtime_time_stamp, Unset):
-            last_polled_realtime_time_stamp = UNSET
-        else:
-            last_polled_realtime_time_stamp = datetime.datetime.fromisoformat(
-                _last_polled_realtime_time_stamp
-            )
+        def _parse_last_polled_realtime_time_stamp(
+            data: object,
+        ) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                last_polled_realtime_time_stamp_type_0 = datetime.datetime.fromisoformat(data)
+
+                return last_polled_realtime_time_stamp_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        last_polled_realtime_time_stamp = _parse_last_polled_realtime_time_stamp(
+            d.pop("lastPolledRealtimeTimeStamp", UNSET)
+        )
 
         external_id = d.pop("externalId", UNSET)
 

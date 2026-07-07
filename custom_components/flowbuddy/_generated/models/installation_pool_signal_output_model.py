@@ -29,7 +29,7 @@ class InstallationPoolSignalOutputModel:
         value (str | Unset):
         installation_pool (InstallationPoolReferenceModel | Unset):
         control_type (ControlTypeReferenceModel | Unset):
-        created (datetime.datetime | Unset):
+        created (datetime.datetime | None | Unset):
     """
 
     resource_uri: str | Unset = UNSET
@@ -37,7 +37,7 @@ class InstallationPoolSignalOutputModel:
     value: str | Unset = UNSET
     installation_pool: InstallationPoolReferenceModel | Unset = UNSET
     control_type: ControlTypeReferenceModel | Unset = UNSET
-    created: datetime.datetime | Unset = UNSET
+    created: datetime.datetime | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -58,9 +58,13 @@ class InstallationPoolSignalOutputModel:
         if not isinstance(self.control_type, Unset):
             control_type = self.control_type.to_dict()
 
-        created: str | Unset = UNSET
-        if not isinstance(self.created, Unset):
+        created: None | str | Unset
+        if isinstance(self.created, Unset):
+            created = UNSET
+        elif isinstance(self.created, datetime.datetime):
             created = self.created.isoformat()
+        else:
+            created = self.created
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -106,12 +110,22 @@ class InstallationPoolSignalOutputModel:
         else:
             control_type = ControlTypeReferenceModel.from_dict(_control_type)
 
-        _created = d.pop("created", UNSET)
-        created: datetime.datetime | Unset
-        if isinstance(_created, Unset):
-            created = UNSET
-        else:
-            created = datetime.datetime.fromisoformat(_created)
+        def _parse_created(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                created_type_0 = datetime.datetime.fromisoformat(data)
+
+                return created_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        created = _parse_created(d.pop("created", UNSET))
 
         installation_pool_signal_output_model = cls(
             resource_uri=resource_uri,

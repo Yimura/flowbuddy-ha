@@ -25,27 +25,27 @@ class ControlSignalOutputModel:
     """
     Attributes:
         resource_uri (str | Unset):
-        time_stamp (datetime.datetime | Unset):
+        time_stamp (datetime.datetime | None | Unset):
         value (str | Unset):
         status (str | Unset):
         result_message (str | Unset):
         external_id (str | Unset):
         meter (MeterReferenceModel | Unset):
         control_type (ControlTypeReferenceModel | Unset):
-        created (datetime.datetime | Unset):
-        last_modified (datetime.datetime | Unset):
+        created (datetime.datetime | None | Unset):
+        last_modified (datetime.datetime | None | Unset):
     """
 
     resource_uri: str | Unset = UNSET
-    time_stamp: datetime.datetime | Unset = UNSET
+    time_stamp: datetime.datetime | None | Unset = UNSET
     value: str | Unset = UNSET
     status: str | Unset = UNSET
     result_message: str | Unset = UNSET
     external_id: str | Unset = UNSET
     meter: MeterReferenceModel | Unset = UNSET
     control_type: ControlTypeReferenceModel | Unset = UNSET
-    created: datetime.datetime | Unset = UNSET
-    last_modified: datetime.datetime | Unset = UNSET
+    created: datetime.datetime | None | Unset = UNSET
+    last_modified: datetime.datetime | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -54,9 +54,13 @@ class ControlSignalOutputModel:
 
         resource_uri = self.resource_uri
 
-        time_stamp: str | Unset = UNSET
-        if not isinstance(self.time_stamp, Unset):
+        time_stamp: None | str | Unset
+        if isinstance(self.time_stamp, Unset):
+            time_stamp = UNSET
+        elif isinstance(self.time_stamp, datetime.datetime):
             time_stamp = self.time_stamp.isoformat()
+        else:
+            time_stamp = self.time_stamp
 
         value = self.value
 
@@ -74,13 +78,21 @@ class ControlSignalOutputModel:
         if not isinstance(self.control_type, Unset):
             control_type = self.control_type.to_dict()
 
-        created: str | Unset = UNSET
-        if not isinstance(self.created, Unset):
+        created: None | str | Unset
+        if isinstance(self.created, Unset):
+            created = UNSET
+        elif isinstance(self.created, datetime.datetime):
             created = self.created.isoformat()
+        else:
+            created = self.created
 
-        last_modified: str | Unset = UNSET
-        if not isinstance(self.last_modified, Unset):
+        last_modified: None | str | Unset
+        if isinstance(self.last_modified, Unset):
+            last_modified = UNSET
+        elif isinstance(self.last_modified, datetime.datetime):
             last_modified = self.last_modified.isoformat()
+        else:
+            last_modified = self.last_modified
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -116,12 +128,22 @@ class ControlSignalOutputModel:
         d = dict(src_dict)
         resource_uri = d.pop("resourceUri", UNSET)
 
-        _time_stamp = d.pop("timeStamp", UNSET)
-        time_stamp: datetime.datetime | Unset
-        if isinstance(_time_stamp, Unset):
-            time_stamp = UNSET
-        else:
-            time_stamp = datetime.datetime.fromisoformat(_time_stamp)
+        def _parse_time_stamp(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                time_stamp_type_0 = datetime.datetime.fromisoformat(data)
+
+                return time_stamp_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        time_stamp = _parse_time_stamp(d.pop("timeStamp", UNSET))
 
         value = d.pop("value", UNSET)
 
@@ -145,19 +167,39 @@ class ControlSignalOutputModel:
         else:
             control_type = ControlTypeReferenceModel.from_dict(_control_type)
 
-        _created = d.pop("created", UNSET)
-        created: datetime.datetime | Unset
-        if isinstance(_created, Unset):
-            created = UNSET
-        else:
-            created = datetime.datetime.fromisoformat(_created)
+        def _parse_created(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                created_type_0 = datetime.datetime.fromisoformat(data)
 
-        _last_modified = d.pop("lastModified", UNSET)
-        last_modified: datetime.datetime | Unset
-        if isinstance(_last_modified, Unset):
-            last_modified = UNSET
-        else:
-            last_modified = datetime.datetime.fromisoformat(_last_modified)
+                return created_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        created = _parse_created(d.pop("created", UNSET))
+
+        def _parse_last_modified(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                last_modified_type_0 = datetime.datetime.fromisoformat(data)
+
+                return last_modified_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        last_modified = _parse_last_modified(d.pop("lastModified", UNSET))
 
         control_signal_output_model = cls(
             resource_uri=resource_uri,

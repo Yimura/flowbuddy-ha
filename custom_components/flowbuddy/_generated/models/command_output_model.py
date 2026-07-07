@@ -29,8 +29,8 @@ class CommandOutputModel:
         type_ (str | Unset): Type of command
         status (str | Unset): Status of command
         result (str | Unset): Result of command
-        entered_on (datetime.datetime | Unset): When the command was initiated
-        performed_on (datetime.datetime | Unset): When the command was executed
+        entered_on (datetime.datetime | None | Unset): When the command was initiated
+        performed_on (datetime.datetime | None | Unset): When the command was executed
         external_id (str | Unset):
         installation (InstallationReferenceModel | Unset):
         meter (MeterReferenceModel | Unset):
@@ -41,8 +41,8 @@ class CommandOutputModel:
     type_: str | Unset = UNSET
     status: str | Unset = UNSET
     result: str | Unset = UNSET
-    entered_on: datetime.datetime | Unset = UNSET
-    performed_on: datetime.datetime | Unset = UNSET
+    entered_on: datetime.datetime | None | Unset = UNSET
+    performed_on: datetime.datetime | None | Unset = UNSET
     external_id: str | Unset = UNSET
     installation: InstallationReferenceModel | Unset = UNSET
     meter: MeterReferenceModel | Unset = UNSET
@@ -62,13 +62,21 @@ class CommandOutputModel:
 
         result = self.result
 
-        entered_on: str | Unset = UNSET
-        if not isinstance(self.entered_on, Unset):
+        entered_on: None | str | Unset
+        if isinstance(self.entered_on, Unset):
+            entered_on = UNSET
+        elif isinstance(self.entered_on, datetime.datetime):
             entered_on = self.entered_on.isoformat()
+        else:
+            entered_on = self.entered_on
 
-        performed_on: str | Unset = UNSET
-        if not isinstance(self.performed_on, Unset):
+        performed_on: None | str | Unset
+        if isinstance(self.performed_on, Unset):
+            performed_on = UNSET
+        elif isinstance(self.performed_on, datetime.datetime):
             performed_on = self.performed_on.isoformat()
+        else:
+            performed_on = self.performed_on
 
         external_id = self.external_id
 
@@ -125,19 +133,39 @@ class CommandOutputModel:
 
         result = d.pop("result", UNSET)
 
-        _entered_on = d.pop("enteredOn", UNSET)
-        entered_on: datetime.datetime | Unset
-        if isinstance(_entered_on, Unset):
-            entered_on = UNSET
-        else:
-            entered_on = datetime.datetime.fromisoformat(_entered_on)
+        def _parse_entered_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                entered_on_type_0 = datetime.datetime.fromisoformat(data)
 
-        _performed_on = d.pop("performedOn", UNSET)
-        performed_on: datetime.datetime | Unset
-        if isinstance(_performed_on, Unset):
-            performed_on = UNSET
-        else:
-            performed_on = datetime.datetime.fromisoformat(_performed_on)
+                return entered_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        entered_on = _parse_entered_on(d.pop("enteredOn", UNSET))
+
+        def _parse_performed_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                performed_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return performed_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        performed_on = _parse_performed_on(d.pop("performedOn", UNSET))
 
         external_id = d.pop("externalId", UNSET)
 

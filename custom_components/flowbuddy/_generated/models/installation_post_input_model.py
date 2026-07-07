@@ -37,7 +37,7 @@ class InstallationPostInputModel:
         city (str | Unset):
         country (str | Unset):
         resident (str | Unset):
-        installation_date (datetime.datetime | Unset):
+        installation_date (datetime.datetime | None | Unset):
         project (str | Unset):
         installation_type (str | Unset):
         zip_code (str | Unset):
@@ -71,7 +71,7 @@ class InstallationPostInputModel:
     city: str | Unset = UNSET
     country: str | Unset = UNSET
     resident: str | Unset = UNSET
-    installation_date: datetime.datetime | Unset = UNSET
+    installation_date: datetime.datetime | None | Unset = UNSET
     project: str | Unset = UNSET
     installation_type: str | Unset = UNSET
     zip_code: str | Unset = UNSET
@@ -122,9 +122,13 @@ class InstallationPostInputModel:
 
         resident = self.resident
 
-        installation_date: str | Unset = UNSET
-        if not isinstance(self.installation_date, Unset):
+        installation_date: None | str | Unset
+        if isinstance(self.installation_date, Unset):
+            installation_date = UNSET
+        elif isinstance(self.installation_date, datetime.datetime):
             installation_date = self.installation_date.isoformat()
+        else:
+            installation_date = self.installation_date
 
         project = self.project
 
@@ -269,12 +273,22 @@ class InstallationPostInputModel:
 
         resident = d.pop("resident", UNSET)
 
-        _installation_date = d.pop("installationDate", UNSET)
-        installation_date: datetime.datetime | Unset
-        if isinstance(_installation_date, Unset):
-            installation_date = UNSET
-        else:
-            installation_date = datetime.datetime.fromisoformat(_installation_date)
+        def _parse_installation_date(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                installation_date_type_0 = datetime.datetime.fromisoformat(data)
+
+                return installation_date_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        installation_date = _parse_installation_date(d.pop("installationDate", UNSET))
 
         project = d.pop("project", UNSET)
 

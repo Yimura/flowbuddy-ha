@@ -24,9 +24,9 @@ class AggregationDayValueOutputModel:
     """
     Attributes:
         resource_uri (str | Unset):
-        period_start (datetime.datetime | Unset):
-        timestart (datetime.datetime | Unset):
-        timestop (datetime.datetime | Unset):
+        period_start (datetime.datetime | None | Unset):
+        timestart (datetime.datetime | None | Unset):
+        timestop (datetime.datetime | None | Unset):
         value (float | Unset):
         sum_ (float | Unset):
         count (int | Unset):
@@ -35,9 +35,9 @@ class AggregationDayValueOutputModel:
     """
 
     resource_uri: str | Unset = UNSET
-    period_start: datetime.datetime | Unset = UNSET
-    timestart: datetime.datetime | Unset = UNSET
-    timestop: datetime.datetime | Unset = UNSET
+    period_start: datetime.datetime | None | Unset = UNSET
+    timestart: datetime.datetime | None | Unset = UNSET
+    timestop: datetime.datetime | None | Unset = UNSET
     value: float | Unset = UNSET
     sum_: float | Unset = UNSET
     count: int | Unset = UNSET
@@ -50,17 +50,29 @@ class AggregationDayValueOutputModel:
 
         resource_uri = self.resource_uri
 
-        period_start: str | Unset = UNSET
-        if not isinstance(self.period_start, Unset):
+        period_start: None | str | Unset
+        if isinstance(self.period_start, Unset):
+            period_start = UNSET
+        elif isinstance(self.period_start, datetime.datetime):
             period_start = self.period_start.isoformat()
+        else:
+            period_start = self.period_start
 
-        timestart: str | Unset = UNSET
-        if not isinstance(self.timestart, Unset):
+        timestart: None | str | Unset
+        if isinstance(self.timestart, Unset):
+            timestart = UNSET
+        elif isinstance(self.timestart, datetime.datetime):
             timestart = self.timestart.isoformat()
+        else:
+            timestart = self.timestart
 
-        timestop: str | Unset = UNSET
-        if not isinstance(self.timestop, Unset):
+        timestop: None | str | Unset
+        if isinstance(self.timestop, Unset):
+            timestop = UNSET
+        elif isinstance(self.timestop, datetime.datetime):
             timestop = self.timestop.isoformat()
+        else:
+            timestop = self.timestop
 
         value = self.value
 
@@ -105,26 +117,56 @@ class AggregationDayValueOutputModel:
         d = dict(src_dict)
         resource_uri = d.pop("resourceUri", UNSET)
 
-        _period_start = d.pop("periodStart", UNSET)
-        period_start: datetime.datetime | Unset
-        if isinstance(_period_start, Unset):
-            period_start = UNSET
-        else:
-            period_start = datetime.datetime.fromisoformat(_period_start)
+        def _parse_period_start(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                period_start_type_0 = datetime.datetime.fromisoformat(data)
 
-        _timestart = d.pop("timestart", UNSET)
-        timestart: datetime.datetime | Unset
-        if isinstance(_timestart, Unset):
-            timestart = UNSET
-        else:
-            timestart = datetime.datetime.fromisoformat(_timestart)
+                return period_start_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
 
-        _timestop = d.pop("timestop", UNSET)
-        timestop: datetime.datetime | Unset
-        if isinstance(_timestop, Unset):
-            timestop = UNSET
-        else:
-            timestop = datetime.datetime.fromisoformat(_timestop)
+        period_start = _parse_period_start(d.pop("periodStart", UNSET))
+
+        def _parse_timestart(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                timestart_type_0 = datetime.datetime.fromisoformat(data)
+
+                return timestart_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        timestart = _parse_timestart(d.pop("timestart", UNSET))
+
+        def _parse_timestop(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                timestop_type_0 = datetime.datetime.fromisoformat(data)
+
+                return timestop_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        timestop = _parse_timestop(d.pop("timestop", UNSET))
 
         value = d.pop("value", UNSET)
 

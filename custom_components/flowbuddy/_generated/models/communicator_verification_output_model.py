@@ -27,7 +27,7 @@ class CommunicatorVerificationOutputModel:
         signal_strength (int | Unset):
         result_code (int | Unset):
         result_message (str | Unset):
-        performed_on (datetime.datetime | Unset):
+        performed_on (datetime.datetime | None | Unset):
         external_id (str | Unset):
         communicator (CommunicatorReferenceModel | Unset):
     """
@@ -36,7 +36,7 @@ class CommunicatorVerificationOutputModel:
     signal_strength: int | Unset = UNSET
     result_code: int | Unset = UNSET
     result_message: str | Unset = UNSET
-    performed_on: datetime.datetime | Unset = UNSET
+    performed_on: datetime.datetime | None | Unset = UNSET
     external_id: str | Unset = UNSET
     communicator: CommunicatorReferenceModel | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -52,9 +52,13 @@ class CommunicatorVerificationOutputModel:
 
         result_message = self.result_message
 
-        performed_on: str | Unset = UNSET
-        if not isinstance(self.performed_on, Unset):
+        performed_on: None | str | Unset
+        if isinstance(self.performed_on, Unset):
+            performed_on = UNSET
+        elif isinstance(self.performed_on, datetime.datetime):
             performed_on = self.performed_on.isoformat()
+        else:
+            performed_on = self.performed_on
 
         external_id = self.external_id
 
@@ -95,12 +99,22 @@ class CommunicatorVerificationOutputModel:
 
         result_message = d.pop("resultMessage", UNSET)
 
-        _performed_on = d.pop("performedOn", UNSET)
-        performed_on: datetime.datetime | Unset
-        if isinstance(_performed_on, Unset):
-            performed_on = UNSET
-        else:
-            performed_on = datetime.datetime.fromisoformat(_performed_on)
+        def _parse_performed_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                performed_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return performed_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        performed_on = _parse_performed_on(d.pop("performedOn", UNSET))
 
         external_id = d.pop("externalId", UNSET)
 

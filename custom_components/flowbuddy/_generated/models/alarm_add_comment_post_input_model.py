@@ -27,13 +27,13 @@ class AlarmAddCommentPostInputModel:
     Attributes:
         type_ (str | Unset): The type of comment you want to add
         new_comment (str | Unset): The comment to add
-        date (datetime.datetime | Unset): The date on which is logically coupled to the Comment
+        date (datetime.datetime | None | Unset): The date on which is logically coupled to the Comment
         other_properties (AlarmAddCommentPostInputModelOtherProperties | Unset):
     """
 
     type_: str | Unset = UNSET
     new_comment: str | Unset = UNSET
-    date: datetime.datetime | Unset = UNSET
+    date: datetime.datetime | None | Unset = UNSET
     other_properties: AlarmAddCommentPostInputModelOtherProperties | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -46,9 +46,13 @@ class AlarmAddCommentPostInputModel:
 
         new_comment = self.new_comment
 
-        date: str | Unset = UNSET
-        if not isinstance(self.date, Unset):
+        date: None | str | Unset
+        if isinstance(self.date, Unset):
+            date = UNSET
+        elif isinstance(self.date, datetime.datetime):
             date = self.date.isoformat()
+        else:
+            date = self.date
 
         other_properties: dict[str, Any] | Unset = UNSET
         if not isinstance(self.other_properties, Unset):
@@ -79,12 +83,22 @@ class AlarmAddCommentPostInputModel:
 
         new_comment = d.pop("newComment", UNSET)
 
-        _date = d.pop("date", UNSET)
-        date: datetime.datetime | Unset
-        if isinstance(_date, Unset):
-            date = UNSET
-        else:
-            date = datetime.datetime.fromisoformat(_date)
+        def _parse_date(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                date_type_0 = datetime.datetime.fromisoformat(data)
+
+                return date_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        date = _parse_date(d.pop("date", UNSET))
 
         _other_properties = d.pop("otherProperties", UNSET)
         other_properties: AlarmAddCommentPostInputModelOtherProperties | Unset

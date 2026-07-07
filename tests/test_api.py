@@ -42,6 +42,29 @@ async def test_list_installations(client, load_fixture, respx_mock):
     assert installations[0].identification == "TEST-INST-1"
 
 
+async def test_list_installations_tolerates_null_date_fields(
+    client, load_fixture, respx_mock
+):
+    """Regression test: live tenant returns null for installationDate /
+    dashboardCreatedOn when values are not set. Vendor spec declares those
+    fields as string+date-time without nullable=true, so the generator's
+    from_dict called datetime.fromisoformat(None) -> TypeError.
+
+    Spec (openapi/flexmon-v1.json) is now patched to add nullable=true on
+    every date-time field, so from_dict now returns None. This test locks
+    that behavior in so a future regen against a re-fetched upstream spec
+    (which would drop our nullable patch) fails loudly here instead of
+    only on the live tenant.
+    """
+    respx_mock.get(f"{API_BASE_URL}/installations").mock(
+        return_value=httpx.Response(200, json=load_fixture("installations.json"))
+    )
+    installations = await client.list_installations()
+    inst_1 = next(i for i in installations if i.uuid.endswith("000001"))
+    assert inst_1.installation_date is None
+    assert inst_1.dashboard_created_on is None
+
+
 async def test_get_instant_values(client, load_fixture, respx_mock):
     # NOTE: InstantValueOutputModel only formally types `resource_uri` in
     # the generated spec — `measurement`, `measurementType`, `value`, and

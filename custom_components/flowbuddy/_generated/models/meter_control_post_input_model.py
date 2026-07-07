@@ -26,13 +26,13 @@ class MeterControlPostInputModel:
     """
     Attributes:
         control_type (str | Unset):
-        timestamp (datetime.datetime | Unset):
+        timestamp (datetime.datetime | None | Unset):
         value (str | Unset):
         other_properties (MeterControlPostInputModelOtherProperties | Unset):
     """
 
     control_type: str | Unset = UNSET
-    timestamp: datetime.datetime | Unset = UNSET
+    timestamp: datetime.datetime | None | Unset = UNSET
     value: str | Unset = UNSET
     other_properties: MeterControlPostInputModelOtherProperties | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -44,9 +44,13 @@ class MeterControlPostInputModel:
 
         control_type = self.control_type
 
-        timestamp: str | Unset = UNSET
-        if not isinstance(self.timestamp, Unset):
+        timestamp: None | str | Unset
+        if isinstance(self.timestamp, Unset):
+            timestamp = UNSET
+        elif isinstance(self.timestamp, datetime.datetime):
             timestamp = self.timestamp.isoformat()
+        else:
+            timestamp = self.timestamp
 
         value = self.value
 
@@ -77,12 +81,22 @@ class MeterControlPostInputModel:
         d = dict(src_dict)
         control_type = d.pop("controlType", UNSET)
 
-        _timestamp = d.pop("timestamp", UNSET)
-        timestamp: datetime.datetime | Unset
-        if isinstance(_timestamp, Unset):
-            timestamp = UNSET
-        else:
-            timestamp = datetime.datetime.fromisoformat(_timestamp)
+        def _parse_timestamp(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                timestamp_type_0 = datetime.datetime.fromisoformat(data)
+
+                return timestamp_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        timestamp = _parse_timestamp(d.pop("timestamp", UNSET))
 
         value = d.pop("value", UNSET)
 

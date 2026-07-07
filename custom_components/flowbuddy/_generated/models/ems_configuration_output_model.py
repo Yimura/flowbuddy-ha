@@ -27,15 +27,15 @@ class EmsConfigurationOutputModel:
         resource_uri (str | Unset):
         enable_inverter_control (bool | Unset): Enables the virtual grid meter and allows control over the behavior of a
             hybrid inverter.
-        inverter_control_first_activated_on (datetime.datetime | Unset): The date when the inverter control was first
-            activated.
+        inverter_control_first_activated_on (datetime.datetime | None | Unset): The date when the inverter control was
+            first activated.
         battery_capacity (float | Unset): The capacity, in kWh, of the installed batteries linked to the EMS.
         battery_power (float | Unset): The maximum (dis)charge power, in kW, of the installed batteries linked to the
             EMS.
         enable_ev_charger_control (bool | Unset): Enables the EMS app for EV charger control and allows you to adjust
             the charging power based on grid usage and solar production.
-        ev_charger_control_first_activated_on (datetime.datetime | Unset): The date when the EV charger control was
-            first activated.
+        ev_charger_control_first_activated_on (datetime.datetime | None | Unset): The date when the EV charger control
+            was first activated.
         ev_number_of_phases (int | Unset): Number of phases configured in the EV charger controlled by the EMS.
         max_grid_current (float | Unset): Maximum rated current of the grid connection in Amperes.
         min_charge_current (float | Unset): Minimum charge current that should be used by the connected EV charger in
@@ -49,8 +49,8 @@ class EmsConfigurationOutputModel:
             used by the connected EV charger in Amperes.
         enable_peak_shaving (bool | Unset): Enables the EMS app for capacity tariff and allows you to limit the maximum
             grid power by adjusting charging powers, activating the battery, or disabling external devices.
-        peak_shaving_first_activated_on (datetime.datetime | Unset): The date when the peak shaving feature was first
-            activated.
+        peak_shaving_first_activated_on (datetime.datetime | None | Unset): The date when the peak shaving feature was
+            first activated.
         min_battery_charge_soc (int | Unset): A value ranging from 0-100 that represents the minimum battery charge.
             This variable is set by the installer to ensure battery health.
         user_requested_max_grid_power (int | Unset): The maximum grid power. This variable can be controlled by the
@@ -59,21 +59,21 @@ class EmsConfigurationOutputModel:
             reserve used to cover peak electricity usage. This variable can be controlled by the user.
         enable_curtailing (bool | Unset):
         enable_realtime (bool | Unset): Enables the EMS app for real-time polling.
-        realtime_first_activated_on (datetime.datetime | Unset): The date when the real-time polling feature was first
-            activated.
-        enable_dynamic_pricing (bool | Unset): Enables EMS apps for dynamic pricing
-        dynamic_pricing_first_activated_on (datetime.datetime | Unset): The date when the dynamic pricing feature was
+        realtime_first_activated_on (datetime.datetime | None | Unset): The date when the real-time polling feature was
             first activated.
+        enable_dynamic_pricing (bool | Unset): Enables EMS apps for dynamic pricing
+        dynamic_pricing_first_activated_on (datetime.datetime | None | Unset): The date when the dynamic pricing feature
+            was first activated.
         user_requested_lower_price_threshold (float | Unset): The threshold for the lower price. This variable can be
             controlled by the user.
         user_requested_upper_price_threshold (float | Unset): The threshold for the upper price. This variable can be
             controlled by the user.
-        last_calendar_sync_on (datetime.datetime | Unset):
+        last_calendar_sync_on (datetime.datetime | None | Unset):
         calendar_sync_status (str | Unset):
         enable_mbus_reader (bool | Unset): Enables the EMS app for reading mbus devices.
         enable_smart_grid_ready_control (bool | Unset): Enables the EMS app for smart grid ready control.
-        smart_grid_ready_control_first_activated_on (datetime.datetime | Unset): The date when the smart grid ready
-            control feature was first activated.
+        smart_grid_ready_control_first_activated_on (datetime.datetime | None | Unset): The date when the smart grid
+            ready control feature was first activated.
         user_requested_deactivate_heat_pump_on_high_prices (bool | Unset): Deactivates the heat pump on high prices.
             This variable can be controlled by the user.
         user_requested_activate_heat_pump_on_low_prices (bool | Unset): Activates the heat pump on low prices. This
@@ -89,11 +89,11 @@ class EmsConfigurationOutputModel:
 
     resource_uri: str | Unset = UNSET
     enable_inverter_control: bool | Unset = UNSET
-    inverter_control_first_activated_on: datetime.datetime | Unset = UNSET
+    inverter_control_first_activated_on: datetime.datetime | None | Unset = UNSET
     battery_capacity: float | Unset = UNSET
     battery_power: float | Unset = UNSET
     enable_ev_charger_control: bool | Unset = UNSET
-    ev_charger_control_first_activated_on: datetime.datetime | Unset = UNSET
+    ev_charger_control_first_activated_on: datetime.datetime | None | Unset = UNSET
     ev_number_of_phases: int | Unset = UNSET
     max_grid_current: float | Unset = UNSET
     min_charge_current: float | Unset = UNSET
@@ -102,22 +102,22 @@ class EmsConfigurationOutputModel:
     user_requested_max_charge_current: float | Unset = UNSET
     user_requested_max_grid_current: float | Unset = UNSET
     enable_peak_shaving: bool | Unset = UNSET
-    peak_shaving_first_activated_on: datetime.datetime | Unset = UNSET
+    peak_shaving_first_activated_on: datetime.datetime | None | Unset = UNSET
     min_battery_charge_soc: int | Unset = UNSET
     user_requested_max_grid_power: int | Unset = UNSET
     user_requested_battery_peak_reserve_soc: int | Unset = UNSET
     enable_curtailing: bool | Unset = UNSET
     enable_realtime: bool | Unset = UNSET
-    realtime_first_activated_on: datetime.datetime | Unset = UNSET
+    realtime_first_activated_on: datetime.datetime | None | Unset = UNSET
     enable_dynamic_pricing: bool | Unset = UNSET
-    dynamic_pricing_first_activated_on: datetime.datetime | Unset = UNSET
+    dynamic_pricing_first_activated_on: datetime.datetime | None | Unset = UNSET
     user_requested_lower_price_threshold: float | Unset = UNSET
     user_requested_upper_price_threshold: float | Unset = UNSET
-    last_calendar_sync_on: datetime.datetime | Unset = UNSET
+    last_calendar_sync_on: datetime.datetime | None | Unset = UNSET
     calendar_sync_status: str | Unset = UNSET
     enable_mbus_reader: bool | Unset = UNSET
     enable_smart_grid_ready_control: bool | Unset = UNSET
-    smart_grid_ready_control_first_activated_on: datetime.datetime | Unset = UNSET
+    smart_grid_ready_control_first_activated_on: datetime.datetime | None | Unset = UNSET
     user_requested_deactivate_heat_pump_on_high_prices: bool | Unset = UNSET
     user_requested_activate_heat_pump_on_low_prices: bool | Unset = UNSET
     increased_threshold: int | Unset = UNSET
@@ -137,11 +137,15 @@ class EmsConfigurationOutputModel:
 
         enable_inverter_control = self.enable_inverter_control
 
-        inverter_control_first_activated_on: str | Unset = UNSET
-        if not isinstance(self.inverter_control_first_activated_on, Unset):
+        inverter_control_first_activated_on: None | str | Unset
+        if isinstance(self.inverter_control_first_activated_on, Unset):
+            inverter_control_first_activated_on = UNSET
+        elif isinstance(self.inverter_control_first_activated_on, datetime.datetime):
             inverter_control_first_activated_on = (
                 self.inverter_control_first_activated_on.isoformat()
             )
+        else:
+            inverter_control_first_activated_on = self.inverter_control_first_activated_on
 
         battery_capacity = self.battery_capacity
 
@@ -149,11 +153,15 @@ class EmsConfigurationOutputModel:
 
         enable_ev_charger_control = self.enable_ev_charger_control
 
-        ev_charger_control_first_activated_on: str | Unset = UNSET
-        if not isinstance(self.ev_charger_control_first_activated_on, Unset):
+        ev_charger_control_first_activated_on: None | str | Unset
+        if isinstance(self.ev_charger_control_first_activated_on, Unset):
+            ev_charger_control_first_activated_on = UNSET
+        elif isinstance(self.ev_charger_control_first_activated_on, datetime.datetime):
             ev_charger_control_first_activated_on = (
                 self.ev_charger_control_first_activated_on.isoformat()
             )
+        else:
+            ev_charger_control_first_activated_on = self.ev_charger_control_first_activated_on
 
         ev_number_of_phases = self.ev_number_of_phases
 
@@ -171,9 +179,13 @@ class EmsConfigurationOutputModel:
 
         enable_peak_shaving = self.enable_peak_shaving
 
-        peak_shaving_first_activated_on: str | Unset = UNSET
-        if not isinstance(self.peak_shaving_first_activated_on, Unset):
+        peak_shaving_first_activated_on: None | str | Unset
+        if isinstance(self.peak_shaving_first_activated_on, Unset):
+            peak_shaving_first_activated_on = UNSET
+        elif isinstance(self.peak_shaving_first_activated_on, datetime.datetime):
             peak_shaving_first_activated_on = self.peak_shaving_first_activated_on.isoformat()
+        else:
+            peak_shaving_first_activated_on = self.peak_shaving_first_activated_on
 
         min_battery_charge_soc = self.min_battery_charge_soc
 
@@ -185,23 +197,35 @@ class EmsConfigurationOutputModel:
 
         enable_realtime = self.enable_realtime
 
-        realtime_first_activated_on: str | Unset = UNSET
-        if not isinstance(self.realtime_first_activated_on, Unset):
+        realtime_first_activated_on: None | str | Unset
+        if isinstance(self.realtime_first_activated_on, Unset):
+            realtime_first_activated_on = UNSET
+        elif isinstance(self.realtime_first_activated_on, datetime.datetime):
             realtime_first_activated_on = self.realtime_first_activated_on.isoformat()
+        else:
+            realtime_first_activated_on = self.realtime_first_activated_on
 
         enable_dynamic_pricing = self.enable_dynamic_pricing
 
-        dynamic_pricing_first_activated_on: str | Unset = UNSET
-        if not isinstance(self.dynamic_pricing_first_activated_on, Unset):
+        dynamic_pricing_first_activated_on: None | str | Unset
+        if isinstance(self.dynamic_pricing_first_activated_on, Unset):
+            dynamic_pricing_first_activated_on = UNSET
+        elif isinstance(self.dynamic_pricing_first_activated_on, datetime.datetime):
             dynamic_pricing_first_activated_on = self.dynamic_pricing_first_activated_on.isoformat()
+        else:
+            dynamic_pricing_first_activated_on = self.dynamic_pricing_first_activated_on
 
         user_requested_lower_price_threshold = self.user_requested_lower_price_threshold
 
         user_requested_upper_price_threshold = self.user_requested_upper_price_threshold
 
-        last_calendar_sync_on: str | Unset = UNSET
-        if not isinstance(self.last_calendar_sync_on, Unset):
+        last_calendar_sync_on: None | str | Unset
+        if isinstance(self.last_calendar_sync_on, Unset):
+            last_calendar_sync_on = UNSET
+        elif isinstance(self.last_calendar_sync_on, datetime.datetime):
             last_calendar_sync_on = self.last_calendar_sync_on.isoformat()
+        else:
+            last_calendar_sync_on = self.last_calendar_sync_on
 
         calendar_sync_status = self.calendar_sync_status
 
@@ -209,10 +233,16 @@ class EmsConfigurationOutputModel:
 
         enable_smart_grid_ready_control = self.enable_smart_grid_ready_control
 
-        smart_grid_ready_control_first_activated_on: str | Unset = UNSET
-        if not isinstance(self.smart_grid_ready_control_first_activated_on, Unset):
+        smart_grid_ready_control_first_activated_on: None | str | Unset
+        if isinstance(self.smart_grid_ready_control_first_activated_on, Unset):
+            smart_grid_ready_control_first_activated_on = UNSET
+        elif isinstance(self.smart_grid_ready_control_first_activated_on, datetime.datetime):
             smart_grid_ready_control_first_activated_on = (
                 self.smart_grid_ready_control_first_activated_on.isoformat()
+            )
+        else:
+            smart_grid_ready_control_first_activated_on = (
+                self.smart_grid_ready_control_first_activated_on
             )
 
         user_requested_deactivate_heat_pump_on_high_prices = (
@@ -345,14 +375,26 @@ class EmsConfigurationOutputModel:
 
         enable_inverter_control = d.pop("enableInverterControl", UNSET)
 
-        _inverter_control_first_activated_on = d.pop("inverterControlFirstActivatedOn", UNSET)
-        inverter_control_first_activated_on: datetime.datetime | Unset
-        if isinstance(_inverter_control_first_activated_on, Unset):
-            inverter_control_first_activated_on = UNSET
-        else:
-            inverter_control_first_activated_on = datetime.datetime.fromisoformat(
-                _inverter_control_first_activated_on
-            )
+        def _parse_inverter_control_first_activated_on(
+            data: object,
+        ) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                inverter_control_first_activated_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return inverter_control_first_activated_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        inverter_control_first_activated_on = _parse_inverter_control_first_activated_on(
+            d.pop("inverterControlFirstActivatedOn", UNSET)
+        )
 
         battery_capacity = d.pop("batteryCapacity", UNSET)
 
@@ -360,14 +402,26 @@ class EmsConfigurationOutputModel:
 
         enable_ev_charger_control = d.pop("enableEvChargerControl", UNSET)
 
-        _ev_charger_control_first_activated_on = d.pop("evChargerControlFirstActivatedOn", UNSET)
-        ev_charger_control_first_activated_on: datetime.datetime | Unset
-        if isinstance(_ev_charger_control_first_activated_on, Unset):
-            ev_charger_control_first_activated_on = UNSET
-        else:
-            ev_charger_control_first_activated_on = datetime.datetime.fromisoformat(
-                _ev_charger_control_first_activated_on
-            )
+        def _parse_ev_charger_control_first_activated_on(
+            data: object,
+        ) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                ev_charger_control_first_activated_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return ev_charger_control_first_activated_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        ev_charger_control_first_activated_on = _parse_ev_charger_control_first_activated_on(
+            d.pop("evChargerControlFirstActivatedOn", UNSET)
+        )
 
         ev_number_of_phases = d.pop("evNumberOfPhases", UNSET)
 
@@ -385,14 +439,26 @@ class EmsConfigurationOutputModel:
 
         enable_peak_shaving = d.pop("enablePeakShaving", UNSET)
 
-        _peak_shaving_first_activated_on = d.pop("peakShavingFirstActivatedOn", UNSET)
-        peak_shaving_first_activated_on: datetime.datetime | Unset
-        if isinstance(_peak_shaving_first_activated_on, Unset):
-            peak_shaving_first_activated_on = UNSET
-        else:
-            peak_shaving_first_activated_on = datetime.datetime.fromisoformat(
-                _peak_shaving_first_activated_on
-            )
+        def _parse_peak_shaving_first_activated_on(
+            data: object,
+        ) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                peak_shaving_first_activated_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return peak_shaving_first_activated_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        peak_shaving_first_activated_on = _parse_peak_shaving_first_activated_on(
+            d.pop("peakShavingFirstActivatedOn", UNSET)
+        )
 
         min_battery_charge_soc = d.pop("minBatteryChargeSoc", UNSET)
 
@@ -404,36 +470,68 @@ class EmsConfigurationOutputModel:
 
         enable_realtime = d.pop("enableRealtime", UNSET)
 
-        _realtime_first_activated_on = d.pop("realtimeFirstActivatedOn", UNSET)
-        realtime_first_activated_on: datetime.datetime | Unset
-        if isinstance(_realtime_first_activated_on, Unset):
-            realtime_first_activated_on = UNSET
-        else:
-            realtime_first_activated_on = datetime.datetime.fromisoformat(
-                _realtime_first_activated_on
-            )
+        def _parse_realtime_first_activated_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                realtime_first_activated_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return realtime_first_activated_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        realtime_first_activated_on = _parse_realtime_first_activated_on(
+            d.pop("realtimeFirstActivatedOn", UNSET)
+        )
 
         enable_dynamic_pricing = d.pop("enableDynamicPricing", UNSET)
 
-        _dynamic_pricing_first_activated_on = d.pop("dynamicPricingFirstActivatedOn", UNSET)
-        dynamic_pricing_first_activated_on: datetime.datetime | Unset
-        if isinstance(_dynamic_pricing_first_activated_on, Unset):
-            dynamic_pricing_first_activated_on = UNSET
-        else:
-            dynamic_pricing_first_activated_on = datetime.datetime.fromisoformat(
-                _dynamic_pricing_first_activated_on
-            )
+        def _parse_dynamic_pricing_first_activated_on(
+            data: object,
+        ) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                dynamic_pricing_first_activated_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return dynamic_pricing_first_activated_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        dynamic_pricing_first_activated_on = _parse_dynamic_pricing_first_activated_on(
+            d.pop("dynamicPricingFirstActivatedOn", UNSET)
+        )
 
         user_requested_lower_price_threshold = d.pop("userRequestedLowerPriceThreshold", UNSET)
 
         user_requested_upper_price_threshold = d.pop("userRequestedUpperPriceThreshold", UNSET)
 
-        _last_calendar_sync_on = d.pop("lastCalendarSyncOn", UNSET)
-        last_calendar_sync_on: datetime.datetime | Unset
-        if isinstance(_last_calendar_sync_on, Unset):
-            last_calendar_sync_on = UNSET
-        else:
-            last_calendar_sync_on = datetime.datetime.fromisoformat(_last_calendar_sync_on)
+        def _parse_last_calendar_sync_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                last_calendar_sync_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return last_calendar_sync_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        last_calendar_sync_on = _parse_last_calendar_sync_on(d.pop("lastCalendarSyncOn", UNSET))
 
         calendar_sync_status = d.pop("calendarSyncStatus", UNSET)
 
@@ -441,16 +539,30 @@ class EmsConfigurationOutputModel:
 
         enable_smart_grid_ready_control = d.pop("enableSmartGridReadyControl", UNSET)
 
-        _smart_grid_ready_control_first_activated_on = d.pop(
-            "smartGridReadyControlFirstActivatedOn", UNSET
-        )
-        smart_grid_ready_control_first_activated_on: datetime.datetime | Unset
-        if isinstance(_smart_grid_ready_control_first_activated_on, Unset):
-            smart_grid_ready_control_first_activated_on = UNSET
-        else:
-            smart_grid_ready_control_first_activated_on = datetime.datetime.fromisoformat(
-                _smart_grid_ready_control_first_activated_on
+        def _parse_smart_grid_ready_control_first_activated_on(
+            data: object,
+        ) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                smart_grid_ready_control_first_activated_on_type_0 = (
+                    datetime.datetime.fromisoformat(data)
+                )
+
+                return smart_grid_ready_control_first_activated_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        smart_grid_ready_control_first_activated_on = (
+            _parse_smart_grid_ready_control_first_activated_on(
+                d.pop("smartGridReadyControlFirstActivatedOn", UNSET)
             )
+        )
 
         user_requested_deactivate_heat_pump_on_high_prices = d.pop(
             "userRequestedDeactivateHeatPumpOnHighPrices", UNSET

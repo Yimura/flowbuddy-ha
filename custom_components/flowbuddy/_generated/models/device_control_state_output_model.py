@@ -26,7 +26,7 @@ class DeviceControlStateOutputModel:
     Attributes:
         resource_uri (str | Unset):
         last_applied_value (str | Unset):
-        timestamp (datetime.datetime | Unset):
+        timestamp (datetime.datetime | None | Unset):
         external_id (str | Unset):
         modbus_device (ModbusDeviceReferenceModel | Unset):
         control_type (ControlTypeReferenceModel | Unset):
@@ -34,7 +34,7 @@ class DeviceControlStateOutputModel:
 
     resource_uri: str | Unset = UNSET
     last_applied_value: str | Unset = UNSET
-    timestamp: datetime.datetime | Unset = UNSET
+    timestamp: datetime.datetime | None | Unset = UNSET
     external_id: str | Unset = UNSET
     modbus_device: ModbusDeviceReferenceModel | Unset = UNSET
     control_type: ControlTypeReferenceModel | Unset = UNSET
@@ -48,9 +48,13 @@ class DeviceControlStateOutputModel:
 
         last_applied_value = self.last_applied_value
 
-        timestamp: str | Unset = UNSET
-        if not isinstance(self.timestamp, Unset):
+        timestamp: None | str | Unset
+        if isinstance(self.timestamp, Unset):
+            timestamp = UNSET
+        elif isinstance(self.timestamp, datetime.datetime):
             timestamp = self.timestamp.isoformat()
+        else:
+            timestamp = self.timestamp
 
         external_id = self.external_id
 
@@ -90,12 +94,22 @@ class DeviceControlStateOutputModel:
 
         last_applied_value = d.pop("lastAppliedValue", UNSET)
 
-        _timestamp = d.pop("timestamp", UNSET)
-        timestamp: datetime.datetime | Unset
-        if isinstance(_timestamp, Unset):
-            timestamp = UNSET
-        else:
-            timestamp = datetime.datetime.fromisoformat(_timestamp)
+        def _parse_timestamp(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                timestamp_type_0 = datetime.datetime.fromisoformat(data)
+
+                return timestamp_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        timestamp = _parse_timestamp(d.pop("timestamp", UNSET))
 
         external_id = d.pop("externalId", UNSET)
 

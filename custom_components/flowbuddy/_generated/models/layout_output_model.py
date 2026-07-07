@@ -47,7 +47,7 @@ class LayoutOutputModel:
         inverter_classification (str | Unset): Type of inverter that is used. e.g. micro-inverter, string-inverter
         panel_location (str | Unset):
         external_id (str | Unset):
-        last_changed_on (datetime.datetime | Unset):
+        last_changed_on (datetime.datetime | None | Unset):
         meter (MeterReferenceModel | Unset):
     """
 
@@ -72,7 +72,7 @@ class LayoutOutputModel:
     inverter_classification: str | Unset = UNSET
     panel_location: str | Unset = UNSET
     external_id: str | Unset = UNSET
-    last_changed_on: datetime.datetime | Unset = UNSET
+    last_changed_on: datetime.datetime | None | Unset = UNSET
     meter: MeterReferenceModel | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -121,9 +121,13 @@ class LayoutOutputModel:
 
         external_id = self.external_id
 
-        last_changed_on: str | Unset = UNSET
-        if not isinstance(self.last_changed_on, Unset):
+        last_changed_on: None | str | Unset
+        if isinstance(self.last_changed_on, Unset):
+            last_changed_on = UNSET
+        elif isinstance(self.last_changed_on, datetime.datetime):
             last_changed_on = self.last_changed_on.isoformat()
+        else:
+            last_changed_on = self.last_changed_on
 
         meter: dict[str, Any] | Unset = UNSET
         if not isinstance(self.meter, Unset):
@@ -228,12 +232,22 @@ class LayoutOutputModel:
 
         external_id = d.pop("externalId", UNSET)
 
-        _last_changed_on = d.pop("lastChangedOn", UNSET)
-        last_changed_on: datetime.datetime | Unset
-        if isinstance(_last_changed_on, Unset):
-            last_changed_on = UNSET
-        else:
-            last_changed_on = datetime.datetime.fromisoformat(_last_changed_on)
+        def _parse_last_changed_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                last_changed_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return last_changed_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        last_changed_on = _parse_last_changed_on(d.pop("lastChangedOn", UNSET))
 
         _meter = d.pop("meter", UNSET)
         meter: MeterReferenceModel | Unset

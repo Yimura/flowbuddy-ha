@@ -11,6 +11,8 @@
         "city": "Testville",
         "country": "BE",
         "alarmStatus": "OK",
+        "installationDate": null,
+        "dashboardCreatedOn": null,
         "installationType": {
           "resourceUri": "/installationtypes/residential",
           "name": "Residential PV+Battery"

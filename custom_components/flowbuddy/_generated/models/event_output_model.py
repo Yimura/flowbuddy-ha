@@ -27,9 +27,9 @@ class EventOutputModel:
     """
     Attributes:
         resource_uri (str | Unset):
-        timestamp (datetime.datetime | Unset):
+        timestamp (datetime.datetime | None | Unset):
         description (str | Unset):
-        created_on (datetime.datetime | Unset):
+        created_on (datetime.datetime | None | Unset):
         external_id (str | Unset):
         installation (InstallationReferenceModel | Unset):
         meter (MeterReferenceModel | Unset):
@@ -38,9 +38,9 @@ class EventOutputModel:
     """
 
     resource_uri: str | Unset = UNSET
-    timestamp: datetime.datetime | Unset = UNSET
+    timestamp: datetime.datetime | None | Unset = UNSET
     description: str | Unset = UNSET
-    created_on: datetime.datetime | Unset = UNSET
+    created_on: datetime.datetime | None | Unset = UNSET
     external_id: str | Unset = UNSET
     installation: InstallationReferenceModel | Unset = UNSET
     meter: MeterReferenceModel | Unset = UNSET
@@ -56,15 +56,23 @@ class EventOutputModel:
 
         resource_uri = self.resource_uri
 
-        timestamp: str | Unset = UNSET
-        if not isinstance(self.timestamp, Unset):
+        timestamp: None | str | Unset
+        if isinstance(self.timestamp, Unset):
+            timestamp = UNSET
+        elif isinstance(self.timestamp, datetime.datetime):
             timestamp = self.timestamp.isoformat()
+        else:
+            timestamp = self.timestamp
 
         description = self.description
 
-        created_on: str | Unset = UNSET
-        if not isinstance(self.created_on, Unset):
+        created_on: None | str | Unset
+        if isinstance(self.created_on, Unset):
+            created_on = UNSET
+        elif isinstance(self.created_on, datetime.datetime):
             created_on = self.created_on.isoformat()
+        else:
+            created_on = self.created_on
 
         external_id = self.external_id
 
@@ -118,21 +126,41 @@ class EventOutputModel:
         d = dict(src_dict)
         resource_uri = d.pop("resourceUri", UNSET)
 
-        _timestamp = d.pop("timestamp", UNSET)
-        timestamp: datetime.datetime | Unset
-        if isinstance(_timestamp, Unset):
-            timestamp = UNSET
-        else:
-            timestamp = datetime.datetime.fromisoformat(_timestamp)
+        def _parse_timestamp(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                timestamp_type_0 = datetime.datetime.fromisoformat(data)
+
+                return timestamp_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        timestamp = _parse_timestamp(d.pop("timestamp", UNSET))
 
         description = d.pop("description", UNSET)
 
-        _created_on = d.pop("createdOn", UNSET)
-        created_on: datetime.datetime | Unset
-        if isinstance(_created_on, Unset):
-            created_on = UNSET
-        else:
-            created_on = datetime.datetime.fromisoformat(_created_on)
+        def _parse_created_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                created_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return created_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        created_on = _parse_created_on(d.pop("createdOn", UNSET))
 
         external_id = d.pop("externalId", UNSET)
 

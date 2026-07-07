@@ -25,26 +25,26 @@ class CommunicatorRemoteCommandOutputModel:
     Attributes:
         resource_uri (str | Unset):
         type_ (str | Unset): The type will indicate which action was requested (e.g. `connectiontest`)
-        timestamp (datetime.datetime | Unset):
+        timestamp (datetime.datetime | None | Unset):
         status (str | Unset): Initial = The command is waiting for execution. Dispatching = We are trying to connect to
             the module. Dispatched = The action was executed.
         result (str | Unset): Failure or Success. A failure is often caused by a connection issue and can be solved by a
             retry at a later moment.
         result_message (str | Unset):
-        entered_on (datetime.datetime | Unset):
-        performed_on (datetime.datetime | Unset):
+        entered_on (datetime.datetime | None | Unset):
+        performed_on (datetime.datetime | None | Unset):
         external_id (str | Unset):
         communicator (CommunicatorReferenceModel | Unset):
     """
 
     resource_uri: str | Unset = UNSET
     type_: str | Unset = UNSET
-    timestamp: datetime.datetime | Unset = UNSET
+    timestamp: datetime.datetime | None | Unset = UNSET
     status: str | Unset = UNSET
     result: str | Unset = UNSET
     result_message: str | Unset = UNSET
-    entered_on: datetime.datetime | Unset = UNSET
-    performed_on: datetime.datetime | Unset = UNSET
+    entered_on: datetime.datetime | None | Unset = UNSET
+    performed_on: datetime.datetime | None | Unset = UNSET
     external_id: str | Unset = UNSET
     communicator: CommunicatorReferenceModel | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -56,9 +56,13 @@ class CommunicatorRemoteCommandOutputModel:
 
         type_ = self.type_
 
-        timestamp: str | Unset = UNSET
-        if not isinstance(self.timestamp, Unset):
+        timestamp: None | str | Unset
+        if isinstance(self.timestamp, Unset):
+            timestamp = UNSET
+        elif isinstance(self.timestamp, datetime.datetime):
             timestamp = self.timestamp.isoformat()
+        else:
+            timestamp = self.timestamp
 
         status = self.status
 
@@ -66,13 +70,21 @@ class CommunicatorRemoteCommandOutputModel:
 
         result_message = self.result_message
 
-        entered_on: str | Unset = UNSET
-        if not isinstance(self.entered_on, Unset):
+        entered_on: None | str | Unset
+        if isinstance(self.entered_on, Unset):
+            entered_on = UNSET
+        elif isinstance(self.entered_on, datetime.datetime):
             entered_on = self.entered_on.isoformat()
+        else:
+            entered_on = self.entered_on
 
-        performed_on: str | Unset = UNSET
-        if not isinstance(self.performed_on, Unset):
+        performed_on: None | str | Unset
+        if isinstance(self.performed_on, Unset):
+            performed_on = UNSET
+        elif isinstance(self.performed_on, datetime.datetime):
             performed_on = self.performed_on.isoformat()
+        else:
+            performed_on = self.performed_on
 
         external_id = self.external_id
 
@@ -115,12 +127,22 @@ class CommunicatorRemoteCommandOutputModel:
 
         type_ = d.pop("type", UNSET)
 
-        _timestamp = d.pop("timestamp", UNSET)
-        timestamp: datetime.datetime | Unset
-        if isinstance(_timestamp, Unset):
-            timestamp = UNSET
-        else:
-            timestamp = datetime.datetime.fromisoformat(_timestamp)
+        def _parse_timestamp(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                timestamp_type_0 = datetime.datetime.fromisoformat(data)
+
+                return timestamp_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        timestamp = _parse_timestamp(d.pop("timestamp", UNSET))
 
         status = d.pop("status", UNSET)
 
@@ -128,19 +150,39 @@ class CommunicatorRemoteCommandOutputModel:
 
         result_message = d.pop("resultMessage", UNSET)
 
-        _entered_on = d.pop("enteredOn", UNSET)
-        entered_on: datetime.datetime | Unset
-        if isinstance(_entered_on, Unset):
-            entered_on = UNSET
-        else:
-            entered_on = datetime.datetime.fromisoformat(_entered_on)
+        def _parse_entered_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                entered_on_type_0 = datetime.datetime.fromisoformat(data)
 
-        _performed_on = d.pop("performedOn", UNSET)
-        performed_on: datetime.datetime | Unset
-        if isinstance(_performed_on, Unset):
-            performed_on = UNSET
-        else:
-            performed_on = datetime.datetime.fromisoformat(_performed_on)
+                return entered_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        entered_on = _parse_entered_on(d.pop("enteredOn", UNSET))
+
+        def _parse_performed_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                performed_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return performed_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        performed_on = _parse_performed_on(d.pop("performedOn", UNSET))
 
         external_id = d.pop("externalId", UNSET)
 

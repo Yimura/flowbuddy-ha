@@ -24,8 +24,8 @@ class HeatPumpControlTestOutputModel:
     """
     Attributes:
         resource_uri (str | Unset):
-        entered_on (datetime.datetime | Unset):
-        performed_on (datetime.datetime | Unset):
+        entered_on (datetime.datetime | None | Unset):
+        performed_on (datetime.datetime | None | Unset):
         status (str | Unset):
         result_message (str | Unset):
         external_id (str | Unset):
@@ -33,8 +33,8 @@ class HeatPumpControlTestOutputModel:
     """
 
     resource_uri: str | Unset = UNSET
-    entered_on: datetime.datetime | Unset = UNSET
-    performed_on: datetime.datetime | Unset = UNSET
+    entered_on: datetime.datetime | None | Unset = UNSET
+    performed_on: datetime.datetime | None | Unset = UNSET
     status: str | Unset = UNSET
     result_message: str | Unset = UNSET
     external_id: str | Unset = UNSET
@@ -46,13 +46,21 @@ class HeatPumpControlTestOutputModel:
 
         resource_uri = self.resource_uri
 
-        entered_on: str | Unset = UNSET
-        if not isinstance(self.entered_on, Unset):
+        entered_on: None | str | Unset
+        if isinstance(self.entered_on, Unset):
+            entered_on = UNSET
+        elif isinstance(self.entered_on, datetime.datetime):
             entered_on = self.entered_on.isoformat()
+        else:
+            entered_on = self.entered_on
 
-        performed_on: str | Unset = UNSET
-        if not isinstance(self.performed_on, Unset):
+        performed_on: None | str | Unset
+        if isinstance(self.performed_on, Unset):
+            performed_on = UNSET
+        elif isinstance(self.performed_on, datetime.datetime):
             performed_on = self.performed_on.isoformat()
+        else:
+            performed_on = self.performed_on
 
         status = self.status
 
@@ -91,19 +99,39 @@ class HeatPumpControlTestOutputModel:
         d = dict(src_dict)
         resource_uri = d.pop("resourceUri", UNSET)
 
-        _entered_on = d.pop("enteredOn", UNSET)
-        entered_on: datetime.datetime | Unset
-        if isinstance(_entered_on, Unset):
-            entered_on = UNSET
-        else:
-            entered_on = datetime.datetime.fromisoformat(_entered_on)
+        def _parse_entered_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                entered_on_type_0 = datetime.datetime.fromisoformat(data)
 
-        _performed_on = d.pop("performedOn", UNSET)
-        performed_on: datetime.datetime | Unset
-        if isinstance(_performed_on, Unset):
-            performed_on = UNSET
-        else:
-            performed_on = datetime.datetime.fromisoformat(_performed_on)
+                return entered_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        entered_on = _parse_entered_on(d.pop("enteredOn", UNSET))
+
+        def _parse_performed_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                performed_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return performed_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        performed_on = _parse_performed_on(d.pop("performedOn", UNSET))
 
         status = d.pop("status", UNSET)
 

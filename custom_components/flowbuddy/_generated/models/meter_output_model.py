@@ -32,22 +32,22 @@ class MeterOutputModel:
         type_ (str | Unset): Type of meter (e.g. Solar, Heating, ...)
         meter_type (str | Unset):
         status (str | Unset): Registration status of device
-        first_registered_on (datetime.datetime | Unset): First time when meter was linked to an installation
-        registered_on (datetime.datetime | Unset): Time when meter was linked to an installation (if meter was
+        first_registered_on (datetime.datetime | None | Unset): First time when meter was linked to an installation
+        registered_on (datetime.datetime | None | Unset): Time when meter was linked to an installation (if meter was
             unregistered/re-registered this will be updated)
-        last_communication_attempt_on (datetime.datetime | Unset): Last attempt of network communication with physical
-            device
-        last_successful_communication_on (datetime.datetime | Unset): Last successful network communication with
+        last_communication_attempt_on (datetime.datetime | None | Unset): Last attempt of network communication with
+            physical device
+        last_successful_communication_on (datetime.datetime | None | Unset): Last successful network communication with
             physical device
         polling (str | Unset): Indicates whether the device is processing data (e.g. yes or no)
         last_polling_result (str | Unset): Indicates whether the last data processing was completed without errors (e.g.
             successful)
-        last_successful_polling_on (datetime.datetime | Unset): Time when data was last processed for this device
+        last_successful_polling_on (datetime.datetime | None | Unset): Time when data was last processed for this device
         external_id (str | Unset):
         installation (InstallationReferenceModel | Unset):
         dlms_meter (MeasuringDeviceReferenceModel | Unset):
         api_meter (ApiMeterReferenceModel | Unset):
-        created (datetime.datetime | Unset): Time when meter was created in the application
+        created (datetime.datetime | None | Unset): Time when meter was created in the application
     """
 
     resource_uri: str | Unset = UNSET
@@ -57,18 +57,18 @@ class MeterOutputModel:
     type_: str | Unset = UNSET
     meter_type: str | Unset = UNSET
     status: str | Unset = UNSET
-    first_registered_on: datetime.datetime | Unset = UNSET
-    registered_on: datetime.datetime | Unset = UNSET
-    last_communication_attempt_on: datetime.datetime | Unset = UNSET
-    last_successful_communication_on: datetime.datetime | Unset = UNSET
+    first_registered_on: datetime.datetime | None | Unset = UNSET
+    registered_on: datetime.datetime | None | Unset = UNSET
+    last_communication_attempt_on: datetime.datetime | None | Unset = UNSET
+    last_successful_communication_on: datetime.datetime | None | Unset = UNSET
     polling: str | Unset = UNSET
     last_polling_result: str | Unset = UNSET
-    last_successful_polling_on: datetime.datetime | Unset = UNSET
+    last_successful_polling_on: datetime.datetime | None | Unset = UNSET
     external_id: str | Unset = UNSET
     installation: InstallationReferenceModel | Unset = UNSET
     dlms_meter: MeasuringDeviceReferenceModel | Unset = UNSET
     api_meter: ApiMeterReferenceModel | Unset = UNSET
-    created: datetime.datetime | Unset = UNSET
+    created: datetime.datetime | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -90,29 +90,49 @@ class MeterOutputModel:
 
         status = self.status
 
-        first_registered_on: str | Unset = UNSET
-        if not isinstance(self.first_registered_on, Unset):
+        first_registered_on: None | str | Unset
+        if isinstance(self.first_registered_on, Unset):
+            first_registered_on = UNSET
+        elif isinstance(self.first_registered_on, datetime.datetime):
             first_registered_on = self.first_registered_on.isoformat()
+        else:
+            first_registered_on = self.first_registered_on
 
-        registered_on: str | Unset = UNSET
-        if not isinstance(self.registered_on, Unset):
+        registered_on: None | str | Unset
+        if isinstance(self.registered_on, Unset):
+            registered_on = UNSET
+        elif isinstance(self.registered_on, datetime.datetime):
             registered_on = self.registered_on.isoformat()
+        else:
+            registered_on = self.registered_on
 
-        last_communication_attempt_on: str | Unset = UNSET
-        if not isinstance(self.last_communication_attempt_on, Unset):
+        last_communication_attempt_on: None | str | Unset
+        if isinstance(self.last_communication_attempt_on, Unset):
+            last_communication_attempt_on = UNSET
+        elif isinstance(self.last_communication_attempt_on, datetime.datetime):
             last_communication_attempt_on = self.last_communication_attempt_on.isoformat()
+        else:
+            last_communication_attempt_on = self.last_communication_attempt_on
 
-        last_successful_communication_on: str | Unset = UNSET
-        if not isinstance(self.last_successful_communication_on, Unset):
+        last_successful_communication_on: None | str | Unset
+        if isinstance(self.last_successful_communication_on, Unset):
+            last_successful_communication_on = UNSET
+        elif isinstance(self.last_successful_communication_on, datetime.datetime):
             last_successful_communication_on = self.last_successful_communication_on.isoformat()
+        else:
+            last_successful_communication_on = self.last_successful_communication_on
 
         polling = self.polling
 
         last_polling_result = self.last_polling_result
 
-        last_successful_polling_on: str | Unset = UNSET
-        if not isinstance(self.last_successful_polling_on, Unset):
+        last_successful_polling_on: None | str | Unset
+        if isinstance(self.last_successful_polling_on, Unset):
+            last_successful_polling_on = UNSET
+        elif isinstance(self.last_successful_polling_on, datetime.datetime):
             last_successful_polling_on = self.last_successful_polling_on.isoformat()
+        else:
+            last_successful_polling_on = self.last_successful_polling_on
 
         external_id = self.external_id
 
@@ -128,9 +148,13 @@ class MeterOutputModel:
         if not isinstance(self.api_meter, Unset):
             api_meter = self.api_meter.to_dict()
 
-        created: str | Unset = UNSET
-        if not isinstance(self.created, Unset):
+        created: None | str | Unset
+        if isinstance(self.created, Unset):
+            created = UNSET
+        elif isinstance(self.created, datetime.datetime):
             created = self.created.isoformat()
+        else:
+            created = self.created
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -197,50 +221,102 @@ class MeterOutputModel:
 
         status = d.pop("status", UNSET)
 
-        _first_registered_on = d.pop("firstRegisteredOn", UNSET)
-        first_registered_on: datetime.datetime | Unset
-        if isinstance(_first_registered_on, Unset):
-            first_registered_on = UNSET
-        else:
-            first_registered_on = datetime.datetime.fromisoformat(_first_registered_on)
+        def _parse_first_registered_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                first_registered_on_type_0 = datetime.datetime.fromisoformat(data)
 
-        _registered_on = d.pop("registeredOn", UNSET)
-        registered_on: datetime.datetime | Unset
-        if isinstance(_registered_on, Unset):
-            registered_on = UNSET
-        else:
-            registered_on = datetime.datetime.fromisoformat(_registered_on)
+                return first_registered_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
 
-        _last_communication_attempt_on = d.pop("lastCommunicationAttemptOn", UNSET)
-        last_communication_attempt_on: datetime.datetime | Unset
-        if isinstance(_last_communication_attempt_on, Unset):
-            last_communication_attempt_on = UNSET
-        else:
-            last_communication_attempt_on = datetime.datetime.fromisoformat(
-                _last_communication_attempt_on
-            )
+        first_registered_on = _parse_first_registered_on(d.pop("firstRegisteredOn", UNSET))
 
-        _last_successful_communication_on = d.pop("lastSuccessfulCommunicationOn", UNSET)
-        last_successful_communication_on: datetime.datetime | Unset
-        if isinstance(_last_successful_communication_on, Unset):
-            last_successful_communication_on = UNSET
-        else:
-            last_successful_communication_on = datetime.datetime.fromisoformat(
-                _last_successful_communication_on
-            )
+        def _parse_registered_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                registered_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return registered_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        registered_on = _parse_registered_on(d.pop("registeredOn", UNSET))
+
+        def _parse_last_communication_attempt_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                last_communication_attempt_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return last_communication_attempt_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        last_communication_attempt_on = _parse_last_communication_attempt_on(
+            d.pop("lastCommunicationAttemptOn", UNSET)
+        )
+
+        def _parse_last_successful_communication_on(
+            data: object,
+        ) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                last_successful_communication_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return last_successful_communication_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        last_successful_communication_on = _parse_last_successful_communication_on(
+            d.pop("lastSuccessfulCommunicationOn", UNSET)
+        )
 
         polling = d.pop("polling", UNSET)
 
         last_polling_result = d.pop("lastPollingResult", UNSET)
 
-        _last_successful_polling_on = d.pop("lastSuccessfulPollingOn", UNSET)
-        last_successful_polling_on: datetime.datetime | Unset
-        if isinstance(_last_successful_polling_on, Unset):
-            last_successful_polling_on = UNSET
-        else:
-            last_successful_polling_on = datetime.datetime.fromisoformat(
-                _last_successful_polling_on
-            )
+        def _parse_last_successful_polling_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                last_successful_polling_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return last_successful_polling_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        last_successful_polling_on = _parse_last_successful_polling_on(
+            d.pop("lastSuccessfulPollingOn", UNSET)
+        )
 
         external_id = d.pop("externalId", UNSET)
 
@@ -265,12 +341,22 @@ class MeterOutputModel:
         else:
             api_meter = ApiMeterReferenceModel.from_dict(_api_meter)
 
-        _created = d.pop("created", UNSET)
-        created: datetime.datetime | Unset
-        if isinstance(_created, Unset):
-            created = UNSET
-        else:
-            created = datetime.datetime.fromisoformat(_created)
+        def _parse_created(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                created_type_0 = datetime.datetime.fromisoformat(data)
+
+                return created_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        created = _parse_created(d.pop("created", UNSET))
 
         meter_output_model = cls(
             resource_uri=resource_uri,

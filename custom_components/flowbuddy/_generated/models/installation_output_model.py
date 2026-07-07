@@ -42,11 +42,11 @@ class InstallationOutputModel:
         city (str | Unset):
         country (str | Unset):
         resident (str | Unset):
-        installation_date (datetime.datetime | Unset):
+        installation_date (datetime.datetime | None | Unset):
         project (str | Unset):
         dashboard_id (str | Unset):
         dashboard_type (str | Unset):
-        dashboard_created_on (datetime.datetime | Unset):
+        dashboard_created_on (datetime.datetime | None | Unset):
         alarm_priority (str | Unset): The alarmpriority defines which thresholds should be used to create alarms. You
             can define different categories with different thresholds. (e.g. an installation with HIGH priority will receive
             a network alarm after 6 hours, while LOW priority will receive an alarm after 48 hours.)
@@ -84,11 +84,11 @@ class InstallationOutputModel:
     city: str | Unset = UNSET
     country: str | Unset = UNSET
     resident: str | Unset = UNSET
-    installation_date: datetime.datetime | Unset = UNSET
+    installation_date: datetime.datetime | None | Unset = UNSET
     project: str | Unset = UNSET
     dashboard_id: str | Unset = UNSET
     dashboard_type: str | Unset = UNSET
-    dashboard_created_on: datetime.datetime | Unset = UNSET
+    dashboard_created_on: datetime.datetime | None | Unset = UNSET
     alarm_priority: str | Unset = UNSET
     alarm_status: str | Unset = UNSET
     custom01: str | Unset = UNSET
@@ -146,9 +146,13 @@ class InstallationOutputModel:
 
         resident = self.resident
 
-        installation_date: str | Unset = UNSET
-        if not isinstance(self.installation_date, Unset):
+        installation_date: None | str | Unset
+        if isinstance(self.installation_date, Unset):
+            installation_date = UNSET
+        elif isinstance(self.installation_date, datetime.datetime):
             installation_date = self.installation_date.isoformat()
+        else:
+            installation_date = self.installation_date
 
         project = self.project
 
@@ -156,9 +160,13 @@ class InstallationOutputModel:
 
         dashboard_type = self.dashboard_type
 
-        dashboard_created_on: str | Unset = UNSET
-        if not isinstance(self.dashboard_created_on, Unset):
+        dashboard_created_on: None | str | Unset
+        if isinstance(self.dashboard_created_on, Unset):
+            dashboard_created_on = UNSET
+        elif isinstance(self.dashboard_created_on, datetime.datetime):
             dashboard_created_on = self.dashboard_created_on.isoformat()
+        else:
+            dashboard_created_on = self.dashboard_created_on
 
         alarm_priority = self.alarm_priority
 
@@ -330,12 +338,22 @@ class InstallationOutputModel:
 
         resident = d.pop("resident", UNSET)
 
-        _installation_date = d.pop("installationDate", UNSET)
-        installation_date: datetime.datetime | Unset
-        if isinstance(_installation_date, Unset):
-            installation_date = UNSET
-        else:
-            installation_date = datetime.datetime.fromisoformat(_installation_date)
+        def _parse_installation_date(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                installation_date_type_0 = datetime.datetime.fromisoformat(data)
+
+                return installation_date_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        installation_date = _parse_installation_date(d.pop("installationDate", UNSET))
 
         project = d.pop("project", UNSET)
 
@@ -343,12 +361,22 @@ class InstallationOutputModel:
 
         dashboard_type = d.pop("dashboardType", UNSET)
 
-        _dashboard_created_on = d.pop("dashboardCreatedOn", UNSET)
-        dashboard_created_on: datetime.datetime | Unset
-        if isinstance(_dashboard_created_on, Unset):
-            dashboard_created_on = UNSET
-        else:
-            dashboard_created_on = datetime.datetime.fromisoformat(_dashboard_created_on)
+        def _parse_dashboard_created_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                dashboard_created_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return dashboard_created_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        dashboard_created_on = _parse_dashboard_created_on(d.pop("dashboardCreatedOn", UNSET))
 
         alarm_priority = d.pop("alarmPriority", UNSET)
 

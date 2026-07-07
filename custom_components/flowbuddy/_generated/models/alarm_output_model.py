@@ -27,7 +27,7 @@ class AlarmOutputModel:
     """
     Attributes:
         resource_uri (str | Unset):
-        timestamp (datetime.datetime | Unset): Time when alarm was detected
+        timestamp (datetime.datetime | None | Unset): Time when alarm was detected
         description (str | Unset): Description of alarm
         resolution (str | Unset): Predefined list of solutions that can be linked to an alarm when solved
         cause (str | Unset): Predefined list of causes that can be linked to an alarm
@@ -35,18 +35,18 @@ class AlarmOutputModel:
         priority (str | Unset): Predefined list of priorities to rank the importance of an alarm
         status (str | Unset): Status of alarm (e.g. open or closed)
         closed_by (str | Unset): Indicates which user closed ticket
-        closed_on (datetime.datetime | Unset): When ticket was closed
+        closed_on (datetime.datetime | None | Unset): When ticket was closed
         external_id (str | Unset):
         installation (InstallationReferenceModel | Unset):
         meter (MeterReferenceModel | Unset):
         measurement (MeasurementReferenceModel | Unset):
         event_type (EventTypeReferenceModel | Unset):
         comment (str | Unset): List of comments that were added to alarm
-        created (datetime.datetime | Unset): Time when alarm was created in application
+        created (datetime.datetime | None | Unset): Time when alarm was created in application
     """
 
     resource_uri: str | Unset = UNSET
-    timestamp: datetime.datetime | Unset = UNSET
+    timestamp: datetime.datetime | None | Unset = UNSET
     description: str | Unset = UNSET
     resolution: str | Unset = UNSET
     cause: str | Unset = UNSET
@@ -54,14 +54,14 @@ class AlarmOutputModel:
     priority: str | Unset = UNSET
     status: str | Unset = UNSET
     closed_by: str | Unset = UNSET
-    closed_on: datetime.datetime | Unset = UNSET
+    closed_on: datetime.datetime | None | Unset = UNSET
     external_id: str | Unset = UNSET
     installation: InstallationReferenceModel | Unset = UNSET
     meter: MeterReferenceModel | Unset = UNSET
     measurement: MeasurementReferenceModel | Unset = UNSET
     event_type: EventTypeReferenceModel | Unset = UNSET
     comment: str | Unset = UNSET
-    created: datetime.datetime | Unset = UNSET
+    created: datetime.datetime | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -72,9 +72,13 @@ class AlarmOutputModel:
 
         resource_uri = self.resource_uri
 
-        timestamp: str | Unset = UNSET
-        if not isinstance(self.timestamp, Unset):
+        timestamp: None | str | Unset
+        if isinstance(self.timestamp, Unset):
+            timestamp = UNSET
+        elif isinstance(self.timestamp, datetime.datetime):
             timestamp = self.timestamp.isoformat()
+        else:
+            timestamp = self.timestamp
 
         description = self.description
 
@@ -90,9 +94,13 @@ class AlarmOutputModel:
 
         closed_by = self.closed_by
 
-        closed_on: str | Unset = UNSET
-        if not isinstance(self.closed_on, Unset):
+        closed_on: None | str | Unset
+        if isinstance(self.closed_on, Unset):
+            closed_on = UNSET
+        elif isinstance(self.closed_on, datetime.datetime):
             closed_on = self.closed_on.isoformat()
+        else:
+            closed_on = self.closed_on
 
         external_id = self.external_id
 
@@ -114,9 +122,13 @@ class AlarmOutputModel:
 
         comment = self.comment
 
-        created: str | Unset = UNSET
-        if not isinstance(self.created, Unset):
+        created: None | str | Unset
+        if isinstance(self.created, Unset):
+            created = UNSET
+        elif isinstance(self.created, datetime.datetime):
             created = self.created.isoformat()
+        else:
+            created = self.created
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -168,12 +180,22 @@ class AlarmOutputModel:
         d = dict(src_dict)
         resource_uri = d.pop("resourceUri", UNSET)
 
-        _timestamp = d.pop("timestamp", UNSET)
-        timestamp: datetime.datetime | Unset
-        if isinstance(_timestamp, Unset):
-            timestamp = UNSET
-        else:
-            timestamp = datetime.datetime.fromisoformat(_timestamp)
+        def _parse_timestamp(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                timestamp_type_0 = datetime.datetime.fromisoformat(data)
+
+                return timestamp_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        timestamp = _parse_timestamp(d.pop("timestamp", UNSET))
 
         description = d.pop("description", UNSET)
 
@@ -189,12 +211,22 @@ class AlarmOutputModel:
 
         closed_by = d.pop("closedBy", UNSET)
 
-        _closed_on = d.pop("closedOn", UNSET)
-        closed_on: datetime.datetime | Unset
-        if isinstance(_closed_on, Unset):
-            closed_on = UNSET
-        else:
-            closed_on = datetime.datetime.fromisoformat(_closed_on)
+        def _parse_closed_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                closed_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return closed_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        closed_on = _parse_closed_on(d.pop("closedOn", UNSET))
 
         external_id = d.pop("externalId", UNSET)
 
@@ -228,12 +260,22 @@ class AlarmOutputModel:
 
         comment = d.pop("comment", UNSET)
 
-        _created = d.pop("created", UNSET)
-        created: datetime.datetime | Unset
-        if isinstance(_created, Unset):
-            created = UNSET
-        else:
-            created = datetime.datetime.fromisoformat(_created)
+        def _parse_created(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                created_type_0 = datetime.datetime.fromisoformat(data)
+
+                return created_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        created = _parse_created(d.pop("created", UNSET))
 
         alarm_output_model = cls(
             resource_uri=resource_uri,

@@ -27,13 +27,13 @@ class CommunicatorOutputModel:
         resource_uri (str | Unset):
         logical_device_name (str | Unset): Unique identifier of communicator
         firm_ware_version (str | Unset): Version of the firmware of the device
-        first_registered_on (datetime.datetime | Unset): Time the device was first registered
+        first_registered_on (datetime.datetime | None | Unset): Time the device was first registered
         status (str | Unset): Status of registration
-        last_successful_polling_on (datetime.datetime | Unset): Time of last successful polling of the device
+        last_successful_polling_on (datetime.datetime | None | Unset): Time of last successful polling of the device
         last_polling_result (str | Unset): Result of last data retrieval
-        last_successful_communication_on (datetime.datetime | Unset): Time of last successful communication
-        last_communication_attempt_on (datetime.datetime | Unset): Time of last communication attempt
-        last_time_sync (datetime.datetime | Unset): Last time synchronisation
+        last_successful_communication_on (datetime.datetime | None | Unset): Time of last successful communication
+        last_communication_attempt_on (datetime.datetime | None | Unset): Time of last communication attempt
+        last_time_sync (datetime.datetime | None | Unset): Last time synchronisation
         external_id (str | Unset):
         type_ (CommunicatorTypeReferenceModel | Unset):
         sim (SimReferenceModel | Unset): Connection which can be used for network communication
@@ -42,13 +42,13 @@ class CommunicatorOutputModel:
     resource_uri: str | Unset = UNSET
     logical_device_name: str | Unset = UNSET
     firm_ware_version: str | Unset = UNSET
-    first_registered_on: datetime.datetime | Unset = UNSET
+    first_registered_on: datetime.datetime | None | Unset = UNSET
     status: str | Unset = UNSET
-    last_successful_polling_on: datetime.datetime | Unset = UNSET
+    last_successful_polling_on: datetime.datetime | None | Unset = UNSET
     last_polling_result: str | Unset = UNSET
-    last_successful_communication_on: datetime.datetime | Unset = UNSET
-    last_communication_attempt_on: datetime.datetime | Unset = UNSET
-    last_time_sync: datetime.datetime | Unset = UNSET
+    last_successful_communication_on: datetime.datetime | None | Unset = UNSET
+    last_communication_attempt_on: datetime.datetime | None | Unset = UNSET
+    last_time_sync: datetime.datetime | None | Unset = UNSET
     external_id: str | Unset = UNSET
     type_: CommunicatorTypeReferenceModel | Unset = UNSET
     sim: SimReferenceModel | Unset = UNSET
@@ -64,29 +64,49 @@ class CommunicatorOutputModel:
 
         firm_ware_version = self.firm_ware_version
 
-        first_registered_on: str | Unset = UNSET
-        if not isinstance(self.first_registered_on, Unset):
+        first_registered_on: None | str | Unset
+        if isinstance(self.first_registered_on, Unset):
+            first_registered_on = UNSET
+        elif isinstance(self.first_registered_on, datetime.datetime):
             first_registered_on = self.first_registered_on.isoformat()
+        else:
+            first_registered_on = self.first_registered_on
 
         status = self.status
 
-        last_successful_polling_on: str | Unset = UNSET
-        if not isinstance(self.last_successful_polling_on, Unset):
+        last_successful_polling_on: None | str | Unset
+        if isinstance(self.last_successful_polling_on, Unset):
+            last_successful_polling_on = UNSET
+        elif isinstance(self.last_successful_polling_on, datetime.datetime):
             last_successful_polling_on = self.last_successful_polling_on.isoformat()
+        else:
+            last_successful_polling_on = self.last_successful_polling_on
 
         last_polling_result = self.last_polling_result
 
-        last_successful_communication_on: str | Unset = UNSET
-        if not isinstance(self.last_successful_communication_on, Unset):
+        last_successful_communication_on: None | str | Unset
+        if isinstance(self.last_successful_communication_on, Unset):
+            last_successful_communication_on = UNSET
+        elif isinstance(self.last_successful_communication_on, datetime.datetime):
             last_successful_communication_on = self.last_successful_communication_on.isoformat()
+        else:
+            last_successful_communication_on = self.last_successful_communication_on
 
-        last_communication_attempt_on: str | Unset = UNSET
-        if not isinstance(self.last_communication_attempt_on, Unset):
+        last_communication_attempt_on: None | str | Unset
+        if isinstance(self.last_communication_attempt_on, Unset):
+            last_communication_attempt_on = UNSET
+        elif isinstance(self.last_communication_attempt_on, datetime.datetime):
             last_communication_attempt_on = self.last_communication_attempt_on.isoformat()
+        else:
+            last_communication_attempt_on = self.last_communication_attempt_on
 
-        last_time_sync: str | Unset = UNSET
-        if not isinstance(self.last_time_sync, Unset):
+        last_time_sync: None | str | Unset
+        if isinstance(self.last_time_sync, Unset):
+            last_time_sync = UNSET
+        elif isinstance(self.last_time_sync, datetime.datetime):
             last_time_sync = self.last_time_sync.isoformat()
+        else:
+            last_time_sync = self.last_time_sync
 
         external_id = self.external_id
 
@@ -142,50 +162,102 @@ class CommunicatorOutputModel:
 
         firm_ware_version = d.pop("firmWareVersion", UNSET)
 
-        _first_registered_on = d.pop("firstRegisteredOn", UNSET)
-        first_registered_on: datetime.datetime | Unset
-        if isinstance(_first_registered_on, Unset):
-            first_registered_on = UNSET
-        else:
-            first_registered_on = datetime.datetime.fromisoformat(_first_registered_on)
+        def _parse_first_registered_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                first_registered_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return first_registered_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        first_registered_on = _parse_first_registered_on(d.pop("firstRegisteredOn", UNSET))
 
         status = d.pop("status", UNSET)
 
-        _last_successful_polling_on = d.pop("lastSuccessfulPollingOn", UNSET)
-        last_successful_polling_on: datetime.datetime | Unset
-        if isinstance(_last_successful_polling_on, Unset):
-            last_successful_polling_on = UNSET
-        else:
-            last_successful_polling_on = datetime.datetime.fromisoformat(
-                _last_successful_polling_on
-            )
+        def _parse_last_successful_polling_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                last_successful_polling_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return last_successful_polling_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        last_successful_polling_on = _parse_last_successful_polling_on(
+            d.pop("lastSuccessfulPollingOn", UNSET)
+        )
 
         last_polling_result = d.pop("lastPollingResult", UNSET)
 
-        _last_successful_communication_on = d.pop("lastSuccessfulCommunicationOn", UNSET)
-        last_successful_communication_on: datetime.datetime | Unset
-        if isinstance(_last_successful_communication_on, Unset):
-            last_successful_communication_on = UNSET
-        else:
-            last_successful_communication_on = datetime.datetime.fromisoformat(
-                _last_successful_communication_on
-            )
+        def _parse_last_successful_communication_on(
+            data: object,
+        ) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                last_successful_communication_on_type_0 = datetime.datetime.fromisoformat(data)
 
-        _last_communication_attempt_on = d.pop("lastCommunicationAttemptOn", UNSET)
-        last_communication_attempt_on: datetime.datetime | Unset
-        if isinstance(_last_communication_attempt_on, Unset):
-            last_communication_attempt_on = UNSET
-        else:
-            last_communication_attempt_on = datetime.datetime.fromisoformat(
-                _last_communication_attempt_on
-            )
+                return last_successful_communication_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
 
-        _last_time_sync = d.pop("lastTimeSync", UNSET)
-        last_time_sync: datetime.datetime | Unset
-        if isinstance(_last_time_sync, Unset):
-            last_time_sync = UNSET
-        else:
-            last_time_sync = datetime.datetime.fromisoformat(_last_time_sync)
+        last_successful_communication_on = _parse_last_successful_communication_on(
+            d.pop("lastSuccessfulCommunicationOn", UNSET)
+        )
+
+        def _parse_last_communication_attempt_on(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                last_communication_attempt_on_type_0 = datetime.datetime.fromisoformat(data)
+
+                return last_communication_attempt_on_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        last_communication_attempt_on = _parse_last_communication_attempt_on(
+            d.pop("lastCommunicationAttemptOn", UNSET)
+        )
+
+        def _parse_last_time_sync(data: object) -> datetime.datetime | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, str):
+                    raise TypeError()
+                last_time_sync_type_0 = datetime.datetime.fromisoformat(data)
+
+                return last_time_sync_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(datetime.datetime | None | Unset, data)
+
+        last_time_sync = _parse_last_time_sync(d.pop("lastTimeSync", UNSET))
 
         external_id = d.pop("externalId", UNSET)
 
