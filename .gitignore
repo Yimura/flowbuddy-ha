@@ -30,3 +30,6 @@ config/
 
 # devcontainer post-create marker
 .devcontainer/.post-create-done
+
+# Superpowers scaffolding (specs, plans) — kept local only, out of the release repo
+docs/superpowers/

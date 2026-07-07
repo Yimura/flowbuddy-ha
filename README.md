@@ -85,12 +85,9 @@ pinned.
 ## Known limitations / open questions
 
 v0.1.0 is intentionally minimal: resident-scope read-only sensors plus
-Energy dashboard integration. The full log of open questions (installer
-API access, polling cadence, aggregation endpoints that return no data
-against the live tenant, etc.) is tracked in the design spec:
-
-[`docs/superpowers/specs/2026-07-07-flowbuddy-ha-design.md`](docs/superpowers/specs/2026-07-07-flowbuddy-ha-design.md),
-§5 "Open questions to resolve during implementation".
+Energy dashboard integration. Tracked follow-ups (installer API access,
+adaptive backoff, reauth edge cases, code cleanup) live in the
+[repo issue tracker](https://github.com/Yimura/flowbuddy-ha/issues).
 
 ## License
 
