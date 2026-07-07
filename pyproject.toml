@@ -3,9 +3,20 @@ name = "flowbuddy-ha"
 version = "0.0.0"
 description = "Home Assistant custom integration for FlowBuddy (SIMPL / IZEN)"
 readme = "README.md"
-license = { text = "MIT" }
+license = "MIT"
 requires-python = ">=3.13"
 authors = [{ name = "Andreas Maerten", email = "andreas.maerten@crimson7.io" }]
+
+# We're not a distributable package — pyproject.toml exists purely for
+# dev-dep pinning via `pip install -e '.[dev]'`. Skip build-time package
+# discovery so setuptools doesn't try to bundle openapi/ + custom_components/
+# as top-level modules and fail.
+[tool.setuptools]
+py-modules = []
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
 
 [project.optional-dependencies]
 dev = [

@@ -20,3 +20,7 @@ jobs:
       - uses: hacs/action@main
         with:
           category: integration
+          # Skip the "brands" check -- we're not (yet) listed in
+          # home-assistant/brands and shipping icons in-repo is not the
+          # HACS convention. Revisit when submitting to HA brands.
+          ignore: brands

@@ -1,5 +1,15 @@
 # flowbuddy-ha
 
+[![Validate](https://github.com/Yimura/flowbuddy-ha/actions/workflows/validate.yml/badge.svg)](https://github.com/Yimura/flowbuddy-ha/actions/workflows/validate.yml)
+[![Tests](https://github.com/Yimura/flowbuddy-ha/actions/workflows/tests.yml/badge.svg)](https://github.com/Yimura/flowbuddy-ha/actions/workflows/tests.yml)
+[![Regen check](https://github.com/Yimura/flowbuddy-ha/actions/workflows/regen-check.yml/badge.svg)](https://github.com/Yimura/flowbuddy-ha/actions/workflows/regen-check.yml)
+[![Coverage](https://img.shields.io/badge/coverage-90%25-brightgreen)](https://github.com/Yimura/flowbuddy-ha/actions/workflows/tests.yml)
+[![Python](https://img.shields.io/badge/python-3.13%2B-blue)](https://www.python.org/downloads/)
+[![Home Assistant](https://img.shields.io/badge/Home%20Assistant-2025.1%2B-41BDF5?logo=home-assistant&logoColor=white)](https://www.home-assistant.io/)
+[![HACS](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://hacs.xyz/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/Yimura/flowbuddy-ha?display_name=tag&sort=semver)](https://github.com/Yimura/flowbuddy-ha/releases)
+
 Home Assistant custom integration for [FlowBuddy](https://flowbuddy.earth.be)
 (SIMPL by Cast4All / IZEN) — the energy-monitoring platform used by IZEN's
 Belgian residential/commercial solar + battery installations.
