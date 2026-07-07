@@ -1,0 +1,36 @@
+{
+  "config": {
+    "step": {
+      "auth_mode": {
+        "title": "Méthode d'authentification",
+        "data": { "mode": "Comment souhaitez-vous vous authentifier ?" }
+      },
+      "credentials": {
+        "title": "Saisissez vos identifiants",
+        "data": {
+          "client_id": "Client ID",
+          "client_secret": "Client Secret",
+          "email": "E-mail",
+          "password": "Mot de passe"
+        }
+      },
+      "installation": {
+        "title": "Sélectionnez une installation",
+        "data": { "installation_id": "Installation" }
+      }
+    },
+    "error": {
+      "invalid_auth": "Identifiants invalides.",
+      "cannot_connect": "Impossible de joindre FlowBuddy — vérifiez votre connexion réseau."
+    },
+    "abort": {
+      "already_configured": "Cette installation est déjà configurée."
+    }
+  },
+  "services": {
+    "enable_realtime": {
+      "name": "Activer le mode en direct",
+      "description": "Augmente la fréquence d'interrogation des valeurs en direct pour une durée limitée. Limité par le fournisseur."
+    }
+  }
+}

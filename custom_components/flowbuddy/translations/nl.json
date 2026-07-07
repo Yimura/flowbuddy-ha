@@ -1,0 +1,36 @@
+{
+  "config": {
+    "step": {
+      "auth_mode": {
+        "title": "Aanmeldmethode",
+        "data": { "mode": "Hoe wil je je aanmelden?" }
+      },
+      "credentials": {
+        "title": "Voer je gegevens in",
+        "data": {
+          "client_id": "Client ID",
+          "client_secret": "Client Secret",
+          "email": "E-mailadres",
+          "password": "Wachtwoord"
+        }
+      },
+      "installation": {
+        "title": "Kies een installatie",
+        "data": { "installation_id": "Installatie" }
+      }
+    },
+    "error": {
+      "invalid_auth": "Ongeldige aanmeldgegevens.",
+      "cannot_connect": "Kan FlowBuddy niet bereiken — controleer je netwerk."
+    },
+    "abort": {
+      "already_configured": "Deze installatie is al geconfigureerd."
+    }
+  },
+  "services": {
+    "enable_realtime": {
+      "name": "Live modus inschakelen",
+      "description": "Verhoog de pollingfrequentie van live waarden voor een beperkte periode. Snelheid wordt beperkt door de leverancier."
+    }
+  }
+}

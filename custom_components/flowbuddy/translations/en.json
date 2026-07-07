@@ -1,0 +1,36 @@
+{
+  "config": {
+    "step": {
+      "auth_mode": {
+        "title": "Authentication method",
+        "data": { "mode": "How do you want to authenticate?" }
+      },
+      "credentials": {
+        "title": "Enter your credentials",
+        "data": {
+          "client_id": "Client ID",
+          "client_secret": "Client Secret",
+          "email": "Email",
+          "password": "Password"
+        }
+      },
+      "installation": {
+        "title": "Select installation",
+        "data": { "installation_id": "Installation" }
+      }
+    },
+    "error": {
+      "invalid_auth": "Invalid credentials.",
+      "cannot_connect": "Cannot reach FlowBuddy — check network."
+    },
+    "abort": {
+      "already_configured": "This installation is already configured."
+    }
+  },
+  "services": {
+    "enable_realtime": {
+      "name": "Enable live mode",
+      "description": "Boost live-value polling for a bounded window. Rate-limited by the vendor."
+    }
+  }
+}
