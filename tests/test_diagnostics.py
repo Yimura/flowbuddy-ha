@@ -132,6 +132,65 @@ async def test_diagnostics_reports_coordinator_status(hass):
     assert diag["coordinators"]["alarms"]["is_blocked"] is True
 
 
+async def test_diagnostics_dumps_discovery_measurement_types(hass):
+    """Verify diagnostics dumps meter + measurement + measurement_type shape
+    so the (unit, code, name, is_incremental) tuple needed to debug PV
+    detection failures is downloadable from HA UI without live-editing
+    the integration."""
+    from types import SimpleNamespace
+
+    entry = MockConfigEntry(domain=DOMAIN, unique_id=IID, data=_entry_data())
+    entry.add_to_hass(hass)
+
+    installation = MagicMock(uuid=IID, identification=None, city=None, country=None)
+    meter = MagicMock(
+        serial_number="SN-1",
+        name="PV",
+        manufacturer="Foo",
+        meter_type="Solar",
+        resource_uri="/meters/1",
+    )
+    pv_mt = MagicMock(code="EMS_PV_POWER", name="EMS PV power", unit="kW", is_incremental=False)
+    pv_meas = SimpleNamespace(
+        resource_uri="/measurements/pv",
+        measurement_type=SimpleNamespace(resource_uri="/mt/pv"),
+        meter=SimpleNamespace(resource_uri="/meters/1"),
+    )
+    comm = MagicMock(
+        external_id="c-1",
+        logical_device_name="XMX-1",
+        firm_ware_version="V0.1",
+        status="Registered",
+    )
+    comm.type_ = MagicMock()
+    comm.type_.name = "Lewiz"
+
+    hass.data.setdefault(DOMAIN, {})[entry.entry_id] = {
+        "api": MagicMock(),
+        "installation": installation,
+        "instant_coord": None,
+        "daily_coord": None,
+        "alarms_coord": None,
+        "meters": [meter],
+        "measurements": [pv_meas],
+        "measurementtypes_by_uri": {"/mt/pv": pv_mt},
+        "communicators": [comm],
+    }
+
+    diag = await async_get_config_entry_diagnostics(hass, entry)
+
+    assert diag["discovery"]["meters"][0]["serial_number"] == "SN-1"
+    assert diag["discovery"]["meters"][0]["meter_type"] == "Solar"
+
+    mt = diag["discovery"]["measurements"][0]["measurement_type"]
+    assert mt["code"] == "EMS_PV_POWER"
+    assert mt["unit"] == "kW"
+    assert mt["is_incremental"] is False
+
+    assert diag["discovery"]["communicators"][0]["firm_ware_version"] == "V0.1"
+    assert diag["discovery"]["communicators"][0]["type"] == "Lewiz"
+
+
 async def test_diagnostics_missing_entry_data(hass):
     """Verify that diagnostics gracefully handle missing entry data (before async_setup_entry)."""
     entry = MockConfigEntry(domain=DOMAIN, unique_id=IID, data=_entry_data())

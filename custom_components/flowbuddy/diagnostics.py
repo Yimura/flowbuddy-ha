@@ -57,9 +57,58 @@ async def async_get_config_entry_diagnostics(
                 "daily": _coord_status(daily_coord),
                 "alarms": _coord_status(alarms_coord),
             },
+            "discovery": {
+                "meters": [_meter_summary(m) for m in data.get("meters", [])],
+                "measurements": [
+                    _measurement_summary(m, data.get("measurementtypes_by_uri", {}))
+                    for m in data.get("measurements", [])
+                ],
+                "communicators": [_communicator_summary(c) for c in data.get("communicators", [])],
+            },
         },
         TO_REDACT,
     )
+
+
+def _meter_summary(meter: Any) -> dict[str, Any]:
+    return {
+        "resource_uri": getattr(meter, "resource_uri", None),
+        "serial_number": getattr(meter, "serial_number", None),
+        "name": getattr(meter, "name", None),
+        "manufacturer": getattr(meter, "manufacturer", None),
+        "meter_type": getattr(meter, "meter_type", None),
+    }
+
+
+def _measurement_summary(
+    measurement: Any, measurementtypes_by_uri: dict[str, Any]
+) -> dict[str, Any]:
+    mt_ref = getattr(measurement, "measurement_type", None)
+    mt = measurementtypes_by_uri.get(mt_ref.resource_uri) if mt_ref is not None else None
+    return {
+        "resource_uri": getattr(measurement, "resource_uri", None),
+        "meter_uri": (
+            getattr(measurement.meter, "resource_uri", None) if measurement.meter else None
+        ),
+        "measurement_type": {
+            "resource_uri": getattr(mt_ref, "resource_uri", None),
+            "code": getattr(mt, "code", None) if mt else None,
+            "name": getattr(mt, "name", None) if mt else None,
+            "unit": getattr(mt, "unit", None) if mt else None,
+            "is_incremental": getattr(mt, "is_incremental", None) if mt else None,
+        },
+    }
+
+
+def _communicator_summary(comm: Any) -> dict[str, Any]:
+    comm_type = getattr(comm, "type_", None)
+    return {
+        "external_id": getattr(comm, "external_id", None),
+        "logical_device_name": getattr(comm, "logical_device_name", None),
+        "firm_ware_version": getattr(comm, "firm_ware_version", None),
+        "status": getattr(comm, "status", None),
+        "type": getattr(comm_type, "name", None) if comm_type else None,
+    }
 
 
 def _coord_status(coord: Any) -> dict[str, Any]:
