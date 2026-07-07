@@ -197,24 +197,43 @@ class FlowBuddyClient:
         )
         return _embedded_list(result, "installations", "installations", Installation)
 
-    async def get_instant_values(self, installation_id: str) -> list[InstantValue]:
+    async def get_instant_values(self, installation_id: str) -> list[Any]:
         """Return live values for the given installation.
 
-        WARNING: The upstream /instantvalues endpoint does not accept an
-        installation filter (see spec §5 open question 7). This method
-        fetches all instant values the credentialed account has access to
-        and filters client-side by measurement.installation.resource_uri.
-        For multi-installation tenants this means every poll transfers
-        values for all installations before dropping the ones we do not
-        need — bandwidth cost is O(N_installations). If you own only one
-        installation this is a no-op.
+        Backed by ``GET /flexMon/v1/realtimevalues`` — the SPA's live-data
+        endpoint. Spec §5 Q10 (Gate B live probe 2026-07-07) established
+        that ``/instantvalues`` is installer-only (403 for residents) and
+        the resident-scope replacement is ``/realtimevalues``. The path
+        is not modelled in the vendored OpenAPI spec, so we bypass the
+        generated client and call it directly via ``self._http``; auth is
+        applied via the client-level ``auth`` hook attached at
+        construction. Returns raw dict rows (no typed model exists) —
+        callers should read ``resource_uri`` / ``measurement`` /
+        ``value`` / ``timestamp`` via dict access.
         """
-        result = await get_instant_value_details_list.asyncio(
-            client=self._client, pagesize=_LIST_PAGESIZE
-        )
-        values = _embedded_list(result, "instant_values", "instantvalues", InstantValue)
+        url = f"{API_BASE_URL}/realtimevalues?pagesize={_LIST_PAGESIZE}"
+        resp = await self._http.get(url, auth=self._token.httpx_auth())
+        if resp.status_code == 403:
+            # Installer-scope tenants may have moved the endpoint or the
+            # user's credentials lack the resident realtime role. Treat as
+            # "no data available" instead of failing setup.
+            return []
+        resp.raise_for_status()
+        body = resp.json()
+        embedded = body.get("_embedded", {}) if isinstance(body, dict) else {}
+        # HAL+JSON multi-word keys are camelCase in real responses.
+        rows = embedded.get("realtimeValues") or embedded.get("realtimevalues") or []
         suffix = f"/installations/{installation_id}"
-        return [v for v in values if (_instant_value_installation_ref(v) or "").endswith(suffix)]
+        # Filter client-side by measurement.installation.resourceUri —
+        # /realtimevalues has no per-installation filter param either.
+        return [
+            row for row in rows
+            if isinstance(row, dict)
+            and (
+                (row.get("measurement", {}) or {})
+                .get("installation", {}) or {}
+            ).get("resourceUri", "").endswith(suffix)
+        ]
 
     async def list_meters(self, installation_id: str) -> list[Meter]:
         result = await get_meter_details_list.asyncio(

@@ -78,8 +78,8 @@ async def test_get_instant_values(client, load_fixture, respx_mock):
     # the generated spec — `measurement`, `measurementType`, `value`, and
     # `timestart` land in `additional_properties` (dict-style access via
     # __getitem__) rather than as typed attributes. See report for detail.
-    respx_mock.get(f"{API_BASE_URL}/instantvalues").mock(
-        return_value=httpx.Response(200, json=load_fixture("instantvalues.json"))
+    respx_mock.get(f"{API_BASE_URL}/realtimevalues").mock(
+        return_value=httpx.Response(200, json=load_fixture("realtimevalues.json"))
     )
     iid = "00000000-0000-0000-0000-000000000001"
     values = await client.get_instant_values(iid)
@@ -90,9 +90,9 @@ async def test_get_instant_values(client, load_fixture, respx_mock):
 
 async def test_get_instant_values_filters_by_installation(client, load_fixture, respx_mock):
     """Client-side filter drops values belonging to other installations
-    (upstream /instantvalues has no installation filter -- see spec §5 Q7)."""
-    respx_mock.get(f"{API_BASE_URL}/instantvalues").mock(
-        return_value=httpx.Response(200, json=load_fixture("instantvalues.json"))
+    (upstream /realtimevalues has no installation filter -- see spec §5 Q7)."""
+    respx_mock.get(f"{API_BASE_URL}/realtimevalues").mock(
+        return_value=httpx.Response(200, json=load_fixture("realtimevalues.json"))
     )
     iid = "00000000-0000-0000-0000-000000000001"
     values = await client.get_instant_values(iid)

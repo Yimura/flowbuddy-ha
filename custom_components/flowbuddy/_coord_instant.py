@@ -27,16 +27,27 @@ if TYPE_CHECKING:
 _LOGGER = logging.getLogger(__name__)
 
 
-def _extract_value_and_uri(item: InstantValue) -> tuple[str | None, float | None]:
-    """Return (measurement_resource_uri, value) from a raw InstantValueOutputModel.
+def _extract_value_and_uri(item: Any) -> tuple[str | None, float | None]:
+    """Return (measurement_resource_uri, value) from a realtime-value row.
 
-    ``InstantValueOutputModel`` is under-typed by the generator: only
-    ``resource_uri`` is a real attrs field, so ``measurement`` and ``value``
-    land in ``additional_properties`` rather than as typed attributes. Try
-    the typed attribute path first in case a future codegen run types it,
-    then fall back to raw dict access -- mirrors the pattern used in
-    api.py::_instant_value_installation_ref.
+    ``get_instant_values`` now returns raw dict rows from
+    ``/realtimevalues`` (spec §5 Q10 — resident-scope endpoint). Support
+    both raw-dict and (legacy) InstantValueOutputModel attribute access
+    so tests + future codegen changes don't force a rewrite.
     """
+    if isinstance(item, dict):
+        measurement = item.get("measurement") or {}
+        if not isinstance(measurement, dict):
+            return None, None
+        uri = measurement.get("resourceUri") or measurement.get("resource_uri")
+        raw_val = item.get("value")
+        if isinstance(uri, str) and raw_val is not None:
+            try:
+                return uri, float(raw_val)
+            except (TypeError, ValueError):
+                return None, None
+        return None, None
+
     try:
         uri = item.measurement.resource_uri  # type: ignore[attr-defined]
         val = item.value  # type: ignore[attr-defined]

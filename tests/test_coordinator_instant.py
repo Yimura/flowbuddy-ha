@@ -108,26 +108,17 @@ async def test_block_expires_after_block_duration(hass, mock_api, monkeypatch):
     assert not coord.is_blocked()
 
 
-async def test_async_update_data_returns_keyed_dict_from_real_models(hass, mock_api, load_fixture):
-    """_async_update_data must handle InstantValueOutputModel's attribute+dict split.
+async def test_async_update_data_returns_keyed_dict_from_realtimevalues(hass, mock_api, load_fixture):
+    """_async_update_data consumes raw dict rows from /realtimevalues.
 
-    The generated model only types ``resource_uri`` -- ``measurement`` and
-    ``value`` land in ``additional_properties``. A previous version of this
-    test fabricated a class with those as direct attributes, a false
-    positive that hid a runtime AttributeError against real API responses.
+    Spec §5 Q10 pivot: get_instant_values now backs /realtimevalues (resident-
+    scope) not /instantvalues (installer-only, 403 for residents). It returns
+    raw dicts rather than InstantValueOutputModel instances. The coordinator's
+    _extract_value_and_uri handles both shapes.
     """
-    from custom_components.flowbuddy._generated.models.instant_value_output_model import (
-        InstantValueOutputModel,
-    )
-
-    raw = load_fixture("instantvalues.json")
-    # Build real model instances from every fixture entry belonging to
-    # installation ...000001 (the fixture also has one entry for a different
-    # installation, which the real api.py filters out before the coordinator
-    # ever sees it -- so it's irrelevant here).
+    raw = load_fixture("realtimevalues.json")
     items = [
-        InstantValueOutputModel.from_dict(entry)
-        for entry in raw["_embedded"]["instantvalues"]
+        entry for entry in raw["_embedded"]["realtimeValues"]
         if entry["measurement"]["installation"]["resourceUri"].endswith("00000001")
     ]
     assert items, "fixture must yield at least one item for installation ...000001"
@@ -136,9 +127,6 @@ async def test_async_update_data_returns_keyed_dict_from_real_models(hass, mock_
     coord = FlowBuddyInstantCoordinator(hass, mock_api, "00000000-0000-0000-0000-000000000001")
     data = await coord._async_update_data()
 
-    # Every fixture entry for installation 000001 has a measurement.resourceUri
-    # and a value; all should land in the result dict, keyed by
-    # measurement.resourceUri, values coerced to float.
     assert len(data) == len(items), f"expected {len(items)} entries, got {len(data)}: {data}"
     expected_pv_uri = "/measurements/m-pv-power"
     assert expected_pv_uri in data, f"pv-power missing; keys={list(data)}"

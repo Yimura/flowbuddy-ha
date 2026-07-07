@@ -78,8 +78,8 @@ def _mock_full_discovery(respx_mock, load_fixture) -> None:
             200, json={"_embedded": {"communicators": []}, "page": {"totalElements": 0}}
         )
     )
-    respx_mock.get(f"{API_BASE}/instantvalues").mock(
-        return_value=httpx.Response(200, json=load_fixture("instantvalues.json"))
+    respx_mock.get(f"{API_BASE}/realtimevalues").mock(
+        return_value=httpx.Response(200, json=load_fixture("realtimevalues.json"))
     )
     respx_mock.get(f"{API_BASE}/aggregationdayvalues").mock(
         return_value=httpx.Response(200, json=load_fixture("aggregationdayvalues.json"))

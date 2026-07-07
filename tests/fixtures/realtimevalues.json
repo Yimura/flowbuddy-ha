@@ -1,0 +1,82 @@
+{
+  "_embedded": {
+    "realtimeValues": [
+      {
+        "resourceUri": "/instantvalues/iv-1",
+        "measurement": {
+          "resourceUri": "/measurements/m-pv-power",
+          "installation": {
+            "resourceUri": "/installations/00000000-0000-0000-0000-000000000001"
+          }
+        },
+        "measurementType": {
+          "resourceUri": "/measurementtypes/pv-power"
+        },
+        "value": 1500.0,
+        "timestart": "2026-07-07T12:00:00Z"
+      },
+      {
+        "resourceUri": "/instantvalues/iv-2",
+        "measurement": {
+          "resourceUri": "/measurements/m-pv-energy",
+          "installation": {
+            "resourceUri": "/installations/00000000-0000-0000-0000-000000000001"
+          }
+        },
+        "measurementType": {
+          "resourceUri": "/measurementtypes/pv-energy"
+        },
+        "value": 15230.5,
+        "timestart": "2026-07-07T12:00:00Z"
+      },
+      {
+        "resourceUri": "/instantvalues/iv-3",
+        "measurement": {
+          "resourceUri": "/measurements/m-grid-import-power",
+          "installation": {
+            "resourceUri": "/installations/00000000-0000-0000-0000-000000000001"
+          }
+        },
+        "measurementType": {
+          "resourceUri": "/measurementtypes/grid-import-power"
+        },
+        "value": 450.0,
+        "timestart": "2026-07-07T12:00:00Z"
+      },
+      {
+        "resourceUri": "/instantvalues/iv-4",
+        "measurement": {
+          "resourceUri": "/measurements/m-battery-soc",
+          "installation": {
+            "resourceUri": "/installations/00000000-0000-0000-0000-000000000001"
+          }
+        },
+        "measurementType": {
+          "resourceUri": "/measurementtypes/battery-soc"
+        },
+        "value": 76.5,
+        "timestart": "2026-07-07T12:00:00Z"
+      },
+      {
+        "resourceUri": "/instantvalues/iv-other",
+        "measurement": {
+          "resourceUri": "/measurements/m-other",
+          "installation": {
+            "resourceUri": "/installations/00000000-0000-0000-0000-000000000002"
+          }
+        },
+        "measurementType": {
+          "resourceUri": "/measurementtypes/pv-power"
+        },
+        "value": 999.0,
+        "timestart": "2026-07-07T12:00:00Z"
+      }
+    ]
+  },
+  "page": {
+    "number": 0,
+    "size": 20,
+    "totalPages": 1,
+    "totalElements": 5
+  }
+}
