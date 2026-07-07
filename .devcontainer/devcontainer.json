@@ -1,0 +1,27 @@
+{
+  "name": "flowbuddy-ha-dev",
+  "build": { "dockerfile": "Dockerfile" },
+  "remoteUser": "vscode",
+  "workspaceFolder": "/workspaces/flowbuddy-ha",
+  "runArgs": ["--name", "flowbuddy-ha-dev"],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "charliermarsh.ruff",
+        "matangover.mypy"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff",
+          "editor.formatOnSave": true
+        }
+      }
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  }
+}
