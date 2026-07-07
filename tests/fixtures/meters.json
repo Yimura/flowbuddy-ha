@@ -1,0 +1,43 @@
+{
+  "_embedded": {
+    "meters": [
+      {
+        "resourceUri": "/meters/meter-pv-1",
+        "name": "PV Inverter",
+        "serialNumber": "TEST-SN-PV-1",
+        "manufacturer": "TestInverterCo",
+        "type": "INVERTER",
+        "meterType": "PV",
+        "status": "ACTIVE",
+        "polling": "yes",
+        "lastPollingResult": "successful",
+        "installation": { "resourceUri": "/installations/00000000-0000-0000-0000-000000000001" }
+      },
+      {
+        "resourceUri": "/meters/meter-grid-1",
+        "name": "DSO Smart Meter",
+        "serialNumber": "TEST-SN-GRID-1",
+        "manufacturer": "Fluvius",
+        "type": "SMART_METER",
+        "meterType": "GRID",
+        "status": "ACTIVE",
+        "polling": "yes",
+        "lastPollingResult": "successful",
+        "installation": { "resourceUri": "/installations/00000000-0000-0000-0000-000000000001" }
+      },
+      {
+        "resourceUri": "/meters/meter-batt-1",
+        "name": "Battery",
+        "serialNumber": "TEST-SN-BATT-1",
+        "manufacturer": "TestBatteryCo",
+        "type": "BATTERY",
+        "meterType": "BATTERY",
+        "status": "ACTIVE",
+        "polling": "yes",
+        "lastPollingResult": "successful",
+        "installation": { "resourceUri": "/installations/00000000-0000-0000-0000-000000000001" }
+      }
+    ]
+  },
+  "page": { "number": 0, "size": 20, "totalPages": 1, "totalElements": 3 }
+}

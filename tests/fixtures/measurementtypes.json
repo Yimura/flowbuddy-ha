@@ -1,0 +1,21 @@
+{
+  "_embedded": {
+    "measurementtypes": [
+      { "resourceUri": "/measurementtypes/pv-power", "name": "PV Power", "code": "PV_POWER", "unit": "W", "isIncremental": false, "aggregationType": "AVG", "externalId": "PV_POWER" },
+      { "resourceUri": "/measurementtypes/pv-energy", "name": "PV Energy", "code": "PV_ENERGY", "unit": "Wh", "isIncremental": true, "aggregationType": "SUM", "externalId": "PV_ENERGY" },
+      { "resourceUri": "/measurementtypes/grid-import-power", "name": "Grid Import Power", "code": "GRID_IMPORT_POWER", "unit": "W", "isIncremental": false, "aggregationType": "AVG", "externalId": "GRID_IMPORT_POWER" },
+      { "resourceUri": "/measurementtypes/grid-import-energy", "name": "Grid Import Energy", "code": "GRID_IMPORT_ENERGY", "unit": "kWh", "isIncremental": true, "aggregationType": "SUM", "externalId": "GRID_IMPORT_ENERGY" },
+      { "resourceUri": "/measurementtypes/grid-export-energy", "name": "Grid Export Energy", "code": "GRID_EXPORT_ENERGY", "unit": "kWh", "isIncremental": true, "aggregationType": "SUM", "externalId": "GRID_EXPORT_ENERGY" },
+      { "resourceUri": "/measurementtypes/battery-soc", "name": "Battery SoC", "code": "BATTERY_SOC", "unit": "%", "isIncremental": false, "aggregationType": "AVG", "externalId": "BATTERY_SOC" },
+      { "resourceUri": "/measurementtypes/battery-charge-power", "name": "Battery Charge Power", "code": "BATTERY_CHARGE_POWER", "unit": "W", "isIncremental": false, "aggregationType": "AVG", "externalId": "BATTERY_CHARGE_POWER" },
+      { "resourceUri": "/measurementtypes/battery-voltage", "name": "Battery Voltage", "code": "BATTERY_VOLTAGE", "unit": "V", "isIncremental": false, "aggregationType": "AVG", "externalId": "BATTERY_VOLTAGE" },
+      { "resourceUri": "/measurementtypes/battery-current", "name": "Battery Current", "code": "BATTERY_CURRENT", "unit": "A", "isIncremental": false, "aggregationType": "AVG", "externalId": "BATTERY_CURRENT" },
+      { "resourceUri": "/measurementtypes/hvac-temp", "name": "HVAC Temp", "code": "HVAC_TEMP", "unit": "°C", "isIncremental": false, "aggregationType": "AVG", "externalId": "HVAC_TEMP" },
+      { "resourceUri": "/measurementtypes/grid-freq", "name": "Grid Frequency", "code": "GRID_FREQ", "unit": "Hz", "isIncremental": false, "aggregationType": "AVG", "externalId": "GRID_FREQ" },
+      { "resourceUri": "/measurementtypes/apparent-power", "name": "Apparent Power", "code": "APPARENT_POWER", "unit": "VA", "isIncremental": false, "aggregationType": "AVG", "externalId": "APPARENT_POWER" },
+      { "resourceUri": "/measurementtypes/reactive-power", "name": "Reactive Power", "code": "REACTIVE_POWER", "unit": "var", "isIncremental": false, "aggregationType": "AVG", "externalId": "REACTIVE_POWER" },
+      { "resourceUri": "/measurementtypes/unknown-unit", "name": "Unknown Unit", "code": "UNKNOWN_UNIT", "unit": "wombats", "isIncremental": false, "aggregationType": "AVG", "externalId": "UNKNOWN_UNIT" }
+    ]
+  },
+  "page": { "number": 0, "size": 20, "totalPages": 1, "totalElements": 14 }
+}

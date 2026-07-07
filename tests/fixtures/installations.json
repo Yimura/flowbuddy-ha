@@ -1,0 +1,37 @@
+{
+  "_embedded": {
+    "installations": [
+      {
+        "resourceUri": "/installations/00000000-0000-0000-0000-000000000001",
+        "identification": "TEST-INST-1",
+        "uuid": "00000000-0000-0000-0000-000000000001",
+        "customerName": "Test Customer",
+        "customerId": "cust-1",
+        "emailAddress": "test@example.com",
+        "city": "Testville",
+        "country": "BE",
+        "alarmStatus": "OK",
+        "installationType": {
+          "resourceUri": "/installationtypes/residential",
+          "name": "Residential PV+Battery"
+        }
+      },
+      {
+        "resourceUri": "/installations/00000000-0000-0000-0000-000000000002",
+        "identification": "TEST-INST-2",
+        "uuid": "00000000-0000-0000-0000-000000000002",
+        "customerName": "Test Customer 2",
+        "customerId": "cust-2",
+        "emailAddress": "test@example.com",
+        "city": "Otherville",
+        "country": "BE",
+        "alarmStatus": "OK",
+        "installationType": {
+          "resourceUri": "/installationtypes/residential",
+          "name": "Residential PV only"
+        }
+      }
+    ]
+  },
+  "page": { "number": 0, "size": 20, "totalPages": 1, "totalElements": 2 }
+}

@@ -1,0 +1,8 @@
+{
+  "_embedded": {
+    "alarms": [
+      { "resourceUri": "/alarms/alarm-1", "id": "alarm-1", "priority": "HIGH", "status": "OPEN", "message": "Communicator offline", "raisedOn": "2026-07-07T10:00:00Z", "installation": { "resourceUri": "/installations/00000000-0000-0000-0000-000000000001" } }
+    ]
+  },
+  "page": { "number": 0, "size": 20, "totalPages": 1, "totalElements": 1 }
+}

@@ -1,0 +1,8 @@
+{
+  "access_token": "test-access-token-abc123",
+  "expires_in": 300,
+  "refresh_expires_in": 1800,
+  "refresh_token": "test-refresh-token-xyz789",
+  "token_type": "Bearer",
+  "scope": "openid profile email"
+}

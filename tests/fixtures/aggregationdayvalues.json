@@ -1,0 +1,10 @@
+{
+  "_embedded": {
+    "aggregationdayvalues": [
+      { "resourceUri": "/aggregationdayvalues/adv-1", "measurement": { "resourceUri": "/measurements/m-pv-energy" }, "periodStart": "2026-07-07T00:00:00Z", "value": 8.5, "sum": 8.5, "count": 96 },
+      { "resourceUri": "/aggregationdayvalues/adv-2", "measurement": { "resourceUri": "/measurements/m-grid-import-energy" }, "periodStart": "2026-07-07T00:00:00Z", "value": 2.1, "sum": 2.1, "count": 96 },
+      { "resourceUri": "/aggregationdayvalues/adv-3", "measurement": { "resourceUri": "/measurements/m-grid-export-energy" }, "periodStart": "2026-07-07T00:00:00Z", "value": 3.2, "sum": 3.2, "count": 96 }
+    ]
+  },
+  "page": { "number": 0, "size": 20, "totalPages": 1, "totalElements": 3 }
+}
