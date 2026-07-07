@@ -193,30 +193,41 @@ Device grouping:
 - One child `DeviceInfo` per `Meter` (identifiers = `(DOMAIN, meter.serialNumber)`, `via_device` = the installation).
 - One grandchild `DeviceInfo` per `Battery` / `Inverter` / `HVAC`, `via_device` = its parent meter.
 
-### 4.4 Polling
+### 4.4 Polling — vendor model informs cadence
 
-Two coordinators per installation, sharing one `FlowBuddyClient`.
+Reconnaissance of the FlowBuddy SPA revealed that live data is not a passive stream. The vendor architecture is:
 
-**`FlowBuddyLiveCoordinator`** — default `update_interval=30s` (user-configurable 10–300s via Options flow):
+1. **Meters push measurements at their own natural cadence** (typically 60–900 s depending on device — DSO smart meters push slowly, inverter/battery communicators faster). `/instantvalues` returns the last-received value; polling the API faster than the meter pushes yields no new data.
+2. **Aggregations are cached upstream** (`/aggregationdayvalues`, `.../monthvalues`, `.../yearvalues`) and are always cheap to fetch — no rate limit observed.
+3. **"True real-time" (sub-minute) requires activation**: the SPA calls `POST /installations/{id}/activateContinuousProcessing` (an endpoint that returns 401 unauth but is not in the public OpenAPI spec — it lives in an internal `realtimeorchestration` module) to boost meter push frequency for a bounded window. The activation opens a **5-minute Real-Time Overview (RTO) session** (`RTO_DURATION * 60_000 ms`), after which the meter reverts to its baseline cadence.
+4. **Activation is rate-limited per installation**: the SPA handles a `PollingLimitExceeded` server event by writing the installation to `sessionStorage.go_block_rto` and refusing further activation attempts for that installation until the block clears. States observed: `StartRealtime`, `MeterStarting`, `CommunicatorStarted`, `PollingRequested`, `PollingLimitExceeded`, `Stopped`, `ForceStopped`.
 
-- `GET /instantvalues?installation={id}&pagesize=500` — one call returns all live values.
-- Returns `dict[str, float]` keyed by measurement `resourceUri`.
-- Drives all `measurement`-class sensors (power, current, voltage, SoC, temperature, frequency).
+**Design consequence**: this integration MUST NOT continuously poll `/instantvalues` at sub-minute intervals — the vendor will block us. Two modes instead:
 
-**`FlowBuddyDailyCoordinator`** — `update_interval=15m`:
+#### Baseline mode (always-on, safe)
 
-- `GET /aggregationdayvalues?installation={id}&fromPeriodStart={today_local_midnight_iso8601}&pagesize=500`.
-- Returns `dict[str, float]` keyed by measurement `resourceUri`.
-- Drives all `total_increasing` energy sensors (kWh today).
+Runs unattended in the background. All defaults below are user-configurable via the Options flow.
 
-**Alarms coordinator** — `update_interval=5m`:
+| Coordinator | Endpoint | Default interval | Purpose |
+|---|---|---|---|
+| `FlowBuddyInstantCoordinator` | `GET /instantvalues?installation={id}&pagesize=500` | **90 s** (min 60 s, max 300 s) | Drives live-ish `measurement`-class sensors (power, voltage, current, SoC, temperature). Frequency matches typical meter push cadence — no gain from polling faster. |
+| `FlowBuddyDailyCoordinator` | `GET /aggregationdayvalues?installation={id}&fromPeriodStart={today_local_midnight_iso8601}&pagesize=500` | **15 min** | Drives `total_increasing` kWh sensors (Energy dashboard). Aggregations are cached upstream; safe cadence. |
+| `FlowBuddyAlarmsCoordinator` | `GET /alarms?installation={id}` (filter open status, verify exact param at implementation) | **5 min** | Feeds `binary_sensor` alarms + per-alarm `button` for ack. |
 
-- `GET /alarms?installation={id}&status=open` (or equivalent per spec — verify at implementation).
-- Feeds `binary_sensor` entities and creates per-alarm `button` for ack.
+#### Live mode (opt-in, session-bounded, rate-aware)
 
-Partial failure per measurement does not fail the coordinator — a missing value becomes an `unknown` state for that sensor only. `UpdateFailed` is only raised on transport, auth, or complete response failure.
+Exposed as an HA service, not a background poll:
 
-**Adaptive backoff**: on `429` or repeated `5xx`, double `update_interval` up to 5 minutes; halve on next success. After 3 consecutive failures, create an HA `repairs` issue.
+- **`flowbuddy.enable_realtime(installation_id, duration_minutes=5)`** → calls `POST /installations/{id}/activateContinuousProcessing` (via the internal `realtimeorchestration` module) then temporarily drops `FlowBuddyInstantCoordinator.update_interval` to **20 s** for the duration of the RTO window. Restores baseline interval on window expiry.
+- **Guard against rate limits**: subscribe to installation event stream (`GET /events?installation={id}` polled every 30 s during a live session, or use the same event that the SPA reads). On `PollingLimitExceeded`, immediately restore baseline interval, mark installation as `rto_blocked_until = now + 10 min`, log an HA `repairs` entry ("FlowBuddy blocked live polling — vendor rate limit"), and refuse further `enable_realtime` calls until the timer clears.
+- **Auto-stop**: after `duration_minutes`, revert interval and stop consuming realtime API budget. Vendor deactivates on its side automatically at the 5-min RTO window end regardless.
+- **Typical use**: automation opens live view when dashboard is loaded, or when a specific load pattern needs sub-minute reaction. Not the default.
+
+#### Common behaviour (both modes)
+
+- Partial failure per measurement does not fail the coordinator — a missing value becomes an `unknown` state for that sensor only. `UpdateFailed` is only raised on transport, auth, or full response failure.
+- **Adaptive backoff**: on `429` or repeated `5xx`, double the affected coordinator's `update_interval` up to 10 min; halve on next success. After 3 consecutive failures, create an HA `repairs` issue.
+- **`PollingLimitExceeded` treated as harder than 429**: 10-min hard block on that installation before any further live-mode activation; baseline coordinators continue at their (already conservative) intervals.
 
 ### 4.5 Control (write path)
 
@@ -251,6 +262,14 @@ ack_alarm:
 request_connection_test:
   fields:
     communicator_id: { selector: { text: {} } }
+
+enable_realtime:
+  # Boost the instant-values coordinator to ~20s for a bounded window by
+  # calling POST /installations/{id}/activateContinuousProcessing.
+  # Rate-limited by the vendor -- see §4.4 "Live mode".
+  fields:
+    installation_id: { selector: { text: {} } }
+    duration_minutes: { selector: { number: { min: 1, max: 5, step: 1 } }, default: 5 }
 ```
 
 **Post-write refresh**: after any successful write, schedule `coordinator.async_request_refresh()` after 5 s so state reflects the change (SIMPL propagation is not immediate).
@@ -312,7 +331,7 @@ These do not block the design but must be answered before v1 ships. They are cal
 1. **Live-tenant API-account availability** — does the owner's SIMPL account expose the API accounts UI? Confirms the primary auth path is usable. Fallback (`password`) works either way.
 2. **Public web-client `client_id` for the password grant fallback** — pin the exact value at implementation by grepping the SPA bundle (`/assets/index-*.js`) once with an authenticated fetch.
 3. **Actual `MeasurementType.code` values** in this tenant — the mapping table above is unit-driven so it will work regardless, but the Energy dashboard onboarding docs (README) will name specific codes only after the first run.
-4. **Rate limits** — undocumented. Start with 30 s live / 15 m daily / 5 m alarms; watch for `429` and tighten if observed.
+4. **Rate limits — vendor model confirmed via SPA recon**. Baseline cadence: 90 s instant / 15 min daily / 5 min alarms (defaults in §4.4). The vendor rejects sub-minute continuous polling with `PollingLimitExceeded`; the SPA blocks the offending installation client-side when it sees this event. Live mode via `activateContinuousProcessing` is 5-min-bounded and per-installation rate-limited. Confirm at implementation: (a) whether `client_credentials` tokens have the scope to call `activateContinuousProcessing`, (b) the exact event name/shape observed on `PollingLimitExceeded` so we can detect it programmatically, (c) whether alarms endpoint accepts a `status=open` filter or requires client-side filtering, (d) actual meter push cadence observed by watching `MeasurementValue.createdOn` deltas over a 10-min window on the live tenant (this sets the practical floor for `FlowBuddyInstantCoordinator.update_interval`).
 5. **HVAC mode enum** — verify the `hvac` schema's mode field name and allowed values against a live response before finalising the `climate` entity's `hvac_modes`.
 6. **`instantvalues` vs `measurementvalues`** — confirm `/instantvalues` returns latest-per-measurement (assumed from name); if not, fall back to `/measurementvalues?sortby=-timestart&pagesize=1` per measurement (worse — N requests per poll).
 7. **`installation` filter on `/instantvalues`** — the spec parameters list didn't include `installation` for `/instantvalues` (unlike `/measurementvalues`). Confirm with a live call; if unsupported, filter client-side or iterate per meter.
@@ -332,7 +351,7 @@ The integration is considered successful when:
 ## 7. Risks
 
 - **Vendor cooperation**: no formal API contract; endpoint semantics or auth can change without notice. Mitigation: adaptive backoff, `ConfigEntryAuthFailed` on unrecoverable auth, clear diagnostics for issue reports.
-- **Rate limiting is undocumented**: overzealous polling could get the tenant throttled or blocked. Mitigation: conservative defaults, adaptive backoff, opt-in "aggressive" polling in Options flow.
+- **Vendor rate limits are enforced**: continuous sub-minute polling triggers `PollingLimitExceeded` and the vendor blocks the installation (SPA does this client-side; server likely does too). Mitigation: conservative 90 s baseline, live mode is opt-in + session-bounded + auto-stopped, `PollingLimitExceeded` handled as a 10-min hard block with HA `repairs` visibility, no "aggressive polling" option in Options flow (would be a footgun).
 - **`password` grant may be disabled** on the Keycloak client used by the SPA. Mitigation: `client_credentials` is documented and preferred; password is the fallback only.
 - **Feature-flag heterogeneity**: `env-config.js` shows many features can be tenant-disabled. Mitigation: skip-on-403 and skip-on-empty-response behaviour, no hard-coded per-feature assumptions.
 - **HVAC / battery control mis-operation** could damage equipment or cause discomfort. Mitigation: `number` entities constrained by the vendor-reported ranges (`maxPower`, `maxChargePower`), no default automation shipped, README warns to test before wiring into automations.
