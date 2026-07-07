@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+coverage.xml
+dist/
+build/
+
+# Env
+.venv/
+venv/
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# HA test artefacts
+config/
+.storage/
+
+# devcontainer post-create marker
+.devcontainer/.post-create-done
