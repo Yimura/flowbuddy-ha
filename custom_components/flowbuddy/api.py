@@ -143,9 +143,28 @@ class FlowBuddyClient:
         # The bearer token is injected per-request via our httpx.Auth
         # adapter (httpx_args={"auth": ...}); the static `token=` value is
         # a placeholder immediately overwritten by that auth flow.
+        #
+        # The generated AuthenticatedClient lazily constructs its OWN
+        # internal httpx.AsyncClient on first request. Passing verify=<ctx>
+        # via httpx_args reuses HA's already-loaded SSL context (loaded off
+        # the event loop at HA start) instead of triggering the blocking
+        # ssl.SSLContext.load_verify_locations() the first time a request
+        # is made -- otherwise HA's blocking-call detector fires from
+        # inside get_async_httpx_client().
+        verify_ssl: Any = True
+        try:
+            from homeassistant.util.ssl import get_default_context
+
+            verify_ssl = get_default_context()
+        except ImportError:
+            # Running outside HA (unit tests without hass helpers). httpx
+            # default `verify=True` is fine because respx intercepts at the
+            # transport layer before any actual SSL handshake.
+            pass
         self._client = _gen_client.AuthenticatedClient(
             base_url=API_BASE_URL,
             token="unused-injected-by-httpx-auth",
+            verify_ssl=verify_ssl,
             httpx_args={"auth": token_provider.httpx_auth()},
         )
 

@@ -125,26 +125,25 @@ class FlowBuddyConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         # HA's helper which returns a client backed by HA's pre-warmed shared
         # SSL context (context is created once at HA startup off-loop).
         http = create_async_httpx_client(self.hass)
-        try:
-            if self._auth_mode == AUTH_MODE_PASSWORD:
-                provider = KeycloakTokenProvider(
-                    mode="password",
-                    http=http,
-                    client_id=user_input.get("client_id") or DEFAULT_PASSWORD_CLIENT_ID,
-                    username=user_input["email"],
-                    password=user_input["password"],
-                )
-            else:
-                provider = KeycloakTokenProvider(
-                    mode="client_credentials",
-                    http=http,
-                    client_id=user_input["client_id"],
-                    client_secret=user_input["client_secret"],
-                )
-            client = FlowBuddyClient(http=http, token_provider=provider)
-            return await client.list_installations()
-        finally:
-            await http.aclose()
+        if self._auth_mode == AUTH_MODE_PASSWORD:
+            provider = KeycloakTokenProvider(
+                mode="password",
+                http=http,
+                client_id=user_input.get("client_id") or DEFAULT_PASSWORD_CLIENT_ID,
+                username=user_input["email"],
+                password=user_input["password"],
+            )
+        else:
+            provider = KeycloakTokenProvider(
+                mode="client_credentials",
+                http=http,
+                client_id=user_input["client_id"],
+                client_secret=user_input["client_secret"],
+            )
+        client = FlowBuddyClient(http=http, token_provider=provider)
+        # HA owns http's lifecycle (create_async_httpx_client, auto_cleanup);
+        # do NOT aclose() it here.
+        return await client.list_installations()
 
     # -- Step 3: installation picker -----------------------------------------
 
