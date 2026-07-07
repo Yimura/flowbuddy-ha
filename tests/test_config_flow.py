@@ -261,3 +261,34 @@ async def test_reauth_flow(hass, load_fixture, respx_mock):
     assert entry.data["client_id"] == "new-cid"
     assert entry.data["client_secret"] == "new-secret"
     assert entry.data[CONF_INSTALLATION_ID] == iid
+
+
+async def test_create_entry_title_falls_back_when_identification_is_null(
+    hass, load_fixture, respx_mock
+):
+    """Regression test: real tenant returned installation.identification=null,
+    which HA's async_create_entry(title=None, ...) then dropped, causing
+    KeyError('title') deep in the flow-manager finish path. Title must
+    always be a non-empty string, falling back through customer_name to a
+    UUID-derived label.
+    """
+    single = _single_installation(load_fixture)
+    single["_embedded"]["installations"][0]["identification"] = None
+    single["_embedded"]["installations"][0]["customerName"] = None
+    respx_mock.post(KEYCLOAK_TOKEN_URL).mock(
+        return_value=httpx.Response(200, json=load_fixture("token_success.json"))
+    )
+    respx_mock.get(INSTALLATIONS_URL).mock(return_value=httpx.Response(200, json=single))
+
+    result = await _start_user_flow(hass)
+    result = await hass.config_entries.flow.async_configure(
+        result["flow_id"], {"mode": AUTH_MODE_CLIENT_CREDS}
+    )
+    result = await hass.config_entries.flow.async_configure(
+        result["flow_id"], {"client_id": "cid", "client_secret": "secret"}
+    )
+
+    assert result["type"] == data_entry_flow.FlowResultType.CREATE_ENTRY
+    assert result["title"], "title must be a non-empty string"
+    assert result["title"].startswith("FlowBuddy ")
+    await hass.async_block_till_done()

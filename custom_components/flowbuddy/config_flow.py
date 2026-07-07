@@ -36,6 +36,20 @@ _LOGGER = logging.getLogger(__name__)
 DEFAULT_PASSWORD_CLIENT_ID = "go_flowbuddy"
 
 
+def _clean_str(value: Any) -> str | None:
+    """Return a non-empty stripped string, or None.
+
+    Generated attrs models mark most fields nullable (spec-patched to
+    match live vendor behavior); attribute access can yield None, UNSET,
+    or an empty/whitespace string on optional fields. Treat all three as
+    "no value" for title-picking and similar fallback chains.
+    """
+    if value is None:
+        return None
+    text = str(value).strip()
+    return text or None
+
+
 class FlowBuddyConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Handle a config flow for FlowBuddy."""
 
@@ -183,7 +197,16 @@ class FlowBuddyConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             return self.async_update_reload_and_abort(self._get_reauth_entry(), data=data)
 
         self._abort_if_unique_id_configured()
-        return self.async_create_entry(title=installation.identification, data=data)
+        # Fallback chain: identification -> customerName -> uuid. Any of
+        # them may arrive as None from the API (spec is now fully nullable),
+        # but async_create_entry requires a non-empty title or HA's flow
+        # manager raises KeyError('title') on flow completion.
+        title = (
+            _clean_str(getattr(installation, "identification", None))
+            or _clean_str(getattr(installation, "customer_name", None))
+            or f"FlowBuddy {installation.uuid[:8]}"
+        )
+        return self.async_create_entry(title=title, data=data)
 
     # -- Reauth --------------------------------------------------------------
 
