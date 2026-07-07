@@ -72,10 +72,15 @@ def describe(mt: Any) -> Description:
                            UnitOfReactivePower.VOLT_AMPERE_REACTIVE)
 
     # Percentage — battery SoC (by code hint) must match before generic percent.
+    # The FlexMon vendor spec ships SoC with unit="Wh%" (a typo -- confirmed
+    # against real tenant data 2026-07-07). Treat both spellings as SoC when
+    # the code identifies it as such; ignore isIncremental=True on SoC since
+    # SoC is a snapshot, not a cumulative counter.
+    code_upper = code.upper()
+    if unit in ("%", "Wh%") and ("SOC" in code_upper or code_upper == "SOC_BAT"):
+        return Description(mt.code, mt.name, SensorDeviceClass.BATTERY,
+                           SensorStateClass.MEASUREMENT, PERCENTAGE)
     if unit == "%":
-        if "SOC" in code.upper():
-            return Description(mt.code, mt.name, SensorDeviceClass.BATTERY,
-                               SensorStateClass.MEASUREMENT, PERCENTAGE)
         return Description(mt.code, mt.name, None,
                            SensorStateClass.MEASUREMENT, PERCENTAGE)
 
@@ -83,6 +88,23 @@ def describe(mt: Any) -> Description:
     if unit == "°C":
         return Description(mt.code, mt.name, SensorDeviceClass.TEMPERATURE,
                            SensorStateClass.MEASUREMENT, UnitOfTemperature.CELSIUS)
+
+    # Monetary savings (vendor emits "€" as unit on the savings measurement types).
+    # HA's MONETARY device_class doesn't strictly require a currency-code unit,
+    # but Energy dashboard tooling handles common symbols like "€" fine.
+    if unit == "€":
+        return Description(
+            mt.code, mt.name, SensorDeviceClass.MONETARY,
+            SensorStateClass.TOTAL_INCREASING if incremental else SensorStateClass.MEASUREMENT,
+            "EUR",
+        )
+
+    # Enum-like unitless values (vendor emits "_Unitless_" for e.g.
+    # EMS BAT Charge Direction: 0=idle, positive=charge, negative=discharge).
+    # No HA device_class fits; ship a plain numeric sensor with no unit.
+    if unit == "_Unitless_":
+        return Description(mt.code, mt.name, None,
+                           SensorStateClass.MEASUREMENT, None)  # type: ignore[arg-type]
 
     # Fallback — still create a sensor so unknown units don't silently drop data.
     return Description(mt.code, mt.name, None,

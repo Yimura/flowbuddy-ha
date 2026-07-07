@@ -104,3 +104,35 @@ def test_scale_kw_input_returns_watt():
 def test_scale_wh_input_returns_kwh():
     d = describe(_mt("PV_ENERGY", "Wh", True))
     assert d.value_transformer(15230.5) == pytest.approx(15.2305)
+
+
+def test_soc_with_vendor_typo_unit_Whpercent():
+    """Real vendor ships SoC with unit="Wh%" (typo) + isIncremental=True.
+    Confirmed against live tenant 2026-07-07 (EMS BAT SOC percentage,
+    code=Soc_bat). Must still map to BATTERY device_class + % unit."""
+    d = describe(_mt("Soc_bat", "Wh%", True))
+    assert d.device_class == SensorDeviceClass.BATTERY
+    assert d.native_unit_of_measurement == PERCENTAGE
+    # SoC is a snapshot -> MEASUREMENT, not TOTAL_INCREASING, despite
+    # vendor's isIncremental=True.
+    assert d.state_class == SensorStateClass.MEASUREMENT
+
+
+def test_monetary_savings_euro():
+    """Vendor emits savings with unit="€" + isIncremental=True (cumulative
+    savings over the lifetime of the installation)."""
+    from homeassistant.components.sensor import SensorDeviceClass, SensorStateClass
+    d = describe(_mt("Savings_pv", "€", True))
+    assert d.device_class == SensorDeviceClass.MONETARY
+    assert d.state_class == SensorStateClass.TOTAL_INCREASING
+    assert d.native_unit_of_measurement == "EUR"
+
+
+def test_unitless_direction_enum():
+    """Vendor emits unit="_Unitless_" for enum-like measurements
+    (EMS BAT Charge Direction: 0=idle, positive=charge, negative=discharge).
+    Must not carry a wrong device_class or fake unit."""
+    d = describe(_mt("P_bat_dir", "_Unitless_", False))
+    assert d.device_class is None
+    assert d.native_unit_of_measurement is None
+    assert d.state_class == SensorStateClass.MEASUREMENT
