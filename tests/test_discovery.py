@@ -146,3 +146,35 @@ def test_unitless_direction_enum():
     assert d.device_class is None
     assert d.native_unit_of_measurement is None
     assert d.state_class == SensorStateClass.MEASUREMENT
+
+
+def test_name_override_for_e_gen_pv():
+    """Vendor emits mt.name='Reverse Active Energy' for E_gen_pv (OBIS/
+    IEC-62053 term for current in reverse through a CT-clamp meter). On
+    the PV sub-meter this measures PV production kWh but the OBIS name
+    reads to most users like grid-export. Override to a clear semantic
+    name; leave other codes untouched."""
+    m = MagicMock()
+    m.code = "E_gen_pv"
+    m.unit = "Wh"
+    m.is_incremental = True
+    m.name = "Reverse Active Energy"
+    d = describe(m)
+    assert d.name == "EMS PV energy"
+    # Overriding name does NOT change device_class / state_class / unit
+    # -- still an energy sensor plugged into the Energy dashboard.
+    assert d.device_class == SensorDeviceClass.ENERGY
+    assert d.state_class == SensorStateClass.TOTAL_INCREASING
+    assert d.native_unit_of_measurement == UnitOfEnergy.KILO_WATT_HOUR
+
+
+def test_name_untouched_for_unmapped_codes():
+    """Only whitelisted codes get renamed; everything else preserves
+    vendor-verbatim mt.name (1:1 with the FlowBuddy web UI)."""
+    m = MagicMock()
+    m.code = "P_grid"
+    m.unit = "W"
+    m.is_incremental = False
+    m.name = "EMS GRID power"
+    d = describe(m)
+    assert d.name == "EMS GRID power"
