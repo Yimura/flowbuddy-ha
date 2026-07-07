@@ -24,7 +24,8 @@
       "cannot_connect": "Impossible de joindre FlowBuddy — vérifiez votre connexion réseau."
     },
     "abort": {
-      "already_configured": "Cette installation est déjà configurée."
+      "already_configured": "Cette installation est déjà configurée.",
+      "no_installations": "Aucune installation n'a été trouvée pour ce compte."
     }
   },
   "services": {

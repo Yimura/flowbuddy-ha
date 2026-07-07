@@ -24,7 +24,8 @@
       "cannot_connect": "Kan FlowBuddy niet bereiken — controleer je netwerk."
     },
     "abort": {
-      "already_configured": "Deze installatie is al geconfigureerd."
+      "already_configured": "Deze installatie is al geconfigureerd.",
+      "no_installations": "Er zijn geen installaties gevonden voor dit account."
     }
   },
   "services": {
