@@ -18,7 +18,7 @@ import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.helpers.httpx_client import create_async_httpx_client
 
-from .api import FlowBuddyClient
+from .api import FlowBuddyClient, installation_id as _installation_id
 from .auth import InvalidCredentialsError, KeycloakTokenProvider
 from .const import (
     AUTH_MODE_CLIENT_CREDS,
@@ -172,20 +172,40 @@ class FlowBuddyConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         if user_input is not None:
             installation_id = user_input[CONF_INSTALLATION_ID]
-            installation = next(i for i in self._installations if i.uuid == installation_id)
+            installation = next(
+                i for i in self._installations if _installation_id(i) == installation_id
+            )
             return await self._async_finish(installation)
 
-        options = {i.uuid: i.identification for i in self._installations}
+        options: dict[str, str] = {}
+        for i in self._installations:
+            iid = _installation_id(i)
+            if not iid:
+                continue  # skip unusable installations rather than let vol.In crash
+            label = (
+                _clean_str(getattr(i, "identification", None))
+                or _clean_str(getattr(i, "customer_name", None))
+                or f"FlowBuddy {iid[:8]}"
+            )
+            options[iid] = label
         schema = vol.Schema({vol.Required(CONF_INSTALLATION_ID): vol.In(options)})
         return self.async_show_form(step_id="installation", data_schema=schema)
 
     async def _async_finish(self, installation: Any) -> config_entries.ConfigFlowResult:
-        await self.async_set_unique_id(installation.uuid)
+        installation_id = _installation_id(installation)
+        if not installation_id:
+            _LOGGER.error(
+                "FlowBuddy /installations returned an installation with no usable "
+                "identifier (uuid, resourceUri, and externalId are all null)"
+            )
+            return self.async_abort(reason="no_installations")
+
+        await self.async_set_unique_id(installation_id)
 
         data = {
             **self._credentials,
             CONF_AUTH_MODE: self._auth_mode,
-            CONF_INSTALLATION_ID: installation.uuid,
+            CONF_INSTALLATION_ID: installation_id,
         }
         # Password mode always carries a client_id (defaulted in the schema);
         # make sure it lands in entry.data even if the user left it blank.
@@ -197,14 +217,13 @@ class FlowBuddyConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             return self.async_update_reload_and_abort(self._get_reauth_entry(), data=data)
 
         self._abort_if_unique_id_configured()
-        # Fallback chain: identification -> customerName -> uuid. Any of
-        # them may arrive as None from the API (spec is now fully nullable),
-        # but async_create_entry requires a non-empty title or HA's flow
-        # manager raises KeyError('title') on flow completion.
+        # Fallback chain: identification -> customerName -> uuid slice. Any
+        # of them may arrive as None (spec is now fully nullable); title
+        # must be a non-empty string or HA raises KeyError('title').
         title = (
             _clean_str(getattr(installation, "identification", None))
             or _clean_str(getattr(installation, "customer_name", None))
-            or f"FlowBuddy {installation.uuid[:8]}"
+            or f"FlowBuddy {installation_id[:8]}"
         )
         return self.async_create_entry(title=title, data=data)
 

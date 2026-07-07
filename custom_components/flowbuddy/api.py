@@ -134,6 +134,29 @@ def _instant_value_installation_ref(item: InstantValue) -> str | None:
     return ref if isinstance(ref, str) else None
 
 
+def installation_id(installation: Any) -> str | None:
+    """Return a usable identifier for an Installation.
+
+    Vendor sometimes returns ``uuid=null`` even though the installation
+    obviously has one (it appears in ``resourceUri``). Fall back through
+    ``resource_uri`` (last path segment) and ``external_id``. Returns
+    None only if all three are null/empty.
+    """
+    for attr in ("uuid",):
+        v = getattr(installation, attr, None)
+        if isinstance(v, str) and v.strip():
+            return v.strip()
+    ru = getattr(installation, "resource_uri", None)
+    if isinstance(ru, str) and "/" in ru:
+        seg = ru.rstrip("/").rsplit("/", 1)[-1].strip()
+        if seg:
+            return seg
+    ext = getattr(installation, "external_id", None)
+    if isinstance(ext, str) and ext.strip():
+        return ext.strip()
+    return None
+
+
 class FlowBuddyClient:
     """Facade over the generated FlexMon v1 client + our Keycloak auth."""
 

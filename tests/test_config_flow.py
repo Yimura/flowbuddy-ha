@@ -263,6 +263,33 @@ async def test_reauth_flow(hass, load_fixture, respx_mock):
     assert entry.data[CONF_INSTALLATION_ID] == iid
 
 
+async def test_create_entry_survives_null_uuid(hass, load_fixture, respx_mock):
+    """Regression test: real tenant returned installation.uuid=null.
+    Fallback chain (uuid -> resource_uri last segment -> external_id) must
+    yield a usable installation_id, so the config entry still gets created
+    with a stable unique_id derived from resource_uri.
+    """
+    single = _single_installation(load_fixture)
+    single["_embedded"]["installations"][0]["uuid"] = None  # vendor lies
+    # resourceUri already carries the id: /installations/00000000-...
+    respx_mock.post(KEYCLOAK_TOKEN_URL).mock(
+        return_value=httpx.Response(200, json=load_fixture("token_success.json"))
+    )
+    respx_mock.get(INSTALLATIONS_URL).mock(return_value=httpx.Response(200, json=single))
+
+    result = await _start_user_flow(hass)
+    result = await hass.config_entries.flow.async_configure(
+        result["flow_id"], {"mode": AUTH_MODE_CLIENT_CREDS}
+    )
+    result = await hass.config_entries.flow.async_configure(
+        result["flow_id"], {"client_id": "cid", "client_secret": "secret"}
+    )
+
+    assert result["type"] == data_entry_flow.FlowResultType.CREATE_ENTRY
+    assert result["data"][CONF_INSTALLATION_ID] == "00000000-0000-0000-0000-000000000001"
+    await hass.async_block_till_done()
+
+
 async def test_create_entry_title_falls_back_when_identification_is_null(
     hass, load_fixture, respx_mock
 ):

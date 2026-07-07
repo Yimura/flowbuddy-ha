@@ -36,7 +36,7 @@ from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers import issue_registry as ir
 from homeassistant.helpers.typing import ConfigType
 
-from .api import FlowBuddyClient, PollingLimitExceededError
+from .api import FlowBuddyClient, PollingLimitExceededError, installation_id as _installation_id
 from .auth import InvalidCredentialsError, KeycloakTokenProvider
 from .const import (
     AUTH_MODE_PASSWORD,
@@ -309,7 +309,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     except Exception as exc:
         raise ConfigEntryNotReady(f"Error communicating with FlowBuddy: {exc}") from exc
 
-    installation = next((i for i in installations if i.uuid == installation_id), None)
+    installation = next(
+        (i for i in installations if _installation_id(i) == installation_id), None
+    )
     if installation is None:
         raise ConfigEntryNotReady(
             f"Installation {installation_id} was not found for these credentials"
