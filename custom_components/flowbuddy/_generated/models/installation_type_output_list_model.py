@@ -1,0 +1,86 @@
+from __future__ import annotations
+
+from collections.abc import Mapping
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from ..types import UNSET, Unset
+from typing import cast
+
+if TYPE_CHECKING:
+    from ..models.installation_type_output_model import InstallationTypeOutputModel
+
+
+T = TypeVar("T", bound="InstallationTypeOutputListModel")
+
+
+@_attrs_define
+class InstallationTypeOutputListModel:
+    """
+    Attributes:
+        installation_types (list[InstallationTypeOutputModel] | Unset):
+    """
+
+    installation_types: list[InstallationTypeOutputModel] | Unset = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        from ..models.installation_type_output_model import InstallationTypeOutputModel
+
+        installation_types: list[dict[str, Any]] | Unset = UNSET
+        if not isinstance(self.installation_types, Unset):
+            installation_types = []
+            for installation_types_item_data in self.installation_types:
+                installation_types_item = installation_types_item_data.to_dict()
+                installation_types.append(installation_types_item)
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({})
+        if installation_types is not UNSET:
+            field_dict["installationTypes"] = installation_types
+
+        return field_dict
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.installation_type_output_model import InstallationTypeOutputModel
+
+        d = dict(src_dict)
+        _installation_types = d.pop("installationTypes", UNSET)
+        installation_types: list[InstallationTypeOutputModel] | Unset = UNSET
+        if _installation_types is not UNSET:
+            installation_types = []
+            for installation_types_item_data in _installation_types:
+                installation_types_item = InstallationTypeOutputModel.from_dict(
+                    installation_types_item_data
+                )
+
+                installation_types.append(installation_types_item)
+
+        installation_type_output_list_model = cls(
+            installation_types=installation_types,
+        )
+
+        installation_type_output_list_model.additional_properties = d
+        return installation_type_output_list_model
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties
