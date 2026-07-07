@@ -1,0 +1,13 @@
+{
+  "_embedded": {
+    "communicators": [
+      {
+        "resourceUri": "/communicators/comm-1",
+        "logicalDeviceName": "COMM-1",
+        "status": "ACTIVE",
+        "externalId": "comm-1"
+      }
+    ]
+  },
+  "page": { "number": 0, "size": 20, "totalPages": 1, "totalElements": 1 }
+}

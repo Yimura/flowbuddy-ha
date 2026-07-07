@@ -1,0 +1,14 @@
+{
+  "_embedded": {
+    "hvacs": [
+      {
+        "resourceUri": "/hvacs/hvac-1",
+        "lastSetCoolTemperature": 21.5,
+        "lastSetHeatTemperature": 19.0,
+        "externalId": "HVAC-1",
+        "info": { "resourceUri": "/meters/meter-grid-1", "name": "DSO Smart Meter", "externalId": "meter-grid-1" }
+      }
+    ]
+  },
+  "page": { "number": 0, "size": 20, "totalPages": 1, "totalElements": 1 }
+}

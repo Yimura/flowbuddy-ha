@@ -1,0 +1,14 @@
+{
+  "_embedded": {
+    "inverters": [
+      {
+        "resourceUri": "/inverters/inverter-1",
+        "maxPower": 8000.0,
+        "externalId": "INV-1",
+        "lastSetProductionCapacity": 3000,
+        "info": { "resourceUri": "/meters/meter-pv-1", "name": "PV Inverter", "externalId": "meter-pv-1" }
+      }
+    ]
+  },
+  "page": { "number": 0, "size": 20, "totalPages": 1, "totalElements": 1 }
+}

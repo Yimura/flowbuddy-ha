@@ -1,0 +1,16 @@
+{
+  "_embedded": {
+    "batteries": [
+      {
+        "resourceUri": "/batteries/battery-1",
+        "capacity": 10000.0,
+        "maxChargePower": 5000.0,
+        "maxDischargePower": 4000.0,
+        "lastSetChargePower": 1200.0,
+        "externalId": "BAT-1",
+        "info": { "resourceUri": "/meters/meter-batt-1", "name": "Battery", "externalId": "meter-batt-1" }
+      }
+    ]
+  },
+  "page": { "number": 0, "size": 20, "totalPages": 1, "totalElements": 1 }
+}

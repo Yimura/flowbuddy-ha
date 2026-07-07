@@ -239,3 +239,68 @@ async def test_request_connection_test(client, respx_mock):
     )
     await client.request_connection_test("comm-1")
     assert route.called
+
+
+async def test_list_batteries(client, load_fixture, respx_mock):
+    respx_mock.get(f"{API_BASE_URL}/batteries").mock(
+        return_value=httpx.Response(200, json=load_fixture("batteries.json"))
+    )
+    iid = "00000000-0000-0000-0000-000000000001"
+    batteries = await client.list_batteries(iid)
+    assert len(batteries) == 1
+    assert batteries[0].external_id == "BAT-1"
+    assert batteries[0].max_charge_power == 5000.0
+    assert batteries[0].info.resource_uri == "/meters/meter-batt-1"
+
+
+async def test_list_inverters(client, load_fixture, respx_mock):
+    respx_mock.get(f"{API_BASE_URL}/inverters").mock(
+        return_value=httpx.Response(200, json=load_fixture("inverters.json"))
+    )
+    iid = "00000000-0000-0000-0000-000000000001"
+    inverters = await client.list_inverters(iid)
+    assert len(inverters) == 1
+    assert inverters[0].external_id == "INV-1"
+    assert inverters[0].max_power == 8000.0
+    assert inverters[0].info.resource_uri == "/meters/meter-pv-1"
+
+
+async def test_list_hvacs(client, load_fixture, respx_mock):
+    respx_mock.get(f"{API_BASE_URL}/hvacs").mock(
+        return_value=httpx.Response(200, json=load_fixture("hvacs.json"))
+    )
+    iid = "00000000-0000-0000-0000-000000000001"
+    hvacs = await client.list_hvacs(iid)
+    assert len(hvacs) == 1
+    assert hvacs[0].external_id == "HVAC-1"
+    assert hvacs[0].last_set_cool_temperature == 21.5
+    assert hvacs[0].info.resource_uri == "/meters/meter-grid-1"
+
+
+async def test_list_communicators(client, load_fixture, respx_mock):
+    respx_mock.get(f"{API_BASE_URL}/communicators").mock(
+        return_value=httpx.Response(200, json=load_fixture("communicators.json"))
+    )
+    iid = "00000000-0000-0000-0000-000000000001"
+    communicators = await client.list_communicators(iid)
+    assert len(communicators) == 1
+    assert communicators[0].logical_device_name == "COMM-1"
+    assert communicators[0].external_id == "comm-1"
+
+
+async def test_list_measurements(client, load_fixture, respx_mock):
+    respx_mock.get(f"{API_BASE_URL}/measurements").mock(
+        return_value=httpx.Response(200, json=load_fixture("measurements.json"))
+    )
+    iid = "00000000-0000-0000-0000-000000000001"
+    measurements = await client.list_measurements(iid)
+    assert len(measurements) == 6
+    pv_power = next(m for m in measurements if m.resource_uri == "/measurements/m-pv-power")
+    assert pv_power.meter.resource_uri == "/meters/meter-pv-1"
+    assert pv_power.measurement_type.resource_uri == "/measurementtypes/pv-power"
+    assert respx_mock.calls.last.request.url.params["installation"] == iid
+
+
+async def test_aclose_closes_http_client(client):
+    await client.aclose()
+    assert client._http.is_closed

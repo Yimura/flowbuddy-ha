@@ -10,12 +10,20 @@ from ._generated.api.aggregation_day_value_apis import (
     get_aggregation_day_value_details_list,
 )
 from ._generated.api.alarm_apis import add_comment, get_alarm_details_list, set_to_closed
-from ._generated.api.battery_apis import set_charge_power
-from ._generated.api.communicator_apis import request_connection_test
-from ._generated.api.hvac_apis import set_cool_temperature, set_heat_temperature
+from ._generated.api.battery_apis import get_battery_details_list, set_charge_power
+from ._generated.api.communicator_apis import (
+    get_communicator_details_list,
+    request_connection_test,
+)
+from ._generated.api.hvac_apis import (
+    get_hvac_details_list,
+    set_cool_temperature,
+    set_heat_temperature,
+)
 from ._generated.api.installation_apis import get_installation_details_list
 from ._generated.api.instant_value_apis import get_instant_value_details_list
-from ._generated.api.inverter_apis import limit_production
+from ._generated.api.inverter_apis import get_inverter_details_list, limit_production
+from ._generated.api.measurement_apis import get_measurement_details_list
 from ._generated.api.measurement_type_apis import get_measurement_type_details_list
 from ._generated.api.meter_apis import get_meter_details_list
 from ._generated.models import (
@@ -33,10 +41,25 @@ from ._generated.models import (
     AlarmOutputModel as Alarm,
 )
 from ._generated.models import (
+    BatteryOutputModel as Battery,
+)
+from ._generated.models import (
+    CommunicatorOutputModel as Communicator,
+)
+from ._generated.models import (
+    HVACOutputModel as HVAC,
+)
+from ._generated.models import (
     InstallationOutputModel as Installation,
 )
 from ._generated.models import (
     InstantValueOutputModel as InstantValue,
+)
+from ._generated.models import (
+    InverterOutputModel as Inverter,
+)
+from ._generated.models import (
+    MeasurementOutputModel as Measurement,
 )
 from ._generated.models import (
     MeasurementTypeOutputModel as MeasurementType,
@@ -229,6 +252,86 @@ class FlowBuddyClient:
 
     async def request_connection_test(self, communicator_id: str) -> None:
         await request_connection_test.asyncio(communicator_id, client=self._client)
+
+    async def list_batteries(self, installation_id: str) -> list[Battery]:
+        """Return all batteries visible to the credentialed account.
+
+        NOTE: unlike ``/meters`` or ``/measurements``, the vendor's
+        ``/batteries`` endpoint has no ``installation`` query parameter
+        (confirmed against the generated client -- see
+        ``_generated/api/battery_apis/get_battery_details_list.py``), and
+        ``BatteryOutputModel`` carries no installation reference of its own
+        to filter on client-side either -- only a link to its owning meter
+        via ``info.resource_uri``. Downstream consumers (``number.py``)
+        already narrow the result down implicitly by only matching
+        batteries whose ``info.resource_uri`` appears in this
+        installation's ``meters_by_uri``, so no filtering happens here.
+        ``installation_id`` is accepted for symmetry with the other
+        discovery facades and to leave room for a future server-side filter.
+        """
+        result = await get_battery_details_list.asyncio(
+            client=self._client, pagesize=_LIST_PAGESIZE
+        )
+        return _embedded_list(result, "batteries", "batteries", Battery)
+
+    async def list_inverters(self, installation_id: str) -> list[Inverter]:
+        """Return all inverters visible to the credentialed account.
+
+        See ``list_batteries`` -- ``/inverters`` has the same
+        no-installation-filter limitation, worked around downstream the
+        same way via each inverter's ``info.resource_uri`` meter link.
+        """
+        result = await get_inverter_details_list.asyncio(
+            client=self._client, pagesize=_LIST_PAGESIZE
+        )
+        return _embedded_list(result, "inverters", "inverters", Inverter)
+
+    async def list_hvacs(self, installation_id: str) -> list[HVAC]:
+        """Return all HVAC units visible to the credentialed account.
+
+        See ``list_batteries`` -- ``/hvacs`` has the same
+        no-installation-filter limitation.
+        """
+        result = await get_hvac_details_list.asyncio(
+            client=self._client, pagesize=_LIST_PAGESIZE
+        )
+        return _embedded_list(result, "hvacs", "hvacs", HVAC)
+
+    async def list_communicators(self, installation_id: str) -> list[Communicator]:
+        """Return all communicators visible to the credentialed account.
+
+        Same ``/communicators``-has-no-installation-filter limitation as
+        ``list_batteries``, except here there is not even a meter link to
+        narrow down by client-side afterwards: ``CommunicatorOutputModel``
+        carries no installation or meter reference at all.
+        """
+        result = await get_communicator_details_list.asyncio(
+            client=self._client, pagesize=_LIST_PAGESIZE
+        )
+        return _embedded_list(result, "communicators", "communicators", Communicator)
+
+    async def list_measurements(self, installation_id: str) -> list[Measurement]:
+        """Return every measurement registered for the given installation.
+
+        Unlike batteries/inverters/hvacs/communicators, ``/measurements``
+        does accept a server-side ``installation`` filter (see
+        ``_generated/api/measurement_apis/get_measurement_details_list.py``),
+        so -- like ``list_meters`` -- no client-side filtering is needed.
+        """
+        result = await get_measurement_details_list.asyncio(
+            client=self._client, installation=installation_id, pagesize=_LIST_PAGESIZE
+        )
+        return _embedded_list(result, "measurements", "measurements", Measurement)
+
+    async def aclose(self) -> None:
+        """Close this client's private httpx.AsyncClient connection pool.
+
+        Each config entry constructs its own ``httpx.AsyncClient`` rather
+        than sharing one across entries (spec §5 Q9 deferral -- see
+        ``__init__.py::async_setup_entry``); this is the corresponding
+        teardown hook called from ``async_unload_entry``.
+        """
+        await self._http.aclose()
 
     async def activate_continuous_processing(self, installation_id: str) -> None:
         url = f"{API_BASE_URL}/installations/{installation_id}/activateContinuousProcessing"
