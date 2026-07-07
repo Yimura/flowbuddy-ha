@@ -22,7 +22,38 @@ from .const import (
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
 
+    from .api import InstantValue
+
 _LOGGER = logging.getLogger(__name__)
+
+
+def _extract_value_and_uri(item: InstantValue) -> tuple[str | None, float | None]:
+    """Return (measurement_resource_uri, value) from a raw InstantValueOutputModel.
+
+    ``InstantValueOutputModel`` is under-typed by the generator: only
+    ``resource_uri`` is a real attrs field, so ``measurement`` and ``value``
+    land in ``additional_properties`` rather than as typed attributes. Try
+    the typed attribute path first in case a future codegen run types it,
+    then fall back to raw dict access -- mirrors the pattern used in
+    api.py::_instant_value_installation_ref.
+    """
+    try:
+        uri = item.measurement.resource_uri  # type: ignore[attr-defined]
+        val = item.value  # type: ignore[attr-defined]
+        if isinstance(uri, str) and val is not None:
+            return uri, float(val)
+    except AttributeError:
+        pass
+
+    additional = getattr(item, "additional_properties", None) or {}
+    measurement = additional.get("measurement")
+    if not isinstance(measurement, dict):
+        return None, None
+    uri = measurement.get("resourceUri") or measurement.get("resource_uri")
+    raw_val = additional.get("value")
+    if not isinstance(uri, str) or raw_val is None:
+        return None, None
+    return uri, float(raw_val)
 
 
 class FlowBuddyInstantCoordinator(DataUpdateCoordinator[dict[str, float]]):
@@ -65,7 +96,12 @@ class FlowBuddyInstantCoordinator(DataUpdateCoordinator[dict[str, float]]):
             values = await self._api.get_instant_values(self._installation_id)
         except Exception as exc:
             raise UpdateFailed(str(exc)) from exc
-        return {v.measurement.resource_uri: v.value for v in values}
+        result: dict[str, float] = {}
+        for item in values:
+            uri, val = _extract_value_and_uri(item)
+            if uri is not None and val is not None:
+                result[uri] = val
+        return result
 
     async def boost(self, duration_minutes: int) -> None:
         async with self._boost_lock:

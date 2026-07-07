@@ -108,17 +108,41 @@ async def test_block_expires_after_block_duration(hass, mock_api, monkeypatch):
     assert not coord.is_blocked()
 
 
-async def test_async_update_data_returns_keyed_dict(hass, mock_api):
-    class V:
-        def __init__(self, uri, val):
-            self.measurement = MagicMock(resource_uri=uri)
-            self.value = val
-    mock_api.get_instant_values.return_value = [
-        V("/measurements/a", 100.0), V("/measurements/b", 200.0)
+async def test_async_update_data_returns_keyed_dict_from_real_models(hass, mock_api, load_fixture):
+    """_async_update_data must handle InstantValueOutputModel's attribute+dict split.
+
+    The generated model only types ``resource_uri`` -- ``measurement`` and
+    ``value`` land in ``additional_properties``. A previous version of this
+    test fabricated a class with those as direct attributes, a false
+    positive that hid a runtime AttributeError against real API responses.
+    """
+    from custom_components.flowbuddy._generated.models.instant_value_output_model import (
+        InstantValueOutputModel,
+    )
+
+    raw = load_fixture("instantvalues.json")
+    # Build real model instances from every fixture entry belonging to
+    # installation ...000001 (the fixture also has one entry for a different
+    # installation, which the real api.py filters out before the coordinator
+    # ever sees it -- so it's irrelevant here).
+    items = [
+        InstantValueOutputModel.from_dict(entry)
+        for entry in raw["_embedded"]["instantvalues"]
+        if entry["measurement"]["installation"]["resourceUri"].endswith("00000001")
     ]
-    coord = FlowBuddyInstantCoordinator(hass, mock_api, "iid-1")
+    assert items, "fixture must yield at least one item for installation ...000001"
+
+    mock_api.get_instant_values.return_value = items
+    coord = FlowBuddyInstantCoordinator(hass, mock_api, "00000000-0000-0000-0000-000000000001")
     data = await coord._async_update_data()
-    assert data == {"/measurements/a": 100.0, "/measurements/b": 200.0}
+
+    # Every fixture entry for installation 000001 has a measurement.resourceUri
+    # and a value; all should land in the result dict, keyed by
+    # measurement.resourceUri, values coerced to float.
+    assert len(data) == len(items), f"expected {len(items)} entries, got {len(data)}: {data}"
+    expected_pv_uri = "/measurements/m-pv-power"
+    assert expected_pv_uri in data, f"pv-power missing; keys={list(data)}"
+    assert data[expected_pv_uri] == 1500.0
 
 
 async def test_api_exception_raises_update_failed(hass, mock_api):
