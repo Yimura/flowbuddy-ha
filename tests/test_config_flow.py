@@ -148,7 +148,7 @@ async def test_password_mode_happy_path(hass, load_fixture, respx_mock):
     assert result["data"]["email"] == "user@example.com"
     assert result["data"]["password"] == "hunter2"
     # Placeholder default client_id for the password grant (spec §5.2).
-    assert result["data"]["client_id"] == "simpl-go-frontend"
+    assert result["data"]["client_id"] == "go_flowbuddy"
     await hass.async_block_till_done()
 
 

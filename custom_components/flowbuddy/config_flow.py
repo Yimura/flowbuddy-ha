@@ -32,7 +32,7 @@ _LOGGER = logging.getLogger(__name__)
 # Placeholder client_id for the Keycloak "password" grant. In production this
 # should be read from the SPA bundle (spec §5.2); until that inspection is
 # automated we ship a sane default the user can override in the UI.
-DEFAULT_PASSWORD_CLIENT_ID = "simpl-go-frontend"
+DEFAULT_PASSWORD_CLIENT_ID = "go_flowbuddy"
 
 
 class FlowBuddyConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):

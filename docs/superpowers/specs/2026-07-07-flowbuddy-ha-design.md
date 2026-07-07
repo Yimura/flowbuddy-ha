@@ -144,7 +144,7 @@ Two auth modes are supported via config flow. Both use the same token endpoint:
 
 **Fallback — `password`** (Resource Owner Password Grant, for tenants where the API-account UI is admin-only or unavailable):
 
-- Config flow prompts for `Email`, `Password`, and optional `Client ID` (defaulting to the public web client discovered from the SPA bundle at recon time; if absent, the default `simpl-go-frontend` or equivalent is used — to be pinned at implementation).
+- Config flow prompts for `Email`, `Password`, and optional `Client ID` (defaulting to the public Keycloak web client `go_flowbuddy`, discovered via `GET https://flowbuddy.earth.be/keycloak.json` at 2026-07-07 Gate B — `{"realm":"izen","resource":"go_flowbuddy","public-client":true}`).
 - Token request: `grant_type=password&username=…&password=…&client_id=…&scope=openid profile email`.
 - Refresh via `grant_type=refresh_token` — the password grant returns a refresh token; client_credentials does not, so the credentials flow simply re-authenticates on expiry.
 
