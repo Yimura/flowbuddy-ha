@@ -103,15 +103,39 @@ class FlowBuddyInstantCoordinator(DataUpdateCoordinator[dict[str, float]]):
         return self._blocked_until is not None and time.monotonic() < self._blocked_until
 
     async def _async_update_data(self) -> dict[str, float]:
+        """Return {measurement.resource_uri: value} from /measurements.
+
+        Live probe (2026-07-07) showed each Measurement object carries
+        ``lastPolledValue`` + ``lastPolledRealtimeValue`` directly, so a
+        plain refresh of /measurements gives every current sensor value
+        without needing /realtimevalues (which is only populated after
+        activateContinuousProcessing and returns empty otherwise). Prefer
+        ``lastPolledRealtimeValue`` when a realtime session is active,
+        fall back to ``lastPolledValue`` otherwise.
+        """
         try:
-            values = await self._api.get_instant_values(self._installation_id)
+            measurements = await self._api.list_measurements(self._installation_id)
         except Exception as exc:
             raise UpdateFailed(str(exc)) from exc
         result: dict[str, float] = {}
-        for item in values:
-            uri, val = _extract_value_and_uri(item)
-            if uri is not None and val is not None:
-                result[uri] = val
+        for m in measurements:
+            uri = getattr(m, "resource_uri", None)
+            if not isinstance(uri, str):
+                continue
+            # Prefer realtime value when present, fall back to polled value.
+            val = getattr(m, "last_polled_realtime_value", None)
+            if val is None:
+                val = getattr(m, "last_polled_value", None)
+            if val is None:
+                # Dict-style fallback for under-typed generated shapes.
+                add = getattr(m, "additional_properties", None) or {}
+                val = add.get("lastPolledRealtimeValue") or add.get("lastPolledValue")
+            if val is None:
+                continue
+            try:
+                result[uri] = float(val)
+            except (TypeError, ValueError):
+                continue
         return result
 
     async def boost(self, duration_minutes: int) -> None:

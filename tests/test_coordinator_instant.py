@@ -23,6 +23,7 @@ from custom_components.flowbuddy.const import (
 def mock_api():
     api = MagicMock()
     api.get_instant_values = AsyncMock(return_value=[])
+    api.list_measurements = AsyncMock(return_value=[])
     api.activate_continuous_processing = AsyncMock()
     return api
 
@@ -108,33 +109,36 @@ async def test_block_expires_after_block_duration(hass, mock_api, monkeypatch):
     assert not coord.is_blocked()
 
 
-async def test_async_update_data_returns_keyed_dict_from_realtimevalues(hass, mock_api, load_fixture):
-    """_async_update_data consumes raw dict rows from /realtimevalues.
+async def test_async_update_data_reads_last_polled_from_measurements(hass, mock_api):
+    """_async_update_data now reads Measurement.lastPolledValue directly.
 
-    Spec §5 Q10 pivot: get_instant_values now backs /realtimevalues (resident-
-    scope) not /instantvalues (installer-only, 403 for residents). It returns
-    raw dicts rather than InstantValueOutputModel instances. The coordinator's
-    _extract_value_and_uri handles both shapes.
+    Live probe (spec §5 Q10 follow-up 2026-07-07): /realtimevalues is
+    empty unless activateContinuousProcessing was called, but every
+    Measurement object carries its own lastPolledValue +
+    lastPolledRealtimeValue. Pull those instead.
     """
-    raw = load_fixture("realtimevalues.json")
-    items = [
-        entry for entry in raw["_embedded"]["realtimeValues"]
-        if entry["measurement"]["installation"]["resourceUri"].endswith("00000001")
-    ]
-    assert items, "fixture must yield at least one item for installation ...000001"
+    m_pv = MagicMock()
+    m_pv.resource_uri = "https://api/measurements/pv-power"
+    m_pv.last_polled_realtime_value = None
+    m_pv.last_polled_value = 1500.0
+    m_grid = MagicMock()
+    m_grid.resource_uri = "https://api/measurements/grid-power"
+    m_grid.last_polled_realtime_value = 250.0  # realtime overrides polled
+    m_grid.last_polled_value = 200.0
+    mock_api.list_measurements.return_value = [m_pv, m_grid]
 
-    mock_api.get_instant_values.return_value = items
-    coord = FlowBuddyInstantCoordinator(hass, mock_api, "00000000-0000-0000-0000-000000000001")
+    coord = FlowBuddyInstantCoordinator(hass, mock_api, "iid-1")
     data = await coord._async_update_data()
 
-    assert len(data) == len(items), f"expected {len(items)} entries, got {len(data)}: {data}"
-    expected_pv_uri = "/measurements/m-pv-power"
-    assert expected_pv_uri in data, f"pv-power missing; keys={list(data)}"
-    assert data[expected_pv_uri] == 1500.0
+    assert data == {
+        "https://api/measurements/pv-power": 1500.0,
+        "https://api/measurements/grid-power": 250.0,  # realtime wins
+    }
+    mock_api.list_measurements.assert_awaited_with("iid-1")
 
 
 async def test_api_exception_raises_update_failed(hass, mock_api):
-    mock_api.get_instant_values.side_effect = RuntimeError("network")
+    mock_api.list_measurements.side_effect = RuntimeError("network")
     coord = FlowBuddyInstantCoordinator(hass, mock_api, "iid-1")
     with pytest.raises(UpdateFailed):
         await coord._async_update_data()

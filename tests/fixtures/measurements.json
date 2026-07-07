@@ -4,40 +4,105 @@
       {
         "resourceUri": "/measurements/m-pv-power",
         "externalId": "m-pv-power",
-        "meter": { "resourceUri": "/meters/meter-pv-1", "name": "PV Inverter", "externalId": "meter-pv-1" },
-        "measurementType": { "resourceUri": "/measurementtypes/pv-power", "name": "PV Power", "externalId": "PV_POWER" }
+        "meter": {
+          "resourceUri": "/meters/meter-pv-1",
+          "name": "PV Inverter",
+          "externalId": "meter-pv-1"
+        },
+        "measurementType": {
+          "resourceUri": "/measurementtypes/pv-power",
+          "name": "PV Power",
+          "externalId": "PV_POWER"
+        },
+        "lastPolledValue": 1500.0,
+        "lastPolledRealtimeValue": null
       },
       {
         "resourceUri": "/measurements/m-pv-energy",
         "externalId": "m-pv-energy",
-        "meter": { "resourceUri": "/meters/meter-pv-1", "name": "PV Inverter", "externalId": "meter-pv-1" },
-        "measurementType": { "resourceUri": "/measurementtypes/pv-energy", "name": "PV Energy", "externalId": "PV_ENERGY" }
+        "meter": {
+          "resourceUri": "/meters/meter-pv-1",
+          "name": "PV Inverter",
+          "externalId": "meter-pv-1"
+        },
+        "measurementType": {
+          "resourceUri": "/measurementtypes/pv-energy",
+          "name": "PV Energy",
+          "externalId": "PV_ENERGY"
+        },
+        "lastPolledValue": 8500.5,
+        "lastPolledRealtimeValue": null
       },
       {
         "resourceUri": "/measurements/m-grid-import-power",
         "externalId": "m-grid-import-power",
-        "meter": { "resourceUri": "/meters/meter-grid-1", "name": "DSO Smart Meter", "externalId": "meter-grid-1" },
-        "measurementType": { "resourceUri": "/measurementtypes/grid-import-power", "name": "Grid Import Power", "externalId": "GRID_IMPORT_POWER" }
+        "meter": {
+          "resourceUri": "/meters/meter-grid-1",
+          "name": "DSO Smart Meter",
+          "externalId": "meter-grid-1"
+        },
+        "measurementType": {
+          "resourceUri": "/measurementtypes/grid-import-power",
+          "name": "Grid Import Power",
+          "externalId": "GRID_IMPORT_POWER"
+        },
+        "lastPolledValue": 250.0,
+        "lastPolledRealtimeValue": null
       },
       {
         "resourceUri": "/measurements/m-grid-import-energy",
         "externalId": "m-grid-import-energy",
-        "meter": { "resourceUri": "/meters/meter-grid-1", "name": "DSO Smart Meter", "externalId": "meter-grid-1" },
-        "measurementType": { "resourceUri": "/measurementtypes/grid-import-energy", "name": "Grid Import Energy", "externalId": "GRID_IMPORT_ENERGY" }
+        "meter": {
+          "resourceUri": "/meters/meter-grid-1",
+          "name": "DSO Smart Meter",
+          "externalId": "meter-grid-1"
+        },
+        "measurementType": {
+          "resourceUri": "/measurementtypes/grid-import-energy",
+          "name": "Grid Import Energy",
+          "externalId": "GRID_IMPORT_ENERGY"
+        },
+        "lastPolledValue": 100.5,
+        "lastPolledRealtimeValue": null
       },
       {
         "resourceUri": "/measurements/m-grid-export-energy",
         "externalId": "m-grid-export-energy",
-        "meter": { "resourceUri": "/meters/meter-grid-1", "name": "DSO Smart Meter", "externalId": "meter-grid-1" },
-        "measurementType": { "resourceUri": "/measurementtypes/grid-export-energy", "name": "Grid Export Energy", "externalId": "GRID_EXPORT_ENERGY" }
+        "meter": {
+          "resourceUri": "/meters/meter-grid-1",
+          "name": "DSO Smart Meter",
+          "externalId": "meter-grid-1"
+        },
+        "measurementType": {
+          "resourceUri": "/measurementtypes/grid-export-energy",
+          "name": "Grid Export Energy",
+          "externalId": "GRID_EXPORT_ENERGY"
+        },
+        "lastPolledValue": 200.3,
+        "lastPolledRealtimeValue": null
       },
       {
         "resourceUri": "/measurements/m-battery-soc",
         "externalId": "m-battery-soc",
-        "meter": { "resourceUri": "/meters/meter-batt-1", "name": "Battery", "externalId": "meter-batt-1" },
-        "measurementType": { "resourceUri": "/measurementtypes/battery-soc", "name": "Battery SoC", "externalId": "BATTERY_SOC" }
+        "meter": {
+          "resourceUri": "/meters/meter-batt-1",
+          "name": "Battery",
+          "externalId": "meter-batt-1"
+        },
+        "measurementType": {
+          "resourceUri": "/measurementtypes/battery-soc",
+          "name": "Battery SoC",
+          "externalId": "BATTERY_SOC"
+        },
+        "lastPolledValue": 76.5,
+        "lastPolledRealtimeValue": null
       }
     ]
   },
-  "page": { "number": 0, "size": 20, "totalPages": 1, "totalElements": 6 }
+  "page": {
+    "number": 0,
+    "size": 20,
+    "totalPages": 1,
+    "totalElements": 6
+  }
 }
