@@ -1,0 +1,64 @@
+set_battery_charge_power:
+  fields:
+    entity_id:
+      required: true
+      selector:
+        entity:
+          domain: number
+          integration: flowbuddy
+    watts:
+      required: true
+      selector:
+        number:
+          min: -20000
+          max: 20000
+          step: 100
+
+limit_inverter:
+  fields:
+    entity_id:
+      required: true
+      selector:
+        entity:
+          domain: number
+          integration: flowbuddy
+    watts:
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 20000
+          step: 100
+
+ack_alarm:
+  fields:
+    alarm_id:
+      required: true
+      selector:
+        text: {}
+    comment:
+      required: false
+      selector:
+        text: {}
+
+request_connection_test:
+  fields:
+    communicator_id:
+      required: true
+      selector:
+        text: {}
+
+enable_realtime:
+  fields:
+    installation_id:
+      required: true
+      selector:
+        text: {}
+    duration_minutes:
+      required: false
+      default: 5
+      selector:
+        number:
+          min: 1
+          max: 5
+          step: 1

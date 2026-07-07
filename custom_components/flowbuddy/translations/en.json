@@ -31,9 +31,50 @@
     }
   },
   "services": {
+    "set_battery_charge_power": {
+      "name": "Set battery charge power",
+      "description": "Push a new charge/discharge setpoint to a FlowBuddy battery.",
+      "fields": {
+        "entity_id": { "name": "Entity", "description": "The battery charge power number entity." },
+        "watts": { "name": "Watts", "description": "Signed setpoint: positive charges, negative discharges." }
+      }
+    },
+    "limit_inverter": {
+      "name": "Limit inverter production",
+      "description": "Curtail a FlowBuddy inverter's production capacity.",
+      "fields": {
+        "entity_id": { "name": "Entity", "description": "The inverter production limit number entity." },
+        "watts": { "name": "Watts", "description": "Maximum production capacity in watts." }
+      }
+    },
+    "ack_alarm": {
+      "name": "Acknowledge alarm",
+      "description": "Acknowledge (close) an open FlowBuddy alarm.",
+      "fields": {
+        "alarm_id": { "name": "Alarm ID", "description": "The FlowBuddy alarm identifier." },
+        "comment": { "name": "Comment", "description": "Optional comment to attach before closing." }
+      }
+    },
+    "request_connection_test": {
+      "name": "Request connection test",
+      "description": "Ask FlowBuddy to test connectivity for a communicator.",
+      "fields": {
+        "communicator_id": { "name": "Communicator ID", "description": "The FlowBuddy communicator identifier." }
+      }
+    },
     "enable_realtime": {
       "name": "Enable live mode",
-      "description": "Boost live-value polling for a bounded window. Rate-limited by the vendor."
+      "description": "Boost live-value polling for a bounded window. Rate-limited by the vendor.",
+      "fields": {
+        "installation_id": { "name": "Installation ID", "description": "The FlowBuddy installation identifier." },
+        "duration_minutes": { "name": "Duration (minutes)", "description": "How long to stay in live mode (max 5)." }
+      }
+    }
+  },
+  "issues": {
+    "polling_limit_exceeded": {
+      "title": "Live polling blocked by FlowBuddy",
+      "description": "FlowBuddy blocked live polling for installation {installation_id} after too many requests. Retry in {retry_seconds} seconds."
     }
   }
 }
