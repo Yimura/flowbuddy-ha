@@ -19,6 +19,14 @@ def _installation(uuid: str) -> SimpleNamespace:
     return SimpleNamespace(uuid=uuid)
 
 
+def _null_uuid_installation() -> SimpleNamespace:
+    """An installation with the vendor's null-uuid quirk and no other
+    identifying attribute -- ``installation_id()`` (see api.py) falls all
+    the way through to returning None, so every entity/service lookup for
+    this tenant is keyed off the ``"unknown"`` fallback string."""
+    return SimpleNamespace(uuid=None)
+
+
 @pytest.fixture
 async def flowbuddy_hass(hass):
     """Register FlowBuddy's services on the test hass instance."""
@@ -96,6 +104,32 @@ async def test_enable_realtime_polling_limit_raises_and_creates_issue(flowbuddy_
     assert issue is not None
 
 
+async def test_enable_realtime_resolves_via_installation_id_fallback_when_uuid_null(
+    flowbuddy_hass,
+):
+    """Regression: installation.uuid=None must resolve via the same
+    'unknown' fallback string that entity unique_ids use (api.installation_id()
+    + `or "unknown"`), not raw installation.uuid comparison."""
+    hass = flowbuddy_hass
+    coord = AsyncMock()
+    hass.data[DOMAIN] = {
+        "entry1": {
+            "installation": _null_uuid_installation(),
+            "api": AsyncMock(),
+            "instant_coord": coord,
+        }
+    }
+
+    await hass.services.async_call(
+        DOMAIN,
+        "enable_realtime",
+        {"installation_id": "unknown", "duration_minutes": 3},
+        blocking=True,
+    )
+
+    coord.boost.assert_awaited_once_with(3)
+
+
 async def test_enable_realtime_unknown_installation_raises(flowbuddy_hass):
     hass = flowbuddy_hass
     hass.data[DOMAIN] = {}
@@ -167,6 +201,41 @@ async def test_set_battery_charge_power_resolves_entity_and_calls_api(flowbuddy_
     hass.data[DOMAIN] = {
         "entry1": {
             "installation": _installation("inst-1"),
+            "api": api,
+            "batteries": [battery],
+        }
+    }
+
+    await hass.services.async_call(
+        DOMAIN,
+        "set_battery_charge_power",
+        {"entity_id": entry.entity_id, "watts": 1500},
+        blocking=True,
+    )
+
+    api.set_battery_charge_power.assert_awaited_once_with("battery-ext-1", 1500)
+
+
+async def test_set_battery_charge_power_resolves_via_installation_id_fallback_when_uuid_null(
+    flowbuddy_hass,
+):
+    """Regression: number-target resolution must recompute the candidate
+    unique_id using installation_id() + 'unknown' fallback, matching what
+    number.py actually stamped on the entity for a null-uuid tenant."""
+    hass = flowbuddy_hass
+    registry = er.async_get(hass)
+    entry = registry.async_get_or_create(
+        "number",
+        DOMAIN,
+        "unknown:battery:/api/batteries/1:charge_power",
+        suggested_object_id="test_battery_charge_power_null_uuid",
+    )
+
+    api = AsyncMock()
+    battery = SimpleNamespace(resource_uri="/api/batteries/1", external_id="battery-ext-1")
+    hass.data[DOMAIN] = {
+        "entry1": {
+            "installation": _null_uuid_installation(),
             "api": api,
             "batteries": [battery],
         }

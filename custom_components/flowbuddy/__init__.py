@@ -111,10 +111,17 @@ def _entries(hass: HomeAssistant) -> dict[str, dict[str, Any]]:
 
 
 def _find_entry_by_installation(hass: HomeAssistant, installation_id: str) -> dict[str, Any] | None:
-    """Find the config-entry data dict whose installation.uuid matches."""
+    """Find the config-entry data dict whose installation id matches.
+
+    Uses ``installation_id()`` (with the same ``or "unknown"`` fallback every
+    entity's unique_id already applies) rather than raw ``installation.uuid``
+    -- the vendor can return ``uuid=null`` for a tenant, in which case every
+    entity was built keyed off the fallback string, and service resolution
+    must match that same string or it can never find the entry.
+    """
     for data in _entries(hass).values():
         installation = data.get("installation")
-        if installation is not None and getattr(installation, "uuid", None) == installation_id:
+        if installation is not None and (_installation_id(installation) or "unknown") == installation_id:
             return data
     return None
 
@@ -126,7 +133,7 @@ def _find_number_target(
 
     ``kind`` is ``"battery"`` or ``"inverter"`` and matches the segment used
     by ``number.py`` when it built each entity's unique_id
-    (``f"{installation.uuid}:{kind}:{item.resource_uri}:{unique_id_suffix}"``).
+    (``f"{installation_id(installation) or 'unknown'}:{kind}:{item.resource_uri}:{unique_id_suffix}"``).
     We look the entity up in the entity registry to get its unique_id, then
     recompute that same unique_id for every battery/inverter cached in
     ``hass.data[DOMAIN]`` until we find the match -- this avoids depending on
@@ -142,8 +149,9 @@ def _find_number_target(
         api = data.get("api")
         if installation is None or api is None:
             continue
+        installation_uuid = _installation_id(installation) or "unknown"
         for item in data.get(list_key, []):
-            candidate = f"{installation.uuid}:{kind}:{item.resource_uri}:{unique_id_suffix}"
+            candidate = f"{installation_uuid}:{kind}:{item.resource_uri}:{unique_id_suffix}"
             if unique_id is not None and candidate == unique_id:
                 return api, item.external_id
 
