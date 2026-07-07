@@ -332,9 +332,39 @@ async def test_list_measurements(client, load_fixture, respx_mock):
     assert respx_mock.calls.last.request.url.params["installation"] == iid
 
 
-async def test_aclose_is_noop_ha_owns_client_lifecycle(client):
+async def test_aclose_leaves_ha_owned_http_client_open(client):
     # HA's create_async_httpx_client returns an auto-cleaned shared client;
     # FlowBuddyClient.aclose() must NOT close it, otherwise integration
     # reload tears down a client HA still uses (frame.py:350 warning).
+    await client.aclose()
+    assert not client._http.is_closed
+
+
+async def test_aclose_closes_generated_clients_private_pool(client, load_fixture, respx_mock):
+    # The generated AuthenticatedClient lazily builds its OWN private
+    # httpx.AsyncClient the first time any generated API call runs. That
+    # pool is private to this FlowBuddyClient -- nothing else references it
+    # -- so aclose() must close it or it leaks a connection pool per
+    # config-entry reload.
+    respx_mock.get(f"{API_BASE_URL}/installations").mock(
+        return_value=httpx.Response(200, json=load_fixture("installations.json"))
+    )
+    await client.list_installations()  # lazily builds client._client's private pool
+    private_client = client._client._async_client
+    assert private_client is not None
+    assert not private_client.is_closed
+
+    await client.aclose()
+
+    assert private_client.is_closed
+    # HA-owned client is a separate concern and must stay untouched.
+    assert not client._http.is_closed
+
+
+async def test_aclose_is_safe_when_private_pool_was_never_built(client):
+    # If no generated API call was ever made, client._client never
+    # constructed its private pool -- aclose() must not crash trying to
+    # close something that doesn't exist yet.
+    assert client._client._async_client is None
     await client.aclose()
     assert not client._http.is_closed

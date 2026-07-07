@@ -383,15 +383,24 @@ class FlowBuddyClient:
         return _embedded_list(result, "measurements", "measurements", Measurement)
 
     async def aclose(self) -> None:
-        """No-op teardown hook.
+        """Teardown hook.
 
         Since we now use ``homeassistant.helpers.httpx_client.create_async_httpx_client``,
-        HA owns the client lifecycle (auto_cleanup=True). Closing it here
-        would tear down a client HA reuses across integration reloads and
-        trigger a ``frame.py:350`` warning. Kept as a stable method name so
-        callers do not need to know about the ownership transfer.
+        HA owns ``self._http``'s lifecycle (auto_cleanup=True) -- closing it
+        here would tear down a client HA reuses across integration reloads
+        and trigger a ``frame.py:350`` warning, so we leave it alone.
+
+        The generated ``AuthenticatedClient`` (``self._client``) is a
+        separate concern: it lazily builds its OWN private
+        ``httpx.AsyncClient`` the first time any generated API call runs
+        (see ``Client.get_async_httpx_client``). That pool is private to
+        this ``FlowBuddyClient`` instance -- nothing else references it --
+        so we own its lifecycle and must close it here, or it leaks one
+        connection pool per config-entry reload.
         """
-        return None
+        private_client = getattr(self._client, "_async_client", None)
+        if private_client is not None and not private_client.is_closed:
+            await private_client.aclose()
 
     async def activate_continuous_processing(self, installation_id: str) -> None:
         url = f"{API_BASE_URL}/installations/{installation_id}/activateContinuousProcessing"
