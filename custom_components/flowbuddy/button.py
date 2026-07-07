@@ -12,6 +12,24 @@ from .const import DOMAIN
 from .entity import FlowBuddyEntity, installation_device_info
 
 
+def _alarm_field(alarm: Any, key: str) -> Any:
+	"""Best-effort accessor for an alarm field.
+
+	``AlarmOutputModel`` (see ``_generated/models/alarm_output_model.py``)
+	only types a subset of the raw API payload: ``priority``, ``status``,
+	``resource_uri``, ``description``, etc. Fields the live API emits but
+	the generated model does not declare — ``id``, ``message``,
+	``raisedOn`` — are absent from the attrs class entirely and are left
+	in ``additional_properties`` by ``from_dict``. Try the typed
+	attribute first (in case a future codegen run adds it), then fall
+	back to the raw dict.
+	"""
+	value = getattr(alarm, key, None)
+	if value is not None:
+		return value
+	return alarm.additional_properties.get(key)
+
+
 class AlarmAckButton(FlowBuddyEntity, ButtonEntity):
     """Button to acknowledge (close) an open alarm."""
 
@@ -25,12 +43,13 @@ class AlarmAckButton(FlowBuddyEntity, ButtonEntity):
         alarm: Any,
         installation: Any,
     ) -> None:
+        alarm_id = _alarm_field(alarm, "id")
         super().__init__(
             coordinator,
-            unique_id=f"{installation.uuid}:alarm:{alarm.id}:ack",
+            unique_id=f"{installation.uuid}:alarm:{alarm_id}:ack",
         )
         self._api = api
-        self._alarm_id = alarm.id
+        self._alarm_id = alarm_id
         self._attr_device_info = installation_device_info(installation)
 
     async def async_press(self) -> None:

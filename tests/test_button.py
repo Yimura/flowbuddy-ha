@@ -55,27 +55,48 @@ def mock_api():
     return api
 
 
-async def test_alarm_ack_button_unique_id(mock_alarm, mock_installation, mock_coordinator):
+async def test_alarm_ack_button_unique_id(load_fixture):
     """Test AlarmAckButton has correct unique_id."""
-    button = AlarmAckButton(
-        coordinator=mock_coordinator,
-        api=AsyncMock(),
-        alarm=mock_alarm,
-        installation=mock_installation,
+    from custom_components.flowbuddy._generated.models.alarm_output_model import (
+        AlarmOutputModel,
     )
-    assert button.unique_id == f"{mock_installation.uuid}:alarm:{mock_alarm.id}:ack"
+    from unittest.mock import MagicMock
 
-
-async def test_alarm_ack_button_calls_close_alarm(mock_alarm, mock_installation, mock_coordinator, mock_api):
-    """Test AlarmAckButton.async_press calls api.close_alarm."""
+    raw = load_fixture("alarms_open.json")
+    alarm = AlarmOutputModel.from_dict(raw["_embedded"]["alarms"][0])
+    installation = MagicMock(uuid="00000000-0000-0000-0000-000000000001")
+    coordinator = MagicMock()
+    coordinator.data = [alarm]
     button = AlarmAckButton(
-        coordinator=mock_coordinator,
-        api=mock_api,
-        alarm=mock_alarm,
-        installation=mock_installation,
+        coordinator=coordinator,
+        api=AsyncMock(),
+        alarm=alarm,
+        installation=installation,
+    )
+    assert button.unique_id == "00000000-0000-0000-0000-000000000001:alarm:alarm-1:ack"
+
+
+async def test_alarm_ack_button_calls_close_alarm(load_fixture):
+    """Test AlarmAckButton.async_press calls api.close_alarm."""
+    from custom_components.flowbuddy._generated.models.alarm_output_model import (
+        AlarmOutputModel,
+    )
+    from unittest.mock import MagicMock
+
+    raw = load_fixture("alarms_open.json")
+    alarm = AlarmOutputModel.from_dict(raw["_embedded"]["alarms"][0])
+    installation = MagicMock(uuid="00000000-0000-0000-0000-000000000001")
+    coordinator = MagicMock()
+    coordinator.data = [alarm]
+    api = AsyncMock()
+    button = AlarmAckButton(
+        coordinator=coordinator,
+        api=api,
+        alarm=alarm,
+        installation=installation,
     )
     await button.async_press()
-    mock_api.close_alarm.assert_awaited_once_with(mock_alarm.id)
+    api.close_alarm.assert_awaited_once_with("alarm-1")
 
 
 async def test_request_connection_test_button_unique_id(mock_communicator, mock_installation, mock_coordinator):
