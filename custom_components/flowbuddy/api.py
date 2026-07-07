@@ -11,6 +11,7 @@ from ._generated.api.aggregation_day_value_apis import (
 )
 from ._generated.api.alarm_apis import add_comment, get_alarm_details_list, set_to_closed
 from ._generated.api.battery_apis import set_charge_power
+from ._generated.api.communicator_apis import request_connection_test
 from ._generated.api.hvac_apis import set_cool_temperature, set_heat_temperature
 from ._generated.api.installation_apis import get_installation_details_list
 from ._generated.api.instant_value_apis import get_instant_value_details_list
@@ -225,6 +226,9 @@ class FlowBuddyClient:
         await set_to_closed.asyncio(
             alarm_id, client=self._client, body=AlarmSetToClosedPostInputModel()
         )
+
+    async def request_connection_test(self, communicator_id: str) -> None:
+        await request_connection_test.asyncio(communicator_id, client=self._client)
 
     async def activate_continuous_processing(self, installation_id: str) -> None:
         url = f"{API_BASE_URL}/installations/{installation_id}/activateContinuousProcessing"

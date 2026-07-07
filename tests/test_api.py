@@ -231,3 +231,11 @@ async def test_activate_continuous_processing_rate_limit_via_body(client, respx_
     )
     with pytest.raises(PollingLimitExceededError):
         await client.activate_continuous_processing(iid)
+
+
+async def test_request_connection_test(client, respx_mock):
+    route = respx_mock.post(f"{API_BASE_URL}/communicators/comm-1/requestConnectionTest").mock(
+        return_value=httpx.Response(204)
+    )
+    await client.request_connection_test("comm-1")
+    assert route.called
