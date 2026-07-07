@@ -14,6 +14,7 @@ regen:
 		exit 1; \
 	fi
 	rm -rf $(GEN_DIR)
+	mkdir -p $(dir $(GEN_DIR))
 	python -m openapi_python_client generate \
 		--path $(SPEC) \
 		--output-path $(GEN_DIR) \
