@@ -1,8 +1,9 @@
 """Tests for diagnostics.py config-entry diagnostics."""
+
 from __future__ import annotations
 
 from datetime import timedelta
-from unittest.mock import AsyncMock, MagicMock
+from unittest.mock import MagicMock
 
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from pytest_homeassistant_custom_component.common import MockConfigEntry
@@ -14,7 +15,6 @@ from custom_components.flowbuddy.const import (
     DOMAIN,
 )
 from custom_components.flowbuddy.diagnostics import async_get_config_entry_diagnostics
-
 
 IID = "00000000-0000-0000-0000-000000000001"
 

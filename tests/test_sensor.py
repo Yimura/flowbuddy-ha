@@ -1,4 +1,5 @@
 """Tests for sensor platform."""
+
 from types import SimpleNamespace
 from unittest.mock import MagicMock
 
@@ -48,9 +49,11 @@ def test_sensor_returns_none_when_missing_from_coordinator():
     meas = MagicMock(resource_uri="/measurements/m-pv")
     s = FlowBuddySensor(
         coordinator=coord,
-        installation_uuid="i", meter=MagicMock(serial_number="s"),
+        installation_uuid="i",
+        meter=MagicMock(serial_number="s"),
         installation=MagicMock(uuid="i"),
-        measurement=meas, measurement_type=mt,
+        measurement=meas,
+        measurement_type=mt,
     )
     assert s.native_value is None
 

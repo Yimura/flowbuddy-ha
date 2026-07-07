@@ -1,16 +1,20 @@
 """Number platform — battery charge power + inverter production limit setpoints."""
+
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from homeassistant.components.number import NumberEntity, NumberMode
-from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from .const import DOMAIN
 from .api import installation_id as _iid
+from .const import DOMAIN
 from .entity import FlowBuddyEntity, meter_device_info
+
+if TYPE_CHECKING:
+    from homeassistant.config_entries import ConfigEntry
+    from homeassistant.core import HomeAssistant
+    from homeassistant.helpers.entity_platform import AddEntitiesCallback
+    from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 
 class BatteryChargePowerNumber(FlowBuddyEntity, NumberEntity):
@@ -28,7 +32,13 @@ class BatteryChargePowerNumber(FlowBuddyEntity, NumberEntity):
     _attr_name = "Charge power"
 
     def __init__(
-        self, *, coordinator, api: Any, battery: Any, meter: Any, installation: Any,
+        self,
+        *,
+        coordinator: DataUpdateCoordinator[Any],
+        api: Any,
+        battery: Any,
+        meter: Any,
+        installation: Any,
     ) -> None:
         super().__init__(
             coordinator,
@@ -59,7 +69,13 @@ class InverterProductionLimitNumber(FlowBuddyEntity, NumberEntity):
     _attr_name = "Production limit"
 
     def __init__(
-        self, *, coordinator, api: Any, inverter: Any, meter: Any, installation: Any,
+        self,
+        *,
+        coordinator: DataUpdateCoordinator[Any],
+        api: Any,
+        inverter: Any,
+        meter: Any,
+        installation: Any,
     ) -> None:
         super().__init__(
             coordinator,
@@ -80,7 +96,9 @@ class InverterProductionLimitNumber(FlowBuddyEntity, NumberEntity):
 
 
 async def async_setup_entry(
-    hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback,
+    hass: HomeAssistant,
+    entry: ConfigEntry,
+    async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up FlowBuddy number entities from the batteries/inverters cached in hass.data."""
     data = hass.data[DOMAIN][entry.entry_id]
@@ -94,16 +112,26 @@ async def async_setup_entry(
         meter = meters_by_uri.get(battery.info.resource_uri) if battery.info else None
         if meter is None:
             continue
-        entities.append(BatteryChargePowerNumber(
-            coordinator=coordinator, api=api, battery=battery, meter=meter,
-            installation=installation,
-        ))
+        entities.append(
+            BatteryChargePowerNumber(
+                coordinator=coordinator,
+                api=api,
+                battery=battery,
+                meter=meter,
+                installation=installation,
+            )
+        )
     for inverter in data.get("inverters", []):
         meter = meters_by_uri.get(inverter.info.resource_uri) if inverter.info else None
         if meter is None:
             continue
-        entities.append(InverterProductionLimitNumber(
-            coordinator=coordinator, api=api, inverter=inverter, meter=meter,
-            installation=installation,
-        ))
+        entities.append(
+            InverterProductionLimitNumber(
+                coordinator=coordinator,
+                api=api,
+                inverter=inverter,
+                meter=meter,
+                installation=installation,
+            )
+        )
     async_add_entities(entities)

@@ -1,4 +1,5 @@
 """Tests for FlowBuddyDailyCoordinator."""
+
 from __future__ import annotations
 
 from unittest.mock import AsyncMock, MagicMock
@@ -26,6 +27,7 @@ async def test_update_returns_keyed_dict(hass, mock_api):
         def __init__(self, uri, val):
             self.measurement = MagicMock(resource_uri=uri)
             self.value = val
+
     mock_api.get_day_aggregations.return_value = [V("/m/pv", 8.5), V("/m/grid-import", 2.1)]
     coord = FlowBuddyDailyCoordinator(hass, mock_api, "iid-1")
     data = await coord._async_update_data()
@@ -34,6 +36,7 @@ async def test_update_returns_keyed_dict(hass, mock_api):
 
 async def test_api_exception_raises_update_failed(hass, mock_api):
     from homeassistant.helpers.update_coordinator import UpdateFailed
+
     mock_api.get_day_aggregations.side_effect = RuntimeError("network")
     coord = FlowBuddyDailyCoordinator(hass, mock_api, "iid-1")
     with pytest.raises(UpdateFailed):

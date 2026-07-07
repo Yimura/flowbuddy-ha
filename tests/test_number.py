@@ -1,4 +1,5 @@
 """Tests for number platform (battery charge power + inverter production limit)."""
+
 from __future__ import annotations
 
 from unittest.mock import AsyncMock, MagicMock
@@ -24,7 +25,10 @@ def test_battery_number_range():
     installation = MagicMock(uuid="00000000-0000-0000-0000-000000000001")
 
     number = BatteryChargePowerNumber(
-        coordinator=coord, api=api, battery=battery, meter=meter,
+        coordinator=coord,
+        api=api,
+        battery=battery,
+        meter=meter,
         installation=installation,
     )
 
@@ -50,7 +54,10 @@ async def test_battery_set_calls_api():
     installation = MagicMock(uuid="00000000-0000-0000-0000-000000000001")
 
     number = BatteryChargePowerNumber(
-        coordinator=coord, api=api, battery=battery, meter=meter,
+        coordinator=coord,
+        api=api,
+        battery=battery,
+        meter=meter,
         installation=installation,
     )
 
@@ -73,7 +80,10 @@ def test_inverter_number_range():
     installation = MagicMock(uuid="00000000-0000-0000-0000-000000000001")
 
     number = InverterProductionLimitNumber(
-        coordinator=coord, api=api, inverter=inverter, meter=meter,
+        coordinator=coord,
+        api=api,
+        inverter=inverter,
+        meter=meter,
         installation=installation,
     )
 
@@ -98,7 +108,10 @@ async def test_inverter_set_calls_api():
     installation = MagicMock(uuid="00000000-0000-0000-0000-000000000001")
 
     number = InverterProductionLimitNumber(
-        coordinator=coord, api=api, inverter=inverter, meter=meter,
+        coordinator=coord,
+        api=api,
+        inverter=inverter,
+        meter=meter,
         installation=installation,
     )
 

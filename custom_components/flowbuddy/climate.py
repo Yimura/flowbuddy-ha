@@ -1,22 +1,23 @@
 """Climate platform — HVAC units with independent heat/cool setpoint control."""
+
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-from homeassistant.components.climate import (
-    ClimateEntity,
-    ClimateEntityFeature,
-    HVACMode,
-)
-from homeassistant.config_entries import ConfigEntry
+from homeassistant.components.climate import ClimateEntity
+from homeassistant.components.climate.const import ClimateEntityFeature, HVACMode
 from homeassistant.const import ATTR_TEMPERATURE, UnitOfTemperature
-from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import HomeAssistantError
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from .const import DOMAIN
 from .api import installation_id as _iid
+from .const import DOMAIN
 from .entity import FlowBuddyEntity, meter_device_info
+
+if TYPE_CHECKING:
+    from homeassistant.config_entries import ConfigEntry
+    from homeassistant.core import HomeAssistant
+    from homeassistant.helpers.entity_platform import AddEntitiesCallback
+    from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 
 class FlowBuddyHvac(FlowBuddyEntity, ClimateEntity):
@@ -47,7 +48,13 @@ class FlowBuddyHvac(FlowBuddyEntity, ClimateEntity):
     _attr_name = None
 
     def __init__(
-        self, *, coordinator, api: Any, hvac: Any, meter: Any, installation: Any,
+        self,
+        *,
+        coordinator: DataUpdateCoordinator[Any],
+        api: Any,
+        hvac: Any,
+        meter: Any,
+        installation: Any,
     ) -> None:
         super().__init__(
             coordinator,
@@ -97,7 +104,9 @@ class FlowBuddyHvac(FlowBuddyEntity, ClimateEntity):
 
 
 async def async_setup_entry(
-    hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback,
+    hass: HomeAssistant,
+    entry: ConfigEntry,
+    async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up FlowBuddy HVAC climate entities from the hvacs cached in hass.data."""
     data = hass.data[DOMAIN][entry.entry_id]
@@ -111,8 +120,13 @@ async def async_setup_entry(
         meter = meters_by_uri.get(hvac.info.resource_uri) if hvac.info else None
         if meter is None:
             continue
-        entities.append(FlowBuddyHvac(
-            coordinator=coordinator, api=api, hvac=hvac, meter=meter,
-            installation=installation,
-        ))
+        entities.append(
+            FlowBuddyHvac(
+                coordinator=coordinator,
+                api=api,
+                hvac=hvac,
+                meter=meter,
+                installation=installation,
+            )
+        )
     async_add_entities(entities)

@@ -1,19 +1,23 @@
 """Binary sensor platform — open alarms surfaced as PROBLEM binary sensors."""
+
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from homeassistant.components.binary_sensor import (
     BinarySensorDeviceClass,
     BinarySensorEntity,
 )
-from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from .const import DOMAIN
 from .api import installation_id as _iid
+from .const import DOMAIN
 from .entity import FlowBuddyEntity, installation_device_info
+
+if TYPE_CHECKING:
+    from homeassistant.config_entries import ConfigEntry
+    from homeassistant.core import HomeAssistant
+    from homeassistant.helpers.entity_platform import AddEntitiesCallback
+    from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 
 def _alarm_field(alarm: Any, key: str) -> Any:
@@ -43,7 +47,9 @@ class FlowBuddyAlarmBinarySensor(FlowBuddyEntity, BinarySensorEntity):
 
     _attr_device_class = BinarySensorDeviceClass.PROBLEM
 
-    def __init__(self, *, coordinator, installation, alarm) -> None:
+    def __init__(
+        self, *, coordinator: DataUpdateCoordinator[Any], installation: Any, alarm: Any
+    ) -> None:
         alarm_id = _alarm_field(alarm, "id")
         super().__init__(
             coordinator,
@@ -65,7 +71,9 @@ class FlowBuddyAlarmBinarySensor(FlowBuddyEntity, BinarySensorEntity):
 
 
 async def async_setup_entry(
-    hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback,
+    hass: HomeAssistant,
+    entry: ConfigEntry,
+    async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up FlowBuddy alarm binary sensors from the alarms coordinator.
 
@@ -80,7 +88,9 @@ async def async_setup_entry(
     alarms_coord = data["alarms_coord"]
     entities = [
         FlowBuddyAlarmBinarySensor(
-            coordinator=alarms_coord, installation=installation, alarm=alarm,
+            coordinator=alarms_coord,
+            installation=installation,
+            alarm=alarm,
         )
         for alarm in alarms_coord.data
     ]

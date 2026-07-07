@@ -42,9 +42,7 @@ async def test_list_installations(client, load_fixture, respx_mock):
     assert installations[0].identification == "TEST-INST-1"
 
 
-async def test_list_installations_tolerates_null_date_fields(
-    client, load_fixture, respx_mock
-):
+async def test_list_installations_tolerates_null_date_fields(client, load_fixture, respx_mock):
     """Regression test: live tenant returns null for installationDate /
     dashboardCreatedOn when values are not set. Vendor spec declares those
     fields as string+date-time without nullable=true, so the generator's

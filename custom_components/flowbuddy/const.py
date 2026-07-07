@@ -1,4 +1,5 @@
 """Constants for the FlowBuddy integration."""
+
 from __future__ import annotations
 
 from typing import Final
@@ -15,13 +16,13 @@ KEYCLOAK_SCOPES: Final = "openid profile email"
 # Baseline mode is safe/always-on. Live mode is opt-in via
 # flowbuddy.enable_realtime service and bounded to RTO_MAX_MINUTES.
 DEFAULT_INSTANT_INTERVAL_S: Final = 90
-MIN_INSTANT_INTERVAL_S: Final = 60         # HARD floor for baseline polling
+MIN_INSTANT_INTERVAL_S: Final = 60  # HARD floor for baseline polling
 DEFAULT_DAILY_INTERVAL_S: Final = 15 * 60
 DEFAULT_ALARMS_INTERVAL_S: Final = 5 * 60
-DEFAULT_LIVE_INTERVAL_S: Final = 20        # only inside an RTO window
+DEFAULT_LIVE_INTERVAL_S: Final = 20  # only inside an RTO window
 
 RTO_MAX_MINUTES: Final = 5
-POLLING_LIMIT_BLOCK_S: Final = 10 * 60     # hard block after PollingLimitExceeded
+POLLING_LIMIT_BLOCK_S: Final = 10 * 60  # hard block after PollingLimitExceeded
 
 # --- Config flow keys --------------------------------------------------
 CONF_AUTH_MODE: Final = "auth_mode"

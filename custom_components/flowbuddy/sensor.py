@@ -1,17 +1,22 @@
 """Sensor platform."""
+
 from __future__ import annotations
 
 import logging
+from typing import TYPE_CHECKING, Any
 
 from homeassistant.components.sensor import SensorEntity
-from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
+from .api import installation_id as _iid
 from .const import DOMAIN
 from .discovery import describe
-from .api import installation_id as _iid
 from .entity import FlowBuddyEntity, meter_device_info
+
+if TYPE_CHECKING:
+    from homeassistant.config_entries import ConfigEntry
+    from homeassistant.core import HomeAssistant
+    from homeassistant.helpers.entity_platform import AddEntitiesCallback
+    from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -20,8 +25,14 @@ class FlowBuddySensor(FlowBuddyEntity, SensorEntity):
     """A single measurement, sourced from either the instant or daily coordinator."""
 
     def __init__(
-        self, *, coordinator, installation_uuid: str, meter, installation,
-        measurement, measurement_type,
+        self,
+        *,
+        coordinator: DataUpdateCoordinator[Any],
+        installation_uuid: str,
+        meter: Any,
+        installation: Any,
+        measurement: Any,
+        measurement_type: Any,
     ) -> None:
         desc = describe(measurement_type)
         super().__init__(
@@ -43,7 +54,9 @@ class FlowBuddySensor(FlowBuddyEntity, SensorEntity):
 
 
 async def async_setup_entry(
-    hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback,
+    hass: HomeAssistant,
+    entry: ConfigEntry,
+    async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up FlowBuddy sensors from the discovery data cached in hass.data."""
     data = hass.data[DOMAIN][entry.entry_id]
@@ -64,9 +77,7 @@ async def async_setup_entry(
         if mt is None:
             continue
         if measurement.meter is None:
-            _LOGGER.debug(
-                "Skipping measurement %s with no meter link", measurement.resource_uri
-            )
+            _LOGGER.debug("Skipping measurement %s with no meter link", measurement.resource_uri)
             continue
         meter = data["meters_by_uri"].get(measurement.meter.resource_uri)
         if meter is None:
@@ -78,12 +89,14 @@ async def async_setup_entry(
         # responses ship periodStart=null (spec vs runtime mismatch),
         # so it's not useful as a data source right now.
         coord = data["instant_coord"]
-        entities.append(FlowBuddySensor(
-            coordinator=coord,
-            installation_uuid=(_iid(data["installation"]) or "unknown"),
-            meter=meter,
-            installation=data["installation"],
-            measurement=measurement,
-            measurement_type=mt,
-        ))
+        entities.append(
+            FlowBuddySensor(
+                coordinator=coord,
+                installation_uuid=(_iid(data["installation"]) or "unknown"),
+                meter=meter,
+                installation=data["installation"],
+                measurement=measurement,
+                measurement_type=mt,
+            )
+        )
     async_add_entities(entities)

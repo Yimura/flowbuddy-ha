@@ -1,50 +1,53 @@
 """Button platform — alarm acknowledge + connection test."""
+
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from homeassistant.components.button import ButtonEntity
-from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from .const import DOMAIN
 from .api import installation_id as _iid
+from .const import DOMAIN
 from .entity import FlowBuddyEntity, installation_device_info
+
+if TYPE_CHECKING:
+    from homeassistant.config_entries import ConfigEntry
+    from homeassistant.core import HomeAssistant
+    from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 
 def _alarm_field(alarm: Any, key: str) -> Any:
-	"""Best-effort accessor for an alarm field.
+    """Best-effort accessor for an alarm field.
 
-	``AlarmOutputModel`` (see ``_generated/models/alarm_output_model.py``)
-	only types a subset of the raw API payload: ``priority``, ``status``,
-	``resource_uri``, ``description``, etc. Fields the live API emits but
-	the generated model does not declare — ``id``, ``message``,
-	``raisedOn`` — are absent from the attrs class entirely and are left
-	in ``additional_properties`` by ``from_dict``. Try the typed
-	attribute first (in case a future codegen run adds it), then fall
-	back to the raw dict.
-	"""
-	value = getattr(alarm, key, None)
-	if value is not None:
-		return value
-	return alarm.additional_properties.get(key)
+    ``AlarmOutputModel`` (see ``_generated/models/alarm_output_model.py``)
+    only types a subset of the raw API payload: ``priority``, ``status``,
+    ``resource_uri``, ``description``, etc. Fields the live API emits but
+    the generated model does not declare — ``id``, ``message``,
+    ``raisedOn`` — are absent from the attrs class entirely and are left
+    in ``additional_properties`` by ``from_dict``. Try the typed
+    attribute first (in case a future codegen run adds it), then fall
+    back to the raw dict.
+    """
+    value = getattr(alarm, key, None)
+    if value is not None:
+        return value
+    return alarm.additional_properties.get(key)
 
 
 def _communicator_field(communicator: Any, key: str) -> Any:
-	"""Best-effort accessor for a communicator field.
+    """Best-effort accessor for a communicator field.
 
-	``CommunicatorOutputModel`` (see ``_generated/models/communicator_output_model.py``)
-	only types a subset of the raw API payload: ``resource_uri``, ``logical_device_name``,
-	``external_id``, etc. Fields the live API emits but the generated model does not
-	declare — ``id`` — are absent from the attrs class entirely and are left in
-	``additional_properties`` by ``from_dict``. Try the typed attribute first (in case
-	a future codegen run adds it), then fall back to the raw dict.
-	"""
-	value = getattr(communicator, key, None)
-	if value is not None:
-		return value
-	return communicator.additional_properties.get(key)
+    ``CommunicatorOutputModel`` (see ``_generated/models/communicator_output_model.py``)
+    only types a subset of the raw API payload: ``resource_uri``, ``logical_device_name``,
+    ``external_id``, etc. Fields the live API emits but the generated model does not
+    declare — ``id`` — are absent from the attrs class entirely and are left in
+    ``additional_properties`` by ``from_dict``. Try the typed attribute first (in case
+    a future codegen run adds it), then fall back to the raw dict.
+    """
+    value = getattr(communicator, key, None)
+    if value is not None:
+        return value
+    return communicator.additional_properties.get(key)
 
 
 class AlarmAckButton(FlowBuddyEntity, ButtonEntity):
@@ -102,7 +105,9 @@ class RequestConnectionTestButton(FlowBuddyEntity, ButtonEntity):
 
 
 async def async_setup_entry(
-    hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback,
+    hass: HomeAssistant,
+    entry: ConfigEntry,
+    async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up FlowBuddy button entities from installation and communicators data."""
     data = hass.data[DOMAIN][entry.entry_id]

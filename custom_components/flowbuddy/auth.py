@@ -5,11 +5,14 @@ from __future__ import annotations
 import asyncio
 import time
 from dataclasses import dataclass
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 import httpx
 
 from .const import KEYCLOAK_SCOPES, KEYCLOAK_TOKEN_URL
+
+if TYPE_CHECKING:
+    from collections.abc import AsyncGenerator
 
 
 class InvalidCredentialsError(Exception):
@@ -89,7 +92,9 @@ class _AsyncAuth(httpx.Auth):
     def __init__(self, provider: KeycloakTokenProvider) -> None:
         self._provider = provider
 
-    async def async_auth_flow(self, request):
+    async def async_auth_flow(
+        self, request: httpx.Request
+    ) -> AsyncGenerator[httpx.Request, httpx.Response]:
         token = await self._provider.get_token()
         request.headers["Authorization"] = f"Bearer {token}"
         response = yield request

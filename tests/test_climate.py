@@ -1,4 +1,5 @@
 """Tests for climate platform (HVAC heat/cool setpoint control)."""
+
 from __future__ import annotations
 
 from unittest.mock import AsyncMock, MagicMock
@@ -24,7 +25,11 @@ def _make_hvac(*, hvac_mode: HVACMode | None = None):
     installation = MagicMock(uuid="00000000-0000-0000-0000-000000000001")
 
     entity = FlowBuddyHvac(
-        coordinator=coord, api=api, hvac=hvac, meter=meter, installation=installation,
+        coordinator=coord,
+        api=api,
+        hvac=hvac,
+        meter=meter,
+        installation=installation,
     )
     if hvac_mode is not None:
         entity._attr_hvac_mode = hvac_mode

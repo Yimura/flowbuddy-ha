@@ -21,11 +21,7 @@ import logging
 import time
 from typing import TYPE_CHECKING, Any
 
-import httpx
-from homeassistant.helpers.httpx_client import create_async_httpx_client
 import voluptuous as vol
-from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant, ServiceCall
 from homeassistant.exceptions import (
     ConfigEntryAuthFailed,
     ConfigEntryNotReady,
@@ -34,9 +30,10 @@ from homeassistant.exceptions import (
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers import issue_registry as ir
-from homeassistant.helpers.typing import ConfigType
+from homeassistant.helpers.httpx_client import create_async_httpx_client
 
-from .api import FlowBuddyClient, PollingLimitExceededError, installation_id as _installation_id
+from .api import FlowBuddyClient, PollingLimitExceededError
+from .api import installation_id as _installation_id
 from .auth import InvalidCredentialsError, KeycloakTokenProvider
 from .const import (
     AUTH_MODE_PASSWORD,
@@ -53,6 +50,11 @@ from .coordinator import (
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
+
+    import httpx
+    from homeassistant.config_entries import ConfigEntry
+    from homeassistant.core import HomeAssistant, ServiceCall
+    from homeassistant.helpers.typing import ConfigType
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -121,7 +123,10 @@ def _find_entry_by_installation(hass: HomeAssistant, installation_id: str) -> di
     """
     for data in _entries(hass).values():
         installation = data.get("installation")
-        if installation is not None and (_installation_id(installation) or "unknown") == installation_id:
+        if (
+            installation is not None
+            and (_installation_id(installation) or "unknown") == installation_id
+        ):
             return data
     return None
 
@@ -317,9 +322,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     except Exception as exc:
         raise ConfigEntryNotReady(f"Error communicating with FlowBuddy: {exc}") from exc
 
-    installation = next(
-        (i for i in installations if _installation_id(i) == installation_id), None
-    )
+    installation = next((i for i in installations if _installation_id(i) == installation_id), None)
     if installation is None:
         raise ConfigEntryNotReady(
             f"Installation {installation_id} was not found for these credentials"

@@ -1,4 +1,5 @@
 """Tests for discovery.describe — one per row of the spec §4.3 mapping table."""
+
 from unittest.mock import MagicMock
 
 import pytest
@@ -20,11 +21,16 @@ from custom_components.flowbuddy.discovery import describe
 
 def _mt(code, unit, incremental):
     m = MagicMock()
-    m.code = code; m.unit = unit; m.is_incremental = incremental; m.name = code
+    m.code = code
+    m.unit = unit
+    m.is_incremental = incremental
+    m.name = code
     return m
 
 
-@pytest.mark.parametrize("unit_in,unit_expected", [("W", UnitOfPower.WATT), ("kW", UnitOfPower.WATT)])
+@pytest.mark.parametrize(
+    "unit_in,unit_expected", [("W", UnitOfPower.WATT), ("kW", UnitOfPower.WATT)]
+)
 def test_power_measurement(unit_in, unit_expected):
     d = describe(_mt("PV_POWER", unit_in, False))
     assert d.device_class == SensorDeviceClass.POWER
@@ -32,7 +38,10 @@ def test_power_measurement(unit_in, unit_expected):
     assert d.native_unit_of_measurement == unit_expected
 
 
-@pytest.mark.parametrize("unit_in,unit_expected", [("Wh", UnitOfEnergy.KILO_WATT_HOUR), ("kWh", UnitOfEnergy.KILO_WATT_HOUR)])
+@pytest.mark.parametrize(
+    "unit_in,unit_expected",
+    [("Wh", UnitOfEnergy.KILO_WATT_HOUR), ("kWh", UnitOfEnergy.KILO_WATT_HOUR)],
+)
 def test_energy_incremental(unit_in, unit_expected):
     d = describe(_mt("PV_ENERGY", unit_in, True))
     assert d.device_class == SensorDeviceClass.ENERGY
@@ -106,7 +115,7 @@ def test_scale_wh_input_returns_kwh():
     assert d.value_transformer(15230.5) == pytest.approx(15.2305)
 
 
-def test_soc_with_vendor_typo_unit_Whpercent():
+def test_soc_with_vendor_typo_unit_whpercent():
     """Real vendor ships SoC with unit="Wh%" (typo) + isIncremental=True.
     Confirmed against live tenant 2026-07-07 (EMS BAT SOC percentage,
     code=Soc_bat). Must still map to BATTERY device_class + % unit."""
@@ -122,6 +131,7 @@ def test_monetary_savings_euro():
     """Vendor emits savings with unit="€" + isIncremental=True (cumulative
     savings over the lifetime of the installation)."""
     from homeassistant.components.sensor import SensorDeviceClass, SensorStateClass
+
     d = describe(_mt("Savings_pv", "€", True))
     assert d.device_class == SensorDeviceClass.MONETARY
     assert d.state_class == SensorStateClass.TOTAL_INCREASING

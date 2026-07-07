@@ -1,4 +1,5 @@
 """Tests for FlowBuddyInstantCoordinator."""
+
 from __future__ import annotations
 
 import asyncio
@@ -30,7 +31,10 @@ def mock_api():
 
 def test_baseline_interval_never_below_min(hass, mock_api):
     coord = FlowBuddyInstantCoordinator(
-        hass, mock_api, "iid-1", base_interval_s=5   # try to abuse
+        hass,
+        mock_api,
+        "iid-1",
+        base_interval_s=5,  # try to abuse
     )
     assert coord.update_interval.total_seconds() >= MIN_INSTANT_INTERVAL_S
 
@@ -46,7 +50,7 @@ async def test_boost_shortens_interval(hass, mock_api):
 
 async def test_boost_caps_duration_at_rto_max(hass, mock_api):
     coord = FlowBuddyInstantCoordinator(hass, mock_api, "iid-1")
-    await coord.boost(99)   # try to boost for 99 min
+    await coord.boost(99)  # try to boost for 99 min
     # _boosted_until - now should be <= RTO_MAX_MINUTES * 60
     remaining = coord._boosted_until - time.monotonic()
     assert remaining <= RTO_MAX_MINUTES * 60 + 1

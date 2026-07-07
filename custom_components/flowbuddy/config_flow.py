@@ -18,7 +18,8 @@ import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.helpers.httpx_client import create_async_httpx_client
 
-from .api import FlowBuddyClient, installation_id as _installation_id
+from .api import FlowBuddyClient
+from .api import installation_id as _installation_id
 from .auth import InvalidCredentialsError, KeycloakTokenProvider
 from .const import (
     AUTH_MODE_CLIENT_CREDS,

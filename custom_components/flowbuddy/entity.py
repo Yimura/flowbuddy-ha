@@ -1,13 +1,17 @@
 """Entity base + DeviceInfo helpers."""
+
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .api import installation_id as _installation_id
 from .const import DOMAIN
+
+if TYPE_CHECKING:
+    from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 
 def _first_str(*candidates: Any) -> str | None:
@@ -84,7 +88,7 @@ class FlowBuddyEntity(CoordinatorEntity[Any]):
 
     _attr_has_entity_name = True
 
-    def __init__(self, coordinator, *, unique_id: str) -> None:
+    def __init__(self, coordinator: DataUpdateCoordinator[Any], *, unique_id: str) -> None:
         """Initialize the entity."""
         super().__init__(coordinator)
         self._attr_unique_id = unique_id

@@ -21,7 +21,6 @@ from ._generated.api.hvac_apis import (
     set_heat_temperature,
 )
 from ._generated.api.installation_apis import get_installation_details_list
-from ._generated.api.instant_value_apis import get_instant_value_details_list
 from ._generated.api.inverter_apis import get_inverter_details_list, limit_production
 from ._generated.api.measurement_apis import get_measurement_details_list
 from ._generated.api.measurement_type_apis import get_measurement_type_details_list
@@ -227,12 +226,12 @@ class FlowBuddyClient:
         # Filter client-side by measurement.installation.resourceUri —
         # /realtimevalues has no per-installation filter param either.
         return [
-            row for row in rows
+            row
+            for row in rows
             if isinstance(row, dict)
-            and (
-                (row.get("measurement", {}) or {})
-                .get("installation", {}) or {}
-            ).get("resourceUri", "").endswith(suffix)
+            and ((row.get("measurement", {}) or {}).get("installation", {}) or {})
+            .get("resourceUri", "")
+            .endswith(suffix)
         ]
 
     async def list_meters(self, installation_id: str) -> list[Meter]:

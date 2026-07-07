@@ -1,11 +1,12 @@
 """Instant-value coordinator with rate-limit-aware boost."""
+
 from __future__ import annotations
 
 import asyncio
 import logging
 import time
 from datetime import timedelta
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
@@ -22,7 +23,6 @@ from .const import (
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
 
-    from .api import InstantValue
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -49,8 +49,8 @@ def _extract_value_and_uri(item: Any) -> tuple[str | None, float | None]:
         return None, None
 
     try:
-        uri = item.measurement.resource_uri  # type: ignore[attr-defined]
-        val = item.value  # type: ignore[attr-defined]
+        uri = item.measurement.resource_uri
+        val = item.value
         if isinstance(uri, str) and val is not None:
             return uri, float(val)
     except AttributeError:
@@ -141,6 +141,10 @@ class FlowBuddyInstantCoordinator(DataUpdateCoordinator[dict[str, float]]):
     async def boost(self, duration_minutes: int) -> None:
         async with self._boost_lock:
             if self.is_blocked():
+                # is_blocked() returning True guarantees _blocked_until is set
+                # (see is_blocked's own None check); no await happened since
+                # that check, so this can't have changed underneath us.
+                assert self._blocked_until is not None
                 raise PollingLimitExceededError(
                     f"Installation {self._installation_id} is blocked "
                     f"for {int(self._blocked_until - time.monotonic())}s"
@@ -155,9 +159,7 @@ class FlowBuddyInstantCoordinator(DataUpdateCoordinator[dict[str, float]]):
             self.update_interval = timedelta(seconds=DEFAULT_LIVE_INTERVAL_S)
             if self._boost_task and not self._boost_task.done():
                 self._boost_task.cancel()
-            self._boost_task = self.hass.loop.create_task(
-                self._auto_restore(duration_minutes * 60)
-            )
+            self._boost_task = self.hass.loop.create_task(self._auto_restore(duration_minutes * 60))
 
     async def _auto_restore(self, delay_s: float) -> None:
         try:

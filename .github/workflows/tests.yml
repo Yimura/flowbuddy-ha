@@ -16,12 +16,10 @@ jobs:
       - name: Install dev dependencies
         run: pip install -e '.[dev]'
       - name: Lint
-        continue-on-error: true
         run: |
           ruff check .
           ruff format --check .
       - name: Type-check
-        continue-on-error: true
         run: mypy custom_components/flowbuddy
       - name: Test
         run: pytest --cov --cov-fail-under=80
