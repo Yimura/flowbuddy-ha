@@ -47,7 +47,7 @@ from ._generated.models import (
     CommunicatorOutputModel as Communicator,
 )
 from ._generated.models import (
-    HVACOutputModel as HVAC,
+    HVACOutputModel as Hvac,
 )
 from ._generated.models import (
     InstallationOutputModel as Installation,
@@ -286,16 +286,14 @@ class FlowBuddyClient:
         )
         return _embedded_list(result, "inverters", "inverters", Inverter)
 
-    async def list_hvacs(self, installation_id: str) -> list[HVAC]:
+    async def list_hvacs(self, installation_id: str) -> list[Hvac]:
         """Return all HVAC units visible to the credentialed account.
 
         See ``list_batteries`` -- ``/hvacs`` has the same
         no-installation-filter limitation.
         """
-        result = await get_hvac_details_list.asyncio(
-            client=self._client, pagesize=_LIST_PAGESIZE
-        )
-        return _embedded_list(result, "hvacs", "hvacs", HVAC)
+        result = await get_hvac_details_list.asyncio(client=self._client, pagesize=_LIST_PAGESIZE)
+        return _embedded_list(result, "hvacs", "hvacs", Hvac)
 
     async def list_communicators(self, installation_id: str) -> list[Communicator]:
         """Return all communicators visible to the credentialed account.

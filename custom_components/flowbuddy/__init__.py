@@ -3,34 +3,62 @@
 ``async_setup`` registers the five FlowBuddy services (see spec §4.5 /
 ``services.yaml``) exactly once, independent of any config entry -- service
 handlers look up the right API client / coordinator at call time via
-``hass.data[DOMAIN]``, which ``async_setup_entry`` (P9.A) populates per
-config entry with at least ``installation``, ``api`` and ``instant_coord``
-keys (mirroring the shape already relied on by ``number.py``/``button.py``).
+``hass.data[DOMAIN]``, which ``async_setup_entry`` populates per config entry
+with the shape documented on ``PLATFORMS``/below (mirroring what
+``number.py``/``button.py``/``sensor.py``/``binary_sensor.py``/``climate.py``
+already rely on).
 
-``async_setup_entry`` here is a placeholder -- P9.A replaces it with the
-real coordinator/data wiring (auth, coordinators, forwarding to platforms).
-It must exist so config-entry setup does not fail while that work lands.
+``async_setup_entry`` authenticates against Keycloak, runs installation +
+meter/measurement/battery/inverter/hvac/communicator discovery, creates and
+primes the three coordinators, stores everything in
+``hass.data[DOMAIN][entry.entry_id]``, then forwards to the five platforms.
 """
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import time
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
+import httpx
 import voluptuous as vol
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, ServiceCall
-from homeassistant.exceptions import ServiceValidationError
+from homeassistant.exceptions import (
+    ConfigEntryAuthFailed,
+    ConfigEntryNotReady,
+    ServiceValidationError,
+)
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers import issue_registry as ir
 from homeassistant.helpers.typing import ConfigType
 
-from .api import PollingLimitExceededError
-from .const import DOMAIN, POLLING_LIMIT_BLOCK_S
+from .api import FlowBuddyClient, PollingLimitExceededError
+from .auth import InvalidCredentialsError, KeycloakTokenProvider
+from .const import (
+    AUTH_MODE_PASSWORD,
+    CONF_AUTH_MODE,
+    CONF_INSTALLATION_ID,
+    DOMAIN,
+    POLLING_LIMIT_BLOCK_S,
+)
+from .coordinator import (
+    FlowBuddyAlarmsCoordinator,
+    FlowBuddyDailyCoordinator,
+    FlowBuddyInstantCoordinator,
+)
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
 
 _LOGGER = logging.getLogger(__name__)
+
+# Platforms forwarded by every FlowBuddy config entry; shared between
+# async_setup_entry (forward) and async_unload_entry (unload) so the two
+# lists can never drift apart.
+PLATFORMS: list[str] = ["sensor", "binary_sensor", "number", "climate", "button"]
 
 SERVICE_SET_BATTERY_CHARGE_POWER = "set_battery_charge_power"
 SERVICE_LIMIT_INVERTER = "limit_inverter"
@@ -227,11 +255,138 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     return True
 
 
+def _build_token_provider(
+    http: httpx.AsyncClient, data: Mapping[str, Any]
+) -> KeycloakTokenProvider:
+    """Build a KeycloakTokenProvider from a config entry's stored credentials.
+
+    ``config_flow.py`` always writes a ``client_id`` into ``entry.data`` for
+    both auth modes (defaulting it for the password grant -- see
+    ``FlowBuddyConfigFlow._async_finish``), so no default is needed here.
+    """
+    if data.get(CONF_AUTH_MODE) == AUTH_MODE_PASSWORD:
+        return KeycloakTokenProvider(
+            mode="password",
+            http=http,
+            client_id=data["client_id"],
+            username=data["email"],
+            password=data["password"],
+        )
+    return KeycloakTokenProvider(
+        mode="client_credentials",
+        http=http,
+        client_id=data["client_id"],
+        client_secret=data["client_secret"],
+    )
+
+
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up a FlowBuddy config entry.
 
-    PLACEHOLDER: real coordinator/API/data wiring lands in P9.A. This stub
-    exists only so config-entry setup does not fail while services (this
-    task) and the full entry setup (P9.A) are developed independently.
+    Creates the auth/API client, runs installation + fleet discovery,
+    creates and primes the three coordinators, stores everything in
+    ``hass.data[DOMAIN][entry.entry_id]`` and forwards to ``PLATFORMS``.
     """
+    # Each config entry gets its own httpx.AsyncClient (and therefore its own
+    # connection pool) rather than sharing one across entries. Spec §5 Q9
+    # left this decision to P9.A; the call made at the P3 review was to
+    # DEFER the shared-client refactor and ship the simpler private-pool
+    # version first.
+    http = httpx.AsyncClient()
+    api = FlowBuddyClient(http=http, token_provider=_build_token_provider(http, entry.data))
+    installation_id = entry.data[CONF_INSTALLATION_ID]
+
+    try:
+        installations = await api.list_installations()
+    except InvalidCredentialsError as exc:
+        await http.aclose()
+        raise ConfigEntryAuthFailed(str(exc)) from exc
+    except Exception as exc:
+        await http.aclose()
+        raise ConfigEntryNotReady(f"Error communicating with FlowBuddy: {exc}") from exc
+
+    installation = next((i for i in installations if i.uuid == installation_id), None)
+    if installation is None:
+        await http.aclose()
+        raise ConfigEntryNotReady(
+            f"Installation {installation_id} was not found for these credentials"
+        )
+
+    try:
+        # asyncio.gather's typeshed overloads only cover a fixed number of
+        # distinctly-typed arguments; beyond that arity it falls back to a
+        # homogeneous signature, so mypy would otherwise infer each unpacked
+        # name below as `object`. Route through an explicit `list[Any]` to
+        # match what gather actually returns at runtime.
+        results: list[Any] = await asyncio.gather(
+            api.list_meters(installation_id),
+            api.list_measurementtypes(),
+            api.list_measurements(installation_id),
+            api.list_batteries(installation_id),
+            api.list_inverters(installation_id),
+            api.list_hvacs(installation_id),
+            api.list_communicators(installation_id),
+        )
+        (
+            meters,
+            measurementtypes,
+            measurements,
+            batteries,
+            inverters,
+            hvacs,
+            communicators,
+        ) = results
+    except InvalidCredentialsError as exc:
+        await http.aclose()
+        raise ConfigEntryAuthFailed(str(exc)) from exc
+    except Exception as exc:
+        await http.aclose()
+        raise ConfigEntryNotReady(f"Error communicating with FlowBuddy: {exc}") from exc
+
+    entry_data: dict[str, Any] = {
+        "api": api,
+        "installation": installation,
+        "meters": meters,
+        "meters_by_uri": {m.resource_uri: m for m in meters},
+        "measurements": measurements,
+        "measurementtypes_by_uri": {mt.resource_uri: mt for mt in measurementtypes},
+        "batteries": batteries,
+        "inverters": inverters,
+        "hvacs": hvacs,
+        "communicators": communicators,
+        "instant_coord": FlowBuddyInstantCoordinator(hass, api, installation_id),
+        "daily_coord": FlowBuddyDailyCoordinator(hass, api, installation_id),
+        "alarms_coord": FlowBuddyAlarmsCoordinator(hass, api, installation_id),
+    }
+    hass.data.setdefault(DOMAIN, {})[entry.entry_id] = entry_data
+
+    try:
+        # Prime every coordinator before forwarding to platforms: button.py
+        # and binary_sensor.py build their initial entity list directly from
+        # alarms_coord.data, so it (and the others, for consistency) must
+        # already hold data by the time platform setup runs.
+        await entry_data["instant_coord"].async_config_entry_first_refresh()
+        await entry_data["daily_coord"].async_config_entry_first_refresh()
+        await entry_data["alarms_coord"].async_config_entry_first_refresh()
+    except ConfigEntryNotReady:
+        hass.data[DOMAIN].pop(entry.entry_id, None)
+        await http.aclose()
+        raise
+
+    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True
+
+
+async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Unload a FlowBuddy config entry: unload platforms, then clean up."""
+    unload_ok = await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
+    if unload_ok:
+        entry_data = hass.data[DOMAIN].pop(entry.entry_id)
+        instant_coord = entry_data.get("instant_coord")
+        boost_task = getattr(instant_coord, "_boost_task", None)
+        if boost_task is not None and not boost_task.done():
+            boost_task.cancel()
+        api = entry_data.get("api")
+        if api is not None:
+            await api.aclose()
+    return unload_ok
