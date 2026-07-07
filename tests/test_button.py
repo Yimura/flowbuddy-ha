@@ -99,24 +99,49 @@ async def test_alarm_ack_button_calls_close_alarm(load_fixture):
     api.close_alarm.assert_awaited_once_with("alarm-1")
 
 
-async def test_request_connection_test_button_unique_id(mock_communicator, mock_installation, mock_coordinator):
+async def test_request_connection_test_button_unique_id():
     """Test RequestConnectionTestButton has correct unique_id."""
-    button = RequestConnectionTestButton(
-        coordinator=mock_coordinator,
-        api=AsyncMock(),
-        communicator=mock_communicator,
-        installation=mock_installation,
+    from custom_components.flowbuddy._generated.models.communicator_output_model import (
+        CommunicatorOutputModel,
     )
-    assert button.unique_id == f"{mock_installation.uuid}:communicator:{mock_communicator.id}:connection_test"
+    from unittest.mock import MagicMock
 
-
-async def test_request_connection_test_button_calls_api(mock_communicator, mock_installation, mock_coordinator, mock_api):
-    """Test RequestConnectionTestButton.async_press calls api.request_connection_test."""
+    communicator = CommunicatorOutputModel.from_dict({
+        "resourceUri": "/communicators/c-1",
+        "id": "comm-1",
+    })
+    installation = MagicMock(uuid="00000000-0000-0000-0000-000000000001")
+    coordinator = MagicMock()
+    coordinator.data = [communicator]
     button = RequestConnectionTestButton(
-        coordinator=mock_coordinator,
-        api=mock_api,
-        communicator=mock_communicator,
-        installation=mock_installation,
+        coordinator=coordinator,
+        api=AsyncMock(),
+        communicator=communicator,
+        installation=installation,
+    )
+    assert button.unique_id == "00000000-0000-0000-0000-000000000001:communicator:comm-1:connection_test"
+
+
+async def test_request_connection_test_button_calls_api():
+    """Test RequestConnectionTestButton.async_press calls api.request_connection_test."""
+    from custom_components.flowbuddy._generated.models.communicator_output_model import (
+        CommunicatorOutputModel,
+    )
+    from unittest.mock import MagicMock
+
+    communicator = CommunicatorOutputModel.from_dict({
+        "resourceUri": "/communicators/c-1",
+        "id": "comm-1",
+    })
+    installation = MagicMock(uuid="00000000-0000-0000-0000-000000000001")
+    coordinator = MagicMock()
+    coordinator.data = [communicator]
+    api = AsyncMock()
+    button = RequestConnectionTestButton(
+        coordinator=coordinator,
+        api=api,
+        communicator=communicator,
+        installation=installation,
     )
     await button.async_press()
-    mock_api.request_connection_test.assert_awaited_once_with(mock_communicator.id)
+    api.request_connection_test.assert_awaited_once_with("comm-1")

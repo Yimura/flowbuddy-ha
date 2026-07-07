@@ -30,6 +30,22 @@ def _alarm_field(alarm: Any, key: str) -> Any:
 	return alarm.additional_properties.get(key)
 
 
+def _communicator_field(communicator: Any, key: str) -> Any:
+	"""Best-effort accessor for a communicator field.
+
+	``CommunicatorOutputModel`` (see ``_generated/models/communicator_output_model.py``)
+	only types a subset of the raw API payload: ``resource_uri``, ``logical_device_name``,
+	``external_id``, etc. Fields the live API emits but the generated model does not
+	declare — ``id`` — are absent from the attrs class entirely and are left in
+	``additional_properties`` by ``from_dict``. Try the typed attribute first (in case
+	a future codegen run adds it), then fall back to the raw dict.
+	"""
+	value = getattr(communicator, key, None)
+	if value is not None:
+		return value
+	return communicator.additional_properties.get(key)
+
+
 class AlarmAckButton(FlowBuddyEntity, ButtonEntity):
     """Button to acknowledge (close) an open alarm."""
 
@@ -70,12 +86,13 @@ class RequestConnectionTestButton(FlowBuddyEntity, ButtonEntity):
         communicator: Any,
         installation: Any,
     ) -> None:
+        communicator_id = _communicator_field(communicator, "id")
         super().__init__(
             coordinator,
-            unique_id=f"{installation.uuid}:communicator:{communicator.id}:connection_test",
+            unique_id=f"{installation.uuid}:communicator:{communicator_id}:connection_test",
         )
         self._api = api
-        self._communicator_id = communicator.id
+        self._communicator_id = communicator_id
         self._attr_device_info = installation_device_info(installation)
 
     async def async_press(self) -> None:
