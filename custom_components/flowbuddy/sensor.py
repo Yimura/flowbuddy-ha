@@ -8,6 +8,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .const import DOMAIN
 from .discovery import describe
+from .api import installation_id as _iid
 from .entity import FlowBuddyEntity, meter_device_info
 
 
@@ -55,7 +56,7 @@ async def async_setup_entry(
         coord = data["daily_coord"] if mt.is_incremental else data["instant_coord"]
         entities.append(FlowBuddySensor(
             coordinator=coord,
-            installation_uuid=data["installation"].uuid,
+            installation_uuid=(_iid(data["installation"]) or "unknown"),
             meter=meter,
             installation=data["installation"],
             measurement=measurement,

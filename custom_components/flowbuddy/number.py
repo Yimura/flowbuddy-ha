@@ -9,6 +9,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .const import DOMAIN
+from .api import installation_id as _iid
 from .entity import FlowBuddyEntity, meter_device_info
 
 
@@ -31,7 +32,7 @@ class BatteryChargePowerNumber(FlowBuddyEntity, NumberEntity):
     ) -> None:
         super().__init__(
             coordinator,
-            unique_id=f"{installation.uuid}:battery:{battery.resource_uri}:charge_power",
+            unique_id=f"{_iid(installation) or 'unknown'}:battery:{battery.resource_uri}:charge_power",
         )
         self._api = api
         self._battery_id = battery.external_id
@@ -62,7 +63,7 @@ class InverterProductionLimitNumber(FlowBuddyEntity, NumberEntity):
     ) -> None:
         super().__init__(
             coordinator,
-            unique_id=f"{installation.uuid}:inverter:{inverter.resource_uri}:production_limit",
+            unique_id=f"{_iid(installation) or 'unknown'}:inverter:{inverter.resource_uri}:production_limit",
         )
         self._api = api
         self._inverter_id = inverter.external_id

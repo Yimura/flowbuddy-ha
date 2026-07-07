@@ -15,6 +15,7 @@ from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .const import DOMAIN
+from .api import installation_id as _iid
 from .entity import FlowBuddyEntity, meter_device_info
 
 
@@ -50,7 +51,7 @@ class FlowBuddyHvac(FlowBuddyEntity, ClimateEntity):
     ) -> None:
         super().__init__(
             coordinator,
-            unique_id=f"{installation.uuid}:hvac:{hvac.resource_uri}",
+            unique_id=f"{_iid(installation) or 'unknown'}:hvac:{hvac.resource_uri}",
         )
         self._api = api
         self._hvac_id = hvac.external_id

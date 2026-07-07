@@ -9,6 +9,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .const import DOMAIN
+from .api import installation_id as _iid
 from .entity import FlowBuddyEntity, installation_device_info
 
 
@@ -62,7 +63,7 @@ class AlarmAckButton(FlowBuddyEntity, ButtonEntity):
         alarm_id = _alarm_field(alarm, "id")
         super().__init__(
             coordinator,
-            unique_id=f"{installation.uuid}:alarm:{alarm_id}:ack",
+            unique_id=f"{_iid(installation) or 'unknown'}:alarm:{alarm_id}:ack",
         )
         self._api = api
         self._alarm_id = alarm_id
@@ -89,7 +90,7 @@ class RequestConnectionTestButton(FlowBuddyEntity, ButtonEntity):
         communicator_id = _communicator_field(communicator, "id")
         super().__init__(
             coordinator,
-            unique_id=f"{installation.uuid}:communicator:{communicator_id}:connection_test",
+            unique_id=f"{_iid(installation) or 'unknown'}:communicator:{communicator_id}:connection_test",
         )
         self._api = api
         self._communicator_id = communicator_id

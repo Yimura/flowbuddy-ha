@@ -12,6 +12,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .const import DOMAIN
+from .api import installation_id as _iid
 from .entity import FlowBuddyEntity, installation_device_info
 
 
@@ -46,7 +47,7 @@ class FlowBuddyAlarmBinarySensor(FlowBuddyEntity, BinarySensorEntity):
         alarm_id = _alarm_field(alarm, "id")
         super().__init__(
             coordinator,
-            unique_id=f"{installation.uuid}:alarm:{alarm_id}",
+            unique_id=f"{_iid(installation) or 'unknown'}:alarm:{alarm_id}",
         )
         message = _alarm_field(alarm, "message")
         self._attr_name = message or alarm_id
