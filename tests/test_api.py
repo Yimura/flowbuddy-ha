@@ -57,6 +57,21 @@ async def test_get_instant_values(client, load_fixture, respx_mock):
     assert pv_power["value"] == 1500.0
 
 
+async def test_get_instant_values_filters_by_installation(client, load_fixture, respx_mock):
+    """Client-side filter drops values belonging to other installations
+    (upstream /instantvalues has no installation filter -- see spec §5 Q7)."""
+    respx_mock.get(f"{API_BASE_URL}/instantvalues").mock(
+        return_value=httpx.Response(200, json=load_fixture("instantvalues.json"))
+    )
+    iid = "00000000-0000-0000-0000-000000000001"
+    values = await client.get_instant_values(iid)
+    # Fixture ships 4 values for ...000001 + 1 for ...000002; expect only 4.
+    assert len(values) == 4
+    for v in values:
+        # Verify not the ...000002 sentinel
+        assert v["value"] != 999.0
+
+
 async def test_list_meters(client, load_fixture, respx_mock):
     respx_mock.get(f"{API_BASE_URL}/meters").mock(
         return_value=httpx.Response(200, json=load_fixture("meters.json"))
@@ -196,6 +211,22 @@ async def test_activate_continuous_processing_rate_limit(client, respx_mock, loa
     respx_mock.post(f"{API_BASE_URL}/installations/{iid}/activateContinuousProcessing").mock(
         return_value=httpx.Response(
             429, json={"code": "RL001", "extraInfo": {"message": "PollingLimitExceeded"}}
+        )
+    )
+    with pytest.raises(PollingLimitExceededError):
+        await client.activate_continuous_processing(iid)
+
+
+async def test_activate_continuous_processing_rate_limit_via_body(client, respx_mock):
+    """Vendor may signal PollingLimitExceeded via 4xx-with-body rather than 429."""
+    iid = "00000000-0000-0000-0000-000000000001"
+    respx_mock.post(f"{API_BASE_URL}/installations/{iid}/activateContinuousProcessing").mock(
+        return_value=httpx.Response(
+            400,
+            json={
+                "code": "RL001",
+                "extraInfo": {"message": "PollingLimitExceeded on installation"},
+            },
         )
     )
     with pytest.raises(PollingLimitExceededError):

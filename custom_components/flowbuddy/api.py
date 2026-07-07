@@ -81,6 +81,35 @@ def _embedded_list(
     return [model_cls.from_dict(item) for item in raw]
 
 
+def _instant_value_installation_ref(item: InstantValue) -> str | None:
+    """Best-effort extraction of an instant value's owning installation.
+
+    ``InstantValueOutputModel`` is under-typed by the generator: only
+    ``resource_uri`` is a real attribute, so ``measurement`` (and its
+    nested ``installation``) lands as a raw dict inside
+    ``additional_properties`` rather than as typed sub-models. Try the
+    typed attribute path first in case a future codegen run types it,
+    then fall back to raw dict access under both the camelCase spelling
+    that the live API actually emits and the snake_case spelling used
+    elsewhere in this codebase.
+    """
+    try:
+        ref = item.measurement.installation.resource_uri  # type: ignore[attr-defined]
+        if isinstance(ref, str):
+            return ref
+    except AttributeError:
+        pass
+
+    measurement = item.additional_properties.get("measurement")
+    if not isinstance(measurement, dict):
+        return None
+    installation = measurement.get("installation")
+    if not isinstance(installation, dict):
+        return None
+    ref = installation.get("resourceUri") or installation.get("resource_uri")
+    return ref if isinstance(ref, str) else None
+
+
 class FlowBuddyClient:
     """Facade over the generated FlexMon v1 client + our Keycloak auth."""
 
@@ -103,15 +132,23 @@ class FlowBuddyClient:
         return _embedded_list(result, "installations", "installations", Installation)
 
     async def get_instant_values(self, installation_id: str) -> list[InstantValue]:
-        # NOTE: the generated /instantvalues endpoint has no `installation`
-        # filter param in the public spec — FlexMon scopes instant values
-        # implicitly to the authenticated client credentials.
-        # installation_id is kept in the signature per the facade's
-        # interface contract but is not forwarded as a query param.
+        """Return live values for the given installation.
+
+        WARNING: The upstream /instantvalues endpoint does not accept an
+        installation filter (see spec §5 open question 7). This method
+        fetches all instant values the credentialed account has access to
+        and filters client-side by measurement.installation.resource_uri.
+        For multi-installation tenants this means every poll transfers
+        values for all installations before dropping the ones we do not
+        need — bandwidth cost is O(N_installations). If you own only one
+        installation this is a no-op.
+        """
         result = await get_instant_value_details_list.asyncio(
             client=self._client, pagesize=_LIST_PAGESIZE
         )
-        return _embedded_list(result, "instant_values", "instantvalues", InstantValue)
+        values = _embedded_list(result, "instant_values", "instantvalues", InstantValue)
+        suffix = f"/installations/{installation_id}"
+        return [v for v in values if (_instant_value_installation_ref(v) or "").endswith(suffix)]
 
     async def list_meters(self, installation_id: str) -> list[Meter]:
         result = await get_meter_details_list.asyncio(
