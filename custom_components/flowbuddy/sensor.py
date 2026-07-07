@@ -51,9 +51,13 @@ async def async_setup_entry(
         meter = data["meters_by_uri"].get(measurement.meter.resource_uri)
         if meter is None:
             continue
-        # Route: incremental (cumulative) measurements -> daily coordinator;
-        # everything else -> instant coordinator.
-        coord = data["daily_coord"] if mt.is_incremental else data["instant_coord"]
+        # All measurements route to instant_coord: Measurement.lastPolledValue
+        # already carries both live power AND cumulative energy counters in
+        # the same payload. The daily coordinator's separate
+        # /aggregationdayvalues filter matches zero rows because real
+        # responses ship periodStart=null (spec vs runtime mismatch),
+        # so it's not useful as a data source right now.
+        coord = data["instant_coord"]
         entities.append(FlowBuddySensor(
             coordinator=coord,
             installation_uuid=(_iid(data["installation"]) or "unknown"),
