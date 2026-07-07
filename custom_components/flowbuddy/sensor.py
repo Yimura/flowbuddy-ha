@@ -1,6 +1,8 @@
 """Sensor platform."""
 from __future__ import annotations
 
+import logging
+
 from homeassistant.components.sensor import SensorEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
@@ -10,6 +12,8 @@ from .const import DOMAIN
 from .discovery import describe
 from .api import installation_id as _iid
 from .entity import FlowBuddyEntity, meter_device_info
+
+_LOGGER = logging.getLogger(__name__)
 
 
 class FlowBuddySensor(FlowBuddyEntity, SensorEntity):
@@ -45,8 +49,24 @@ async def async_setup_entry(
     data = hass.data[DOMAIN][entry.entry_id]
     entities: list[FlowBuddySensor] = []
     for measurement in data["measurements"]:
+        # Spec (openapi/flexmon-v1.json) marks every $ref property nullable,
+        # and the live tenant does return null for these links on some rows
+        # -- guard both before dereferencing .resource_uri, or one bad
+        # measurement would raise AttributeError and fail platform setup
+        # for every sensor, not just the affected one.
+        if measurement.measurement_type is None:
+            _LOGGER.debug(
+                "Skipping measurement %s with no measurement_type link",
+                measurement.resource_uri,
+            )
+            continue
         mt = data["measurementtypes_by_uri"].get(measurement.measurement_type.resource_uri)
         if mt is None:
+            continue
+        if measurement.meter is None:
+            _LOGGER.debug(
+                "Skipping measurement %s with no meter link", measurement.resource_uri
+            )
             continue
         meter = data["meters_by_uri"].get(measurement.meter.resource_uri)
         if meter is None:
