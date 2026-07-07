@@ -145,6 +145,29 @@ async def test_setup_entry_registers_communicator_device(hass, load_fixture, res
     assert comm_device.serial_number == "COMM-1"
 
 
+async def test_setup_entry_registers_installation_device(hass, load_fixture, respx_mock):
+    """Every downstream device (meter, communicator, alarm-ack, connection-
+    test button) sets via_device=(DOMAIN, installation_id). HA 2025.12
+    hard-fails when that points at a not-yet-registered device. Prior to
+    v0.2.1 the installation device was created lazily via whichever entity
+    happened to attach to installation_device_info first -- if no such
+    entity exists (no alarms + comm-button moved off installation), the
+    via_device link dangles."""
+    from homeassistant.helpers import device_registry as dr
+
+    _mock_full_discovery(respx_mock, load_fixture)
+    entry = MockConfigEntry(domain=DOMAIN, unique_id=IID, data=_entry_data())
+    entry.add_to_hass(hass)
+
+    assert await hass.config_entries.async_setup(entry.entry_id)
+    await hass.async_block_till_done()
+
+    device_reg = dr.async_get(hass)
+    inst_device = device_reg.async_get_device(identifiers={(DOMAIN, IID)})
+    assert inst_device is not None
+    assert inst_device.model == "Residential PV+Battery"
+
+
 async def test_setup_entry_invalid_creds_raises_auth_failed(hass, load_fixture, respx_mock):
     respx_mock.post(KEYCLOAK_TOKEN_URL).mock(
         return_value=httpx.Response(401, json=load_fixture("token_invalid_grant.json"))

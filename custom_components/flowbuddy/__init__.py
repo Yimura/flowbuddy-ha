@@ -48,7 +48,7 @@ from .coordinator import (
     FlowBuddyDailyCoordinator,
     FlowBuddyInstantCoordinator,
 )
-from .entity import communicator_device_info
+from .entity import communicator_device_info, installation_device_info
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
@@ -376,10 +376,24 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     }
     hass.data.setdefault(DOMAIN, {})[entry.entry_id] = entry_data
 
-    # Register communicator devices eagerly so the Devices UI shows firmware
-    # + serial as soon as discovery finishes -- independent of whether the
-    # button platform manages to attach an entity to each communicator.
+    # Register installation + communicator devices eagerly.
+    #
+    # Installation must go FIRST -- meter, communicator, alarm-ack, and
+    # connection-test devices all set via_device=(DOMAIN, installation_id).
+    # HA 2025.12 hard-fails on a via_device that points at a not-yet-
+    # registered target (currently just a helpers.frame:348 warning). Prior
+    # to v0.2.1 the installation device was created lazily via whichever
+    # entity happened to attach to installation_device_info first --
+    # RequestConnectionTestButton (moved off installation in v0.2.0) or the
+    # AlarmAckButton (only exists when alarms_coord has open alarms). On a
+    # resident tenant with no open alarms and the new comm-device
+    # attachment, nothing ever created the installation row, dangling every
+    # downstream via_device link.
     dev_reg = dr.async_get(hass)
+    dev_reg.async_get_or_create(
+        config_entry_id=entry.entry_id,
+        **installation_device_info(installation),
+    )
     for comm in communicators:
         dev_reg.async_get_or_create(
             config_entry_id=entry.entry_id,

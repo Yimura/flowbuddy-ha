@@ -162,15 +162,16 @@ class FlowBuddyIntegratedEnergySensor(FlowBuddyEntity, RestoreEntity, SensorEnti
 
 
 def _is_pv_power(mt: Any) -> bool:
-    """True if the measurement type describes PV power (W).
+    """True if the measurement type describes PV power (W or kW).
 
-    Permissive: matches on unit == "W" plus the substring "pv" in either
-    the vendor ``code`` or ``name``, case-insensitive. Prior art at
-    ``discovery.py::describe`` treats vendor code/name as free-form
-    strings, so mirror that leniency here rather than pinning a single
-    spelling.
+    Permissive: matches on unit in ("W", "kW") plus the substring "pv" in
+    either the vendor ``code`` or ``name``, case-insensitive. Prior art at
+    ``discovery.py::describe`` normalizes both to ``UnitOfPower.WATT`` via
+    a value_transformer, so both are legitimate raw-unit shapes coming out
+    of the vendor spec -- pinning "W" only silently missed kW-emitting
+    tenants.
     """
-    if mt is None or getattr(mt, "unit", None) != "W":
+    if mt is None or getattr(mt, "unit", None) not in ("W", "kW"):
         return False
     label = f"{(getattr(mt, 'code', '') or '')} {(getattr(mt, 'name', '') or '')}".lower()
     return "pv" in label

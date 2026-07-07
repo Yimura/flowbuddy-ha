@@ -199,6 +199,43 @@ async def test_setup_entry_suppresses_pv_integrator_when_pv_energy_peer_exists(h
     assert integrators == []
 
 
+async def test_setup_entry_pv_detection_accepts_kw_unit(hass):
+    """Vendor emits some tenants' PV power as unit='kW' (discovery.describe
+    normalizes to W via value_transformer x1000). Detection must catch
+    both to avoid silently skipping kW-emitting installs."""
+    coord = MagicMock()
+    coord.data = {}
+    coord.update_interval = None
+    installation = MagicMock(uuid="i-1")
+    meter = MagicMock(serial_number="m", resource_uri="/meters/m-pv-1")
+    pv_mt = MagicMock(
+        code="EMS_PV_POWER",
+        name="EMS PV power",
+        unit="kW",  # vendor emits kW, discovery normalizes to W display unit
+        is_incremental=False,
+    )
+    pv_meas = SimpleNamespace(
+        resource_uri="/measurements/pv",
+        measurement_type=SimpleNamespace(resource_uri="/mt/pv"),
+        meter=SimpleNamespace(resource_uri="/meters/m-pv-1"),
+    )
+
+    entry = SimpleNamespace(entry_id="e-1")
+    hass.data[DOMAIN] = {
+        entry.entry_id: {
+            "installation": installation,
+            "measurements": [pv_meas],
+            "measurementtypes_by_uri": {"/mt/pv": pv_mt},
+            "meters_by_uri": {"/meters/m-pv-1": meter},
+            "instant_coord": coord,
+        }
+    }
+    added: list = []
+    await async_setup_entry(hass, entry, lambda e: added.extend(e))
+    integrators = [e for e in added if isinstance(e, FlowBuddyIntegratedEnergySensor)]
+    assert len(integrators) == 1
+
+
 async def test_setup_entry_pv_detection_is_case_insensitive(hass):
     """Vendor spells PV codes inconsistently across tenants (EMS_PV_POWER,
     ems_pv_power, EMS PV Power). Detection must match on any casing so
