@@ -13,6 +13,11 @@
         "alarmStatus": "OK",
         "installationDate": null,
         "dashboardCreatedOn": null,
+        "location": null,
+        "communicator": null,
+        "clientUserGroup": null,
+        "energyTariff": null,
+        "installationPool": null,
         "installationType": {
           "resourceUri": "/installationtypes/residential",
           "name": "Residential PV+Battery"

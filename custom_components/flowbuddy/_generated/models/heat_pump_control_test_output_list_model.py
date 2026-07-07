@@ -22,21 +22,28 @@ T = TypeVar("T", bound="HeatPumpControlTestOutputListModel")
 class HeatPumpControlTestOutputListModel:
     """
     Attributes:
-        heat_pump_control_tests (list[HeatPumpControlTestOutputModel] | Unset):
+        heat_pump_control_tests (list[HeatPumpControlTestOutputModel] | None | Unset):
     """
 
-    heat_pump_control_tests: list[HeatPumpControlTestOutputModel] | Unset = UNSET
+    heat_pump_control_tests: list[HeatPumpControlTestOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.heat_pump_control_test_output_model import HeatPumpControlTestOutputModel
 
-        heat_pump_control_tests: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.heat_pump_control_tests, Unset):
+        heat_pump_control_tests: list[dict[str, Any]] | None | Unset
+        if isinstance(self.heat_pump_control_tests, Unset):
+            heat_pump_control_tests = UNSET
+        elif isinstance(self.heat_pump_control_tests, list):
             heat_pump_control_tests = []
-            for heat_pump_control_tests_item_data in self.heat_pump_control_tests:
-                heat_pump_control_tests_item = heat_pump_control_tests_item_data.to_dict()
-                heat_pump_control_tests.append(heat_pump_control_tests_item)
+            for heat_pump_control_tests_type_0_item_data in self.heat_pump_control_tests:
+                heat_pump_control_tests_type_0_item = (
+                    heat_pump_control_tests_type_0_item_data.to_dict()
+                )
+                heat_pump_control_tests.append(heat_pump_control_tests_type_0_item)
+
+        else:
+            heat_pump_control_tests = self.heat_pump_control_tests
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,16 +58,34 @@ class HeatPumpControlTestOutputListModel:
         from ..models.heat_pump_control_test_output_model import HeatPumpControlTestOutputModel
 
         d = dict(src_dict)
-        _heat_pump_control_tests = d.pop("heatPumpControlTests", UNSET)
-        heat_pump_control_tests: list[HeatPumpControlTestOutputModel] | Unset = UNSET
-        if _heat_pump_control_tests is not UNSET:
-            heat_pump_control_tests = []
-            for heat_pump_control_tests_item_data in _heat_pump_control_tests:
-                heat_pump_control_tests_item = HeatPumpControlTestOutputModel.from_dict(
-                    heat_pump_control_tests_item_data
-                )
 
-                heat_pump_control_tests.append(heat_pump_control_tests_item)
+        def _parse_heat_pump_control_tests(
+            data: object,
+        ) -> list[HeatPumpControlTestOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                heat_pump_control_tests_type_0 = []
+                _heat_pump_control_tests_type_0 = data
+                for heat_pump_control_tests_type_0_item_data in _heat_pump_control_tests_type_0:
+                    heat_pump_control_tests_type_0_item = HeatPumpControlTestOutputModel.from_dict(
+                        heat_pump_control_tests_type_0_item_data
+                    )
+
+                    heat_pump_control_tests_type_0.append(heat_pump_control_tests_type_0_item)
+
+                return heat_pump_control_tests_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[HeatPumpControlTestOutputModel] | None | Unset, data)
+
+        heat_pump_control_tests = _parse_heat_pump_control_tests(
+            d.pop("heatPumpControlTests", UNSET)
+        )
 
         heat_pump_control_test_output_list_model = cls(
             heat_pump_control_tests=heat_pump_control_tests,

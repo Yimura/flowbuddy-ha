@@ -13,8 +13,8 @@ from typing import cast
 import datetime
 
 if TYPE_CHECKING:
-    from ..models.installation_pool_control_post_input_model_other_properties import (
-        InstallationPoolControlPostInputModelOtherProperties,
+    from ..models.installation_pool_control_post_input_model_other_properties_type_0 import (
+        InstallationPoolControlPostInputModelOtherPropertiesType0,
     )
 
 
@@ -25,24 +25,30 @@ T = TypeVar("T", bound="InstallationPoolControlPostInputModel")
 class InstallationPoolControlPostInputModel:
     """
     Attributes:
-        control_type (str | Unset):
+        control_type (None | str | Unset):
         timestamp (datetime.datetime | None | Unset):
-        value (str | Unset):
-        other_properties (InstallationPoolControlPostInputModelOtherProperties | Unset):
+        value (None | str | Unset):
+        other_properties (InstallationPoolControlPostInputModelOtherPropertiesType0 | None | Unset):
     """
 
-    control_type: str | Unset = UNSET
+    control_type: None | str | Unset = UNSET
     timestamp: datetime.datetime | None | Unset = UNSET
-    value: str | Unset = UNSET
-    other_properties: InstallationPoolControlPostInputModelOtherProperties | Unset = UNSET
+    value: None | str | Unset = UNSET
+    other_properties: InstallationPoolControlPostInputModelOtherPropertiesType0 | None | Unset = (
+        UNSET
+    )
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.installation_pool_control_post_input_model_other_properties import (
-            InstallationPoolControlPostInputModelOtherProperties,
+        from ..models.installation_pool_control_post_input_model_other_properties_type_0 import (
+            InstallationPoolControlPostInputModelOtherPropertiesType0,
         )
 
-        control_type = self.control_type
+        control_type: None | str | Unset
+        if isinstance(self.control_type, Unset):
+            control_type = UNSET
+        else:
+            control_type = self.control_type
 
         timestamp: None | str | Unset
         if isinstance(self.timestamp, Unset):
@@ -52,11 +58,21 @@ class InstallationPoolControlPostInputModel:
         else:
             timestamp = self.timestamp
 
-        value = self.value
+        value: None | str | Unset
+        if isinstance(self.value, Unset):
+            value = UNSET
+        else:
+            value = self.value
 
-        other_properties: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.other_properties, Unset):
+        other_properties: dict[str, Any] | None | Unset
+        if isinstance(self.other_properties, Unset):
+            other_properties = UNSET
+        elif isinstance(
+            self.other_properties, InstallationPoolControlPostInputModelOtherPropertiesType0
+        ):
             other_properties = self.other_properties.to_dict()
+        else:
+            other_properties = self.other_properties
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -74,12 +90,20 @@ class InstallationPoolControlPostInputModel:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.installation_pool_control_post_input_model_other_properties import (
-            InstallationPoolControlPostInputModelOtherProperties,
+        from ..models.installation_pool_control_post_input_model_other_properties_type_0 import (
+            InstallationPoolControlPostInputModelOtherPropertiesType0,
         )
 
         d = dict(src_dict)
-        control_type = d.pop("controlType", UNSET)
+
+        def _parse_control_type(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        control_type = _parse_control_type(d.pop("controlType", UNSET))
 
         def _parse_timestamp(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -98,16 +122,37 @@ class InstallationPoolControlPostInputModel:
 
         timestamp = _parse_timestamp(d.pop("timestamp", UNSET))
 
-        value = d.pop("value", UNSET)
+        def _parse_value(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _other_properties = d.pop("otherProperties", UNSET)
-        other_properties: InstallationPoolControlPostInputModelOtherProperties | Unset
-        if isinstance(_other_properties, Unset):
-            other_properties = UNSET
-        else:
-            other_properties = InstallationPoolControlPostInputModelOtherProperties.from_dict(
-                _other_properties
+        value = _parse_value(d.pop("value", UNSET))
+
+        def _parse_other_properties(
+            data: object,
+        ) -> InstallationPoolControlPostInputModelOtherPropertiesType0 | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                other_properties_type_0 = (
+                    InstallationPoolControlPostInputModelOtherPropertiesType0.from_dict(data)
+                )
+
+                return other_properties_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(
+                InstallationPoolControlPostInputModelOtherPropertiesType0 | None | Unset, data
             )
+
+        other_properties = _parse_other_properties(d.pop("otherProperties", UNSET))
 
         installation_pool_control_post_input_model = cls(
             control_type=control_type,

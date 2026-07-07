@@ -22,21 +22,26 @@ T = TypeVar("T", bound="PvReportOutputListModel")
 class PvReportOutputListModel:
     """
     Attributes:
-        pv_reports (list[PvReportOutputModel] | Unset):
+        pv_reports (list[PvReportOutputModel] | None | Unset):
     """
 
-    pv_reports: list[PvReportOutputModel] | Unset = UNSET
+    pv_reports: list[PvReportOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.pv_report_output_model import PvReportOutputModel
 
-        pv_reports: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.pv_reports, Unset):
+        pv_reports: list[dict[str, Any]] | None | Unset
+        if isinstance(self.pv_reports, Unset):
+            pv_reports = UNSET
+        elif isinstance(self.pv_reports, list):
             pv_reports = []
-            for pv_reports_item_data in self.pv_reports:
-                pv_reports_item = pv_reports_item_data.to_dict()
-                pv_reports.append(pv_reports_item)
+            for pv_reports_type_0_item_data in self.pv_reports:
+                pv_reports_type_0_item = pv_reports_type_0_item_data.to_dict()
+                pv_reports.append(pv_reports_type_0_item)
+
+        else:
+            pv_reports = self.pv_reports
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,14 +56,30 @@ class PvReportOutputListModel:
         from ..models.pv_report_output_model import PvReportOutputModel
 
         d = dict(src_dict)
-        _pv_reports = d.pop("pvReports", UNSET)
-        pv_reports: list[PvReportOutputModel] | Unset = UNSET
-        if _pv_reports is not UNSET:
-            pv_reports = []
-            for pv_reports_item_data in _pv_reports:
-                pv_reports_item = PvReportOutputModel.from_dict(pv_reports_item_data)
 
-                pv_reports.append(pv_reports_item)
+        def _parse_pv_reports(data: object) -> list[PvReportOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                pv_reports_type_0 = []
+                _pv_reports_type_0 = data
+                for pv_reports_type_0_item_data in _pv_reports_type_0:
+                    pv_reports_type_0_item = PvReportOutputModel.from_dict(
+                        pv_reports_type_0_item_data
+                    )
+
+                    pv_reports_type_0.append(pv_reports_type_0_item)
+
+                return pv_reports_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[PvReportOutputModel] | None | Unset, data)
+
+        pv_reports = _parse_pv_reports(d.pop("pvReports", UNSET))
 
         pv_report_output_list_model = cls(
             pv_reports=pv_reports,

@@ -22,21 +22,26 @@ T = TypeVar("T", bound="LayoutOutputListModel")
 class LayoutOutputListModel:
     """
     Attributes:
-        layouts (list[LayoutOutputModel] | Unset):
+        layouts (list[LayoutOutputModel] | None | Unset):
     """
 
-    layouts: list[LayoutOutputModel] | Unset = UNSET
+    layouts: list[LayoutOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.layout_output_model import LayoutOutputModel
 
-        layouts: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.layouts, Unset):
+        layouts: list[dict[str, Any]] | None | Unset
+        if isinstance(self.layouts, Unset):
+            layouts = UNSET
+        elif isinstance(self.layouts, list):
             layouts = []
-            for layouts_item_data in self.layouts:
-                layouts_item = layouts_item_data.to_dict()
-                layouts.append(layouts_item)
+            for layouts_type_0_item_data in self.layouts:
+                layouts_type_0_item = layouts_type_0_item_data.to_dict()
+                layouts.append(layouts_type_0_item)
+
+        else:
+            layouts = self.layouts
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,14 +56,28 @@ class LayoutOutputListModel:
         from ..models.layout_output_model import LayoutOutputModel
 
         d = dict(src_dict)
-        _layouts = d.pop("layouts", UNSET)
-        layouts: list[LayoutOutputModel] | Unset = UNSET
-        if _layouts is not UNSET:
-            layouts = []
-            for layouts_item_data in _layouts:
-                layouts_item = LayoutOutputModel.from_dict(layouts_item_data)
 
-                layouts.append(layouts_item)
+        def _parse_layouts(data: object) -> list[LayoutOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                layouts_type_0 = []
+                _layouts_type_0 = data
+                for layouts_type_0_item_data in _layouts_type_0:
+                    layouts_type_0_item = LayoutOutputModel.from_dict(layouts_type_0_item_data)
+
+                    layouts_type_0.append(layouts_type_0_item)
+
+                return layouts_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[LayoutOutputModel] | None | Unset, data)
+
+        layouts = _parse_layouts(d.pop("layouts", UNSET))
 
         layout_output_list_model = cls(
             layouts=layouts,

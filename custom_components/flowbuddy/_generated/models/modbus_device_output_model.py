@@ -22,42 +22,70 @@ T = TypeVar("T", bound="ModbusDeviceOutputModel")
 class ModbusDeviceOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
-        serial_number (str | Unset):
-        address (str | Unset):
-        tcp_port (int | Unset):
-        result_code (int | Unset):
-        external_id (str | Unset):
-        measuring_device (MeasuringDeviceReferenceModel | Unset):
+        resource_uri (None | str | Unset):
+        serial_number (None | str | Unset):
+        address (None | str | Unset):
+        tcp_port (int | None | Unset):
+        result_code (int | None | Unset):
+        external_id (None | str | Unset):
+        measuring_device (MeasuringDeviceReferenceModel | None | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
-    serial_number: str | Unset = UNSET
-    address: str | Unset = UNSET
-    tcp_port: int | Unset = UNSET
-    result_code: int | Unset = UNSET
-    external_id: str | Unset = UNSET
-    measuring_device: MeasuringDeviceReferenceModel | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
+    serial_number: None | str | Unset = UNSET
+    address: None | str | Unset = UNSET
+    tcp_port: int | None | Unset = UNSET
+    result_code: int | None | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    measuring_device: MeasuringDeviceReferenceModel | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.measuring_device_reference_model import MeasuringDeviceReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
-        serial_number = self.serial_number
+        serial_number: None | str | Unset
+        if isinstance(self.serial_number, Unset):
+            serial_number = UNSET
+        else:
+            serial_number = self.serial_number
 
-        address = self.address
+        address: None | str | Unset
+        if isinstance(self.address, Unset):
+            address = UNSET
+        else:
+            address = self.address
 
-        tcp_port = self.tcp_port
+        tcp_port: int | None | Unset
+        if isinstance(self.tcp_port, Unset):
+            tcp_port = UNSET
+        else:
+            tcp_port = self.tcp_port
 
-        result_code = self.result_code
+        result_code: int | None | Unset
+        if isinstance(self.result_code, Unset):
+            result_code = UNSET
+        else:
+            result_code = self.result_code
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        measuring_device: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.measuring_device, Unset):
+        measuring_device: dict[str, Any] | None | Unset
+        if isinstance(self.measuring_device, Unset):
+            measuring_device = UNSET
+        elif isinstance(self.measuring_device, MeasuringDeviceReferenceModel):
             measuring_device = self.measuring_device.to_dict()
+        else:
+            measuring_device = self.measuring_device
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -84,24 +112,77 @@ class ModbusDeviceOutputModel:
         from ..models.measuring_device_reference_model import MeasuringDeviceReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
 
-        serial_number = d.pop("serialNumber", UNSET)
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        address = d.pop("address", UNSET)
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
-        tcp_port = d.pop("tcpPort", UNSET)
+        def _parse_serial_number(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        result_code = d.pop("resultCode", UNSET)
+        serial_number = _parse_serial_number(d.pop("serialNumber", UNSET))
 
-        external_id = d.pop("externalId", UNSET)
+        def _parse_address(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _measuring_device = d.pop("measuringDevice", UNSET)
-        measuring_device: MeasuringDeviceReferenceModel | Unset
-        if isinstance(_measuring_device, Unset):
-            measuring_device = UNSET
-        else:
-            measuring_device = MeasuringDeviceReferenceModel.from_dict(_measuring_device)
+        address = _parse_address(d.pop("address", UNSET))
+
+        def _parse_tcp_port(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
+
+        tcp_port = _parse_tcp_port(d.pop("tcpPort", UNSET))
+
+        def _parse_result_code(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
+
+        result_code = _parse_result_code(d.pop("resultCode", UNSET))
+
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
+
+        def _parse_measuring_device(data: object) -> MeasuringDeviceReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                measuring_device_type_1 = MeasuringDeviceReferenceModel.from_dict(data)
+
+                return measuring_device_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(MeasuringDeviceReferenceModel | None | Unset, data)
+
+        measuring_device = _parse_measuring_device(d.pop("measuringDevice", UNSET))
 
         modbus_device_output_model = cls(
             resource_uri=resource_uri,

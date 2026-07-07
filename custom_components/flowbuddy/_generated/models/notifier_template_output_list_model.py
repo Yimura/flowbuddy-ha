@@ -22,21 +22,26 @@ T = TypeVar("T", bound="NotifierTemplateOutputListModel")
 class NotifierTemplateOutputListModel:
     """
     Attributes:
-        notifier_templates (list[NotifierTemplateOutputModel] | Unset):
+        notifier_templates (list[NotifierTemplateOutputModel] | None | Unset):
     """
 
-    notifier_templates: list[NotifierTemplateOutputModel] | Unset = UNSET
+    notifier_templates: list[NotifierTemplateOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.notifier_template_output_model import NotifierTemplateOutputModel
 
-        notifier_templates: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.notifier_templates, Unset):
+        notifier_templates: list[dict[str, Any]] | None | Unset
+        if isinstance(self.notifier_templates, Unset):
+            notifier_templates = UNSET
+        elif isinstance(self.notifier_templates, list):
             notifier_templates = []
-            for notifier_templates_item_data in self.notifier_templates:
-                notifier_templates_item = notifier_templates_item_data.to_dict()
-                notifier_templates.append(notifier_templates_item)
+            for notifier_templates_type_0_item_data in self.notifier_templates:
+                notifier_templates_type_0_item = notifier_templates_type_0_item_data.to_dict()
+                notifier_templates.append(notifier_templates_type_0_item)
+
+        else:
+            notifier_templates = self.notifier_templates
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,16 +56,32 @@ class NotifierTemplateOutputListModel:
         from ..models.notifier_template_output_model import NotifierTemplateOutputModel
 
         d = dict(src_dict)
-        _notifier_templates = d.pop("notifierTemplates", UNSET)
-        notifier_templates: list[NotifierTemplateOutputModel] | Unset = UNSET
-        if _notifier_templates is not UNSET:
-            notifier_templates = []
-            for notifier_templates_item_data in _notifier_templates:
-                notifier_templates_item = NotifierTemplateOutputModel.from_dict(
-                    notifier_templates_item_data
-                )
 
-                notifier_templates.append(notifier_templates_item)
+        def _parse_notifier_templates(
+            data: object,
+        ) -> list[NotifierTemplateOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                notifier_templates_type_0 = []
+                _notifier_templates_type_0 = data
+                for notifier_templates_type_0_item_data in _notifier_templates_type_0:
+                    notifier_templates_type_0_item = NotifierTemplateOutputModel.from_dict(
+                        notifier_templates_type_0_item_data
+                    )
+
+                    notifier_templates_type_0.append(notifier_templates_type_0_item)
+
+                return notifier_templates_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[NotifierTemplateOutputModel] | None | Unset, data)
+
+        notifier_templates = _parse_notifier_templates(d.pop("notifierTemplates", UNSET))
 
         notifier_template_output_list_model = cls(
             notifier_templates=notifier_templates,

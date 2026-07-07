@@ -23,37 +23,57 @@ T = TypeVar("T", bound="ApiMeasurementOutputModel")
 class ApiMeasurementOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
-        name (str | Unset):
-        external_id (str | Unset):
-        api_measurement_type (ApiMeasurementTypeReferenceModel | Unset):
-        api_meter (ApiMeterReferenceModel | Unset):
+        resource_uri (None | str | Unset):
+        name (None | str | Unset):
+        external_id (None | str | Unset):
+        api_measurement_type (ApiMeasurementTypeReferenceModel | None | Unset):
+        api_meter (ApiMeterReferenceModel | None | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
-    name: str | Unset = UNSET
-    external_id: str | Unset = UNSET
-    api_measurement_type: ApiMeasurementTypeReferenceModel | Unset = UNSET
-    api_meter: ApiMeterReferenceModel | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
+    name: None | str | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    api_measurement_type: ApiMeasurementTypeReferenceModel | None | Unset = UNSET
+    api_meter: ApiMeterReferenceModel | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.api_measurement_type_reference_model import ApiMeasurementTypeReferenceModel
         from ..models.api_meter_reference_model import ApiMeterReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
-        name = self.name
+        name: None | str | Unset
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        api_measurement_type: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.api_measurement_type, Unset):
+        api_measurement_type: dict[str, Any] | None | Unset
+        if isinstance(self.api_measurement_type, Unset):
+            api_measurement_type = UNSET
+        elif isinstance(self.api_measurement_type, ApiMeasurementTypeReferenceModel):
             api_measurement_type = self.api_measurement_type.to_dict()
+        else:
+            api_measurement_type = self.api_measurement_type
 
-        api_meter: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.api_meter, Unset):
+        api_meter: dict[str, Any] | None | Unset
+        if isinstance(self.api_meter, Unset):
+            api_meter = UNSET
+        elif isinstance(self.api_meter, ApiMeterReferenceModel):
             api_meter = self.api_meter.to_dict()
+        else:
+            api_meter = self.api_meter
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -77,25 +97,69 @@ class ApiMeasurementOutputModel:
         from ..models.api_meter_reference_model import ApiMeterReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
 
-        name = d.pop("name", UNSET)
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        external_id = d.pop("externalId", UNSET)
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
-        _api_measurement_type = d.pop("apiMeasurementType", UNSET)
-        api_measurement_type: ApiMeasurementTypeReferenceModel | Unset
-        if isinstance(_api_measurement_type, Unset):
-            api_measurement_type = UNSET
-        else:
-            api_measurement_type = ApiMeasurementTypeReferenceModel.from_dict(_api_measurement_type)
+        def _parse_name(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _api_meter = d.pop("apiMeter", UNSET)
-        api_meter: ApiMeterReferenceModel | Unset
-        if isinstance(_api_meter, Unset):
-            api_meter = UNSET
-        else:
-            api_meter = ApiMeterReferenceModel.from_dict(_api_meter)
+        name = _parse_name(d.pop("name", UNSET))
+
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
+
+        def _parse_api_measurement_type(
+            data: object,
+        ) -> ApiMeasurementTypeReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                api_measurement_type_type_1 = ApiMeasurementTypeReferenceModel.from_dict(data)
+
+                return api_measurement_type_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(ApiMeasurementTypeReferenceModel | None | Unset, data)
+
+        api_measurement_type = _parse_api_measurement_type(d.pop("apiMeasurementType", UNSET))
+
+        def _parse_api_meter(data: object) -> ApiMeterReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                api_meter_type_1 = ApiMeterReferenceModel.from_dict(data)
+
+                return api_meter_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(ApiMeterReferenceModel | None | Unset, data)
+
+        api_meter = _parse_api_meter(d.pop("apiMeter", UNSET))
 
         api_measurement_output_model = cls(
             resource_uri=resource_uri,

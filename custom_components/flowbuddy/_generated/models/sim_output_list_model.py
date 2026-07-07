@@ -22,21 +22,26 @@ T = TypeVar("T", bound="SimOutputListModel")
 class SimOutputListModel:
     """
     Attributes:
-        sims (list[SimOutputModel] | Unset):
+        sims (list[SimOutputModel] | None | Unset):
     """
 
-    sims: list[SimOutputModel] | Unset = UNSET
+    sims: list[SimOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.sim_output_model import SimOutputModel
 
-        sims: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.sims, Unset):
+        sims: list[dict[str, Any]] | None | Unset
+        if isinstance(self.sims, Unset):
+            sims = UNSET
+        elif isinstance(self.sims, list):
             sims = []
-            for sims_item_data in self.sims:
-                sims_item = sims_item_data.to_dict()
-                sims.append(sims_item)
+            for sims_type_0_item_data in self.sims:
+                sims_type_0_item = sims_type_0_item_data.to_dict()
+                sims.append(sims_type_0_item)
+
+        else:
+            sims = self.sims
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,14 +56,28 @@ class SimOutputListModel:
         from ..models.sim_output_model import SimOutputModel
 
         d = dict(src_dict)
-        _sims = d.pop("sims", UNSET)
-        sims: list[SimOutputModel] | Unset = UNSET
-        if _sims is not UNSET:
-            sims = []
-            for sims_item_data in _sims:
-                sims_item = SimOutputModel.from_dict(sims_item_data)
 
-                sims.append(sims_item)
+        def _parse_sims(data: object) -> list[SimOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                sims_type_0 = []
+                _sims_type_0 = data
+                for sims_type_0_item_data in _sims_type_0:
+                    sims_type_0_item = SimOutputModel.from_dict(sims_type_0_item_data)
+
+                    sims_type_0.append(sims_type_0_item)
+
+                return sims_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[SimOutputModel] | None | Unset, data)
+
+        sims = _parse_sims(d.pop("sims", UNSET))
 
         sim_output_list_model = cls(
             sims=sims,

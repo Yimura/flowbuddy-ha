@@ -12,8 +12,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-    from ..models.api_meter_create_remote_device_post_input_model_other_properties import (
-        ApiMeterCreateRemoteDevicePostInputModelOtherProperties,
+    from ..models.api_meter_create_remote_device_post_input_model_other_properties_type_0 import (
+        ApiMeterCreateRemoteDevicePostInputModelOtherPropertiesType0,
     )
 
 
@@ -24,36 +24,60 @@ T = TypeVar("T", bound="ApiMeterCreateRemoteDevicePostInputModel")
 class ApiMeterCreateRemoteDevicePostInputModel:
     """
     Attributes:
-        serial_number (str | Unset): EAN code for Fluvius, Inverter serialNumber for SolarEdge
-        email_address (str | Unset): E-mailadres to send the mandate request to (Fluvius)
-        api_meter_type (str | Unset): SolarEdge or Fluvius
-        api_account (str | Unset): The account to be used to connect to the API
-        other_properties (ApiMeterCreateRemoteDevicePostInputModelOtherProperties | Unset):
+        serial_number (None | str | Unset): EAN code for Fluvius, Inverter serialNumber for SolarEdge
+        email_address (None | str | Unset): E-mailadres to send the mandate request to (Fluvius)
+        api_meter_type (None | str | Unset): SolarEdge or Fluvius
+        api_account (None | str | Unset): The account to be used to connect to the API
+        other_properties (ApiMeterCreateRemoteDevicePostInputModelOtherPropertiesType0 | None | Unset):
     """
 
-    serial_number: str | Unset = UNSET
-    email_address: str | Unset = UNSET
-    api_meter_type: str | Unset = UNSET
-    api_account: str | Unset = UNSET
-    other_properties: ApiMeterCreateRemoteDevicePostInputModelOtherProperties | Unset = UNSET
+    serial_number: None | str | Unset = UNSET
+    email_address: None | str | Unset = UNSET
+    api_meter_type: None | str | Unset = UNSET
+    api_account: None | str | Unset = UNSET
+    other_properties: (
+        ApiMeterCreateRemoteDevicePostInputModelOtherPropertiesType0 | None | Unset
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.api_meter_create_remote_device_post_input_model_other_properties import (
-            ApiMeterCreateRemoteDevicePostInputModelOtherProperties,
+        from ..models.api_meter_create_remote_device_post_input_model_other_properties_type_0 import (
+            ApiMeterCreateRemoteDevicePostInputModelOtherPropertiesType0,
         )
 
-        serial_number = self.serial_number
+        serial_number: None | str | Unset
+        if isinstance(self.serial_number, Unset):
+            serial_number = UNSET
+        else:
+            serial_number = self.serial_number
 
-        email_address = self.email_address
+        email_address: None | str | Unset
+        if isinstance(self.email_address, Unset):
+            email_address = UNSET
+        else:
+            email_address = self.email_address
 
-        api_meter_type = self.api_meter_type
+        api_meter_type: None | str | Unset
+        if isinstance(self.api_meter_type, Unset):
+            api_meter_type = UNSET
+        else:
+            api_meter_type = self.api_meter_type
 
-        api_account = self.api_account
+        api_account: None | str | Unset
+        if isinstance(self.api_account, Unset):
+            api_account = UNSET
+        else:
+            api_account = self.api_account
 
-        other_properties: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.other_properties, Unset):
+        other_properties: dict[str, Any] | None | Unset
+        if isinstance(self.other_properties, Unset):
+            other_properties = UNSET
+        elif isinstance(
+            self.other_properties, ApiMeterCreateRemoteDevicePostInputModelOtherPropertiesType0
+        ):
             other_properties = self.other_properties.to_dict()
+        else:
+            other_properties = self.other_properties
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -73,27 +97,70 @@ class ApiMeterCreateRemoteDevicePostInputModel:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.api_meter_create_remote_device_post_input_model_other_properties import (
-            ApiMeterCreateRemoteDevicePostInputModelOtherProperties,
+        from ..models.api_meter_create_remote_device_post_input_model_other_properties_type_0 import (
+            ApiMeterCreateRemoteDevicePostInputModelOtherPropertiesType0,
         )
 
         d = dict(src_dict)
-        serial_number = d.pop("serialNumber", UNSET)
 
-        email_address = d.pop("emailAddress", UNSET)
+        def _parse_serial_number(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        api_meter_type = d.pop("apiMeterType", UNSET)
+        serial_number = _parse_serial_number(d.pop("serialNumber", UNSET))
 
-        api_account = d.pop("apiAccount", UNSET)
+        def _parse_email_address(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _other_properties = d.pop("otherProperties", UNSET)
-        other_properties: ApiMeterCreateRemoteDevicePostInputModelOtherProperties | Unset
-        if isinstance(_other_properties, Unset):
-            other_properties = UNSET
-        else:
-            other_properties = ApiMeterCreateRemoteDevicePostInputModelOtherProperties.from_dict(
-                _other_properties
+        email_address = _parse_email_address(d.pop("emailAddress", UNSET))
+
+        def _parse_api_meter_type(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        api_meter_type = _parse_api_meter_type(d.pop("apiMeterType", UNSET))
+
+        def _parse_api_account(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        api_account = _parse_api_account(d.pop("apiAccount", UNSET))
+
+        def _parse_other_properties(
+            data: object,
+        ) -> ApiMeterCreateRemoteDevicePostInputModelOtherPropertiesType0 | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                other_properties_type_0 = (
+                    ApiMeterCreateRemoteDevicePostInputModelOtherPropertiesType0.from_dict(data)
+                )
+
+                return other_properties_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(
+                ApiMeterCreateRemoteDevicePostInputModelOtherPropertiesType0 | None | Unset, data
             )
+
+        other_properties = _parse_other_properties(d.pop("otherProperties", UNSET))
 
         api_meter_create_remote_device_post_input_model = cls(
             serial_number=serial_number,

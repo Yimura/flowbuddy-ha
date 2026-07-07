@@ -12826,16 +12826,24 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "apiMeterType": {
-            "$ref": "#/components/schemas/ApiMeterTypeReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiMeterTypeReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -12843,13 +12851,16 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -12857,23 +12868,29 @@
         "type": "object",
         "properties": {
           "type": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "status": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "code": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "extraInfo": {
-            "type": "object"
+            "type": "object",
+            "nullable": true
           }
         }
       },
@@ -12884,7 +12901,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ApiAccountOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -12892,7 +12910,8 @@
         "type": "object",
         "properties": {
           "href": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -12900,19 +12919,44 @@
         "type": "object",
         "properties": {
           "self": {
-            "$ref": "#/components/schemas/HrefModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HrefModel"
+              }
+            ]
           },
           "first": {
-            "$ref": "#/components/schemas/HrefModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HrefModel"
+              }
+            ]
           },
           "last": {
-            "$ref": "#/components/schemas/HrefModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HrefModel"
+              }
+            ]
           },
           "prev": {
-            "$ref": "#/components/schemas/HrefModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HrefModel"
+              }
+            ]
           },
           "next": {
-            "$ref": "#/components/schemas/HrefModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HrefModel"
+              }
+            ]
           }
         }
       },
@@ -12921,19 +12965,23 @@
         "properties": {
           "size": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "totalElements": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "totalPages": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "number": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -12941,13 +12989,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/ApiAccountOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiAccountOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -12955,19 +13018,32 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "apiMeasurementType": {
-            "$ref": "#/components/schemas/ApiMeasurementTypeReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiMeasurementTypeReferenceModel"
+              }
+            ]
           },
           "apiMeter": {
-            "$ref": "#/components/schemas/ApiMeterReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiMeterReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -12975,13 +13051,16 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -12989,10 +13068,12 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13003,7 +13084,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ApiMeasurementOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13011,13 +13093,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/ApiMeasurementOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiMeasurementOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -13025,19 +13122,28 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "isCumulative": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "apiMeterType": {
-            "$ref": "#/components/schemas/ApiMeterTypeReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiMeterTypeReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -13048,7 +13154,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ApiMeasurementTypeOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13056,13 +13163,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/ApiMeasurementTypeOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiMeasurementTypeOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -13071,25 +13193,30 @@
         "properties": {
           "serialNumber": {
             "type": "string",
-            "description": "EAN code for Fluvius, Inverter serialNumber for SolarEdge"
+            "description": "EAN code for Fluvius, Inverter serialNumber for SolarEdge",
+            "nullable": true
           },
           "emailAddress": {
             "type": "string",
-            "description": "E-mailadres to send the mandate request to (Fluvius)"
+            "description": "E-mailadres to send the mandate request to (Fluvius)",
+            "nullable": true
           },
           "apiMeterType": {
             "type": "string",
-            "description": "SolarEdge or Fluvius"
+            "description": "SolarEdge or Fluvius",
+            "nullable": true
           },
           "apiAccount": {
             "type": "string",
-            "description": "The account to be used to connect to the API"
+            "description": "The account to be used to connect to the API",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13097,13 +13224,16 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13111,36 +13241,53 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "identifier": {
             "type": "string",
-            "description": "Unique identifier for the device. This is only used for Fluvius connections and equals the EAN code of the meter"
+            "description": "Unique identifier for the device. This is only used for Fluvius connections and equals the EAN code of the meter",
+            "nullable": true
           },
           "plantId": {
             "type": "string",
-            "description": "A technical reference to the API meter"
+            "description": "A technical reference to the API meter",
+            "nullable": true
           },
           "serialNumber": {
             "type": "string",
-            "description": "The serialNumber of the device"
+            "description": "The serialNumber of the device",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "status": {
             "type": "string",
-            "description": "The status of the ApiMeter"
+            "description": "The status of the ApiMeter",
+            "nullable": true
           },
           "statusMessage": {
             "type": "string",
-            "description": "Additional info regarding the status"
+            "description": "Additional info regarding the status",
+            "nullable": true
           },
           "apiMeterType": {
-            "$ref": "#/components/schemas/ApiMeterTypeReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiMeterTypeReferenceModel"
+              }
+            ]
           },
           "apiAccount": {
-            "$ref": "#/components/schemas/ApiAccountReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiAccountReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -13151,7 +13298,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ApiMeterOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13159,13 +13307,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/ApiMeterOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiMeterOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -13174,21 +13337,25 @@
         "properties": {
           "plantId": {
             "type": "string",
-            "description": "The technical reference in the remote portal"
+            "description": "The technical reference in the remote portal",
+            "nullable": true
           },
           "apiMeterType": {
             "type": "string",
-            "description": "SolarEdge or Fluvius"
+            "description": "SolarEdge or Fluvius",
+            "nullable": true
           },
           "apiAccount": {
             "type": "string",
-            "description": "The account to be used to connect to the API"
+            "description": "The account to be used to connect to the API",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13196,13 +13363,16 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13213,7 +13383,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ApiMeterTypeOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13221,13 +13392,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/ApiMeterTypeOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiMeterTypeOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -13235,16 +13421,20 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "code": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13255,7 +13445,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/EventTypeOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13263,13 +13454,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/EventTypeOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EventTypeOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -13277,13 +13483,16 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13294,7 +13503,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/NotifierTemplateOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13302,13 +13512,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/NotifierTemplateOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NotifierTemplateOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -13319,7 +13544,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ControlTypeByMeterOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13327,16 +13553,24 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "code": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "unit": {
-            "$ref": "#/components/schemas/UnitOutputModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UnitOutputModel"
+              }
+            ]
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13344,10 +13578,12 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13355,16 +13591,20 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "code": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13375,7 +13615,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ControlTypeOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13383,13 +13624,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/ControlTypeOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ControlTypeOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -13400,7 +13656,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AggregationDayValueOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13408,7 +13665,8 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "periodStart": {
             "type": "string",
@@ -13427,22 +13685,31 @@
           },
           "value": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "sum": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "count": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "max": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "measurement": {
-            "$ref": "#/components/schemas/MeasurementReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeasurementReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -13450,10 +13717,12 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13461,13 +13730,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/AggregationDayValueOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AggregationDayValueOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -13478,7 +13762,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AggregationMonthValueOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13486,7 +13771,8 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "periodStart": {
             "type": "string",
@@ -13505,22 +13791,31 @@
           },
           "value": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "sum": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "count": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "max": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "measurement": {
-            "$ref": "#/components/schemas/MeasurementReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeasurementReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -13528,13 +13823,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/AggregationMonthValueOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AggregationMonthValueOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -13545,7 +13855,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AggregationYearValueOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13553,7 +13864,8 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "periodStart": {
             "type": "string",
@@ -13572,22 +13884,31 @@
           },
           "value": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "sum": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "count": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "max": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "measurement": {
-            "$ref": "#/components/schemas/MeasurementReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeasurementReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -13595,13 +13916,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/AggregationYearValueOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AggregationYearValueOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -13610,11 +13946,13 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "The type of comment you want to add"
+            "description": "The type of comment you want to add",
+            "nullable": true
           },
           "newComment": {
             "type": "string",
-            "description": "The comment to add"
+            "description": "The comment to add",
+            "nullable": true
           },
           "date": {
             "type": "string",
@@ -13626,7 +13964,8 @@
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13634,7 +13973,8 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "timestamp": {
             "type": "string",
@@ -13644,31 +13984,38 @@
           },
           "description": {
             "type": "string",
-            "description": "Description of alarm"
+            "description": "Description of alarm",
+            "nullable": true
           },
           "resolution": {
             "type": "string",
-            "description": "Predefined list of solutions that can be linked to an alarm when solved"
+            "description": "Predefined list of solutions that can be linked to an alarm when solved",
+            "nullable": true
           },
           "cause": {
             "type": "string",
-            "description": "Predefined list of causes that can be linked to an alarm"
+            "description": "Predefined list of causes that can be linked to an alarm",
+            "nullable": true
           },
           "action": {
             "type": "string",
-            "description": "Predefined list of action types that can be linked to an alarm"
+            "description": "Predefined list of action types that can be linked to an alarm",
+            "nullable": true
           },
           "priority": {
             "type": "string",
-            "description": "Predefined list of priorities to rank the importance of an alarm"
+            "description": "Predefined list of priorities to rank the importance of an alarm",
+            "nullable": true
           },
           "status": {
             "type": "string",
-            "description": "Status of alarm (e.g. open or closed)"
+            "description": "Status of alarm (e.g. open or closed)",
+            "nullable": true
           },
           "closedBy": {
             "type": "string",
-            "description": "Indicates which user closed ticket"
+            "description": "Indicates which user closed ticket",
+            "nullable": true
           },
           "closedOn": {
             "type": "string",
@@ -13677,23 +14024,45 @@
             "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "installation": {
-            "$ref": "#/components/schemas/InstallationReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InstallationReferenceModel"
+              }
+            ]
           },
           "meter": {
-            "$ref": "#/components/schemas/MeterReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeterReferenceModel"
+              }
+            ]
           },
           "measurement": {
-            "$ref": "#/components/schemas/MeasurementReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeasurementReferenceModel"
+              }
+            ]
           },
           "eventType": {
-            "$ref": "#/components/schemas/EventTypeReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EventTypeReferenceModel"
+              }
+            ]
           },
           "comment": {
             "type": "string",
-            "description": "List of comments that were added to alarm"
+            "description": "List of comments that were added to alarm",
+            "nullable": true
           },
           "created": {
             "type": "string",
@@ -13707,13 +14076,16 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13721,10 +14093,12 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13732,13 +14106,16 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13749,7 +14126,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AlarmOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13757,13 +14135,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/AlarmOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlarmOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -13774,7 +14167,8 @@
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13785,7 +14179,8 @@
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13793,19 +14188,23 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "type": {
             "type": "string",
-            "description": "Type of command"
+            "description": "Type of command",
+            "nullable": true
           },
           "status": {
             "type": "string",
-            "description": "Status of command"
+            "description": "Status of command",
+            "nullable": true
           },
           "result": {
             "type": "string",
-            "description": "Result of command"
+            "description": "Result of command",
+            "nullable": true
           },
           "enteredOn": {
             "type": "string",
@@ -13820,16 +14219,32 @@
             "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "installation": {
-            "$ref": "#/components/schemas/InstallationReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InstallationReferenceModel"
+              }
+            ]
           },
           "meter": {
-            "$ref": "#/components/schemas/MeterReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeterReferenceModel"
+              }
+            ]
           },
           "measurement": {
-            "$ref": "#/components/schemas/MeasurementReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeasurementReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -13840,7 +14255,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CommandOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13848,13 +14264,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/CommandOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommandOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -13862,7 +14293,8 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "timestamp": {
             "type": "string",
@@ -13870,7 +14302,8 @@
             "nullable": true
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "createdOn": {
             "type": "string",
@@ -13878,19 +14311,40 @@
             "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "installation": {
-            "$ref": "#/components/schemas/InstallationReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InstallationReferenceModel"
+              }
+            ]
           },
           "meter": {
-            "$ref": "#/components/schemas/MeterReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeterReferenceModel"
+              }
+            ]
           },
           "measurement": {
-            "$ref": "#/components/schemas/MeasurementReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeasurementReferenceModel"
+              }
+            ]
           },
           "eventType": {
-            "$ref": "#/components/schemas/EventTypeReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EventTypeReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -13901,7 +14355,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/EventOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13909,13 +14364,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/EventOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EventOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -13923,13 +14393,15 @@
         "type": "object",
         "properties": {
           "installationPool": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13938,13 +14410,15 @@
         "properties": {
           "notifierTemplate": {
             "type": "string",
-            "description": "link to mail template that will be used"
+            "description": "link to mail template that will be used",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -13952,7 +14426,8 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -13966,39 +14441,50 @@
             "type": "string"
           },
           "uuid": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customerName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customerId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "emailAddress": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "latitude": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "longitude": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "street": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "houseNumber": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "city": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "country": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "resident": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "installationDate": {
             "type": "string",
@@ -14006,64 +14492,83 @@
             "nullable": true
           },
           "project": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "installationType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "zipCode": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "dashboardId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "dashboardType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "custom01": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "custom02": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "custom03": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "custom04": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "custom05": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customList01": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customList02": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customUrl01": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customUrl02": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "alarmPriority": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "clientUserGroup": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "energyTariff": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "installationPool": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14071,13 +14576,16 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -14085,10 +14593,12 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -14096,13 +14606,16 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -14110,50 +14623,64 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "identification": {
             "type": "string",
-            "description": "Unique identifier for your installation"
+            "description": "Unique identifier for your installation",
+            "nullable": true
           },
           "uuid": {
             "type": "string",
-            "description": "Deprecated, no longer used"
+            "description": "Deprecated, no longer used",
+            "nullable": true
           },
           "customerName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customerId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "emailAddress": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "latitude": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "longitude": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "street": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "houseNumber": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "zipCode": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "city": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "country": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "resident": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "installationDate": {
             "type": "string",
@@ -14161,13 +14688,16 @@
             "nullable": true
           },
           "project": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "dashboardId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "dashboardType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "dashboardCreatedOn": {
             "type": "string",
@@ -14176,68 +14706,111 @@
           },
           "alarmPriority": {
             "type": "string",
-            "description": "The alarmpriority defines which thresholds should be used to create alarms. You can define different categories with different thresholds. (e.g. an installation with HIGH priority will receive a network alarm after 6 hours, while LOW priority will receive an alarm after 48 hours.)"
+            "description": "The alarmpriority defines which thresholds should be used to create alarms. You can define different categories with different thresholds. (e.g. an installation with HIGH priority will receive a network alarm after 6 hours, while LOW priority will receive an alarm after 48 hours.)",
+            "nullable": true
           },
           "alarmStatus": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "custom01": {
             "type": "string",
-            "description": "Custom info field"
+            "description": "Custom info field",
+            "nullable": true
           },
           "custom02": {
             "type": "string",
-            "description": "Custom info field"
+            "description": "Custom info field",
+            "nullable": true
           },
           "custom03": {
             "type": "string",
-            "description": "Custom info field"
+            "description": "Custom info field",
+            "nullable": true
           },
           "custom04": {
             "type": "string",
-            "description": "Custom info field"
+            "description": "Custom info field",
+            "nullable": true
           },
           "custom05": {
             "type": "string",
-            "description": "Custom info field"
+            "description": "Custom info field",
+            "nullable": true
           },
           "customList01": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customList02": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customUrl01": {
             "type": "string",
-            "description": "Custom link field"
+            "description": "Custom link field",
+            "nullable": true
           },
           "customUrl02": {
             "type": "string",
-            "description": "Custom link field"
+            "description": "Custom link field",
+            "nullable": true
           },
           "enableScheduling": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "location": {
-            "$ref": "#/components/schemas/LocationReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LocationReferenceModel"
+              }
+            ]
           },
           "installationType": {
-            "$ref": "#/components/schemas/InstallationTypeReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InstallationTypeReferenceModel"
+              }
+            ]
           },
           "communicator": {
-            "$ref": "#/components/schemas/CommunicatorReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorReferenceModel"
+              }
+            ]
           },
           "clientUserGroup": {
-            "$ref": "#/components/schemas/ClientUserGroupReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ClientUserGroupReferenceModel"
+              }
+            ]
           },
           "energyTariff": {
-            "$ref": "#/components/schemas/EnergyTariffReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EnergyTariffReferenceModel"
+              }
+            ]
           },
           "installationPool": {
-            "$ref": "#/components/schemas/InstallationPoolReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InstallationPoolReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -14245,13 +14818,16 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -14259,13 +14835,16 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -14273,10 +14852,12 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -14287,7 +14868,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/InstallationOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14295,13 +14877,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/InstallationOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InstallationOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -14309,42 +14906,54 @@
         "type": "object",
         "properties": {
           "identification": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "uuid": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customerName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customerId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "emailAddress": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "latitude": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "longitude": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "street": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "houseNumber": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "city": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "country": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "resident": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "installationDate": {
             "type": "string",
@@ -14352,64 +14961,83 @@
             "nullable": true
           },
           "project": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "installationType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "zipCode": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "dashboardId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "dashboardType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "custom01": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "custom02": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "custom03": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "custom04": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "custom05": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customList01": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customList02": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customUrl01": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customUrl02": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "alarmPriority": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "clientUserGroup": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "energyTariff": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "installationPool": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14423,39 +15051,50 @@
             "type": "string"
           },
           "uuid": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customerName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customerId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "emailAddress": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "latitude": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "longitude": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "street": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "houseNumber": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "city": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "country": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "resident": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "installationDate": {
             "type": "string",
@@ -14463,64 +15102,83 @@
             "nullable": true
           },
           "project": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "installationType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "zipCode": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "dashboardId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "dashboardType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "custom01": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "custom02": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "custom03": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "custom04": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "custom05": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customList01": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customList02": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customUrl01": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "customUrl02": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "alarmPriority": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "clientUserGroup": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "energyTariff": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "installationPool": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14528,16 +15186,19 @@
         "type": "object",
         "properties": {
           "apiMeter": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "initialPolling": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14546,16 +15207,19 @@
         "properties": {
           "communicator": {
             "type": "string",
-            "description": "The communicator serial number starting with **XMX** or **IQ**. If no Communicator is selected, the linked Communicator field of Installation is used as input."
+            "description": "The communicator serial number starting with **XMX** or **IQ**. If no Communicator is selected, the linked Communicator field of Installation is used as input.",
+            "nullable": true
           },
           "initialPolling": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14563,21 +15227,25 @@
         "type": "object",
         "properties": {
           "measuringDevice": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "description": {
             "type": "string",
-            "description": "Custom name that will be used to fill in Meter Type"
+            "description": "Custom name that will be used to fill in Meter Type",
+            "nullable": true
           },
           "initialPolling": {
             "type": "string",
-            "description": "You can choose which data to process for this particular device. All data (whole period) or only the data read after registration."
+            "description": "You can choose which data to process for this particular device. All data (whole period) or only the data read after registration.",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14588,7 +15256,8 @@
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14596,13 +15265,15 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14610,13 +15281,16 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -14627,7 +15301,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/InstallationTypeOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14635,13 +15310,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/InstallationTypeOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InstallationTypeOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -14649,13 +15339,15 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14663,13 +15355,15 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14680,7 +15374,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/InstantValueOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14688,7 +15383,8 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -14696,13 +15392,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/InstantValueOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InstantValueOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -14710,11 +15421,13 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "status": {
             "type": "string",
-            "description": "Registration status of Measurement"
+            "description": "Registration status of Measurement",
+            "nullable": true
           },
           "firstRegisteredOn": {
             "type": "string",
@@ -14724,12 +15437,14 @@
           },
           "polling": {
             "type": "boolean",
-            "description": "Indicates if data is processed for this measurement (overrule from meter)"
+            "description": "Indicates if data is processed for this measurement (overrule from meter)",
+            "nullable": true
           },
           "lastPolledValue": {
             "type": "number",
             "description": "Last valid meter reading. (correspondig to the latest cumulative value registered by the physical device)",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "lastPolledTimeStamp": {
             "type": "string",
@@ -14744,7 +15459,8 @@
             "nullable": true
           },
           "validatingQuality": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "lastRunMeasurementQualityEngineOn": {
             "type": "string",
@@ -14752,12 +15468,14 @@
             "nullable": true
           },
           "alarmStatus": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "lastPolledRealtimeValue": {
             "type": "number",
             "description": "Last realtime value that was processed",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "lastPolledRealtimeTimeStamp": {
             "type": "string",
@@ -14766,13 +15484,24 @@
             "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "meter": {
-            "$ref": "#/components/schemas/MeterReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeterReferenceModel"
+              }
+            ]
           },
           "measurementType": {
-            "$ref": "#/components/schemas/MeasurementTypeReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeasurementTypeReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -14780,13 +15509,16 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -14797,7 +15529,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MeasurementOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14805,13 +15538,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/MeasurementOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeasurementOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -14819,30 +15567,38 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
             "type": "string",
-            "description": "Description of the type"
+            "description": "Description of the type",
+            "nullable": true
           },
           "aggregationType": {
             "type": "string",
-            "description": "Indicaties how data is aggregated (e.g. sum, avg, max, min)"
+            "description": "Indicaties how data is aggregated (e.g. sum, avg, max, min)",
+            "nullable": true
           },
           "code": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "isIncremental": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "interval": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "unit": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -14853,7 +15609,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MeasurementTypeOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14861,13 +15618,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/MeasurementTypeOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeasurementTypeOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -14878,7 +15650,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MeasurementValueOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14886,7 +15659,8 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "timestart": {
             "type": "string",
@@ -14895,7 +15669,8 @@
           },
           "value": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "createdOn": {
             "type": "string",
@@ -14903,7 +15678,12 @@
             "nullable": true
           },
           "measurement": {
-            "$ref": "#/components/schemas/MeasurementReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeasurementReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -14911,13 +15691,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/MeasurementValueOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeasurementValueOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -14925,7 +15720,8 @@
         "type": "object",
         "properties": {
           "controlType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "timestamp": {
             "type": "string",
@@ -14933,13 +15729,15 @@
             "nullable": true
           },
           "value": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14950,7 +15748,8 @@
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14961,7 +15760,8 @@
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -14969,10 +15769,12 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -14980,29 +15782,36 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
             "type": "string",
-            "description": "Description of the meter"
+            "description": "Description of the meter",
+            "nullable": true
           },
           "serialNumber": {
             "type": "string",
-            "description": "Serial number of device"
+            "description": "Serial number of device",
+            "nullable": true
           },
           "manufacturer": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "type": {
             "type": "string",
-            "description": "Type of meter (e.g. Solar, Heating, ...)"
+            "description": "Type of meter (e.g. Solar, Heating, ...)",
+            "nullable": true
           },
           "meterType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "status": {
             "type": "string",
-            "description": "Registration status of device"
+            "description": "Registration status of device",
+            "nullable": true
           },
           "firstRegisteredOn": {
             "type": "string",
@@ -15030,11 +15839,13 @@
           },
           "polling": {
             "type": "string",
-            "description": "Indicates whether the device is processing data (e.g. yes or no) "
+            "description": "Indicates whether the device is processing data (e.g. yes or no) ",
+            "nullable": true
           },
           "lastPollingResult": {
             "type": "string",
-            "description": "Indicates whether the last data processing was completed without errors (e.g. successful)"
+            "description": "Indicates whether the last data processing was completed without errors (e.g. successful)",
+            "nullable": true
           },
           "lastSuccessfulPollingOn": {
             "type": "string",
@@ -15043,16 +15854,32 @@
             "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "installation": {
-            "$ref": "#/components/schemas/InstallationReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InstallationReferenceModel"
+              }
+            ]
           },
           "dlmsMeter": {
-            "$ref": "#/components/schemas/MeasuringDeviceReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeasuringDeviceReferenceModel"
+              }
+            ]
           },
           "apiMeter": {
-            "$ref": "#/components/schemas/ApiMeterReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiMeterReferenceModel"
+              }
+            ]
           },
           "created": {
             "type": "string",
@@ -15069,7 +15896,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MeterOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15077,13 +15905,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/MeterOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeterOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -15091,13 +15934,15 @@
         "type": "object",
         "properties": {
           "description": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15105,19 +15950,23 @@
         "type": "object",
         "properties": {
           "measurementType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "forcePolling": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "initialPolling": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15128,7 +15977,8 @@
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15136,7 +15986,8 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "timeStamp": {
             "type": "string",
@@ -15144,22 +15995,36 @@
             "nullable": true
           },
           "value": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "resultMessage": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "meter": {
-            "$ref": "#/components/schemas/MeterReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeterReferenceModel"
+              }
+            ]
           },
           "controlType": {
-            "$ref": "#/components/schemas/ControlTypeReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ControlTypeReferenceModel"
+              }
+            ]
           },
           "created": {
             "type": "string",
@@ -15177,13 +16042,16 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -15194,7 +16062,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ControlSignalOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15202,13 +16071,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/ControlSignalOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ControlSignalOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -15216,29 +16100,40 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "capacity": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "maxChargePower": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "maxDischargePower": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "lastSetChargePower": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "info": {
-            "$ref": "#/components/schemas/MeterReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeterReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -15249,7 +16144,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/BatteryOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15257,13 +16153,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/BatteryOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BatteryOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -15272,13 +16183,15 @@
         "properties": {
           "value": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15286,21 +16199,30 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "lastSetCoolTemperature": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "lastSetHeatTemperature": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "info": {
-            "$ref": "#/components/schemas/MeterReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeterReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -15311,7 +16233,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HVACOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15319,13 +16242,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/HVACOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HVACOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -15334,13 +16272,15 @@
         "properties": {
           "value": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15349,13 +16289,15 @@
         "properties": {
           "value": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15363,21 +16305,30 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "maxPower": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "lastSetProductionCapacity": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "info": {
-            "$ref": "#/components/schemas/MeterReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeterReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -15388,7 +16339,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/InverterOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15396,13 +16348,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/InverterOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InverterOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -15411,13 +16378,15 @@
         "properties": {
           "value": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15425,7 +16394,8 @@
         "type": "object",
         "properties": {
           "controlType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "timestamp": {
             "type": "string",
@@ -15433,13 +16403,15 @@
             "nullable": true
           },
           "value": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15447,13 +16419,15 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15461,13 +16435,16 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -15478,7 +16455,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/InstallationPoolOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15486,13 +16464,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/InstallationPoolOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InstallationPoolOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -15500,13 +16493,15 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15514,13 +16509,15 @@
         "type": "object",
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15528,19 +16525,32 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "value": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "installationPool": {
-            "$ref": "#/components/schemas/InstallationPoolReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InstallationPoolReferenceModel"
+              }
+            ]
           },
           "controlType": {
-            "$ref": "#/components/schemas/ControlTypeReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ControlTypeReferenceModel"
+              }
+            ]
           },
           "created": {
             "type": "string",
@@ -15556,7 +16566,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/InstallationPoolSignalOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15564,13 +16575,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/InstallationPoolSignalOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InstallationPoolSignalOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -15578,10 +16604,12 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "lastAppliedValue": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "timestamp": {
             "type": "string",
@@ -15589,13 +16617,24 @@
             "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "modbusDevice": {
-            "$ref": "#/components/schemas/ModbusDeviceReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModbusDeviceReferenceModel"
+              }
+            ]
           },
           "controlType": {
-            "$ref": "#/components/schemas/ControlTypeReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ControlTypeReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -15603,10 +16642,12 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -15617,7 +16658,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DeviceControlStateOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15625,13 +16667,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/DeviceControlStateOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DeviceControlStateOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -15639,27 +16696,38 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "serialNumber": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "address": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "tcpPort": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "resultCode": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "measuringDevice": {
-            "$ref": "#/components/schemas/MeasuringDeviceReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeasuringDeviceReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -15670,7 +16738,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ModbusDeviceOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15678,13 +16747,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/ModbusDeviceOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModbusDeviceOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -15692,7 +16776,8 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "enteredOn": {
             "type": "string",
@@ -15705,16 +16790,24 @@
             "nullable": true
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "resultMessage": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "communicator": {
-            "$ref": "#/components/schemas/CommunicatorReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -15725,7 +16818,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HeatPumpControlTestOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15733,13 +16827,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/HeatPumpControlTestOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HeatPumpControlTestOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -15747,15 +16856,18 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "logicalDeviceName": {
             "type": "string",
-            "description": "Unique identifier of communicator"
+            "description": "Unique identifier of communicator",
+            "nullable": true
           },
           "firmWareVersion": {
             "type": "string",
-            "description": "Version of the firmware of the device"
+            "description": "Version of the firmware of the device",
+            "nullable": true
           },
           "firstRegisteredOn": {
             "type": "string",
@@ -15765,7 +16877,8 @@
           },
           "status": {
             "type": "string",
-            "description": "Status of registration"
+            "description": "Status of registration",
+            "nullable": true
           },
           "lastSuccessfulPollingOn": {
             "type": "string",
@@ -15775,7 +16888,8 @@
           },
           "lastPollingResult": {
             "type": "string",
-            "description": "Result of last data retrieval"
+            "description": "Result of last data retrieval",
+            "nullable": true
           },
           "lastSuccessfulCommunicationOn": {
             "type": "string",
@@ -15796,13 +16910,24 @@
             "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "type": {
-            "$ref": "#/components/schemas/CommunicatorTypeReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorTypeReferenceModel"
+              }
+            ]
           },
           "sim": {
-            "$ref": "#/components/schemas/SimReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SimReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -15810,13 +16935,16 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -15824,10 +16952,12 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         },
         "description": "Connection which can be used for network communication"
@@ -15839,7 +16969,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CommunicatorOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15847,13 +16978,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/CommunicatorOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -15863,13 +17009,15 @@
           "testDurationPerMode": {
             "type": "integer",
             "description": "The duration per mode expressed in minutes",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15878,50 +17026,61 @@
         "properties": {
           "modbusActionType": {
             "type": "string",
-            "description": "A predefined lists of available modbus settings"
+            "description": "A predefined lists of available modbus settings",
+            "nullable": true
           },
           "modbusFunctionCode": {
             "type": "string",
-            "description": "The Modbus protocol offers a number of functions that are used to read or write data"
+            "description": "The Modbus protocol offers a number of functions that are used to read or write data",
+            "nullable": true
           },
           "protocol": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "slaveAddress": {
             "type": "integer",
             "description": "The master device addresses a specific slave device by using the address field. Valid RTU addresses are from 1-247",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "ipv4Address": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "port": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "unitId": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "registerAddress": {
             "type": "integer",
             "description": "Modbus functions operate on register map registers to monitor, configure, and control module I/O. This value is often a 5-digit number (0xxxx,1xxxx,3xxxx,4xxxx)",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "registerValue": {
             "type": "string",
-            "description": "When executing a write function, the value to be written should be filled in."
+            "description": "When executing a write function, the value to be written should be filled in.",
+            "nullable": true
           },
           "registerLength": {
             "type": "integer",
             "description": "The amount of registers that will be read. In case of a larger datatype such as U32, multiple registers have to be read/written.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15930,16 +17089,19 @@
         "properties": {
           "port": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "portOn": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15950,7 +17112,8 @@
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -15958,11 +17121,13 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "type": {
             "type": "string",
-            "description": "The type will indicate which action was requested (e.g. `connectiontest`)"
+            "description": "The type will indicate which action was requested (e.g. `connectiontest`)",
+            "nullable": true
           },
           "timestamp": {
             "type": "string",
@@ -15971,14 +17136,17 @@
           },
           "status": {
             "type": "string",
-            "description": "Initial = The command is waiting for execution. Dispatching = We are trying to connect to the module. Dispatched = The action was executed."
+            "description": "Initial = The command is waiting for execution. Dispatching = We are trying to connect to the module. Dispatched = The action was executed.",
+            "nullable": true
           },
           "result": {
             "type": "string",
-            "description": "Failure or Success. A failure is often caused by a connection issue and can be solved by a retry at a later moment."
+            "description": "Failure or Success. A failure is often caused by a connection issue and can be solved by a retry at a later moment.",
+            "nullable": true
           },
           "resultMessage": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "enteredOn": {
             "type": "string",
@@ -15991,10 +17159,16 @@
             "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "communicator": {
-            "$ref": "#/components/schemas/CommunicatorReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -16005,7 +17179,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CommunicatorRemoteCommandOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -16013,13 +17188,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/CommunicatorRemoteCommandOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorRemoteCommandOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -16027,17 +17217,21 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
             "type": "string",
-            "description": "Descriptive name of the device"
+            "description": "Descriptive name of the device",
+            "nullable": true
           },
           "isEms": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -16048,7 +17242,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CommunicatorTypeOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -16056,13 +17251,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/CommunicatorTypeOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorTypeOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -16070,18 +17280,22 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "signalStrength": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "resultCode": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "resultMessage": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "performedOn": {
             "type": "string",
@@ -16089,10 +17303,16 @@
             "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "communicator": {
-            "$ref": "#/components/schemas/CommunicatorReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -16103,7 +17323,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CommunicatorVerificationOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -16111,13 +17332,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/CommunicatorVerificationOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorVerificationOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -16125,7 +17361,8 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "enteredOn": {
             "type": "string",
@@ -16133,23 +17370,33 @@
             "nullable": true
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "resultMessage": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "signalStrength": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "lanConnectionSuccessful": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "communicator": {
-            "$ref": "#/components/schemas/CommunicatorReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -16160,7 +17407,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConnectionTestOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -16168,13 +17416,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/ConnectionTestOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConnectionTestOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -16182,22 +17445,32 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "serialNumber": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "communicator": {
-            "$ref": "#/components/schemas/CommunicatorReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorReferenceModel"
+              }
+            ]
           },
           "isCommunicatorDevice": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           }
         }
       },
@@ -16208,7 +17481,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MeasuringDeviceOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -16216,13 +17490,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/MeasuringDeviceOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeasuringDeviceOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -16230,30 +17519,37 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "serviceProvider": {
             "type": "string",
-            "description": "The service provider of the sim card (1NCE or Sim Services)"
+            "description": "The service provider of the sim card (1NCE or Sim Services)",
+            "nullable": true
           },
           "operator": {
             "type": "string",
-            "description": "The network operator"
+            "description": "The network operator",
+            "nullable": true
           },
           "iccId": {
             "type": "string",
-            "description": "Unique serial number of the sim card"
+            "description": "Unique serial number of the sim card",
+            "nullable": true
           },
           "ipAddress": {
             "type": "string",
-            "description": "The IP Address to reach the sim card"
+            "description": "The IP Address to reach the sim card",
+            "nullable": true
           },
           "networkStatus": {
             "type": "string",
-            "description": "The status of the sim on the network"
+            "description": "The status of the sim on the network",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -16261,13 +17557,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/SimOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SimOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -16278,7 +17589,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SimOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -16286,11 +17598,13 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "enableInverterControl": {
             "type": "boolean",
-            "description": "Enables the virtual grid meter and allows control over the behavior of a hybrid inverter."
+            "description": "Enables the virtual grid meter and allows control over the behavior of a hybrid inverter.",
+            "nullable": true
           },
           "inverterControlFirstActivatedOn": {
             "type": "string",
@@ -16301,16 +17615,19 @@
           "batteryCapacity": {
             "type": "number",
             "description": "The capacity, in kWh, of the installed batteries linked to the EMS.",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "batteryPower": {
             "type": "number",
             "description": "The maximum (dis)charge power, in kW, of the installed batteries linked to the EMS.",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "enableEvChargerControl": {
             "type": "boolean",
-            "description": "Enables the EMS app for EV charger control and allows you to adjust the charging power based on grid usage and solar production."
+            "description": "Enables the EMS app for EV charger control and allows you to adjust the charging power based on grid usage and solar production.",
+            "nullable": true
           },
           "evChargerControlFirstActivatedOn": {
             "type": "string",
@@ -16321,39 +17638,47 @@
           "evNumberOfPhases": {
             "type": "integer",
             "description": "Number of phases configured in the EV charger controlled by the EMS.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "maxGridCurrent": {
             "type": "number",
             "description": "Maximum rated current of the grid connection in Amperes.",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "minChargeCurrent": {
             "type": "number",
             "description": "Minimum charge current that should be used by the connected EV charger in Amperes.",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "userRequestedEvMode": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "userRequestedEvBatteryMode": {
             "type": "integer",
             "description": "Controls battery discharging when EV charging is active: 0 - Off (battery will not be used to support EV charging), 1 - On.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "userRequestedMaxChargeCurrent": {
             "type": "number",
             "description": "Maximum charging current (from grid or solar) that can be used by the connected EV charger in Amperes.",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "userRequestedMaxGridCurrent": {
             "type": "number",
             "description": "Maximum charging current (imported from the grid) that can be used by the connected EV charger in Amperes.",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "enablePeakShaving": {
             "type": "boolean",
-            "description": "Enables the EMS app for capacity tariff and allows you to limit the maximum grid power by adjusting charging powers, activating the battery, or disabling external devices."
+            "description": "Enables the EMS app for capacity tariff and allows you to limit the maximum grid power by adjusting charging powers, activating the battery, or disabling external devices.",
+            "nullable": true
           },
           "peakShavingFirstActivatedOn": {
             "type": "string",
@@ -16364,24 +17689,29 @@
           "minBatteryChargeSoc": {
             "type": "integer",
             "description": "A value ranging from 0-100 that represents the minimum battery charge. This variable is set by the installer to ensure battery health.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "userRequestedMaxGridPower": {
             "type": "integer",
             "description": "The maximum grid power. This variable can be controlled by the user.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "userRequestedBatteryPeakReserveSoc": {
             "type": "integer",
             "description": "A value ranging from 0-100 that represents the battery reserve used to cover peak electricity usage. This variable can be controlled by the user.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "enableCurtailing": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "enableRealtime": {
             "type": "boolean",
-            "description": "Enables the EMS app for real-time polling."
+            "description": "Enables the EMS app for real-time polling.",
+            "nullable": true
           },
           "realtimeFirstActivatedOn": {
             "type": "string",
@@ -16391,7 +17721,8 @@
           },
           "enableDynamicPricing": {
             "type": "boolean",
-            "description": "Enables EMS apps for dynamic pricing"
+            "description": "Enables EMS apps for dynamic pricing",
+            "nullable": true
           },
           "dynamicPricingFirstActivatedOn": {
             "type": "string",
@@ -16402,12 +17733,14 @@
           "userRequestedLowerPriceThreshold": {
             "type": "number",
             "description": "The threshold for the lower price. This variable can be controlled by the user.",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "userRequestedUpperPriceThreshold": {
             "type": "number",
             "description": "The threshold for the upper price. This variable can be controlled by the user.",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "lastCalendarSyncOn": {
             "type": "string",
@@ -16415,15 +17748,18 @@
             "nullable": true
           },
           "calendarSyncStatus": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "enableMbusReader": {
             "type": "boolean",
-            "description": "Enables the EMS app for reading mbus devices."
+            "description": "Enables the EMS app for reading mbus devices.",
+            "nullable": true
           },
           "enableSmartGridReadyControl": {
             "type": "boolean",
-            "description": "Enables the EMS app for smart grid ready control."
+            "description": "Enables the EMS app for smart grid ready control.",
+            "nullable": true
           },
           "smartGridReadyControlFirstActivatedOn": {
             "type": "string",
@@ -16433,36 +17769,53 @@
           },
           "userRequestedDeactivateHeatPumpOnHighPrices": {
             "type": "boolean",
-            "description": "Deactivates the heat pump on high prices. This variable can be controlled by the user."
+            "description": "Deactivates the heat pump on high prices. This variable can be controlled by the user.",
+            "nullable": true
           },
           "userRequestedActivateHeatPumpOnLowPrices": {
             "type": "boolean",
-            "description": "Activates the heat pump on low prices. This variable can be controlled by the user."
+            "description": "Activates the heat pump on low prices. This variable can be controlled by the user.",
+            "nullable": true
           },
           "increasedThreshold": {
             "type": "integer",
             "description": "Consumption of the heat pump in Watt when it is in increased operation.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "forcedThreshold": {
             "type": "integer",
             "description": "Consumption of the heat pump in Watt when it is in forced operation.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "phaseSwitchingDisabled": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "dynamicPricingTariff": {
-            "$ref": "#/components/schemas/EnergyTariffReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EnergyTariffReferenceModel"
+              }
+            ]
           },
           "communicator": {
-            "$ref": "#/components/schemas/CommunicatorReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -16473,7 +17826,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/EmsConfigurationOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -16481,13 +17835,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/EmsConfigurationOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EmsConfigurationOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -16496,49 +17865,61 @@
         "properties": {
           "userRequestedMaxChargeCurrent": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "userRequestedMaxGridCurrent": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "userRequestedEvBatteryMode": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "userRequestedMaxGridPower": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "userRequestedBatteryPeakReserveSoc": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "userRequestedLowerPriceThreshold": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "userRequestedUpperPriceThreshold": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "userRequestedEvMode": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "userRequestedDeactivateHeatPumpOnHighPrices": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "userRequestedActivateHeatPumpOnLowPrices": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "enableCurtailing": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -16549,7 +17930,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/EmsConfigurationUpdateOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -16557,7 +17939,8 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "enteredOn": {
             "type": "string",
@@ -16570,16 +17953,24 @@
             "nullable": true
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "resultMessage": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "communicator": {
-            "$ref": "#/components/schemas/CommunicatorReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -16587,13 +17978,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/EmsConfigurationUpdateOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EmsConfigurationUpdateOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -16604,7 +18010,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ModbusActionTypeOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -16612,43 +18019,59 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "functionCode": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "slaveAddress": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "registerAddress": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "registerLength": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "value": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "isValueRequired": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "isFixedValue": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "protocol": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "communicatorType": {
-            "$ref": "#/components/schemas/CommunicatorTypeReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorTypeReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -16656,13 +18079,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/ModbusActionTypeOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ModbusActionTypeOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -16670,7 +18108,8 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "enteredOn": {
             "type": "string",
@@ -16678,16 +18117,24 @@
             "nullable": true
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "resultMessage": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "communicator": {
-            "$ref": "#/components/schemas/CommunicatorReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -16695,13 +18142,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/SendChannelTypeDefinitionOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SendChannelTypeDefinitionOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -16712,7 +18174,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SendChannelTypeDefinitionOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -16720,7 +18183,8 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "enteredOn": {
             "type": "string",
@@ -16728,24 +18192,34 @@
             "nullable": true
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "resultMessage": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "ctNumerator": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "ctDenominator": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "communicator": {
-            "$ref": "#/components/schemas/CommunicatorReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -16753,13 +18227,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/SendCtRatioOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SendCtRatioOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -16770,7 +18259,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SendCtRatioOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -16778,7 +18268,8 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "enteredOn": {
             "type": "string",
@@ -16793,20 +18284,29 @@
           },
           "status": {
             "type": "string",
-            "description": "De status waarin het command zich bevindt. Dit veld bepaalt door welke taak de switch breaker wordt gebruikt."
+            "description": "De status waarin het command zich bevindt. Dit veld bepaalt door welke taak de switch breaker wordt gebruikt.",
+            "nullable": true
           },
           "resultMessage": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "breakerOn": {
             "type": "boolean",
-            "description": "Het veld dat bepaald of de breaker aan of uit gezet wordt."
+            "description": "Het veld dat bepaald of de breaker aan of uit gezet wordt.",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "communicator": {
-            "$ref": "#/components/schemas/CommunicatorReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -16814,13 +18314,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/SwitchBreakerOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SwitchBreakerOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -16831,7 +18346,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SwitchBreakerOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -16839,7 +18355,8 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "enteredOn": {
             "type": "string",
@@ -16847,16 +18364,24 @@
             "nullable": true
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "resultMessage": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "communicator": {
-            "$ref": "#/components/schemas/CommunicatorReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -16864,13 +18389,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/SwitchIoPortOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SwitchIoPortOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -16881,7 +18421,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SwitchIoPortOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -16889,7 +18430,8 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "enteredOn": {
             "type": "string",
@@ -16897,10 +18439,12 @@
             "nullable": true
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "resultMessage": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "testStartOn": {
             "type": "string",
@@ -16914,51 +18458,66 @@
             "nullable": true
           },
           "breakerInitialStatus": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "startExportValue": {
             "type": "number",
             "description": "Cumulative export value in Wh as reported on the display of `communicator`",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "startImportValue": {
             "type": "number",
             "description": "Cumulative import value in Wh as reported on the display of `communicator`. This value should be close to 0 and lower than the export value. If not, this might indicate incorrect wiring.",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "nextExportValue": {
             "type": "number",
             "description": "Cumulative export value that was read from the `communicator` after several minutes. The difference between the start and next value is used to decide if a valid production was measured.",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "nextImportValue": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "averageVoltage": {
             "type": "number",
             "description": "Average voltage of the last 10 minutes at the moment of the productiontest. If this value is close to 253V, this might lead to over voltage which might to a shutdown of the inverter.",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "instantaneousActivePowerImport": {
             "type": "number",
             "description": "imported power measured by the `communicator` at the moment of productiontest. If this value is greater as 0, the `communicator` might be wired incorrectly.",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "instantaneousActivePowerExport": {
             "type": "number",
             "description": "exported power measured by the communicator at the moment of productiontest. If this value is greater as 0, the installation is working as expected.",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "instantaneousCurrent": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "communicator": {
-            "$ref": "#/components/schemas/CommunicatorReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CommunicatorReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -16966,13 +18525,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/PvProductionTestOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PvProductionTestOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -16983,7 +18557,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PvProductionTestOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -16991,13 +18566,16 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -17008,7 +18586,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ClientUserGroupOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -17016,13 +18595,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/ClientUserGroupOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ClientUserGroupOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -17040,13 +18634,15 @@
             "type": "string"
           },
           "createReport": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -17054,13 +18650,16 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -17068,13 +18667,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/PvReportOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PvReportOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -17085,7 +18699,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PvReportOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -17093,10 +18708,12 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "createReport": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "lastReportSentDate": {
             "type": "string",
@@ -17104,13 +18721,24 @@
             "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "installation": {
-            "$ref": "#/components/schemas/InstallationReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InstallationReferenceModel"
+              }
+            ]
           },
           "template": {
-            "$ref": "#/components/schemas/NotifierTemplateReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NotifierTemplateReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -17118,19 +18746,23 @@
         "type": "object",
         "properties": {
           "installation": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "createReport": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -17138,76 +18770,97 @@
         "type": "object",
         "properties": {
           "meter": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "orientation": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "tilt": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "wattpeak": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "expectedProduction": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "cspiEnabled": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "stringNumber": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "numberOfPanels": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "wattpeakPerPanel": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "panelBrand": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "panelType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "panelClassification": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "panelSerialNumbers": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "panelCellArea": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "maxInverterPower": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inverterType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inverterBrand": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inverterSerialNumbers": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inverterClassification": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "panelLocation": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -17215,80 +18868,101 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "orientation": {
             "type": "integer",
             "description": "Orientation of the installed solar panels, 0 is North, 90 is East, 180 is South, and 270 is West.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "tilt": {
             "type": "integer",
             "description": "Tilt of the installed solar panels, 0 is horizontal, and 90 is vertical.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "wattpeak": {
             "type": "number",
             "description": "Maximum power of installad solar panels. Expressed in Wp.",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "expectedProduction": {
             "type": "number",
             "description": "Expected energy production in one year for this specific installation. Can also be used to register the guaranteed production.",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "cspiEnabled": {
             "type": "boolean",
-            "description": "Enable this to activate the CSPI algorithm. Orientation, tilt, wattpeak and location/zip should be filled in before your installation can be analyzed."
+            "description": "Enable this to activate the CSPI algorithm. Orientation, tilt, wattpeak and location/zip should be filled in before your installation can be analyzed.",
+            "nullable": true
           },
           "stringNumber": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "numberOfPanels": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "wattpeakPerPanel": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "panelBrand": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "panelType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "panelClassification": {
             "type": "string",
-            "description": "Type of silicon solar cell that is used."
+            "description": "Type of silicon solar cell that is used.",
+            "nullable": true
           },
           "panelSerialNumbers": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "panelCellArea": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "maxInverterPower": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inverterType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inverterBrand": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inverterSerialNumbers": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inverterClassification": {
             "type": "string",
-            "description": "Type of inverter that is used. e.g. micro-inverter, string-inverter"
+            "description": "Type of inverter that is used. e.g. micro-inverter, string-inverter",
+            "nullable": true
           },
           "panelLocation": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalId": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "lastChangedOn": {
             "type": "string",
@@ -17296,7 +18970,12 @@
             "nullable": true
           },
           "meter": {
-            "$ref": "#/components/schemas/MeterReferenceModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MeterReferenceModel"
+              }
+            ]
           }
         }
       },
@@ -17307,7 +18986,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LayoutOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -17315,13 +18995,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/LayoutOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LayoutOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       },
@@ -17329,76 +19024,97 @@
         "type": "object",
         "properties": {
           "meter": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "orientation": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "tilt": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "wattpeak": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "expectedProduction": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "cspiEnabled": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "stringNumber": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "numberOfPanels": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "wattpeakPerPanel": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "panelBrand": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "panelType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "panelClassification": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "panelSerialNumbers": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "panelCellArea": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "maxInverterPower": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inverterType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inverterBrand": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inverterSerialNumbers": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inverterClassification": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "panelLocation": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -17406,76 +19122,97 @@
         "type": "object",
         "properties": {
           "meter": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "orientation": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "tilt": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "wattpeak": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "expectedProduction": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "cspiEnabled": {
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
           },
           "stringNumber": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "numberOfPanels": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "wattpeakPerPanel": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "panelBrand": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "panelType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "panelClassification": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "panelSerialNumbers": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "panelCellArea": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "maxInverterPower": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inverterType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inverterBrand": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inverterSerialNumbers": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "inverterClassification": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "panelLocation": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "otherProperties": {
             "type": "object",
             "additionalProperties": {
               "type": "object"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -17486,7 +19223,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AccessRightOutputModel"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -17494,10 +19232,12 @@
         "type": "object",
         "properties": {
           "resourceUri": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "key": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -17505,13 +19245,28 @@
         "type": "object",
         "properties": {
           "_embedded": {
-            "$ref": "#/components/schemas/AccessRightOutputListModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AccessRightOutputListModel"
+              }
+            ]
           },
           "_links": {
-            "$ref": "#/components/schemas/LinksModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LinksModel"
+              }
+            ]
           },
           "_page": {
-            "$ref": "#/components/schemas/PageModel"
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PageModel"
+              }
+            ]
           }
         }
       }

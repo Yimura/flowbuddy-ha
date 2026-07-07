@@ -22,21 +22,26 @@ T = TypeVar("T", bound="ModbusActionTypeOutputListModel")
 class ModbusActionTypeOutputListModel:
     """
     Attributes:
-        modbus_action_types (list[ModbusActionTypeOutputModel] | Unset):
+        modbus_action_types (list[ModbusActionTypeOutputModel] | None | Unset):
     """
 
-    modbus_action_types: list[ModbusActionTypeOutputModel] | Unset = UNSET
+    modbus_action_types: list[ModbusActionTypeOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.modbus_action_type_output_model import ModbusActionTypeOutputModel
 
-        modbus_action_types: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.modbus_action_types, Unset):
+        modbus_action_types: list[dict[str, Any]] | None | Unset
+        if isinstance(self.modbus_action_types, Unset):
+            modbus_action_types = UNSET
+        elif isinstance(self.modbus_action_types, list):
             modbus_action_types = []
-            for modbus_action_types_item_data in self.modbus_action_types:
-                modbus_action_types_item = modbus_action_types_item_data.to_dict()
-                modbus_action_types.append(modbus_action_types_item)
+            for modbus_action_types_type_0_item_data in self.modbus_action_types:
+                modbus_action_types_type_0_item = modbus_action_types_type_0_item_data.to_dict()
+                modbus_action_types.append(modbus_action_types_type_0_item)
+
+        else:
+            modbus_action_types = self.modbus_action_types
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,16 +56,32 @@ class ModbusActionTypeOutputListModel:
         from ..models.modbus_action_type_output_model import ModbusActionTypeOutputModel
 
         d = dict(src_dict)
-        _modbus_action_types = d.pop("modbusActionTypes", UNSET)
-        modbus_action_types: list[ModbusActionTypeOutputModel] | Unset = UNSET
-        if _modbus_action_types is not UNSET:
-            modbus_action_types = []
-            for modbus_action_types_item_data in _modbus_action_types:
-                modbus_action_types_item = ModbusActionTypeOutputModel.from_dict(
-                    modbus_action_types_item_data
-                )
 
-                modbus_action_types.append(modbus_action_types_item)
+        def _parse_modbus_action_types(
+            data: object,
+        ) -> list[ModbusActionTypeOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                modbus_action_types_type_0 = []
+                _modbus_action_types_type_0 = data
+                for modbus_action_types_type_0_item_data in _modbus_action_types_type_0:
+                    modbus_action_types_type_0_item = ModbusActionTypeOutputModel.from_dict(
+                        modbus_action_types_type_0_item_data
+                    )
+
+                    modbus_action_types_type_0.append(modbus_action_types_type_0_item)
+
+                return modbus_action_types_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[ModbusActionTypeOutputModel] | None | Unset, data)
+
+        modbus_action_types = _parse_modbus_action_types(d.pop("modbusActionTypes", UNSET))
 
         modbus_action_type_output_list_model = cls(
             modbus_action_types=modbus_action_types,

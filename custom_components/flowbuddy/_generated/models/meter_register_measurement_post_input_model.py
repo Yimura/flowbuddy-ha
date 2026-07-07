@@ -12,8 +12,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-    from ..models.meter_register_measurement_post_input_model_other_properties import (
-        MeterRegisterMeasurementPostInputModelOtherProperties,
+    from ..models.meter_register_measurement_post_input_model_other_properties_type_0 import (
+        MeterRegisterMeasurementPostInputModelOtherPropertiesType0,
     )
 
 
@@ -24,32 +24,52 @@ T = TypeVar("T", bound="MeterRegisterMeasurementPostInputModel")
 class MeterRegisterMeasurementPostInputModel:
     """
     Attributes:
-        measurement_type (str | Unset):
-        force_polling (bool | Unset):
-        initial_polling (str | Unset):
-        other_properties (MeterRegisterMeasurementPostInputModelOtherProperties | Unset):
+        measurement_type (None | str | Unset):
+        force_polling (bool | None | Unset):
+        initial_polling (None | str | Unset):
+        other_properties (MeterRegisterMeasurementPostInputModelOtherPropertiesType0 | None | Unset):
     """
 
-    measurement_type: str | Unset = UNSET
-    force_polling: bool | Unset = UNSET
-    initial_polling: str | Unset = UNSET
-    other_properties: MeterRegisterMeasurementPostInputModelOtherProperties | Unset = UNSET
+    measurement_type: None | str | Unset = UNSET
+    force_polling: bool | None | Unset = UNSET
+    initial_polling: None | str | Unset = UNSET
+    other_properties: MeterRegisterMeasurementPostInputModelOtherPropertiesType0 | None | Unset = (
+        UNSET
+    )
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.meter_register_measurement_post_input_model_other_properties import (
-            MeterRegisterMeasurementPostInputModelOtherProperties,
+        from ..models.meter_register_measurement_post_input_model_other_properties_type_0 import (
+            MeterRegisterMeasurementPostInputModelOtherPropertiesType0,
         )
 
-        measurement_type = self.measurement_type
+        measurement_type: None | str | Unset
+        if isinstance(self.measurement_type, Unset):
+            measurement_type = UNSET
+        else:
+            measurement_type = self.measurement_type
 
-        force_polling = self.force_polling
+        force_polling: bool | None | Unset
+        if isinstance(self.force_polling, Unset):
+            force_polling = UNSET
+        else:
+            force_polling = self.force_polling
 
-        initial_polling = self.initial_polling
+        initial_polling: None | str | Unset
+        if isinstance(self.initial_polling, Unset):
+            initial_polling = UNSET
+        else:
+            initial_polling = self.initial_polling
 
-        other_properties: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.other_properties, Unset):
+        other_properties: dict[str, Any] | None | Unset
+        if isinstance(self.other_properties, Unset):
+            other_properties = UNSET
+        elif isinstance(
+            self.other_properties, MeterRegisterMeasurementPostInputModelOtherPropertiesType0
+        ):
             other_properties = self.other_properties.to_dict()
+        else:
+            other_properties = self.other_properties
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -67,25 +87,61 @@ class MeterRegisterMeasurementPostInputModel:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.meter_register_measurement_post_input_model_other_properties import (
-            MeterRegisterMeasurementPostInputModelOtherProperties,
+        from ..models.meter_register_measurement_post_input_model_other_properties_type_0 import (
+            MeterRegisterMeasurementPostInputModelOtherPropertiesType0,
         )
 
         d = dict(src_dict)
-        measurement_type = d.pop("measurementType", UNSET)
 
-        force_polling = d.pop("forcePolling", UNSET)
+        def _parse_measurement_type(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        initial_polling = d.pop("initialPolling", UNSET)
+        measurement_type = _parse_measurement_type(d.pop("measurementType", UNSET))
 
-        _other_properties = d.pop("otherProperties", UNSET)
-        other_properties: MeterRegisterMeasurementPostInputModelOtherProperties | Unset
-        if isinstance(_other_properties, Unset):
-            other_properties = UNSET
-        else:
-            other_properties = MeterRegisterMeasurementPostInputModelOtherProperties.from_dict(
-                _other_properties
+        def _parse_force_polling(data: object) -> bool | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(bool | None | Unset, data)
+
+        force_polling = _parse_force_polling(d.pop("forcePolling", UNSET))
+
+        def _parse_initial_polling(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        initial_polling = _parse_initial_polling(d.pop("initialPolling", UNSET))
+
+        def _parse_other_properties(
+            data: object,
+        ) -> MeterRegisterMeasurementPostInputModelOtherPropertiesType0 | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                other_properties_type_0 = (
+                    MeterRegisterMeasurementPostInputModelOtherPropertiesType0.from_dict(data)
+                )
+
+                return other_properties_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(
+                MeterRegisterMeasurementPostInputModelOtherPropertiesType0 | None | Unset, data
             )
+
+        other_properties = _parse_other_properties(d.pop("otherProperties", UNSET))
 
         meter_register_measurement_post_input_model = cls(
             measurement_type=measurement_type,

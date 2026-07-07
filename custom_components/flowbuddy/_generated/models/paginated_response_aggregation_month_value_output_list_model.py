@@ -26,14 +26,14 @@ T = TypeVar("T", bound="PaginatedResponseAggregationMonthValueOutputListModel")
 class PaginatedResponseAggregationMonthValueOutputListModel:
     """
     Attributes:
-        field_embedded (AggregationMonthValueOutputListModel | Unset):
-        field_links (LinksModel | Unset):
-        field_page (PageModel | Unset):
+        field_embedded (AggregationMonthValueOutputListModel | None | Unset):
+        field_links (LinksModel | None | Unset):
+        field_page (None | PageModel | Unset):
     """
 
-    field_embedded: AggregationMonthValueOutputListModel | Unset = UNSET
-    field_links: LinksModel | Unset = UNSET
-    field_page: PageModel | Unset = UNSET
+    field_embedded: AggregationMonthValueOutputListModel | None | Unset = UNSET
+    field_links: LinksModel | None | Unset = UNSET
+    field_page: None | PageModel | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -43,17 +43,29 @@ class PaginatedResponseAggregationMonthValueOutputListModel:
         from ..models.links_model import LinksModel
         from ..models.page_model import PageModel
 
-        field_embedded: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.field_embedded, Unset):
+        field_embedded: dict[str, Any] | None | Unset
+        if isinstance(self.field_embedded, Unset):
+            field_embedded = UNSET
+        elif isinstance(self.field_embedded, AggregationMonthValueOutputListModel):
             field_embedded = self.field_embedded.to_dict()
+        else:
+            field_embedded = self.field_embedded
 
-        field_links: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.field_links, Unset):
+        field_links: dict[str, Any] | None | Unset
+        if isinstance(self.field_links, Unset):
+            field_links = UNSET
+        elif isinstance(self.field_links, LinksModel):
             field_links = self.field_links.to_dict()
+        else:
+            field_links = self.field_links
 
-        field_page: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.field_page, Unset):
+        field_page: dict[str, Any] | None | Unset
+        if isinstance(self.field_page, Unset):
+            field_page = UNSET
+        elif isinstance(self.field_page, PageModel):
             field_page = self.field_page.to_dict()
+        else:
+            field_page = self.field_page
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -76,26 +88,59 @@ class PaginatedResponseAggregationMonthValueOutputListModel:
         from ..models.page_model import PageModel
 
         d = dict(src_dict)
-        _field_embedded = d.pop("_embedded", UNSET)
-        field_embedded: AggregationMonthValueOutputListModel | Unset
-        if isinstance(_field_embedded, Unset):
-            field_embedded = UNSET
-        else:
-            field_embedded = AggregationMonthValueOutputListModel.from_dict(_field_embedded)
 
-        _field_links = d.pop("_links", UNSET)
-        field_links: LinksModel | Unset
-        if isinstance(_field_links, Unset):
-            field_links = UNSET
-        else:
-            field_links = LinksModel.from_dict(_field_links)
+        def _parse_field_embedded(
+            data: object,
+        ) -> AggregationMonthValueOutputListModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                field_embedded_type_1 = AggregationMonthValueOutputListModel.from_dict(data)
 
-        _field_page = d.pop("_page", UNSET)
-        field_page: PageModel | Unset
-        if isinstance(_field_page, Unset):
-            field_page = UNSET
-        else:
-            field_page = PageModel.from_dict(_field_page)
+                return field_embedded_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(AggregationMonthValueOutputListModel | None | Unset, data)
+
+        field_embedded = _parse_field_embedded(d.pop("_embedded", UNSET))
+
+        def _parse_field_links(data: object) -> LinksModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                field_links_type_1 = LinksModel.from_dict(data)
+
+                return field_links_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(LinksModel | None | Unset, data)
+
+        field_links = _parse_field_links(d.pop("_links", UNSET))
+
+        def _parse_field_page(data: object) -> None | PageModel | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                field_page_type_1 = PageModel.from_dict(data)
+
+                return field_page_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(None | PageModel | Unset, data)
+
+        field_page = _parse_field_page(d.pop("_page", UNSET))
 
         paginated_response_aggregation_month_value_output_list_model = cls(
             field_embedded=field_embedded,

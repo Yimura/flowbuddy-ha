@@ -22,34 +22,54 @@ T = TypeVar("T", bound="InverterOutputModel")
 class InverterOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
-        max_power (float | Unset):
-        external_id (str | Unset):
-        last_set_production_capacity (int | Unset):
-        info (MeterReferenceModel | Unset):
+        resource_uri (None | str | Unset):
+        max_power (float | None | Unset):
+        external_id (None | str | Unset):
+        last_set_production_capacity (int | None | Unset):
+        info (MeterReferenceModel | None | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
-    max_power: float | Unset = UNSET
-    external_id: str | Unset = UNSET
-    last_set_production_capacity: int | Unset = UNSET
-    info: MeterReferenceModel | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
+    max_power: float | None | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    last_set_production_capacity: int | None | Unset = UNSET
+    info: MeterReferenceModel | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.meter_reference_model import MeterReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
-        max_power = self.max_power
+        max_power: float | None | Unset
+        if isinstance(self.max_power, Unset):
+            max_power = UNSET
+        else:
+            max_power = self.max_power
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        last_set_production_capacity = self.last_set_production_capacity
+        last_set_production_capacity: int | None | Unset
+        if isinstance(self.last_set_production_capacity, Unset):
+            last_set_production_capacity = UNSET
+        else:
+            last_set_production_capacity = self.last_set_production_capacity
 
-        info: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.info, Unset):
+        info: dict[str, Any] | None | Unset
+        if isinstance(self.info, Unset):
+            info = UNSET
+        elif isinstance(self.info, MeterReferenceModel):
             info = self.info.to_dict()
+        else:
+            info = self.info
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -72,20 +92,61 @@ class InverterOutputModel:
         from ..models.meter_reference_model import MeterReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
 
-        max_power = d.pop("maxPower", UNSET)
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        external_id = d.pop("externalId", UNSET)
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
-        last_set_production_capacity = d.pop("lastSetProductionCapacity", UNSET)
+        def _parse_max_power(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
 
-        _info = d.pop("info", UNSET)
-        info: MeterReferenceModel | Unset
-        if isinstance(_info, Unset):
-            info = UNSET
-        else:
-            info = MeterReferenceModel.from_dict(_info)
+        max_power = _parse_max_power(d.pop("maxPower", UNSET))
+
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
+
+        def _parse_last_set_production_capacity(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
+
+        last_set_production_capacity = _parse_last_set_production_capacity(
+            d.pop("lastSetProductionCapacity", UNSET)
+        )
+
+        def _parse_info(data: object) -> MeterReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                info_type_1 = MeterReferenceModel.from_dict(data)
+
+                return info_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(MeterReferenceModel | None | Unset, data)
+
+        info = _parse_info(d.pop("info", UNSET))
 
         inverter_output_model = cls(
             resource_uri=resource_uri,

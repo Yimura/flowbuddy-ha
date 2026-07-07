@@ -12,8 +12,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-    from ..models.pv_report_patch_input_model_other_properties import (
-        PvReportPatchInputModelOtherProperties,
+    from ..models.pv_report_patch_input_model_other_properties_type_0 import (
+        PvReportPatchInputModelOtherPropertiesType0,
     )
 
 
@@ -24,32 +24,48 @@ T = TypeVar("T", bound="PvReportPatchInputModel")
 class PvReportPatchInputModel:
     """
     Attributes:
-        installation (str | Unset):
-        template (str | Unset):
-        create_report (str | Unset):
-        other_properties (PvReportPatchInputModelOtherProperties | Unset):
+        installation (None | str | Unset):
+        template (None | str | Unset):
+        create_report (None | str | Unset):
+        other_properties (None | PvReportPatchInputModelOtherPropertiesType0 | Unset):
     """
 
-    installation: str | Unset = UNSET
-    template: str | Unset = UNSET
-    create_report: str | Unset = UNSET
-    other_properties: PvReportPatchInputModelOtherProperties | Unset = UNSET
+    installation: None | str | Unset = UNSET
+    template: None | str | Unset = UNSET
+    create_report: None | str | Unset = UNSET
+    other_properties: None | PvReportPatchInputModelOtherPropertiesType0 | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.pv_report_patch_input_model_other_properties import (
-            PvReportPatchInputModelOtherProperties,
+        from ..models.pv_report_patch_input_model_other_properties_type_0 import (
+            PvReportPatchInputModelOtherPropertiesType0,
         )
 
-        installation = self.installation
+        installation: None | str | Unset
+        if isinstance(self.installation, Unset):
+            installation = UNSET
+        else:
+            installation = self.installation
 
-        template = self.template
+        template: None | str | Unset
+        if isinstance(self.template, Unset):
+            template = UNSET
+        else:
+            template = self.template
 
-        create_report = self.create_report
+        create_report: None | str | Unset
+        if isinstance(self.create_report, Unset):
+            create_report = UNSET
+        else:
+            create_report = self.create_report
 
-        other_properties: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.other_properties, Unset):
+        other_properties: dict[str, Any] | None | Unset
+        if isinstance(self.other_properties, Unset):
+            other_properties = UNSET
+        elif isinstance(self.other_properties, PvReportPatchInputModelOtherPropertiesType0):
             other_properties = self.other_properties.to_dict()
+        else:
+            other_properties = self.other_properties
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -67,23 +83,59 @@ class PvReportPatchInputModel:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.pv_report_patch_input_model_other_properties import (
-            PvReportPatchInputModelOtherProperties,
+        from ..models.pv_report_patch_input_model_other_properties_type_0 import (
+            PvReportPatchInputModelOtherPropertiesType0,
         )
 
         d = dict(src_dict)
-        installation = d.pop("installation", UNSET)
 
-        template = d.pop("template", UNSET)
+        def _parse_installation(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        create_report = d.pop("createReport", UNSET)
+        installation = _parse_installation(d.pop("installation", UNSET))
 
-        _other_properties = d.pop("otherProperties", UNSET)
-        other_properties: PvReportPatchInputModelOtherProperties | Unset
-        if isinstance(_other_properties, Unset):
-            other_properties = UNSET
-        else:
-            other_properties = PvReportPatchInputModelOtherProperties.from_dict(_other_properties)
+        def _parse_template(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        template = _parse_template(d.pop("template", UNSET))
+
+        def _parse_create_report(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        create_report = _parse_create_report(d.pop("createReport", UNSET))
+
+        def _parse_other_properties(
+            data: object,
+        ) -> None | PvReportPatchInputModelOtherPropertiesType0 | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                other_properties_type_0 = PvReportPatchInputModelOtherPropertiesType0.from_dict(
+                    data
+                )
+
+                return other_properties_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(None | PvReportPatchInputModelOtherPropertiesType0 | Unset, data)
+
+        other_properties = _parse_other_properties(d.pop("otherProperties", UNSET))
 
         pv_report_patch_input_model = cls(
             installation=installation,

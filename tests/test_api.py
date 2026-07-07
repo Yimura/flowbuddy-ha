@@ -63,6 +63,14 @@ async def test_list_installations_tolerates_null_date_fields(
     inst_1 = next(i for i in installations if i.uuid.endswith("000001"))
     assert inst_1.installation_date is None
     assert inst_1.dashboard_created_on is None
+    # Nested $ref properties also arrive null on the wire even though the
+    # vendor spec doesn't declare them nullable — spec now patches every
+    # $ref property with nullable=true (see openapi/flexmon-v1.json).
+    assert inst_1.location is None
+    assert inst_1.communicator is None
+    assert inst_1.client_user_group is None
+    assert inst_1.energy_tariff is None
+    assert inst_1.installation_pool is None
 
 
 async def test_get_instant_values(client, load_fixture, respx_mock):

@@ -22,21 +22,28 @@ T = TypeVar("T", bound="EmsConfigurationUpdateOutputListModel")
 class EmsConfigurationUpdateOutputListModel:
     """
     Attributes:
-        ems_configuration_updates (list[EmsConfigurationUpdateOutputModel] | Unset):
+        ems_configuration_updates (list[EmsConfigurationUpdateOutputModel] | None | Unset):
     """
 
-    ems_configuration_updates: list[EmsConfigurationUpdateOutputModel] | Unset = UNSET
+    ems_configuration_updates: list[EmsConfigurationUpdateOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.ems_configuration_update_output_model import EmsConfigurationUpdateOutputModel
 
-        ems_configuration_updates: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.ems_configuration_updates, Unset):
+        ems_configuration_updates: list[dict[str, Any]] | None | Unset
+        if isinstance(self.ems_configuration_updates, Unset):
+            ems_configuration_updates = UNSET
+        elif isinstance(self.ems_configuration_updates, list):
             ems_configuration_updates = []
-            for ems_configuration_updates_item_data in self.ems_configuration_updates:
-                ems_configuration_updates_item = ems_configuration_updates_item_data.to_dict()
-                ems_configuration_updates.append(ems_configuration_updates_item)
+            for ems_configuration_updates_type_0_item_data in self.ems_configuration_updates:
+                ems_configuration_updates_type_0_item = (
+                    ems_configuration_updates_type_0_item_data.to_dict()
+                )
+                ems_configuration_updates.append(ems_configuration_updates_type_0_item)
+
+        else:
+            ems_configuration_updates = self.ems_configuration_updates
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,16 +58,36 @@ class EmsConfigurationUpdateOutputListModel:
         from ..models.ems_configuration_update_output_model import EmsConfigurationUpdateOutputModel
 
         d = dict(src_dict)
-        _ems_configuration_updates = d.pop("emsConfigurationUpdates", UNSET)
-        ems_configuration_updates: list[EmsConfigurationUpdateOutputModel] | Unset = UNSET
-        if _ems_configuration_updates is not UNSET:
-            ems_configuration_updates = []
-            for ems_configuration_updates_item_data in _ems_configuration_updates:
-                ems_configuration_updates_item = EmsConfigurationUpdateOutputModel.from_dict(
-                    ems_configuration_updates_item_data
-                )
 
-                ems_configuration_updates.append(ems_configuration_updates_item)
+        def _parse_ems_configuration_updates(
+            data: object,
+        ) -> list[EmsConfigurationUpdateOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                ems_configuration_updates_type_0 = []
+                _ems_configuration_updates_type_0 = data
+                for ems_configuration_updates_type_0_item_data in _ems_configuration_updates_type_0:
+                    ems_configuration_updates_type_0_item = (
+                        EmsConfigurationUpdateOutputModel.from_dict(
+                            ems_configuration_updates_type_0_item_data
+                        )
+                    )
+
+                    ems_configuration_updates_type_0.append(ems_configuration_updates_type_0_item)
+
+                return ems_configuration_updates_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[EmsConfigurationUpdateOutputModel] | None | Unset, data)
+
+        ems_configuration_updates = _parse_ems_configuration_updates(
+            d.pop("emsConfigurationUpdates", UNSET)
+        )
 
         ems_configuration_update_output_list_model = cls(
             ems_configuration_updates=ems_configuration_updates,

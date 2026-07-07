@@ -22,21 +22,26 @@ T = TypeVar("T", bound="CommunicatorOutputListModel")
 class CommunicatorOutputListModel:
     """
     Attributes:
-        communicators (list[CommunicatorOutputModel] | Unset):
+        communicators (list[CommunicatorOutputModel] | None | Unset):
     """
 
-    communicators: list[CommunicatorOutputModel] | Unset = UNSET
+    communicators: list[CommunicatorOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.communicator_output_model import CommunicatorOutputModel
 
-        communicators: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.communicators, Unset):
+        communicators: list[dict[str, Any]] | None | Unset
+        if isinstance(self.communicators, Unset):
+            communicators = UNSET
+        elif isinstance(self.communicators, list):
             communicators = []
-            for communicators_item_data in self.communicators:
-                communicators_item = communicators_item_data.to_dict()
-                communicators.append(communicators_item)
+            for communicators_type_0_item_data in self.communicators:
+                communicators_type_0_item = communicators_type_0_item_data.to_dict()
+                communicators.append(communicators_type_0_item)
+
+        else:
+            communicators = self.communicators
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,14 +56,30 @@ class CommunicatorOutputListModel:
         from ..models.communicator_output_model import CommunicatorOutputModel
 
         d = dict(src_dict)
-        _communicators = d.pop("communicators", UNSET)
-        communicators: list[CommunicatorOutputModel] | Unset = UNSET
-        if _communicators is not UNSET:
-            communicators = []
-            for communicators_item_data in _communicators:
-                communicators_item = CommunicatorOutputModel.from_dict(communicators_item_data)
 
-                communicators.append(communicators_item)
+        def _parse_communicators(data: object) -> list[CommunicatorOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                communicators_type_0 = []
+                _communicators_type_0 = data
+                for communicators_type_0_item_data in _communicators_type_0:
+                    communicators_type_0_item = CommunicatorOutputModel.from_dict(
+                        communicators_type_0_item_data
+                    )
+
+                    communicators_type_0.append(communicators_type_0_item)
+
+                return communicators_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[CommunicatorOutputModel] | None | Unset, data)
+
+        communicators = _parse_communicators(d.pop("communicators", UNSET))
 
         communicator_output_list_model = cls(
             communicators=communicators,

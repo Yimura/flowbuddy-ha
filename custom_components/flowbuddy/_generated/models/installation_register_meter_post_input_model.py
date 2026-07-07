@@ -12,8 +12,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-    from ..models.installation_register_meter_post_input_model_other_properties import (
-        InstallationRegisterMeterPostInputModelOtherProperties,
+    from ..models.installation_register_meter_post_input_model_other_properties_type_0 import (
+        InstallationRegisterMeterPostInputModelOtherPropertiesType0,
     )
 
 
@@ -24,33 +24,53 @@ T = TypeVar("T", bound="InstallationRegisterMeterPostInputModel")
 class InstallationRegisterMeterPostInputModel:
     """
     Attributes:
-        measuring_device (str | Unset):
-        description (str | Unset): Custom name that will be used to fill in Meter Type
-        initial_polling (str | Unset): You can choose which data to process for this particular device. All data (whole
-            period) or only the data read after registration.
-        other_properties (InstallationRegisterMeterPostInputModelOtherProperties | Unset):
+        measuring_device (None | str | Unset):
+        description (None | str | Unset): Custom name that will be used to fill in Meter Type
+        initial_polling (None | str | Unset): You can choose which data to process for this particular device. All data
+            (whole period) or only the data read after registration.
+        other_properties (InstallationRegisterMeterPostInputModelOtherPropertiesType0 | None | Unset):
     """
 
-    measuring_device: str | Unset = UNSET
-    description: str | Unset = UNSET
-    initial_polling: str | Unset = UNSET
-    other_properties: InstallationRegisterMeterPostInputModelOtherProperties | Unset = UNSET
+    measuring_device: None | str | Unset = UNSET
+    description: None | str | Unset = UNSET
+    initial_polling: None | str | Unset = UNSET
+    other_properties: InstallationRegisterMeterPostInputModelOtherPropertiesType0 | None | Unset = (
+        UNSET
+    )
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.installation_register_meter_post_input_model_other_properties import (
-            InstallationRegisterMeterPostInputModelOtherProperties,
+        from ..models.installation_register_meter_post_input_model_other_properties_type_0 import (
+            InstallationRegisterMeterPostInputModelOtherPropertiesType0,
         )
 
-        measuring_device = self.measuring_device
+        measuring_device: None | str | Unset
+        if isinstance(self.measuring_device, Unset):
+            measuring_device = UNSET
+        else:
+            measuring_device = self.measuring_device
 
-        description = self.description
+        description: None | str | Unset
+        if isinstance(self.description, Unset):
+            description = UNSET
+        else:
+            description = self.description
 
-        initial_polling = self.initial_polling
+        initial_polling: None | str | Unset
+        if isinstance(self.initial_polling, Unset):
+            initial_polling = UNSET
+        else:
+            initial_polling = self.initial_polling
 
-        other_properties: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.other_properties, Unset):
+        other_properties: dict[str, Any] | None | Unset
+        if isinstance(self.other_properties, Unset):
+            other_properties = UNSET
+        elif isinstance(
+            self.other_properties, InstallationRegisterMeterPostInputModelOtherPropertiesType0
+        ):
             other_properties = self.other_properties.to_dict()
+        else:
+            other_properties = self.other_properties
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -68,25 +88,61 @@ class InstallationRegisterMeterPostInputModel:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.installation_register_meter_post_input_model_other_properties import (
-            InstallationRegisterMeterPostInputModelOtherProperties,
+        from ..models.installation_register_meter_post_input_model_other_properties_type_0 import (
+            InstallationRegisterMeterPostInputModelOtherPropertiesType0,
         )
 
         d = dict(src_dict)
-        measuring_device = d.pop("measuringDevice", UNSET)
 
-        description = d.pop("description", UNSET)
+        def _parse_measuring_device(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        initial_polling = d.pop("initialPolling", UNSET)
+        measuring_device = _parse_measuring_device(d.pop("measuringDevice", UNSET))
 
-        _other_properties = d.pop("otherProperties", UNSET)
-        other_properties: InstallationRegisterMeterPostInputModelOtherProperties | Unset
-        if isinstance(_other_properties, Unset):
-            other_properties = UNSET
-        else:
-            other_properties = InstallationRegisterMeterPostInputModelOtherProperties.from_dict(
-                _other_properties
+        def _parse_description(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        description = _parse_description(d.pop("description", UNSET))
+
+        def _parse_initial_polling(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        initial_polling = _parse_initial_polling(d.pop("initialPolling", UNSET))
+
+        def _parse_other_properties(
+            data: object,
+        ) -> InstallationRegisterMeterPostInputModelOtherPropertiesType0 | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                other_properties_type_0 = (
+                    InstallationRegisterMeterPostInputModelOtherPropertiesType0.from_dict(data)
+                )
+
+                return other_properties_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(
+                InstallationRegisterMeterPostInputModelOtherPropertiesType0 | None | Unset, data
             )
+
+        other_properties = _parse_other_properties(d.pop("otherProperties", UNSET))
 
         installation_register_meter_post_input_model = cls(
             measuring_device=measuring_device,

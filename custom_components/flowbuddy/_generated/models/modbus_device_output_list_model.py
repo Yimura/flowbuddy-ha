@@ -22,21 +22,26 @@ T = TypeVar("T", bound="ModbusDeviceOutputListModel")
 class ModbusDeviceOutputListModel:
     """
     Attributes:
-        modbus_devices (list[ModbusDeviceOutputModel] | Unset):
+        modbus_devices (list[ModbusDeviceOutputModel] | None | Unset):
     """
 
-    modbus_devices: list[ModbusDeviceOutputModel] | Unset = UNSET
+    modbus_devices: list[ModbusDeviceOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.modbus_device_output_model import ModbusDeviceOutputModel
 
-        modbus_devices: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.modbus_devices, Unset):
+        modbus_devices: list[dict[str, Any]] | None | Unset
+        if isinstance(self.modbus_devices, Unset):
+            modbus_devices = UNSET
+        elif isinstance(self.modbus_devices, list):
             modbus_devices = []
-            for modbus_devices_item_data in self.modbus_devices:
-                modbus_devices_item = modbus_devices_item_data.to_dict()
-                modbus_devices.append(modbus_devices_item)
+            for modbus_devices_type_0_item_data in self.modbus_devices:
+                modbus_devices_type_0_item = modbus_devices_type_0_item_data.to_dict()
+                modbus_devices.append(modbus_devices_type_0_item)
+
+        else:
+            modbus_devices = self.modbus_devices
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,14 +56,30 @@ class ModbusDeviceOutputListModel:
         from ..models.modbus_device_output_model import ModbusDeviceOutputModel
 
         d = dict(src_dict)
-        _modbus_devices = d.pop("modbusDevices", UNSET)
-        modbus_devices: list[ModbusDeviceOutputModel] | Unset = UNSET
-        if _modbus_devices is not UNSET:
-            modbus_devices = []
-            for modbus_devices_item_data in _modbus_devices:
-                modbus_devices_item = ModbusDeviceOutputModel.from_dict(modbus_devices_item_data)
 
-                modbus_devices.append(modbus_devices_item)
+        def _parse_modbus_devices(data: object) -> list[ModbusDeviceOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                modbus_devices_type_0 = []
+                _modbus_devices_type_0 = data
+                for modbus_devices_type_0_item_data in _modbus_devices_type_0:
+                    modbus_devices_type_0_item = ModbusDeviceOutputModel.from_dict(
+                        modbus_devices_type_0_item_data
+                    )
+
+                    modbus_devices_type_0.append(modbus_devices_type_0_item)
+
+                return modbus_devices_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[ModbusDeviceOutputModel] | None | Unset, data)
+
+        modbus_devices = _parse_modbus_devices(d.pop("modbusDevices", UNSET))
 
         modbus_device_output_list_model = cls(
             modbus_devices=modbus_devices,

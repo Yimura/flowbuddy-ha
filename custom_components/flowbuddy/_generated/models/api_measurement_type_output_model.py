@@ -22,34 +22,54 @@ T = TypeVar("T", bound="ApiMeasurementTypeOutputModel")
 class ApiMeasurementTypeOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
-        name (str | Unset):
-        is_cumulative (bool | Unset):
-        external_id (str | Unset):
-        api_meter_type (ApiMeterTypeReferenceModel | Unset):
+        resource_uri (None | str | Unset):
+        name (None | str | Unset):
+        is_cumulative (bool | None | Unset):
+        external_id (None | str | Unset):
+        api_meter_type (ApiMeterTypeReferenceModel | None | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
-    name: str | Unset = UNSET
-    is_cumulative: bool | Unset = UNSET
-    external_id: str | Unset = UNSET
-    api_meter_type: ApiMeterTypeReferenceModel | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
+    name: None | str | Unset = UNSET
+    is_cumulative: bool | None | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    api_meter_type: ApiMeterTypeReferenceModel | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.api_meter_type_reference_model import ApiMeterTypeReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
-        name = self.name
+        name: None | str | Unset
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
 
-        is_cumulative = self.is_cumulative
+        is_cumulative: bool | None | Unset
+        if isinstance(self.is_cumulative, Unset):
+            is_cumulative = UNSET
+        else:
+            is_cumulative = self.is_cumulative
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        api_meter_type: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.api_meter_type, Unset):
+        api_meter_type: dict[str, Any] | None | Unset
+        if isinstance(self.api_meter_type, Unset):
+            api_meter_type = UNSET
+        elif isinstance(self.api_meter_type, ApiMeterTypeReferenceModel):
             api_meter_type = self.api_meter_type.to_dict()
+        else:
+            api_meter_type = self.api_meter_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -72,20 +92,59 @@ class ApiMeasurementTypeOutputModel:
         from ..models.api_meter_type_reference_model import ApiMeterTypeReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
 
-        name = d.pop("name", UNSET)
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        is_cumulative = d.pop("isCumulative", UNSET)
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
-        external_id = d.pop("externalId", UNSET)
+        def _parse_name(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _api_meter_type = d.pop("apiMeterType", UNSET)
-        api_meter_type: ApiMeterTypeReferenceModel | Unset
-        if isinstance(_api_meter_type, Unset):
-            api_meter_type = UNSET
-        else:
-            api_meter_type = ApiMeterTypeReferenceModel.from_dict(_api_meter_type)
+        name = _parse_name(d.pop("name", UNSET))
+
+        def _parse_is_cumulative(data: object) -> bool | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(bool | None | Unset, data)
+
+        is_cumulative = _parse_is_cumulative(d.pop("isCumulative", UNSET))
+
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
+
+        def _parse_api_meter_type(data: object) -> ApiMeterTypeReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                api_meter_type_type_1 = ApiMeterTypeReferenceModel.from_dict(data)
+
+                return api_meter_type_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(ApiMeterTypeReferenceModel | None | Unset, data)
+
+        api_meter_type = _parse_api_meter_type(d.pop("apiMeterType", UNSET))
 
         api_measurement_type_output_model = cls(
             resource_uri=resource_uri,

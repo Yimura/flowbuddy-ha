@@ -22,21 +22,28 @@ T = TypeVar("T", bound="AggregationMonthValueOutputListModel")
 class AggregationMonthValueOutputListModel:
     """
     Attributes:
-        aggregation_month_values (list[AggregationMonthValueOutputModel] | Unset):
+        aggregation_month_values (list[AggregationMonthValueOutputModel] | None | Unset):
     """
 
-    aggregation_month_values: list[AggregationMonthValueOutputModel] | Unset = UNSET
+    aggregation_month_values: list[AggregationMonthValueOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.aggregation_month_value_output_model import AggregationMonthValueOutputModel
 
-        aggregation_month_values: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.aggregation_month_values, Unset):
+        aggregation_month_values: list[dict[str, Any]] | None | Unset
+        if isinstance(self.aggregation_month_values, Unset):
+            aggregation_month_values = UNSET
+        elif isinstance(self.aggregation_month_values, list):
             aggregation_month_values = []
-            for aggregation_month_values_item_data in self.aggregation_month_values:
-                aggregation_month_values_item = aggregation_month_values_item_data.to_dict()
-                aggregation_month_values.append(aggregation_month_values_item)
+            for aggregation_month_values_type_0_item_data in self.aggregation_month_values:
+                aggregation_month_values_type_0_item = (
+                    aggregation_month_values_type_0_item_data.to_dict()
+                )
+                aggregation_month_values.append(aggregation_month_values_type_0_item)
+
+        else:
+            aggregation_month_values = self.aggregation_month_values
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,16 +58,36 @@ class AggregationMonthValueOutputListModel:
         from ..models.aggregation_month_value_output_model import AggregationMonthValueOutputModel
 
         d = dict(src_dict)
-        _aggregation_month_values = d.pop("aggregationMonthValues", UNSET)
-        aggregation_month_values: list[AggregationMonthValueOutputModel] | Unset = UNSET
-        if _aggregation_month_values is not UNSET:
-            aggregation_month_values = []
-            for aggregation_month_values_item_data in _aggregation_month_values:
-                aggregation_month_values_item = AggregationMonthValueOutputModel.from_dict(
-                    aggregation_month_values_item_data
-                )
 
-                aggregation_month_values.append(aggregation_month_values_item)
+        def _parse_aggregation_month_values(
+            data: object,
+        ) -> list[AggregationMonthValueOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                aggregation_month_values_type_0 = []
+                _aggregation_month_values_type_0 = data
+                for aggregation_month_values_type_0_item_data in _aggregation_month_values_type_0:
+                    aggregation_month_values_type_0_item = (
+                        AggregationMonthValueOutputModel.from_dict(
+                            aggregation_month_values_type_0_item_data
+                        )
+                    )
+
+                    aggregation_month_values_type_0.append(aggregation_month_values_type_0_item)
+
+                return aggregation_month_values_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[AggregationMonthValueOutputModel] | None | Unset, data)
+
+        aggregation_month_values = _parse_aggregation_month_values(
+            d.pop("aggregationMonthValues", UNSET)
+        )
 
         aggregation_month_value_output_list_model = cls(
             aggregation_month_values=aggregation_month_values,

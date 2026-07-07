@@ -13,8 +13,8 @@ from typing import cast
 import datetime
 
 if TYPE_CHECKING:
-    from ..models.alarm_add_comment_post_input_model_other_properties import (
-        AlarmAddCommentPostInputModelOtherProperties,
+    from ..models.alarm_add_comment_post_input_model_other_properties_type_0 import (
+        AlarmAddCommentPostInputModelOtherPropertiesType0,
     )
 
 
@@ -25,26 +25,34 @@ T = TypeVar("T", bound="AlarmAddCommentPostInputModel")
 class AlarmAddCommentPostInputModel:
     """
     Attributes:
-        type_ (str | Unset): The type of comment you want to add
-        new_comment (str | Unset): The comment to add
+        type_ (None | str | Unset): The type of comment you want to add
+        new_comment (None | str | Unset): The comment to add
         date (datetime.datetime | None | Unset): The date on which is logically coupled to the Comment
-        other_properties (AlarmAddCommentPostInputModelOtherProperties | Unset):
+        other_properties (AlarmAddCommentPostInputModelOtherPropertiesType0 | None | Unset):
     """
 
-    type_: str | Unset = UNSET
-    new_comment: str | Unset = UNSET
+    type_: None | str | Unset = UNSET
+    new_comment: None | str | Unset = UNSET
     date: datetime.datetime | None | Unset = UNSET
-    other_properties: AlarmAddCommentPostInputModelOtherProperties | Unset = UNSET
+    other_properties: AlarmAddCommentPostInputModelOtherPropertiesType0 | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.alarm_add_comment_post_input_model_other_properties import (
-            AlarmAddCommentPostInputModelOtherProperties,
+        from ..models.alarm_add_comment_post_input_model_other_properties_type_0 import (
+            AlarmAddCommentPostInputModelOtherPropertiesType0,
         )
 
-        type_ = self.type_
+        type_: None | str | Unset
+        if isinstance(self.type_, Unset):
+            type_ = UNSET
+        else:
+            type_ = self.type_
 
-        new_comment = self.new_comment
+        new_comment: None | str | Unset
+        if isinstance(self.new_comment, Unset):
+            new_comment = UNSET
+        else:
+            new_comment = self.new_comment
 
         date: None | str | Unset
         if isinstance(self.date, Unset):
@@ -54,9 +62,13 @@ class AlarmAddCommentPostInputModel:
         else:
             date = self.date
 
-        other_properties: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.other_properties, Unset):
+        other_properties: dict[str, Any] | None | Unset
+        if isinstance(self.other_properties, Unset):
+            other_properties = UNSET
+        elif isinstance(self.other_properties, AlarmAddCommentPostInputModelOtherPropertiesType0):
             other_properties = self.other_properties.to_dict()
+        else:
+            other_properties = self.other_properties
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -74,14 +86,29 @@ class AlarmAddCommentPostInputModel:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.alarm_add_comment_post_input_model_other_properties import (
-            AlarmAddCommentPostInputModelOtherProperties,
+        from ..models.alarm_add_comment_post_input_model_other_properties_type_0 import (
+            AlarmAddCommentPostInputModelOtherPropertiesType0,
         )
 
         d = dict(src_dict)
-        type_ = d.pop("type", UNSET)
 
-        new_comment = d.pop("newComment", UNSET)
+        def _parse_type_(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        type_ = _parse_type_(d.pop("type", UNSET))
+
+        def _parse_new_comment(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        new_comment = _parse_new_comment(d.pop("newComment", UNSET))
 
         def _parse_date(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -100,14 +127,26 @@ class AlarmAddCommentPostInputModel:
 
         date = _parse_date(d.pop("date", UNSET))
 
-        _other_properties = d.pop("otherProperties", UNSET)
-        other_properties: AlarmAddCommentPostInputModelOtherProperties | Unset
-        if isinstance(_other_properties, Unset):
-            other_properties = UNSET
-        else:
-            other_properties = AlarmAddCommentPostInputModelOtherProperties.from_dict(
-                _other_properties
-            )
+        def _parse_other_properties(
+            data: object,
+        ) -> AlarmAddCommentPostInputModelOtherPropertiesType0 | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                other_properties_type_0 = (
+                    AlarmAddCommentPostInputModelOtherPropertiesType0.from_dict(data)
+                )
+
+                return other_properties_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(AlarmAddCommentPostInputModelOtherPropertiesType0 | None | Unset, data)
+
+        other_properties = _parse_other_properties(d.pop("otherProperties", UNSET))
 
         alarm_add_comment_post_input_model = cls(
             type_=type_,

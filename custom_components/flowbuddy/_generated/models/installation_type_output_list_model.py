@@ -22,21 +22,26 @@ T = TypeVar("T", bound="InstallationTypeOutputListModel")
 class InstallationTypeOutputListModel:
     """
     Attributes:
-        installation_types (list[InstallationTypeOutputModel] | Unset):
+        installation_types (list[InstallationTypeOutputModel] | None | Unset):
     """
 
-    installation_types: list[InstallationTypeOutputModel] | Unset = UNSET
+    installation_types: list[InstallationTypeOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.installation_type_output_model import InstallationTypeOutputModel
 
-        installation_types: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.installation_types, Unset):
+        installation_types: list[dict[str, Any]] | None | Unset
+        if isinstance(self.installation_types, Unset):
+            installation_types = UNSET
+        elif isinstance(self.installation_types, list):
             installation_types = []
-            for installation_types_item_data in self.installation_types:
-                installation_types_item = installation_types_item_data.to_dict()
-                installation_types.append(installation_types_item)
+            for installation_types_type_0_item_data in self.installation_types:
+                installation_types_type_0_item = installation_types_type_0_item_data.to_dict()
+                installation_types.append(installation_types_type_0_item)
+
+        else:
+            installation_types = self.installation_types
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,16 +56,32 @@ class InstallationTypeOutputListModel:
         from ..models.installation_type_output_model import InstallationTypeOutputModel
 
         d = dict(src_dict)
-        _installation_types = d.pop("installationTypes", UNSET)
-        installation_types: list[InstallationTypeOutputModel] | Unset = UNSET
-        if _installation_types is not UNSET:
-            installation_types = []
-            for installation_types_item_data in _installation_types:
-                installation_types_item = InstallationTypeOutputModel.from_dict(
-                    installation_types_item_data
-                )
 
-                installation_types.append(installation_types_item)
+        def _parse_installation_types(
+            data: object,
+        ) -> list[InstallationTypeOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                installation_types_type_0 = []
+                _installation_types_type_0 = data
+                for installation_types_type_0_item_data in _installation_types_type_0:
+                    installation_types_type_0_item = InstallationTypeOutputModel.from_dict(
+                        installation_types_type_0_item_data
+                    )
+
+                    installation_types_type_0.append(installation_types_type_0_item)
+
+                return installation_types_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[InstallationTypeOutputModel] | None | Unset, data)
+
+        installation_types = _parse_installation_types(d.pop("installationTypes", UNSET))
 
         installation_type_output_list_model = cls(
             installation_types=installation_types,

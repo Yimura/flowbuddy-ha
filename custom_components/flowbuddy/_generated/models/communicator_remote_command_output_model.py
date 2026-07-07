@@ -23,38 +23,46 @@ T = TypeVar("T", bound="CommunicatorRemoteCommandOutputModel")
 class CommunicatorRemoteCommandOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
-        type_ (str | Unset): The type will indicate which action was requested (e.g. `connectiontest`)
+        resource_uri (None | str | Unset):
+        type_ (None | str | Unset): The type will indicate which action was requested (e.g. `connectiontest`)
         timestamp (datetime.datetime | None | Unset):
-        status (str | Unset): Initial = The command is waiting for execution. Dispatching = We are trying to connect to
-            the module. Dispatched = The action was executed.
-        result (str | Unset): Failure or Success. A failure is often caused by a connection issue and can be solved by a
-            retry at a later moment.
-        result_message (str | Unset):
+        status (None | str | Unset): Initial = The command is waiting for execution. Dispatching = We are trying to
+            connect to the module. Dispatched = The action was executed.
+        result (None | str | Unset): Failure or Success. A failure is often caused by a connection issue and can be
+            solved by a retry at a later moment.
+        result_message (None | str | Unset):
         entered_on (datetime.datetime | None | Unset):
         performed_on (datetime.datetime | None | Unset):
-        external_id (str | Unset):
-        communicator (CommunicatorReferenceModel | Unset):
+        external_id (None | str | Unset):
+        communicator (CommunicatorReferenceModel | None | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
-    type_: str | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
+    type_: None | str | Unset = UNSET
     timestamp: datetime.datetime | None | Unset = UNSET
-    status: str | Unset = UNSET
-    result: str | Unset = UNSET
-    result_message: str | Unset = UNSET
+    status: None | str | Unset = UNSET
+    result: None | str | Unset = UNSET
+    result_message: None | str | Unset = UNSET
     entered_on: datetime.datetime | None | Unset = UNSET
     performed_on: datetime.datetime | None | Unset = UNSET
-    external_id: str | Unset = UNSET
-    communicator: CommunicatorReferenceModel | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    communicator: CommunicatorReferenceModel | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.communicator_reference_model import CommunicatorReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
-        type_ = self.type_
+        type_: None | str | Unset
+        if isinstance(self.type_, Unset):
+            type_ = UNSET
+        else:
+            type_ = self.type_
 
         timestamp: None | str | Unset
         if isinstance(self.timestamp, Unset):
@@ -64,11 +72,23 @@ class CommunicatorRemoteCommandOutputModel:
         else:
             timestamp = self.timestamp
 
-        status = self.status
+        status: None | str | Unset
+        if isinstance(self.status, Unset):
+            status = UNSET
+        else:
+            status = self.status
 
-        result = self.result
+        result: None | str | Unset
+        if isinstance(self.result, Unset):
+            result = UNSET
+        else:
+            result = self.result
 
-        result_message = self.result_message
+        result_message: None | str | Unset
+        if isinstance(self.result_message, Unset):
+            result_message = UNSET
+        else:
+            result_message = self.result_message
 
         entered_on: None | str | Unset
         if isinstance(self.entered_on, Unset):
@@ -86,11 +106,19 @@ class CommunicatorRemoteCommandOutputModel:
         else:
             performed_on = self.performed_on
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        communicator: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.communicator, Unset):
+        communicator: dict[str, Any] | None | Unset
+        if isinstance(self.communicator, Unset):
+            communicator = UNSET
+        elif isinstance(self.communicator, CommunicatorReferenceModel):
             communicator = self.communicator.to_dict()
+        else:
+            communicator = self.communicator
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -123,9 +151,24 @@ class CommunicatorRemoteCommandOutputModel:
         from ..models.communicator_reference_model import CommunicatorReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
 
-        type_ = d.pop("type", UNSET)
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
+
+        def _parse_type_(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        type_ = _parse_type_(d.pop("type", UNSET))
 
         def _parse_timestamp(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -144,11 +187,32 @@ class CommunicatorRemoteCommandOutputModel:
 
         timestamp = _parse_timestamp(d.pop("timestamp", UNSET))
 
-        status = d.pop("status", UNSET)
+        def _parse_status(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        result = d.pop("result", UNSET)
+        status = _parse_status(d.pop("status", UNSET))
 
-        result_message = d.pop("resultMessage", UNSET)
+        def _parse_result(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        result = _parse_result(d.pop("result", UNSET))
+
+        def _parse_result_message(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        result_message = _parse_result_message(d.pop("resultMessage", UNSET))
 
         def _parse_entered_on(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -184,14 +248,31 @@ class CommunicatorRemoteCommandOutputModel:
 
         performed_on = _parse_performed_on(d.pop("performedOn", UNSET))
 
-        external_id = d.pop("externalId", UNSET)
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _communicator = d.pop("communicator", UNSET)
-        communicator: CommunicatorReferenceModel | Unset
-        if isinstance(_communicator, Unset):
-            communicator = UNSET
-        else:
-            communicator = CommunicatorReferenceModel.from_dict(_communicator)
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
+
+        def _parse_communicator(data: object) -> CommunicatorReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                communicator_type_1 = CommunicatorReferenceModel.from_dict(data)
+
+                return communicator_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(CommunicatorReferenceModel | None | Unset, data)
+
+        communicator = _parse_communicator(d.pop("communicator", UNSET))
 
         communicator_remote_command_output_model = cls(
             resource_uri=resource_uri,

@@ -22,21 +22,26 @@ T = TypeVar("T", bound="EmsConfigurationOutputListModel")
 class EmsConfigurationOutputListModel:
     """
     Attributes:
-        ems_configurations (list[EmsConfigurationOutputModel] | Unset):
+        ems_configurations (list[EmsConfigurationOutputModel] | None | Unset):
     """
 
-    ems_configurations: list[EmsConfigurationOutputModel] | Unset = UNSET
+    ems_configurations: list[EmsConfigurationOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.ems_configuration_output_model import EmsConfigurationOutputModel
 
-        ems_configurations: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.ems_configurations, Unset):
+        ems_configurations: list[dict[str, Any]] | None | Unset
+        if isinstance(self.ems_configurations, Unset):
+            ems_configurations = UNSET
+        elif isinstance(self.ems_configurations, list):
             ems_configurations = []
-            for ems_configurations_item_data in self.ems_configurations:
-                ems_configurations_item = ems_configurations_item_data.to_dict()
-                ems_configurations.append(ems_configurations_item)
+            for ems_configurations_type_0_item_data in self.ems_configurations:
+                ems_configurations_type_0_item = ems_configurations_type_0_item_data.to_dict()
+                ems_configurations.append(ems_configurations_type_0_item)
+
+        else:
+            ems_configurations = self.ems_configurations
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,16 +56,32 @@ class EmsConfigurationOutputListModel:
         from ..models.ems_configuration_output_model import EmsConfigurationOutputModel
 
         d = dict(src_dict)
-        _ems_configurations = d.pop("emsConfigurations", UNSET)
-        ems_configurations: list[EmsConfigurationOutputModel] | Unset = UNSET
-        if _ems_configurations is not UNSET:
-            ems_configurations = []
-            for ems_configurations_item_data in _ems_configurations:
-                ems_configurations_item = EmsConfigurationOutputModel.from_dict(
-                    ems_configurations_item_data
-                )
 
-                ems_configurations.append(ems_configurations_item)
+        def _parse_ems_configurations(
+            data: object,
+        ) -> list[EmsConfigurationOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                ems_configurations_type_0 = []
+                _ems_configurations_type_0 = data
+                for ems_configurations_type_0_item_data in _ems_configurations_type_0:
+                    ems_configurations_type_0_item = EmsConfigurationOutputModel.from_dict(
+                        ems_configurations_type_0_item_data
+                    )
+
+                    ems_configurations_type_0.append(ems_configurations_type_0_item)
+
+                return ems_configurations_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[EmsConfigurationOutputModel] | None | Unset, data)
+
+        ems_configurations = _parse_ems_configurations(d.pop("emsConfigurations", UNSET))
 
         ems_configuration_output_list_model = cls(
             ems_configurations=ems_configurations,

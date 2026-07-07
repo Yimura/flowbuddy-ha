@@ -9,6 +9,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import cast
 
 
 T = TypeVar("T", bound="SimOutputModel")
@@ -18,38 +19,66 @@ T = TypeVar("T", bound="SimOutputModel")
 class SimOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
-        service_provider (str | Unset): The service provider of the sim card (1NCE or Sim Services)
-        operator (str | Unset): The network operator
-        icc_id (str | Unset): Unique serial number of the sim card
-        ip_address (str | Unset): The IP Address to reach the sim card
-        network_status (str | Unset): The status of the sim on the network
-        external_id (str | Unset):
+        resource_uri (None | str | Unset):
+        service_provider (None | str | Unset): The service provider of the sim card (1NCE or Sim Services)
+        operator (None | str | Unset): The network operator
+        icc_id (None | str | Unset): Unique serial number of the sim card
+        ip_address (None | str | Unset): The IP Address to reach the sim card
+        network_status (None | str | Unset): The status of the sim on the network
+        external_id (None | str | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
-    service_provider: str | Unset = UNSET
-    operator: str | Unset = UNSET
-    icc_id: str | Unset = UNSET
-    ip_address: str | Unset = UNSET
-    network_status: str | Unset = UNSET
-    external_id: str | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
+    service_provider: None | str | Unset = UNSET
+    operator: None | str | Unset = UNSET
+    icc_id: None | str | Unset = UNSET
+    ip_address: None | str | Unset = UNSET
+    network_status: None | str | Unset = UNSET
+    external_id: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
-        service_provider = self.service_provider
+        service_provider: None | str | Unset
+        if isinstance(self.service_provider, Unset):
+            service_provider = UNSET
+        else:
+            service_provider = self.service_provider
 
-        operator = self.operator
+        operator: None | str | Unset
+        if isinstance(self.operator, Unset):
+            operator = UNSET
+        else:
+            operator = self.operator
 
-        icc_id = self.icc_id
+        icc_id: None | str | Unset
+        if isinstance(self.icc_id, Unset):
+            icc_id = UNSET
+        else:
+            icc_id = self.icc_id
 
-        ip_address = self.ip_address
+        ip_address: None | str | Unset
+        if isinstance(self.ip_address, Unset):
+            ip_address = UNSET
+        else:
+            ip_address = self.ip_address
 
-        network_status = self.network_status
+        network_status: None | str | Unset
+        if isinstance(self.network_status, Unset):
+            network_status = UNSET
+        else:
+            network_status = self.network_status
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -74,19 +103,69 @@ class SimOutputModel:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
 
-        service_provider = d.pop("serviceProvider", UNSET)
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        operator = d.pop("operator", UNSET)
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
-        icc_id = d.pop("iccId", UNSET)
+        def _parse_service_provider(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        ip_address = d.pop("ipAddress", UNSET)
+        service_provider = _parse_service_provider(d.pop("serviceProvider", UNSET))
 
-        network_status = d.pop("networkStatus", UNSET)
+        def _parse_operator(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        external_id = d.pop("externalId", UNSET)
+        operator = _parse_operator(d.pop("operator", UNSET))
+
+        def _parse_icc_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        icc_id = _parse_icc_id(d.pop("iccId", UNSET))
+
+        def _parse_ip_address(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        ip_address = _parse_ip_address(d.pop("ipAddress", UNSET))
+
+        def _parse_network_status(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        network_status = _parse_network_status(d.pop("networkStatus", UNSET))
+
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
 
         sim_output_model = cls(
             resource_uri=resource_uri,

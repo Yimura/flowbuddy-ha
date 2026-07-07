@@ -28,86 +28,86 @@ T = TypeVar("T", bound="InstallationOutputModel")
 class InstallationOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
-        identification (str | Unset): Unique identifier for your installation
-        uuid (str | Unset): Deprecated, no longer used
-        customer_name (str | Unset):
-        customer_id (str | Unset):
-        email_address (str | Unset):
-        latitude (float | Unset):
-        longitude (float | Unset):
-        street (str | Unset):
-        house_number (str | Unset):
-        zip_code (str | Unset):
-        city (str | Unset):
-        country (str | Unset):
-        resident (str | Unset):
+        resource_uri (None | str | Unset):
+        identification (None | str | Unset): Unique identifier for your installation
+        uuid (None | str | Unset): Deprecated, no longer used
+        customer_name (None | str | Unset):
+        customer_id (None | str | Unset):
+        email_address (None | str | Unset):
+        latitude (float | None | Unset):
+        longitude (float | None | Unset):
+        street (None | str | Unset):
+        house_number (None | str | Unset):
+        zip_code (None | str | Unset):
+        city (None | str | Unset):
+        country (None | str | Unset):
+        resident (None | str | Unset):
         installation_date (datetime.datetime | None | Unset):
-        project (str | Unset):
-        dashboard_id (str | Unset):
-        dashboard_type (str | Unset):
+        project (None | str | Unset):
+        dashboard_id (None | str | Unset):
+        dashboard_type (None | str | Unset):
         dashboard_created_on (datetime.datetime | None | Unset):
-        alarm_priority (str | Unset): The alarmpriority defines which thresholds should be used to create alarms. You
-            can define different categories with different thresholds. (e.g. an installation with HIGH priority will receive
-            a network alarm after 6 hours, while LOW priority will receive an alarm after 48 hours.)
-        alarm_status (str | Unset):
-        custom01 (str | Unset): Custom info field
-        custom02 (str | Unset): Custom info field
-        custom03 (str | Unset): Custom info field
-        custom04 (str | Unset): Custom info field
-        custom05 (str | Unset): Custom info field
-        custom_list_01 (str | Unset):
-        custom_list_02 (str | Unset):
-        custom_url_01 (str | Unset): Custom link field
-        custom_url_02 (str | Unset): Custom link field
-        enable_scheduling (bool | Unset):
-        external_id (str | Unset):
-        location (LocationReferenceModel | Unset):
-        installation_type (InstallationTypeReferenceModel | Unset):
-        communicator (CommunicatorReferenceModel | Unset):
-        client_user_group (ClientUserGroupReferenceModel | Unset):
-        energy_tariff (EnergyTariffReferenceModel | Unset):
-        installation_pool (InstallationPoolReferenceModel | Unset):
+        alarm_priority (None | str | Unset): The alarmpriority defines which thresholds should be used to create alarms.
+            You can define different categories with different thresholds. (e.g. an installation with HIGH priority will
+            receive a network alarm after 6 hours, while LOW priority will receive an alarm after 48 hours.)
+        alarm_status (None | str | Unset):
+        custom01 (None | str | Unset): Custom info field
+        custom02 (None | str | Unset): Custom info field
+        custom03 (None | str | Unset): Custom info field
+        custom04 (None | str | Unset): Custom info field
+        custom05 (None | str | Unset): Custom info field
+        custom_list_01 (None | str | Unset):
+        custom_list_02 (None | str | Unset):
+        custom_url_01 (None | str | Unset): Custom link field
+        custom_url_02 (None | str | Unset): Custom link field
+        enable_scheduling (bool | None | Unset):
+        external_id (None | str | Unset):
+        location (LocationReferenceModel | None | Unset):
+        installation_type (InstallationTypeReferenceModel | None | Unset):
+        communicator (CommunicatorReferenceModel | None | Unset):
+        client_user_group (ClientUserGroupReferenceModel | None | Unset):
+        energy_tariff (EnergyTariffReferenceModel | None | Unset):
+        installation_pool (InstallationPoolReferenceModel | None | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
-    identification: str | Unset = UNSET
-    uuid: str | Unset = UNSET
-    customer_name: str | Unset = UNSET
-    customer_id: str | Unset = UNSET
-    email_address: str | Unset = UNSET
-    latitude: float | Unset = UNSET
-    longitude: float | Unset = UNSET
-    street: str | Unset = UNSET
-    house_number: str | Unset = UNSET
-    zip_code: str | Unset = UNSET
-    city: str | Unset = UNSET
-    country: str | Unset = UNSET
-    resident: str | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
+    identification: None | str | Unset = UNSET
+    uuid: None | str | Unset = UNSET
+    customer_name: None | str | Unset = UNSET
+    customer_id: None | str | Unset = UNSET
+    email_address: None | str | Unset = UNSET
+    latitude: float | None | Unset = UNSET
+    longitude: float | None | Unset = UNSET
+    street: None | str | Unset = UNSET
+    house_number: None | str | Unset = UNSET
+    zip_code: None | str | Unset = UNSET
+    city: None | str | Unset = UNSET
+    country: None | str | Unset = UNSET
+    resident: None | str | Unset = UNSET
     installation_date: datetime.datetime | None | Unset = UNSET
-    project: str | Unset = UNSET
-    dashboard_id: str | Unset = UNSET
-    dashboard_type: str | Unset = UNSET
+    project: None | str | Unset = UNSET
+    dashboard_id: None | str | Unset = UNSET
+    dashboard_type: None | str | Unset = UNSET
     dashboard_created_on: datetime.datetime | None | Unset = UNSET
-    alarm_priority: str | Unset = UNSET
-    alarm_status: str | Unset = UNSET
-    custom01: str | Unset = UNSET
-    custom02: str | Unset = UNSET
-    custom03: str | Unset = UNSET
-    custom04: str | Unset = UNSET
-    custom05: str | Unset = UNSET
-    custom_list_01: str | Unset = UNSET
-    custom_list_02: str | Unset = UNSET
-    custom_url_01: str | Unset = UNSET
-    custom_url_02: str | Unset = UNSET
-    enable_scheduling: bool | Unset = UNSET
-    external_id: str | Unset = UNSET
-    location: LocationReferenceModel | Unset = UNSET
-    installation_type: InstallationTypeReferenceModel | Unset = UNSET
-    communicator: CommunicatorReferenceModel | Unset = UNSET
-    client_user_group: ClientUserGroupReferenceModel | Unset = UNSET
-    energy_tariff: EnergyTariffReferenceModel | Unset = UNSET
-    installation_pool: InstallationPoolReferenceModel | Unset = UNSET
+    alarm_priority: None | str | Unset = UNSET
+    alarm_status: None | str | Unset = UNSET
+    custom01: None | str | Unset = UNSET
+    custom02: None | str | Unset = UNSET
+    custom03: None | str | Unset = UNSET
+    custom04: None | str | Unset = UNSET
+    custom05: None | str | Unset = UNSET
+    custom_list_01: None | str | Unset = UNSET
+    custom_list_02: None | str | Unset = UNSET
+    custom_url_01: None | str | Unset = UNSET
+    custom_url_02: None | str | Unset = UNSET
+    enable_scheduling: bool | None | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    location: LocationReferenceModel | None | Unset = UNSET
+    installation_type: InstallationTypeReferenceModel | None | Unset = UNSET
+    communicator: CommunicatorReferenceModel | None | Unset = UNSET
+    client_user_group: ClientUserGroupReferenceModel | None | Unset = UNSET
+    energy_tariff: EnergyTariffReferenceModel | None | Unset = UNSET
+    installation_pool: InstallationPoolReferenceModel | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -118,33 +118,89 @@ class InstallationOutputModel:
         from ..models.installation_type_reference_model import InstallationTypeReferenceModel
         from ..models.location_reference_model import LocationReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
-        identification = self.identification
+        identification: None | str | Unset
+        if isinstance(self.identification, Unset):
+            identification = UNSET
+        else:
+            identification = self.identification
 
-        uuid = self.uuid
+        uuid: None | str | Unset
+        if isinstance(self.uuid, Unset):
+            uuid = UNSET
+        else:
+            uuid = self.uuid
 
-        customer_name = self.customer_name
+        customer_name: None | str | Unset
+        if isinstance(self.customer_name, Unset):
+            customer_name = UNSET
+        else:
+            customer_name = self.customer_name
 
-        customer_id = self.customer_id
+        customer_id: None | str | Unset
+        if isinstance(self.customer_id, Unset):
+            customer_id = UNSET
+        else:
+            customer_id = self.customer_id
 
-        email_address = self.email_address
+        email_address: None | str | Unset
+        if isinstance(self.email_address, Unset):
+            email_address = UNSET
+        else:
+            email_address = self.email_address
 
-        latitude = self.latitude
+        latitude: float | None | Unset
+        if isinstance(self.latitude, Unset):
+            latitude = UNSET
+        else:
+            latitude = self.latitude
 
-        longitude = self.longitude
+        longitude: float | None | Unset
+        if isinstance(self.longitude, Unset):
+            longitude = UNSET
+        else:
+            longitude = self.longitude
 
-        street = self.street
+        street: None | str | Unset
+        if isinstance(self.street, Unset):
+            street = UNSET
+        else:
+            street = self.street
 
-        house_number = self.house_number
+        house_number: None | str | Unset
+        if isinstance(self.house_number, Unset):
+            house_number = UNSET
+        else:
+            house_number = self.house_number
 
-        zip_code = self.zip_code
+        zip_code: None | str | Unset
+        if isinstance(self.zip_code, Unset):
+            zip_code = UNSET
+        else:
+            zip_code = self.zip_code
 
-        city = self.city
+        city: None | str | Unset
+        if isinstance(self.city, Unset):
+            city = UNSET
+        else:
+            city = self.city
 
-        country = self.country
+        country: None | str | Unset
+        if isinstance(self.country, Unset):
+            country = UNSET
+        else:
+            country = self.country
 
-        resident = self.resident
+        resident: None | str | Unset
+        if isinstance(self.resident, Unset):
+            resident = UNSET
+        else:
+            resident = self.resident
 
         installation_date: None | str | Unset
         if isinstance(self.installation_date, Unset):
@@ -154,11 +210,23 @@ class InstallationOutputModel:
         else:
             installation_date = self.installation_date
 
-        project = self.project
+        project: None | str | Unset
+        if isinstance(self.project, Unset):
+            project = UNSET
+        else:
+            project = self.project
 
-        dashboard_id = self.dashboard_id
+        dashboard_id: None | str | Unset
+        if isinstance(self.dashboard_id, Unset):
+            dashboard_id = UNSET
+        else:
+            dashboard_id = self.dashboard_id
 
-        dashboard_type = self.dashboard_type
+        dashboard_type: None | str | Unset
+        if isinstance(self.dashboard_type, Unset):
+            dashboard_type = UNSET
+        else:
+            dashboard_type = self.dashboard_type
 
         dashboard_created_on: None | str | Unset
         if isinstance(self.dashboard_created_on, Unset):
@@ -168,55 +236,131 @@ class InstallationOutputModel:
         else:
             dashboard_created_on = self.dashboard_created_on
 
-        alarm_priority = self.alarm_priority
+        alarm_priority: None | str | Unset
+        if isinstance(self.alarm_priority, Unset):
+            alarm_priority = UNSET
+        else:
+            alarm_priority = self.alarm_priority
 
-        alarm_status = self.alarm_status
+        alarm_status: None | str | Unset
+        if isinstance(self.alarm_status, Unset):
+            alarm_status = UNSET
+        else:
+            alarm_status = self.alarm_status
 
-        custom01 = self.custom01
+        custom01: None | str | Unset
+        if isinstance(self.custom01, Unset):
+            custom01 = UNSET
+        else:
+            custom01 = self.custom01
 
-        custom02 = self.custom02
+        custom02: None | str | Unset
+        if isinstance(self.custom02, Unset):
+            custom02 = UNSET
+        else:
+            custom02 = self.custom02
 
-        custom03 = self.custom03
+        custom03: None | str | Unset
+        if isinstance(self.custom03, Unset):
+            custom03 = UNSET
+        else:
+            custom03 = self.custom03
 
-        custom04 = self.custom04
+        custom04: None | str | Unset
+        if isinstance(self.custom04, Unset):
+            custom04 = UNSET
+        else:
+            custom04 = self.custom04
 
-        custom05 = self.custom05
+        custom05: None | str | Unset
+        if isinstance(self.custom05, Unset):
+            custom05 = UNSET
+        else:
+            custom05 = self.custom05
 
-        custom_list_01 = self.custom_list_01
+        custom_list_01: None | str | Unset
+        if isinstance(self.custom_list_01, Unset):
+            custom_list_01 = UNSET
+        else:
+            custom_list_01 = self.custom_list_01
 
-        custom_list_02 = self.custom_list_02
+        custom_list_02: None | str | Unset
+        if isinstance(self.custom_list_02, Unset):
+            custom_list_02 = UNSET
+        else:
+            custom_list_02 = self.custom_list_02
 
-        custom_url_01 = self.custom_url_01
+        custom_url_01: None | str | Unset
+        if isinstance(self.custom_url_01, Unset):
+            custom_url_01 = UNSET
+        else:
+            custom_url_01 = self.custom_url_01
 
-        custom_url_02 = self.custom_url_02
+        custom_url_02: None | str | Unset
+        if isinstance(self.custom_url_02, Unset):
+            custom_url_02 = UNSET
+        else:
+            custom_url_02 = self.custom_url_02
 
-        enable_scheduling = self.enable_scheduling
+        enable_scheduling: bool | None | Unset
+        if isinstance(self.enable_scheduling, Unset):
+            enable_scheduling = UNSET
+        else:
+            enable_scheduling = self.enable_scheduling
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        location: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.location, Unset):
+        location: dict[str, Any] | None | Unset
+        if isinstance(self.location, Unset):
+            location = UNSET
+        elif isinstance(self.location, LocationReferenceModel):
             location = self.location.to_dict()
+        else:
+            location = self.location
 
-        installation_type: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.installation_type, Unset):
+        installation_type: dict[str, Any] | None | Unset
+        if isinstance(self.installation_type, Unset):
+            installation_type = UNSET
+        elif isinstance(self.installation_type, InstallationTypeReferenceModel):
             installation_type = self.installation_type.to_dict()
+        else:
+            installation_type = self.installation_type
 
-        communicator: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.communicator, Unset):
+        communicator: dict[str, Any] | None | Unset
+        if isinstance(self.communicator, Unset):
+            communicator = UNSET
+        elif isinstance(self.communicator, CommunicatorReferenceModel):
             communicator = self.communicator.to_dict()
+        else:
+            communicator = self.communicator
 
-        client_user_group: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.client_user_group, Unset):
+        client_user_group: dict[str, Any] | None | Unset
+        if isinstance(self.client_user_group, Unset):
+            client_user_group = UNSET
+        elif isinstance(self.client_user_group, ClientUserGroupReferenceModel):
             client_user_group = self.client_user_group.to_dict()
+        else:
+            client_user_group = self.client_user_group
 
-        energy_tariff: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.energy_tariff, Unset):
+        energy_tariff: dict[str, Any] | None | Unset
+        if isinstance(self.energy_tariff, Unset):
+            energy_tariff = UNSET
+        elif isinstance(self.energy_tariff, EnergyTariffReferenceModel):
             energy_tariff = self.energy_tariff.to_dict()
+        else:
+            energy_tariff = self.energy_tariff
 
-        installation_pool: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.installation_pool, Unset):
+        installation_pool: dict[str, Any] | None | Unset
+        if isinstance(self.installation_pool, Unset):
+            installation_pool = UNSET
+        elif isinstance(self.installation_pool, InstallationPoolReferenceModel):
             installation_pool = self.installation_pool.to_dict()
+        else:
+            installation_pool = self.installation_pool
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -310,33 +454,132 @@ class InstallationOutputModel:
         from ..models.location_reference_model import LocationReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
 
-        identification = d.pop("identification", UNSET)
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        uuid = d.pop("uuid", UNSET)
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
-        customer_name = d.pop("customerName", UNSET)
+        def _parse_identification(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        customer_id = d.pop("customerId", UNSET)
+        identification = _parse_identification(d.pop("identification", UNSET))
 
-        email_address = d.pop("emailAddress", UNSET)
+        def _parse_uuid(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        latitude = d.pop("latitude", UNSET)
+        uuid = _parse_uuid(d.pop("uuid", UNSET))
 
-        longitude = d.pop("longitude", UNSET)
+        def _parse_customer_name(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        street = d.pop("street", UNSET)
+        customer_name = _parse_customer_name(d.pop("customerName", UNSET))
 
-        house_number = d.pop("houseNumber", UNSET)
+        def _parse_customer_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        zip_code = d.pop("zipCode", UNSET)
+        customer_id = _parse_customer_id(d.pop("customerId", UNSET))
 
-        city = d.pop("city", UNSET)
+        def _parse_email_address(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        country = d.pop("country", UNSET)
+        email_address = _parse_email_address(d.pop("emailAddress", UNSET))
 
-        resident = d.pop("resident", UNSET)
+        def _parse_latitude(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
+
+        latitude = _parse_latitude(d.pop("latitude", UNSET))
+
+        def _parse_longitude(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
+
+        longitude = _parse_longitude(d.pop("longitude", UNSET))
+
+        def _parse_street(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        street = _parse_street(d.pop("street", UNSET))
+
+        def _parse_house_number(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        house_number = _parse_house_number(d.pop("houseNumber", UNSET))
+
+        def _parse_zip_code(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        zip_code = _parse_zip_code(d.pop("zipCode", UNSET))
+
+        def _parse_city(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        city = _parse_city(d.pop("city", UNSET))
+
+        def _parse_country(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        country = _parse_country(d.pop("country", UNSET))
+
+        def _parse_resident(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        resident = _parse_resident(d.pop("resident", UNSET))
 
         def _parse_installation_date(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -355,11 +598,32 @@ class InstallationOutputModel:
 
         installation_date = _parse_installation_date(d.pop("installationDate", UNSET))
 
-        project = d.pop("project", UNSET)
+        def _parse_project(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        dashboard_id = d.pop("dashboardId", UNSET)
+        project = _parse_project(d.pop("project", UNSET))
 
-        dashboard_type = d.pop("dashboardType", UNSET)
+        def _parse_dashboard_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        dashboard_id = _parse_dashboard_id(d.pop("dashboardId", UNSET))
+
+        def _parse_dashboard_type(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        dashboard_type = _parse_dashboard_type(d.pop("dashboardType", UNSET))
 
         def _parse_dashboard_created_on(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -378,73 +642,224 @@ class InstallationOutputModel:
 
         dashboard_created_on = _parse_dashboard_created_on(d.pop("dashboardCreatedOn", UNSET))
 
-        alarm_priority = d.pop("alarmPriority", UNSET)
+        def _parse_alarm_priority(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        alarm_status = d.pop("alarmStatus", UNSET)
+        alarm_priority = _parse_alarm_priority(d.pop("alarmPriority", UNSET))
 
-        custom01 = d.pop("custom01", UNSET)
+        def _parse_alarm_status(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        custom02 = d.pop("custom02", UNSET)
+        alarm_status = _parse_alarm_status(d.pop("alarmStatus", UNSET))
 
-        custom03 = d.pop("custom03", UNSET)
+        def _parse_custom01(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        custom04 = d.pop("custom04", UNSET)
+        custom01 = _parse_custom01(d.pop("custom01", UNSET))
 
-        custom05 = d.pop("custom05", UNSET)
+        def _parse_custom02(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        custom_list_01 = d.pop("customList01", UNSET)
+        custom02 = _parse_custom02(d.pop("custom02", UNSET))
 
-        custom_list_02 = d.pop("customList02", UNSET)
+        def _parse_custom03(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        custom_url_01 = d.pop("customUrl01", UNSET)
+        custom03 = _parse_custom03(d.pop("custom03", UNSET))
 
-        custom_url_02 = d.pop("customUrl02", UNSET)
+        def _parse_custom04(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        enable_scheduling = d.pop("enableScheduling", UNSET)
+        custom04 = _parse_custom04(d.pop("custom04", UNSET))
 
-        external_id = d.pop("externalId", UNSET)
+        def _parse_custom05(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _location = d.pop("location", UNSET)
-        location: LocationReferenceModel | Unset
-        if isinstance(_location, Unset):
-            location = UNSET
-        else:
-            location = LocationReferenceModel.from_dict(_location)
+        custom05 = _parse_custom05(d.pop("custom05", UNSET))
 
-        _installation_type = d.pop("installationType", UNSET)
-        installation_type: InstallationTypeReferenceModel | Unset
-        if isinstance(_installation_type, Unset):
-            installation_type = UNSET
-        else:
-            installation_type = InstallationTypeReferenceModel.from_dict(_installation_type)
+        def _parse_custom_list_01(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _communicator = d.pop("communicator", UNSET)
-        communicator: CommunicatorReferenceModel | Unset
-        if isinstance(_communicator, Unset):
-            communicator = UNSET
-        else:
-            communicator = CommunicatorReferenceModel.from_dict(_communicator)
+        custom_list_01 = _parse_custom_list_01(d.pop("customList01", UNSET))
 
-        _client_user_group = d.pop("clientUserGroup", UNSET)
-        client_user_group: ClientUserGroupReferenceModel | Unset
-        if isinstance(_client_user_group, Unset):
-            client_user_group = UNSET
-        else:
-            client_user_group = ClientUserGroupReferenceModel.from_dict(_client_user_group)
+        def _parse_custom_list_02(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _energy_tariff = d.pop("energyTariff", UNSET)
-        energy_tariff: EnergyTariffReferenceModel | Unset
-        if isinstance(_energy_tariff, Unset):
-            energy_tariff = UNSET
-        else:
-            energy_tariff = EnergyTariffReferenceModel.from_dict(_energy_tariff)
+        custom_list_02 = _parse_custom_list_02(d.pop("customList02", UNSET))
 
-        _installation_pool = d.pop("installationPool", UNSET)
-        installation_pool: InstallationPoolReferenceModel | Unset
-        if isinstance(_installation_pool, Unset):
-            installation_pool = UNSET
-        else:
-            installation_pool = InstallationPoolReferenceModel.from_dict(_installation_pool)
+        def _parse_custom_url_01(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        custom_url_01 = _parse_custom_url_01(d.pop("customUrl01", UNSET))
+
+        def _parse_custom_url_02(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        custom_url_02 = _parse_custom_url_02(d.pop("customUrl02", UNSET))
+
+        def _parse_enable_scheduling(data: object) -> bool | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(bool | None | Unset, data)
+
+        enable_scheduling = _parse_enable_scheduling(d.pop("enableScheduling", UNSET))
+
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
+
+        def _parse_location(data: object) -> LocationReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                location_type_1 = LocationReferenceModel.from_dict(data)
+
+                return location_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(LocationReferenceModel | None | Unset, data)
+
+        location = _parse_location(d.pop("location", UNSET))
+
+        def _parse_installation_type(data: object) -> InstallationTypeReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                installation_type_type_1 = InstallationTypeReferenceModel.from_dict(data)
+
+                return installation_type_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(InstallationTypeReferenceModel | None | Unset, data)
+
+        installation_type = _parse_installation_type(d.pop("installationType", UNSET))
+
+        def _parse_communicator(data: object) -> CommunicatorReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                communicator_type_1 = CommunicatorReferenceModel.from_dict(data)
+
+                return communicator_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(CommunicatorReferenceModel | None | Unset, data)
+
+        communicator = _parse_communicator(d.pop("communicator", UNSET))
+
+        def _parse_client_user_group(data: object) -> ClientUserGroupReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                client_user_group_type_1 = ClientUserGroupReferenceModel.from_dict(data)
+
+                return client_user_group_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(ClientUserGroupReferenceModel | None | Unset, data)
+
+        client_user_group = _parse_client_user_group(d.pop("clientUserGroup", UNSET))
+
+        def _parse_energy_tariff(data: object) -> EnergyTariffReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                energy_tariff_type_1 = EnergyTariffReferenceModel.from_dict(data)
+
+                return energy_tariff_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(EnergyTariffReferenceModel | None | Unset, data)
+
+        energy_tariff = _parse_energy_tariff(d.pop("energyTariff", UNSET))
+
+        def _parse_installation_pool(data: object) -> InstallationPoolReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                installation_pool_type_1 = InstallationPoolReferenceModel.from_dict(data)
+
+                return installation_pool_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(InstallationPoolReferenceModel | None | Unset, data)
+
+        installation_pool = _parse_installation_pool(d.pop("installationPool", UNSET))
 
         installation_output_model = cls(
             resource_uri=resource_uri,

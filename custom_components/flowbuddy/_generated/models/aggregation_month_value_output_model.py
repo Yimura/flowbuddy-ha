@@ -23,32 +23,36 @@ T = TypeVar("T", bound="AggregationMonthValueOutputModel")
 class AggregationMonthValueOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
+        resource_uri (None | str | Unset):
         period_start (datetime.datetime | None | Unset):
         timestart (datetime.datetime | None | Unset):
         timestop (datetime.datetime | None | Unset):
-        value (float | Unset):
-        sum_ (float | Unset):
-        count (int | Unset):
-        max_ (float | Unset):
-        measurement (MeasurementReferenceModel | Unset):
+        value (float | None | Unset):
+        sum_ (float | None | Unset):
+        count (int | None | Unset):
+        max_ (float | None | Unset):
+        measurement (MeasurementReferenceModel | None | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
     period_start: datetime.datetime | None | Unset = UNSET
     timestart: datetime.datetime | None | Unset = UNSET
     timestop: datetime.datetime | None | Unset = UNSET
-    value: float | Unset = UNSET
-    sum_: float | Unset = UNSET
-    count: int | Unset = UNSET
-    max_: float | Unset = UNSET
-    measurement: MeasurementReferenceModel | Unset = UNSET
+    value: float | None | Unset = UNSET
+    sum_: float | None | Unset = UNSET
+    count: int | None | Unset = UNSET
+    max_: float | None | Unset = UNSET
+    measurement: MeasurementReferenceModel | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.measurement_reference_model import MeasurementReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
         period_start: None | str | Unset
         if isinstance(self.period_start, Unset):
@@ -74,17 +78,37 @@ class AggregationMonthValueOutputModel:
         else:
             timestop = self.timestop
 
-        value = self.value
+        value: float | None | Unset
+        if isinstance(self.value, Unset):
+            value = UNSET
+        else:
+            value = self.value
 
-        sum_ = self.sum_
+        sum_: float | None | Unset
+        if isinstance(self.sum_, Unset):
+            sum_ = UNSET
+        else:
+            sum_ = self.sum_
 
-        count = self.count
+        count: int | None | Unset
+        if isinstance(self.count, Unset):
+            count = UNSET
+        else:
+            count = self.count
 
-        max_ = self.max_
+        max_: float | None | Unset
+        if isinstance(self.max_, Unset):
+            max_ = UNSET
+        else:
+            max_ = self.max_
 
-        measurement: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.measurement, Unset):
+        measurement: dict[str, Any] | None | Unset
+        if isinstance(self.measurement, Unset):
+            measurement = UNSET
+        elif isinstance(self.measurement, MeasurementReferenceModel):
             measurement = self.measurement.to_dict()
+        else:
+            measurement = self.measurement
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -115,7 +139,15 @@ class AggregationMonthValueOutputModel:
         from ..models.measurement_reference_model import MeasurementReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
+
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
         def _parse_period_start(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -168,20 +200,58 @@ class AggregationMonthValueOutputModel:
 
         timestop = _parse_timestop(d.pop("timestop", UNSET))
 
-        value = d.pop("value", UNSET)
+        def _parse_value(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
 
-        sum_ = d.pop("sum", UNSET)
+        value = _parse_value(d.pop("value", UNSET))
 
-        count = d.pop("count", UNSET)
+        def _parse_sum_(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
 
-        max_ = d.pop("max", UNSET)
+        sum_ = _parse_sum_(d.pop("sum", UNSET))
 
-        _measurement = d.pop("measurement", UNSET)
-        measurement: MeasurementReferenceModel | Unset
-        if isinstance(_measurement, Unset):
-            measurement = UNSET
-        else:
-            measurement = MeasurementReferenceModel.from_dict(_measurement)
+        def _parse_count(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
+
+        count = _parse_count(d.pop("count", UNSET))
+
+        def _parse_max_(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
+
+        max_ = _parse_max_(d.pop("max", UNSET))
+
+        def _parse_measurement(data: object) -> MeasurementReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                measurement_type_1 = MeasurementReferenceModel.from_dict(data)
+
+                return measurement_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(MeasurementReferenceModel | None | Unset, data)
+
+        measurement = _parse_measurement(d.pop("measurement", UNSET))
 
         aggregation_month_value_output_model = cls(
             resource_uri=resource_uri,

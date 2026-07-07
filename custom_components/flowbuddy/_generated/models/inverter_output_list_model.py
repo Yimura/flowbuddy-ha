@@ -22,21 +22,26 @@ T = TypeVar("T", bound="InverterOutputListModel")
 class InverterOutputListModel:
     """
     Attributes:
-        inverters (list[InverterOutputModel] | Unset):
+        inverters (list[InverterOutputModel] | None | Unset):
     """
 
-    inverters: list[InverterOutputModel] | Unset = UNSET
+    inverters: list[InverterOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.inverter_output_model import InverterOutputModel
 
-        inverters: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.inverters, Unset):
+        inverters: list[dict[str, Any]] | None | Unset
+        if isinstance(self.inverters, Unset):
+            inverters = UNSET
+        elif isinstance(self.inverters, list):
             inverters = []
-            for inverters_item_data in self.inverters:
-                inverters_item = inverters_item_data.to_dict()
-                inverters.append(inverters_item)
+            for inverters_type_0_item_data in self.inverters:
+                inverters_type_0_item = inverters_type_0_item_data.to_dict()
+                inverters.append(inverters_type_0_item)
+
+        else:
+            inverters = self.inverters
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,14 +56,30 @@ class InverterOutputListModel:
         from ..models.inverter_output_model import InverterOutputModel
 
         d = dict(src_dict)
-        _inverters = d.pop("inverters", UNSET)
-        inverters: list[InverterOutputModel] | Unset = UNSET
-        if _inverters is not UNSET:
-            inverters = []
-            for inverters_item_data in _inverters:
-                inverters_item = InverterOutputModel.from_dict(inverters_item_data)
 
-                inverters.append(inverters_item)
+        def _parse_inverters(data: object) -> list[InverterOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                inverters_type_0 = []
+                _inverters_type_0 = data
+                for inverters_type_0_item_data in _inverters_type_0:
+                    inverters_type_0_item = InverterOutputModel.from_dict(
+                        inverters_type_0_item_data
+                    )
+
+                    inverters_type_0.append(inverters_type_0_item)
+
+                return inverters_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[InverterOutputModel] | None | Unset, data)
+
+        inverters = _parse_inverters(d.pop("inverters", UNSET))
 
         inverter_output_list_model = cls(
             inverters=inverters,

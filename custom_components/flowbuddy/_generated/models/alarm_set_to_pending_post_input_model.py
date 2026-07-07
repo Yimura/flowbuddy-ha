@@ -12,8 +12,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-    from ..models.alarm_set_to_pending_post_input_model_other_properties import (
-        AlarmSetToPendingPostInputModelOtherProperties,
+    from ..models.alarm_set_to_pending_post_input_model_other_properties_type_0 import (
+        AlarmSetToPendingPostInputModelOtherPropertiesType0,
     )
 
 
@@ -24,20 +24,24 @@ T = TypeVar("T", bound="AlarmSetToPendingPostInputModel")
 class AlarmSetToPendingPostInputModel:
     """
     Attributes:
-        other_properties (AlarmSetToPendingPostInputModelOtherProperties | Unset):
+        other_properties (AlarmSetToPendingPostInputModelOtherPropertiesType0 | None | Unset):
     """
 
-    other_properties: AlarmSetToPendingPostInputModelOtherProperties | Unset = UNSET
+    other_properties: AlarmSetToPendingPostInputModelOtherPropertiesType0 | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.alarm_set_to_pending_post_input_model_other_properties import (
-            AlarmSetToPendingPostInputModelOtherProperties,
+        from ..models.alarm_set_to_pending_post_input_model_other_properties_type_0 import (
+            AlarmSetToPendingPostInputModelOtherPropertiesType0,
         )
 
-        other_properties: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.other_properties, Unset):
+        other_properties: dict[str, Any] | None | Unset
+        if isinstance(self.other_properties, Unset):
+            other_properties = UNSET
+        elif isinstance(self.other_properties, AlarmSetToPendingPostInputModelOtherPropertiesType0):
             other_properties = self.other_properties.to_dict()
+        else:
+            other_properties = self.other_properties
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -49,19 +53,32 @@ class AlarmSetToPendingPostInputModel:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.alarm_set_to_pending_post_input_model_other_properties import (
-            AlarmSetToPendingPostInputModelOtherProperties,
+        from ..models.alarm_set_to_pending_post_input_model_other_properties_type_0 import (
+            AlarmSetToPendingPostInputModelOtherPropertiesType0,
         )
 
         d = dict(src_dict)
-        _other_properties = d.pop("otherProperties", UNSET)
-        other_properties: AlarmSetToPendingPostInputModelOtherProperties | Unset
-        if isinstance(_other_properties, Unset):
-            other_properties = UNSET
-        else:
-            other_properties = AlarmSetToPendingPostInputModelOtherProperties.from_dict(
-                _other_properties
-            )
+
+        def _parse_other_properties(
+            data: object,
+        ) -> AlarmSetToPendingPostInputModelOtherPropertiesType0 | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                other_properties_type_0 = (
+                    AlarmSetToPendingPostInputModelOtherPropertiesType0.from_dict(data)
+                )
+
+                return other_properties_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(AlarmSetToPendingPostInputModelOtherPropertiesType0 | None | Unset, data)
+
+        other_properties = _parse_other_properties(d.pop("otherProperties", UNSET))
 
         alarm_set_to_pending_post_input_model = cls(
             other_properties=other_properties,

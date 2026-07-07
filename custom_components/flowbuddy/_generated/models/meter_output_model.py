@@ -25,13 +25,13 @@ T = TypeVar("T", bound="MeterOutputModel")
 class MeterOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
-        name (str | Unset): Description of the meter
-        serial_number (str | Unset): Serial number of device
-        manufacturer (str | Unset):
-        type_ (str | Unset): Type of meter (e.g. Solar, Heating, ...)
-        meter_type (str | Unset):
-        status (str | Unset): Registration status of device
+        resource_uri (None | str | Unset):
+        name (None | str | Unset): Description of the meter
+        serial_number (None | str | Unset): Serial number of device
+        manufacturer (None | str | Unset):
+        type_ (None | str | Unset): Type of meter (e.g. Solar, Heating, ...)
+        meter_type (None | str | Unset):
+        status (None | str | Unset): Registration status of device
         first_registered_on (datetime.datetime | None | Unset): First time when meter was linked to an installation
         registered_on (datetime.datetime | None | Unset): Time when meter was linked to an installation (if meter was
             unregistered/re-registered this will be updated)
@@ -39,35 +39,35 @@ class MeterOutputModel:
             physical device
         last_successful_communication_on (datetime.datetime | None | Unset): Last successful network communication with
             physical device
-        polling (str | Unset): Indicates whether the device is processing data (e.g. yes or no)
-        last_polling_result (str | Unset): Indicates whether the last data processing was completed without errors (e.g.
-            successful)
+        polling (None | str | Unset): Indicates whether the device is processing data (e.g. yes or no)
+        last_polling_result (None | str | Unset): Indicates whether the last data processing was completed without
+            errors (e.g. successful)
         last_successful_polling_on (datetime.datetime | None | Unset): Time when data was last processed for this device
-        external_id (str | Unset):
-        installation (InstallationReferenceModel | Unset):
-        dlms_meter (MeasuringDeviceReferenceModel | Unset):
-        api_meter (ApiMeterReferenceModel | Unset):
+        external_id (None | str | Unset):
+        installation (InstallationReferenceModel | None | Unset):
+        dlms_meter (MeasuringDeviceReferenceModel | None | Unset):
+        api_meter (ApiMeterReferenceModel | None | Unset):
         created (datetime.datetime | None | Unset): Time when meter was created in the application
     """
 
-    resource_uri: str | Unset = UNSET
-    name: str | Unset = UNSET
-    serial_number: str | Unset = UNSET
-    manufacturer: str | Unset = UNSET
-    type_: str | Unset = UNSET
-    meter_type: str | Unset = UNSET
-    status: str | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
+    name: None | str | Unset = UNSET
+    serial_number: None | str | Unset = UNSET
+    manufacturer: None | str | Unset = UNSET
+    type_: None | str | Unset = UNSET
+    meter_type: None | str | Unset = UNSET
+    status: None | str | Unset = UNSET
     first_registered_on: datetime.datetime | None | Unset = UNSET
     registered_on: datetime.datetime | None | Unset = UNSET
     last_communication_attempt_on: datetime.datetime | None | Unset = UNSET
     last_successful_communication_on: datetime.datetime | None | Unset = UNSET
-    polling: str | Unset = UNSET
-    last_polling_result: str | Unset = UNSET
+    polling: None | str | Unset = UNSET
+    last_polling_result: None | str | Unset = UNSET
     last_successful_polling_on: datetime.datetime | None | Unset = UNSET
-    external_id: str | Unset = UNSET
-    installation: InstallationReferenceModel | Unset = UNSET
-    dlms_meter: MeasuringDeviceReferenceModel | Unset = UNSET
-    api_meter: ApiMeterReferenceModel | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    installation: InstallationReferenceModel | None | Unset = UNSET
+    dlms_meter: MeasuringDeviceReferenceModel | None | Unset = UNSET
+    api_meter: ApiMeterReferenceModel | None | Unset = UNSET
     created: datetime.datetime | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -76,19 +76,47 @@ class MeterOutputModel:
         from ..models.installation_reference_model import InstallationReferenceModel
         from ..models.measuring_device_reference_model import MeasuringDeviceReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
-        name = self.name
+        name: None | str | Unset
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
 
-        serial_number = self.serial_number
+        serial_number: None | str | Unset
+        if isinstance(self.serial_number, Unset):
+            serial_number = UNSET
+        else:
+            serial_number = self.serial_number
 
-        manufacturer = self.manufacturer
+        manufacturer: None | str | Unset
+        if isinstance(self.manufacturer, Unset):
+            manufacturer = UNSET
+        else:
+            manufacturer = self.manufacturer
 
-        type_ = self.type_
+        type_: None | str | Unset
+        if isinstance(self.type_, Unset):
+            type_ = UNSET
+        else:
+            type_ = self.type_
 
-        meter_type = self.meter_type
+        meter_type: None | str | Unset
+        if isinstance(self.meter_type, Unset):
+            meter_type = UNSET
+        else:
+            meter_type = self.meter_type
 
-        status = self.status
+        status: None | str | Unset
+        if isinstance(self.status, Unset):
+            status = UNSET
+        else:
+            status = self.status
 
         first_registered_on: None | str | Unset
         if isinstance(self.first_registered_on, Unset):
@@ -122,9 +150,17 @@ class MeterOutputModel:
         else:
             last_successful_communication_on = self.last_successful_communication_on
 
-        polling = self.polling
+        polling: None | str | Unset
+        if isinstance(self.polling, Unset):
+            polling = UNSET
+        else:
+            polling = self.polling
 
-        last_polling_result = self.last_polling_result
+        last_polling_result: None | str | Unset
+        if isinstance(self.last_polling_result, Unset):
+            last_polling_result = UNSET
+        else:
+            last_polling_result = self.last_polling_result
 
         last_successful_polling_on: None | str | Unset
         if isinstance(self.last_successful_polling_on, Unset):
@@ -134,19 +170,35 @@ class MeterOutputModel:
         else:
             last_successful_polling_on = self.last_successful_polling_on
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        installation: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.installation, Unset):
+        installation: dict[str, Any] | None | Unset
+        if isinstance(self.installation, Unset):
+            installation = UNSET
+        elif isinstance(self.installation, InstallationReferenceModel):
             installation = self.installation.to_dict()
+        else:
+            installation = self.installation
 
-        dlms_meter: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.dlms_meter, Unset):
+        dlms_meter: dict[str, Any] | None | Unset
+        if isinstance(self.dlms_meter, Unset):
+            dlms_meter = UNSET
+        elif isinstance(self.dlms_meter, MeasuringDeviceReferenceModel):
             dlms_meter = self.dlms_meter.to_dict()
+        else:
+            dlms_meter = self.dlms_meter
 
-        api_meter: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.api_meter, Unset):
+        api_meter: dict[str, Any] | None | Unset
+        if isinstance(self.api_meter, Unset):
+            api_meter = UNSET
+        elif isinstance(self.api_meter, ApiMeterReferenceModel):
             api_meter = self.api_meter.to_dict()
+        else:
+            api_meter = self.api_meter
 
         created: None | str | Unset
         if isinstance(self.created, Unset):
@@ -207,19 +259,69 @@ class MeterOutputModel:
         from ..models.measuring_device_reference_model import MeasuringDeviceReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
 
-        name = d.pop("name", UNSET)
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        serial_number = d.pop("serialNumber", UNSET)
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
-        manufacturer = d.pop("manufacturer", UNSET)
+        def _parse_name(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        type_ = d.pop("type", UNSET)
+        name = _parse_name(d.pop("name", UNSET))
 
-        meter_type = d.pop("meterType", UNSET)
+        def _parse_serial_number(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        status = d.pop("status", UNSET)
+        serial_number = _parse_serial_number(d.pop("serialNumber", UNSET))
+
+        def _parse_manufacturer(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        manufacturer = _parse_manufacturer(d.pop("manufacturer", UNSET))
+
+        def _parse_type_(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        type_ = _parse_type_(d.pop("type", UNSET))
+
+        def _parse_meter_type(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        meter_type = _parse_meter_type(d.pop("meterType", UNSET))
+
+        def _parse_status(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        status = _parse_status(d.pop("status", UNSET))
 
         def _parse_first_registered_on(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -295,9 +397,23 @@ class MeterOutputModel:
             d.pop("lastSuccessfulCommunicationOn", UNSET)
         )
 
-        polling = d.pop("polling", UNSET)
+        def _parse_polling(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        last_polling_result = d.pop("lastPollingResult", UNSET)
+        polling = _parse_polling(d.pop("polling", UNSET))
+
+        def _parse_last_polling_result(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        last_polling_result = _parse_last_polling_result(d.pop("lastPollingResult", UNSET))
 
         def _parse_last_successful_polling_on(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -318,28 +434,65 @@ class MeterOutputModel:
             d.pop("lastSuccessfulPollingOn", UNSET)
         )
 
-        external_id = d.pop("externalId", UNSET)
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _installation = d.pop("installation", UNSET)
-        installation: InstallationReferenceModel | Unset
-        if isinstance(_installation, Unset):
-            installation = UNSET
-        else:
-            installation = InstallationReferenceModel.from_dict(_installation)
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
 
-        _dlms_meter = d.pop("dlmsMeter", UNSET)
-        dlms_meter: MeasuringDeviceReferenceModel | Unset
-        if isinstance(_dlms_meter, Unset):
-            dlms_meter = UNSET
-        else:
-            dlms_meter = MeasuringDeviceReferenceModel.from_dict(_dlms_meter)
+        def _parse_installation(data: object) -> InstallationReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                installation_type_1 = InstallationReferenceModel.from_dict(data)
 
-        _api_meter = d.pop("apiMeter", UNSET)
-        api_meter: ApiMeterReferenceModel | Unset
-        if isinstance(_api_meter, Unset):
-            api_meter = UNSET
-        else:
-            api_meter = ApiMeterReferenceModel.from_dict(_api_meter)
+                return installation_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(InstallationReferenceModel | None | Unset, data)
+
+        installation = _parse_installation(d.pop("installation", UNSET))
+
+        def _parse_dlms_meter(data: object) -> MeasuringDeviceReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                dlms_meter_type_1 = MeasuringDeviceReferenceModel.from_dict(data)
+
+                return dlms_meter_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(MeasuringDeviceReferenceModel | None | Unset, data)
+
+        dlms_meter = _parse_dlms_meter(d.pop("dlmsMeter", UNSET))
+
+        def _parse_api_meter(data: object) -> ApiMeterReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                api_meter_type_1 = ApiMeterReferenceModel.from_dict(data)
+
+                return api_meter_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(ApiMeterReferenceModel | None | Unset, data)
+
+        api_meter = _parse_api_meter(d.pop("apiMeter", UNSET))
 
         def _parse_created(data: object) -> datetime.datetime | None | Unset:
             if data is None:

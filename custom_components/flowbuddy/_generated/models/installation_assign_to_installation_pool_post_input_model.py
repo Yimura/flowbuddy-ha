@@ -12,8 +12,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-    from ..models.installation_assign_to_installation_pool_post_input_model_other_properties import (
-        InstallationAssignToInstallationPoolPostInputModelOtherProperties,
+    from ..models.installation_assign_to_installation_pool_post_input_model_other_properties_type_0 import (
+        InstallationAssignToInstallationPoolPostInputModelOtherPropertiesType0,
     )
 
 
@@ -24,26 +24,37 @@ T = TypeVar("T", bound="InstallationAssignToInstallationPoolPostInputModel")
 class InstallationAssignToInstallationPoolPostInputModel:
     """
     Attributes:
-        installation_pool (str | Unset):
-        other_properties (InstallationAssignToInstallationPoolPostInputModelOtherProperties | Unset):
+        installation_pool (None | str | Unset):
+        other_properties (InstallationAssignToInstallationPoolPostInputModelOtherPropertiesType0 | None | Unset):
     """
 
-    installation_pool: str | Unset = UNSET
-    other_properties: InstallationAssignToInstallationPoolPostInputModelOtherProperties | Unset = (
-        UNSET
-    )
+    installation_pool: None | str | Unset = UNSET
+    other_properties: (
+        InstallationAssignToInstallationPoolPostInputModelOtherPropertiesType0 | None | Unset
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.installation_assign_to_installation_pool_post_input_model_other_properties import (
-            InstallationAssignToInstallationPoolPostInputModelOtherProperties,
+        from ..models.installation_assign_to_installation_pool_post_input_model_other_properties_type_0 import (
+            InstallationAssignToInstallationPoolPostInputModelOtherPropertiesType0,
         )
 
-        installation_pool = self.installation_pool
+        installation_pool: None | str | Unset
+        if isinstance(self.installation_pool, Unset):
+            installation_pool = UNSET
+        else:
+            installation_pool = self.installation_pool
 
-        other_properties: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.other_properties, Unset):
+        other_properties: dict[str, Any] | None | Unset
+        if isinstance(self.other_properties, Unset):
+            other_properties = UNSET
+        elif isinstance(
+            self.other_properties,
+            InstallationAssignToInstallationPoolPostInputModelOtherPropertiesType0,
+        ):
             other_properties = self.other_properties.to_dict()
+        else:
+            other_properties = self.other_properties
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -57,23 +68,46 @@ class InstallationAssignToInstallationPoolPostInputModel:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.installation_assign_to_installation_pool_post_input_model_other_properties import (
-            InstallationAssignToInstallationPoolPostInputModelOtherProperties,
+        from ..models.installation_assign_to_installation_pool_post_input_model_other_properties_type_0 import (
+            InstallationAssignToInstallationPoolPostInputModelOtherPropertiesType0,
         )
 
         d = dict(src_dict)
-        installation_pool = d.pop("installationPool", UNSET)
 
-        _other_properties = d.pop("otherProperties", UNSET)
-        other_properties: InstallationAssignToInstallationPoolPostInputModelOtherProperties | Unset
-        if isinstance(_other_properties, Unset):
-            other_properties = UNSET
-        else:
-            other_properties = (
-                InstallationAssignToInstallationPoolPostInputModelOtherProperties.from_dict(
-                    _other_properties
+        def _parse_installation_pool(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        installation_pool = _parse_installation_pool(d.pop("installationPool", UNSET))
+
+        def _parse_other_properties(
+            data: object,
+        ) -> InstallationAssignToInstallationPoolPostInputModelOtherPropertiesType0 | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                other_properties_type_0 = InstallationAssignToInstallationPoolPostInputModelOtherPropertiesType0.from_dict(
+                    data
                 )
+
+                return other_properties_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(
+                InstallationAssignToInstallationPoolPostInputModelOtherPropertiesType0
+                | None
+                | Unset,
+                data,
             )
+
+        other_properties = _parse_other_properties(d.pop("otherProperties", UNSET))
 
         installation_assign_to_installation_pool_post_input_model = cls(
             installation_pool=installation_pool,

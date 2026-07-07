@@ -23,34 +23,50 @@ T = TypeVar("T", bound="CommunicatorVerificationOutputModel")
 class CommunicatorVerificationOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
-        signal_strength (int | Unset):
-        result_code (int | Unset):
-        result_message (str | Unset):
+        resource_uri (None | str | Unset):
+        signal_strength (int | None | Unset):
+        result_code (int | None | Unset):
+        result_message (None | str | Unset):
         performed_on (datetime.datetime | None | Unset):
-        external_id (str | Unset):
-        communicator (CommunicatorReferenceModel | Unset):
+        external_id (None | str | Unset):
+        communicator (CommunicatorReferenceModel | None | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
-    signal_strength: int | Unset = UNSET
-    result_code: int | Unset = UNSET
-    result_message: str | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
+    signal_strength: int | None | Unset = UNSET
+    result_code: int | None | Unset = UNSET
+    result_message: None | str | Unset = UNSET
     performed_on: datetime.datetime | None | Unset = UNSET
-    external_id: str | Unset = UNSET
-    communicator: CommunicatorReferenceModel | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    communicator: CommunicatorReferenceModel | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.communicator_reference_model import CommunicatorReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
-        signal_strength = self.signal_strength
+        signal_strength: int | None | Unset
+        if isinstance(self.signal_strength, Unset):
+            signal_strength = UNSET
+        else:
+            signal_strength = self.signal_strength
 
-        result_code = self.result_code
+        result_code: int | None | Unset
+        if isinstance(self.result_code, Unset):
+            result_code = UNSET
+        else:
+            result_code = self.result_code
 
-        result_message = self.result_message
+        result_message: None | str | Unset
+        if isinstance(self.result_message, Unset):
+            result_message = UNSET
+        else:
+            result_message = self.result_message
 
         performed_on: None | str | Unset
         if isinstance(self.performed_on, Unset):
@@ -60,11 +76,19 @@ class CommunicatorVerificationOutputModel:
         else:
             performed_on = self.performed_on
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        communicator: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.communicator, Unset):
+        communicator: dict[str, Any] | None | Unset
+        if isinstance(self.communicator, Unset):
+            communicator = UNSET
+        elif isinstance(self.communicator, CommunicatorReferenceModel):
             communicator = self.communicator.to_dict()
+        else:
+            communicator = self.communicator
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -91,13 +115,42 @@ class CommunicatorVerificationOutputModel:
         from ..models.communicator_reference_model import CommunicatorReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
 
-        signal_strength = d.pop("signalStrength", UNSET)
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        result_code = d.pop("resultCode", UNSET)
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
-        result_message = d.pop("resultMessage", UNSET)
+        def _parse_signal_strength(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
+
+        signal_strength = _parse_signal_strength(d.pop("signalStrength", UNSET))
+
+        def _parse_result_code(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
+
+        result_code = _parse_result_code(d.pop("resultCode", UNSET))
+
+        def _parse_result_message(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        result_message = _parse_result_message(d.pop("resultMessage", UNSET))
 
         def _parse_performed_on(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -116,14 +169,31 @@ class CommunicatorVerificationOutputModel:
 
         performed_on = _parse_performed_on(d.pop("performedOn", UNSET))
 
-        external_id = d.pop("externalId", UNSET)
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _communicator = d.pop("communicator", UNSET)
-        communicator: CommunicatorReferenceModel | Unset
-        if isinstance(_communicator, Unset):
-            communicator = UNSET
-        else:
-            communicator = CommunicatorReferenceModel.from_dict(_communicator)
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
+
+        def _parse_communicator(data: object) -> CommunicatorReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                communicator_type_1 = CommunicatorReferenceModel.from_dict(data)
+
+                return communicator_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(CommunicatorReferenceModel | None | Unset, data)
+
+        communicator = _parse_communicator(d.pop("communicator", UNSET))
 
         communicator_verification_output_model = cls(
             resource_uri=resource_uri,

@@ -26,41 +26,41 @@ T = TypeVar("T", bound="AlarmOutputModel")
 class AlarmOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
+        resource_uri (None | str | Unset):
         timestamp (datetime.datetime | None | Unset): Time when alarm was detected
-        description (str | Unset): Description of alarm
-        resolution (str | Unset): Predefined list of solutions that can be linked to an alarm when solved
-        cause (str | Unset): Predefined list of causes that can be linked to an alarm
-        action (str | Unset): Predefined list of action types that can be linked to an alarm
-        priority (str | Unset): Predefined list of priorities to rank the importance of an alarm
-        status (str | Unset): Status of alarm (e.g. open or closed)
-        closed_by (str | Unset): Indicates which user closed ticket
+        description (None | str | Unset): Description of alarm
+        resolution (None | str | Unset): Predefined list of solutions that can be linked to an alarm when solved
+        cause (None | str | Unset): Predefined list of causes that can be linked to an alarm
+        action (None | str | Unset): Predefined list of action types that can be linked to an alarm
+        priority (None | str | Unset): Predefined list of priorities to rank the importance of an alarm
+        status (None | str | Unset): Status of alarm (e.g. open or closed)
+        closed_by (None | str | Unset): Indicates which user closed ticket
         closed_on (datetime.datetime | None | Unset): When ticket was closed
-        external_id (str | Unset):
-        installation (InstallationReferenceModel | Unset):
-        meter (MeterReferenceModel | Unset):
-        measurement (MeasurementReferenceModel | Unset):
-        event_type (EventTypeReferenceModel | Unset):
-        comment (str | Unset): List of comments that were added to alarm
+        external_id (None | str | Unset):
+        installation (InstallationReferenceModel | None | Unset):
+        meter (MeterReferenceModel | None | Unset):
+        measurement (MeasurementReferenceModel | None | Unset):
+        event_type (EventTypeReferenceModel | None | Unset):
+        comment (None | str | Unset): List of comments that were added to alarm
         created (datetime.datetime | None | Unset): Time when alarm was created in application
     """
 
-    resource_uri: str | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
     timestamp: datetime.datetime | None | Unset = UNSET
-    description: str | Unset = UNSET
-    resolution: str | Unset = UNSET
-    cause: str | Unset = UNSET
-    action: str | Unset = UNSET
-    priority: str | Unset = UNSET
-    status: str | Unset = UNSET
-    closed_by: str | Unset = UNSET
+    description: None | str | Unset = UNSET
+    resolution: None | str | Unset = UNSET
+    cause: None | str | Unset = UNSET
+    action: None | str | Unset = UNSET
+    priority: None | str | Unset = UNSET
+    status: None | str | Unset = UNSET
+    closed_by: None | str | Unset = UNSET
     closed_on: datetime.datetime | None | Unset = UNSET
-    external_id: str | Unset = UNSET
-    installation: InstallationReferenceModel | Unset = UNSET
-    meter: MeterReferenceModel | Unset = UNSET
-    measurement: MeasurementReferenceModel | Unset = UNSET
-    event_type: EventTypeReferenceModel | Unset = UNSET
-    comment: str | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    installation: InstallationReferenceModel | None | Unset = UNSET
+    meter: MeterReferenceModel | None | Unset = UNSET
+    measurement: MeasurementReferenceModel | None | Unset = UNSET
+    event_type: EventTypeReferenceModel | None | Unset = UNSET
+    comment: None | str | Unset = UNSET
     created: datetime.datetime | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -70,7 +70,11 @@ class AlarmOutputModel:
         from ..models.measurement_reference_model import MeasurementReferenceModel
         from ..models.meter_reference_model import MeterReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
         timestamp: None | str | Unset
         if isinstance(self.timestamp, Unset):
@@ -80,19 +84,47 @@ class AlarmOutputModel:
         else:
             timestamp = self.timestamp
 
-        description = self.description
+        description: None | str | Unset
+        if isinstance(self.description, Unset):
+            description = UNSET
+        else:
+            description = self.description
 
-        resolution = self.resolution
+        resolution: None | str | Unset
+        if isinstance(self.resolution, Unset):
+            resolution = UNSET
+        else:
+            resolution = self.resolution
 
-        cause = self.cause
+        cause: None | str | Unset
+        if isinstance(self.cause, Unset):
+            cause = UNSET
+        else:
+            cause = self.cause
 
-        action = self.action
+        action: None | str | Unset
+        if isinstance(self.action, Unset):
+            action = UNSET
+        else:
+            action = self.action
 
-        priority = self.priority
+        priority: None | str | Unset
+        if isinstance(self.priority, Unset):
+            priority = UNSET
+        else:
+            priority = self.priority
 
-        status = self.status
+        status: None | str | Unset
+        if isinstance(self.status, Unset):
+            status = UNSET
+        else:
+            status = self.status
 
-        closed_by = self.closed_by
+        closed_by: None | str | Unset
+        if isinstance(self.closed_by, Unset):
+            closed_by = UNSET
+        else:
+            closed_by = self.closed_by
 
         closed_on: None | str | Unset
         if isinstance(self.closed_on, Unset):
@@ -102,25 +134,49 @@ class AlarmOutputModel:
         else:
             closed_on = self.closed_on
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        installation: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.installation, Unset):
+        installation: dict[str, Any] | None | Unset
+        if isinstance(self.installation, Unset):
+            installation = UNSET
+        elif isinstance(self.installation, InstallationReferenceModel):
             installation = self.installation.to_dict()
+        else:
+            installation = self.installation
 
-        meter: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.meter, Unset):
+        meter: dict[str, Any] | None | Unset
+        if isinstance(self.meter, Unset):
+            meter = UNSET
+        elif isinstance(self.meter, MeterReferenceModel):
             meter = self.meter.to_dict()
+        else:
+            meter = self.meter
 
-        measurement: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.measurement, Unset):
+        measurement: dict[str, Any] | None | Unset
+        if isinstance(self.measurement, Unset):
+            measurement = UNSET
+        elif isinstance(self.measurement, MeasurementReferenceModel):
             measurement = self.measurement.to_dict()
+        else:
+            measurement = self.measurement
 
-        event_type: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.event_type, Unset):
+        event_type: dict[str, Any] | None | Unset
+        if isinstance(self.event_type, Unset):
+            event_type = UNSET
+        elif isinstance(self.event_type, EventTypeReferenceModel):
             event_type = self.event_type.to_dict()
+        else:
+            event_type = self.event_type
 
-        comment = self.comment
+        comment: None | str | Unset
+        if isinstance(self.comment, Unset):
+            comment = UNSET
+        else:
+            comment = self.comment
 
         created: None | str | Unset
         if isinstance(self.created, Unset):
@@ -178,7 +234,15 @@ class AlarmOutputModel:
         from ..models.meter_reference_model import MeterReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
+
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
         def _parse_timestamp(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -197,19 +261,68 @@ class AlarmOutputModel:
 
         timestamp = _parse_timestamp(d.pop("timestamp", UNSET))
 
-        description = d.pop("description", UNSET)
+        def _parse_description(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        resolution = d.pop("resolution", UNSET)
+        description = _parse_description(d.pop("description", UNSET))
 
-        cause = d.pop("cause", UNSET)
+        def _parse_resolution(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        action = d.pop("action", UNSET)
+        resolution = _parse_resolution(d.pop("resolution", UNSET))
 
-        priority = d.pop("priority", UNSET)
+        def _parse_cause(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        status = d.pop("status", UNSET)
+        cause = _parse_cause(d.pop("cause", UNSET))
 
-        closed_by = d.pop("closedBy", UNSET)
+        def _parse_action(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        action = _parse_action(d.pop("action", UNSET))
+
+        def _parse_priority(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        priority = _parse_priority(d.pop("priority", UNSET))
+
+        def _parse_status(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        status = _parse_status(d.pop("status", UNSET))
+
+        def _parse_closed_by(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        closed_by = _parse_closed_by(d.pop("closedBy", UNSET))
 
         def _parse_closed_on(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -228,37 +341,91 @@ class AlarmOutputModel:
 
         closed_on = _parse_closed_on(d.pop("closedOn", UNSET))
 
-        external_id = d.pop("externalId", UNSET)
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _installation = d.pop("installation", UNSET)
-        installation: InstallationReferenceModel | Unset
-        if isinstance(_installation, Unset):
-            installation = UNSET
-        else:
-            installation = InstallationReferenceModel.from_dict(_installation)
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
 
-        _meter = d.pop("meter", UNSET)
-        meter: MeterReferenceModel | Unset
-        if isinstance(_meter, Unset):
-            meter = UNSET
-        else:
-            meter = MeterReferenceModel.from_dict(_meter)
+        def _parse_installation(data: object) -> InstallationReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                installation_type_1 = InstallationReferenceModel.from_dict(data)
 
-        _measurement = d.pop("measurement", UNSET)
-        measurement: MeasurementReferenceModel | Unset
-        if isinstance(_measurement, Unset):
-            measurement = UNSET
-        else:
-            measurement = MeasurementReferenceModel.from_dict(_measurement)
+                return installation_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(InstallationReferenceModel | None | Unset, data)
 
-        _event_type = d.pop("eventType", UNSET)
-        event_type: EventTypeReferenceModel | Unset
-        if isinstance(_event_type, Unset):
-            event_type = UNSET
-        else:
-            event_type = EventTypeReferenceModel.from_dict(_event_type)
+        installation = _parse_installation(d.pop("installation", UNSET))
 
-        comment = d.pop("comment", UNSET)
+        def _parse_meter(data: object) -> MeterReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                meter_type_1 = MeterReferenceModel.from_dict(data)
+
+                return meter_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(MeterReferenceModel | None | Unset, data)
+
+        meter = _parse_meter(d.pop("meter", UNSET))
+
+        def _parse_measurement(data: object) -> MeasurementReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                measurement_type_1 = MeasurementReferenceModel.from_dict(data)
+
+                return measurement_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(MeasurementReferenceModel | None | Unset, data)
+
+        measurement = _parse_measurement(d.pop("measurement", UNSET))
+
+        def _parse_event_type(data: object) -> EventTypeReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                event_type_type_1 = EventTypeReferenceModel.from_dict(data)
+
+                return event_type_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(EventTypeReferenceModel | None | Unset, data)
+
+        event_type = _parse_event_type(d.pop("eventType", UNSET))
+
+        def _parse_comment(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        comment = _parse_comment(d.pop("comment", UNSET))
 
         def _parse_created(data: object) -> datetime.datetime | None | Unset:
             if data is None:

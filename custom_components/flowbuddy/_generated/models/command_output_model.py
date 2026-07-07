@@ -25,28 +25,28 @@ T = TypeVar("T", bound="CommandOutputModel")
 class CommandOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
-        type_ (str | Unset): Type of command
-        status (str | Unset): Status of command
-        result (str | Unset): Result of command
+        resource_uri (None | str | Unset):
+        type_ (None | str | Unset): Type of command
+        status (None | str | Unset): Status of command
+        result (None | str | Unset): Result of command
         entered_on (datetime.datetime | None | Unset): When the command was initiated
         performed_on (datetime.datetime | None | Unset): When the command was executed
-        external_id (str | Unset):
-        installation (InstallationReferenceModel | Unset):
-        meter (MeterReferenceModel | Unset):
-        measurement (MeasurementReferenceModel | Unset):
+        external_id (None | str | Unset):
+        installation (InstallationReferenceModel | None | Unset):
+        meter (MeterReferenceModel | None | Unset):
+        measurement (MeasurementReferenceModel | None | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
-    type_: str | Unset = UNSET
-    status: str | Unset = UNSET
-    result: str | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
+    type_: None | str | Unset = UNSET
+    status: None | str | Unset = UNSET
+    result: None | str | Unset = UNSET
     entered_on: datetime.datetime | None | Unset = UNSET
     performed_on: datetime.datetime | None | Unset = UNSET
-    external_id: str | Unset = UNSET
-    installation: InstallationReferenceModel | Unset = UNSET
-    meter: MeterReferenceModel | Unset = UNSET
-    measurement: MeasurementReferenceModel | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    installation: InstallationReferenceModel | None | Unset = UNSET
+    meter: MeterReferenceModel | None | Unset = UNSET
+    measurement: MeasurementReferenceModel | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -54,13 +54,29 @@ class CommandOutputModel:
         from ..models.measurement_reference_model import MeasurementReferenceModel
         from ..models.meter_reference_model import MeterReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
-        type_ = self.type_
+        type_: None | str | Unset
+        if isinstance(self.type_, Unset):
+            type_ = UNSET
+        else:
+            type_ = self.type_
 
-        status = self.status
+        status: None | str | Unset
+        if isinstance(self.status, Unset):
+            status = UNSET
+        else:
+            status = self.status
 
-        result = self.result
+        result: None | str | Unset
+        if isinstance(self.result, Unset):
+            result = UNSET
+        else:
+            result = self.result
 
         entered_on: None | str | Unset
         if isinstance(self.entered_on, Unset):
@@ -78,19 +94,35 @@ class CommandOutputModel:
         else:
             performed_on = self.performed_on
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        installation: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.installation, Unset):
+        installation: dict[str, Any] | None | Unset
+        if isinstance(self.installation, Unset):
+            installation = UNSET
+        elif isinstance(self.installation, InstallationReferenceModel):
             installation = self.installation.to_dict()
+        else:
+            installation = self.installation
 
-        meter: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.meter, Unset):
+        meter: dict[str, Any] | None | Unset
+        if isinstance(self.meter, Unset):
+            meter = UNSET
+        elif isinstance(self.meter, MeterReferenceModel):
             meter = self.meter.to_dict()
+        else:
+            meter = self.meter
 
-        measurement: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.measurement, Unset):
+        measurement: dict[str, Any] | None | Unset
+        if isinstance(self.measurement, Unset):
+            measurement = UNSET
+        elif isinstance(self.measurement, MeasurementReferenceModel):
             measurement = self.measurement.to_dict()
+        else:
+            measurement = self.measurement
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -125,13 +157,42 @@ class CommandOutputModel:
         from ..models.meter_reference_model import MeterReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
 
-        type_ = d.pop("type", UNSET)
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        status = d.pop("status", UNSET)
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
-        result = d.pop("result", UNSET)
+        def _parse_type_(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        type_ = _parse_type_(d.pop("type", UNSET))
+
+        def _parse_status(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        status = _parse_status(d.pop("status", UNSET))
+
+        def _parse_result(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        result = _parse_result(d.pop("result", UNSET))
 
         def _parse_entered_on(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -167,28 +228,65 @@ class CommandOutputModel:
 
         performed_on = _parse_performed_on(d.pop("performedOn", UNSET))
 
-        external_id = d.pop("externalId", UNSET)
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _installation = d.pop("installation", UNSET)
-        installation: InstallationReferenceModel | Unset
-        if isinstance(_installation, Unset):
-            installation = UNSET
-        else:
-            installation = InstallationReferenceModel.from_dict(_installation)
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
 
-        _meter = d.pop("meter", UNSET)
-        meter: MeterReferenceModel | Unset
-        if isinstance(_meter, Unset):
-            meter = UNSET
-        else:
-            meter = MeterReferenceModel.from_dict(_meter)
+        def _parse_installation(data: object) -> InstallationReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                installation_type_1 = InstallationReferenceModel.from_dict(data)
 
-        _measurement = d.pop("measurement", UNSET)
-        measurement: MeasurementReferenceModel | Unset
-        if isinstance(_measurement, Unset):
-            measurement = UNSET
-        else:
-            measurement = MeasurementReferenceModel.from_dict(_measurement)
+                return installation_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(InstallationReferenceModel | None | Unset, data)
+
+        installation = _parse_installation(d.pop("installation", UNSET))
+
+        def _parse_meter(data: object) -> MeterReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                meter_type_1 = MeterReferenceModel.from_dict(data)
+
+                return meter_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(MeterReferenceModel | None | Unset, data)
+
+        meter = _parse_meter(d.pop("meter", UNSET))
+
+        def _parse_measurement(data: object) -> MeasurementReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                measurement_type_1 = MeasurementReferenceModel.from_dict(data)
+
+                return measurement_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(MeasurementReferenceModel | None | Unset, data)
+
+        measurement = _parse_measurement(d.pop("measurement", UNSET))
 
         command_output_model = cls(
             resource_uri=resource_uri,

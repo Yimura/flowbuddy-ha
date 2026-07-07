@@ -23,24 +23,28 @@ T = TypeVar("T", bound="MeasurementValueOutputModel")
 class MeasurementValueOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
+        resource_uri (None | str | Unset):
         timestart (datetime.datetime | None | Unset):
-        value (float | Unset):
+        value (float | None | Unset):
         created_on (datetime.datetime | None | Unset):
-        measurement (MeasurementReferenceModel | Unset):
+        measurement (MeasurementReferenceModel | None | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
     timestart: datetime.datetime | None | Unset = UNSET
-    value: float | Unset = UNSET
+    value: float | None | Unset = UNSET
     created_on: datetime.datetime | None | Unset = UNSET
-    measurement: MeasurementReferenceModel | Unset = UNSET
+    measurement: MeasurementReferenceModel | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.measurement_reference_model import MeasurementReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
         timestart: None | str | Unset
         if isinstance(self.timestart, Unset):
@@ -50,7 +54,11 @@ class MeasurementValueOutputModel:
         else:
             timestart = self.timestart
 
-        value = self.value
+        value: float | None | Unset
+        if isinstance(self.value, Unset):
+            value = UNSET
+        else:
+            value = self.value
 
         created_on: None | str | Unset
         if isinstance(self.created_on, Unset):
@@ -60,9 +68,13 @@ class MeasurementValueOutputModel:
         else:
             created_on = self.created_on
 
-        measurement: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.measurement, Unset):
+        measurement: dict[str, Any] | None | Unset
+        if isinstance(self.measurement, Unset):
+            measurement = UNSET
+        elif isinstance(self.measurement, MeasurementReferenceModel):
             measurement = self.measurement.to_dict()
+        else:
+            measurement = self.measurement
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -85,7 +97,15 @@ class MeasurementValueOutputModel:
         from ..models.measurement_reference_model import MeasurementReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
+
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
         def _parse_timestart(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -104,7 +124,14 @@ class MeasurementValueOutputModel:
 
         timestart = _parse_timestart(d.pop("timestart", UNSET))
 
-        value = d.pop("value", UNSET)
+        def _parse_value(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
+
+        value = _parse_value(d.pop("value", UNSET))
 
         def _parse_created_on(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -123,12 +150,22 @@ class MeasurementValueOutputModel:
 
         created_on = _parse_created_on(d.pop("createdOn", UNSET))
 
-        _measurement = d.pop("measurement", UNSET)
-        measurement: MeasurementReferenceModel | Unset
-        if isinstance(_measurement, Unset):
-            measurement = UNSET
-        else:
-            measurement = MeasurementReferenceModel.from_dict(_measurement)
+        def _parse_measurement(data: object) -> MeasurementReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                measurement_type_1 = MeasurementReferenceModel.from_dict(data)
+
+                return measurement_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(MeasurementReferenceModel | None | Unset, data)
+
+        measurement = _parse_measurement(d.pop("measurement", UNSET))
 
         measurement_value_output_model = cls(
             resource_uri=resource_uri,

@@ -9,6 +9,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import cast
 
 
 T = TypeVar("T", bound="MeasurementTypeOutputModel")
@@ -18,42 +19,74 @@ T = TypeVar("T", bound="MeasurementTypeOutputModel")
 class MeasurementTypeOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
-        name (str | Unset): Description of the type
-        aggregation_type (str | Unset): Indicaties how data is aggregated (e.g. sum, avg, max, min)
-        code (str | Unset):
-        is_incremental (bool | Unset):
-        external_id (str | Unset):
-        interval (str | Unset):
-        unit (str | Unset):
+        resource_uri (None | str | Unset):
+        name (None | str | Unset): Description of the type
+        aggregation_type (None | str | Unset): Indicaties how data is aggregated (e.g. sum, avg, max, min)
+        code (None | str | Unset):
+        is_incremental (bool | None | Unset):
+        external_id (None | str | Unset):
+        interval (None | str | Unset):
+        unit (None | str | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
-    name: str | Unset = UNSET
-    aggregation_type: str | Unset = UNSET
-    code: str | Unset = UNSET
-    is_incremental: bool | Unset = UNSET
-    external_id: str | Unset = UNSET
-    interval: str | Unset = UNSET
-    unit: str | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
+    name: None | str | Unset = UNSET
+    aggregation_type: None | str | Unset = UNSET
+    code: None | str | Unset = UNSET
+    is_incremental: bool | None | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    interval: None | str | Unset = UNSET
+    unit: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
-        name = self.name
+        name: None | str | Unset
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
 
-        aggregation_type = self.aggregation_type
+        aggregation_type: None | str | Unset
+        if isinstance(self.aggregation_type, Unset):
+            aggregation_type = UNSET
+        else:
+            aggregation_type = self.aggregation_type
 
-        code = self.code
+        code: None | str | Unset
+        if isinstance(self.code, Unset):
+            code = UNSET
+        else:
+            code = self.code
 
-        is_incremental = self.is_incremental
+        is_incremental: bool | None | Unset
+        if isinstance(self.is_incremental, Unset):
+            is_incremental = UNSET
+        else:
+            is_incremental = self.is_incremental
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        interval = self.interval
+        interval: None | str | Unset
+        if isinstance(self.interval, Unset):
+            interval = UNSET
+        else:
+            interval = self.interval
 
-        unit = self.unit
+        unit: None | str | Unset
+        if isinstance(self.unit, Unset):
+            unit = UNSET
+        else:
+            unit = self.unit
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -80,21 +113,78 @@ class MeasurementTypeOutputModel:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
 
-        name = d.pop("name", UNSET)
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        aggregation_type = d.pop("aggregationType", UNSET)
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
-        code = d.pop("code", UNSET)
+        def _parse_name(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        is_incremental = d.pop("isIncremental", UNSET)
+        name = _parse_name(d.pop("name", UNSET))
 
-        external_id = d.pop("externalId", UNSET)
+        def _parse_aggregation_type(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        interval = d.pop("interval", UNSET)
+        aggregation_type = _parse_aggregation_type(d.pop("aggregationType", UNSET))
 
-        unit = d.pop("unit", UNSET)
+        def _parse_code(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        code = _parse_code(d.pop("code", UNSET))
+
+        def _parse_is_incremental(data: object) -> bool | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(bool | None | Unset, data)
+
+        is_incremental = _parse_is_incremental(d.pop("isIncremental", UNSET))
+
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
+
+        def _parse_interval(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        interval = _parse_interval(d.pop("interval", UNSET))
+
+        def _parse_unit(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        unit = _parse_unit(d.pop("unit", UNSET))
 
         measurement_type_output_model = cls(
             resource_uri=resource_uri,

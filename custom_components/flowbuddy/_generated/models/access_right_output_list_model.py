@@ -22,21 +22,26 @@ T = TypeVar("T", bound="AccessRightOutputListModel")
 class AccessRightOutputListModel:
     """
     Attributes:
-        access_rights (list[AccessRightOutputModel] | Unset):
+        access_rights (list[AccessRightOutputModel] | None | Unset):
     """
 
-    access_rights: list[AccessRightOutputModel] | Unset = UNSET
+    access_rights: list[AccessRightOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.access_right_output_model import AccessRightOutputModel
 
-        access_rights: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.access_rights, Unset):
+        access_rights: list[dict[str, Any]] | None | Unset
+        if isinstance(self.access_rights, Unset):
+            access_rights = UNSET
+        elif isinstance(self.access_rights, list):
             access_rights = []
-            for access_rights_item_data in self.access_rights:
-                access_rights_item = access_rights_item_data.to_dict()
-                access_rights.append(access_rights_item)
+            for access_rights_type_0_item_data in self.access_rights:
+                access_rights_type_0_item = access_rights_type_0_item_data.to_dict()
+                access_rights.append(access_rights_type_0_item)
+
+        else:
+            access_rights = self.access_rights
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,14 +56,30 @@ class AccessRightOutputListModel:
         from ..models.access_right_output_model import AccessRightOutputModel
 
         d = dict(src_dict)
-        _access_rights = d.pop("accessRights", UNSET)
-        access_rights: list[AccessRightOutputModel] | Unset = UNSET
-        if _access_rights is not UNSET:
-            access_rights = []
-            for access_rights_item_data in _access_rights:
-                access_rights_item = AccessRightOutputModel.from_dict(access_rights_item_data)
 
-                access_rights.append(access_rights_item)
+        def _parse_access_rights(data: object) -> list[AccessRightOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                access_rights_type_0 = []
+                _access_rights_type_0 = data
+                for access_rights_type_0_item_data in _access_rights_type_0:
+                    access_rights_type_0_item = AccessRightOutputModel.from_dict(
+                        access_rights_type_0_item_data
+                    )
+
+                    access_rights_type_0.append(access_rights_type_0_item)
+
+                return access_rights_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[AccessRightOutputModel] | None | Unset, data)
+
+        access_rights = _parse_access_rights(d.pop("accessRights", UNSET))
 
         access_right_output_list_model = cls(
             access_rights=access_rights,

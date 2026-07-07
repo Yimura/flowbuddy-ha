@@ -22,21 +22,26 @@ T = TypeVar("T", bound="BatteryOutputListModel")
 class BatteryOutputListModel:
     """
     Attributes:
-        batteries (list[BatteryOutputModel] | Unset):
+        batteries (list[BatteryOutputModel] | None | Unset):
     """
 
-    batteries: list[BatteryOutputModel] | Unset = UNSET
+    batteries: list[BatteryOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.battery_output_model import BatteryOutputModel
 
-        batteries: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.batteries, Unset):
+        batteries: list[dict[str, Any]] | None | Unset
+        if isinstance(self.batteries, Unset):
+            batteries = UNSET
+        elif isinstance(self.batteries, list):
             batteries = []
-            for batteries_item_data in self.batteries:
-                batteries_item = batteries_item_data.to_dict()
-                batteries.append(batteries_item)
+            for batteries_type_0_item_data in self.batteries:
+                batteries_type_0_item = batteries_type_0_item_data.to_dict()
+                batteries.append(batteries_type_0_item)
+
+        else:
+            batteries = self.batteries
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,14 +56,28 @@ class BatteryOutputListModel:
         from ..models.battery_output_model import BatteryOutputModel
 
         d = dict(src_dict)
-        _batteries = d.pop("batteries", UNSET)
-        batteries: list[BatteryOutputModel] | Unset = UNSET
-        if _batteries is not UNSET:
-            batteries = []
-            for batteries_item_data in _batteries:
-                batteries_item = BatteryOutputModel.from_dict(batteries_item_data)
 
-                batteries.append(batteries_item)
+        def _parse_batteries(data: object) -> list[BatteryOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                batteries_type_0 = []
+                _batteries_type_0 = data
+                for batteries_type_0_item_data in _batteries_type_0:
+                    batteries_type_0_item = BatteryOutputModel.from_dict(batteries_type_0_item_data)
+
+                    batteries_type_0.append(batteries_type_0_item)
+
+                return batteries_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[BatteryOutputModel] | None | Unset, data)
+
+        batteries = _parse_batteries(d.pop("batteries", UNSET))
 
         battery_output_list_model = cls(
             batteries=batteries,

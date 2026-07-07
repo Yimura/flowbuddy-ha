@@ -9,6 +9,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import cast
 
 
 T = TypeVar("T", bound="ApiMeterReferenceModel")
@@ -18,18 +19,26 @@ T = TypeVar("T", bound="ApiMeterReferenceModel")
 class ApiMeterReferenceModel:
     """
     Attributes:
-        resource_uri (str | Unset):
-        external_id (str | Unset):
+        resource_uri (None | str | Unset):
+        external_id (None | str | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
-    external_id: str | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
+    external_id: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -44,9 +53,24 @@ class ApiMeterReferenceModel:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
 
-        external_id = d.pop("externalId", UNSET)
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
+
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
 
         api_meter_reference_model = cls(
             resource_uri=resource_uri,

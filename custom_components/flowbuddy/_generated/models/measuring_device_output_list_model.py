@@ -22,21 +22,26 @@ T = TypeVar("T", bound="MeasuringDeviceOutputListModel")
 class MeasuringDeviceOutputListModel:
     """
     Attributes:
-        measuring_devices (list[MeasuringDeviceOutputModel] | Unset):
+        measuring_devices (list[MeasuringDeviceOutputModel] | None | Unset):
     """
 
-    measuring_devices: list[MeasuringDeviceOutputModel] | Unset = UNSET
+    measuring_devices: list[MeasuringDeviceOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.measuring_device_output_model import MeasuringDeviceOutputModel
 
-        measuring_devices: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.measuring_devices, Unset):
+        measuring_devices: list[dict[str, Any]] | None | Unset
+        if isinstance(self.measuring_devices, Unset):
+            measuring_devices = UNSET
+        elif isinstance(self.measuring_devices, list):
             measuring_devices = []
-            for measuring_devices_item_data in self.measuring_devices:
-                measuring_devices_item = measuring_devices_item_data.to_dict()
-                measuring_devices.append(measuring_devices_item)
+            for measuring_devices_type_0_item_data in self.measuring_devices:
+                measuring_devices_type_0_item = measuring_devices_type_0_item_data.to_dict()
+                measuring_devices.append(measuring_devices_type_0_item)
+
+        else:
+            measuring_devices = self.measuring_devices
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,16 +56,32 @@ class MeasuringDeviceOutputListModel:
         from ..models.measuring_device_output_model import MeasuringDeviceOutputModel
 
         d = dict(src_dict)
-        _measuring_devices = d.pop("measuringDevices", UNSET)
-        measuring_devices: list[MeasuringDeviceOutputModel] | Unset = UNSET
-        if _measuring_devices is not UNSET:
-            measuring_devices = []
-            for measuring_devices_item_data in _measuring_devices:
-                measuring_devices_item = MeasuringDeviceOutputModel.from_dict(
-                    measuring_devices_item_data
-                )
 
-                measuring_devices.append(measuring_devices_item)
+        def _parse_measuring_devices(
+            data: object,
+        ) -> list[MeasuringDeviceOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                measuring_devices_type_0 = []
+                _measuring_devices_type_0 = data
+                for measuring_devices_type_0_item_data in _measuring_devices_type_0:
+                    measuring_devices_type_0_item = MeasuringDeviceOutputModel.from_dict(
+                        measuring_devices_type_0_item_data
+                    )
+
+                    measuring_devices_type_0.append(measuring_devices_type_0_item)
+
+                return measuring_devices_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[MeasuringDeviceOutputModel] | None | Unset, data)
+
+        measuring_devices = _parse_measuring_devices(d.pop("measuringDevices", UNSET))
 
         measuring_device_output_list_model = cls(
             measuring_devices=measuring_devices,

@@ -22,21 +22,26 @@ T = TypeVar("T", bound="ApiMeterOutputListModel")
 class ApiMeterOutputListModel:
     """
     Attributes:
-        api_meters (list[ApiMeterOutputModel] | Unset):
+        api_meters (list[ApiMeterOutputModel] | None | Unset):
     """
 
-    api_meters: list[ApiMeterOutputModel] | Unset = UNSET
+    api_meters: list[ApiMeterOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.api_meter_output_model import ApiMeterOutputModel
 
-        api_meters: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.api_meters, Unset):
+        api_meters: list[dict[str, Any]] | None | Unset
+        if isinstance(self.api_meters, Unset):
+            api_meters = UNSET
+        elif isinstance(self.api_meters, list):
             api_meters = []
-            for api_meters_item_data in self.api_meters:
-                api_meters_item = api_meters_item_data.to_dict()
-                api_meters.append(api_meters_item)
+            for api_meters_type_0_item_data in self.api_meters:
+                api_meters_type_0_item = api_meters_type_0_item_data.to_dict()
+                api_meters.append(api_meters_type_0_item)
+
+        else:
+            api_meters = self.api_meters
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,14 +56,30 @@ class ApiMeterOutputListModel:
         from ..models.api_meter_output_model import ApiMeterOutputModel
 
         d = dict(src_dict)
-        _api_meters = d.pop("apiMeters", UNSET)
-        api_meters: list[ApiMeterOutputModel] | Unset = UNSET
-        if _api_meters is not UNSET:
-            api_meters = []
-            for api_meters_item_data in _api_meters:
-                api_meters_item = ApiMeterOutputModel.from_dict(api_meters_item_data)
 
-                api_meters.append(api_meters_item)
+        def _parse_api_meters(data: object) -> list[ApiMeterOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                api_meters_type_0 = []
+                _api_meters_type_0 = data
+                for api_meters_type_0_item_data in _api_meters_type_0:
+                    api_meters_type_0_item = ApiMeterOutputModel.from_dict(
+                        api_meters_type_0_item_data
+                    )
+
+                    api_meters_type_0.append(api_meters_type_0_item)
+
+                return api_meters_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[ApiMeterOutputModel] | None | Unset, data)
+
+        api_meters = _parse_api_meters(d.pop("apiMeters", UNSET))
 
         api_meter_output_list_model = cls(
             api_meters=api_meters,

@@ -12,8 +12,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-    from ..models.layout_post_input_model_other_properties import (
-        LayoutPostInputModelOtherProperties,
+    from ..models.layout_post_input_model_other_properties_type_0 import (
+        LayoutPostInputModelOtherPropertiesType0,
     )
 
 
@@ -24,100 +24,184 @@ T = TypeVar("T", bound="LayoutPostInputModel")
 class LayoutPostInputModel:
     """
     Attributes:
-        meter (str | Unset):
-        orientation (int | Unset):
-        tilt (int | Unset):
-        wattpeak (float | Unset):
-        expected_production (float | Unset):
-        cspi_enabled (bool | Unset):
-        string_number (str | Unset):
-        number_of_panels (int | Unset):
-        wattpeak_per_panel (float | Unset):
-        panel_brand (str | Unset):
-        panel_type (str | Unset):
-        panel_classification (str | Unset):
-        panel_serial_numbers (str | Unset):
-        panel_cell_area (str | Unset):
-        max_inverter_power (str | Unset):
-        inverter_type (str | Unset):
-        inverter_brand (str | Unset):
-        inverter_serial_numbers (str | Unset):
-        inverter_classification (str | Unset):
-        panel_location (str | Unset):
-        other_properties (LayoutPostInputModelOtherProperties | Unset):
+        meter (None | str | Unset):
+        orientation (int | None | Unset):
+        tilt (int | None | Unset):
+        wattpeak (float | None | Unset):
+        expected_production (float | None | Unset):
+        cspi_enabled (bool | None | Unset):
+        string_number (None | str | Unset):
+        number_of_panels (int | None | Unset):
+        wattpeak_per_panel (float | None | Unset):
+        panel_brand (None | str | Unset):
+        panel_type (None | str | Unset):
+        panel_classification (None | str | Unset):
+        panel_serial_numbers (None | str | Unset):
+        panel_cell_area (None | str | Unset):
+        max_inverter_power (None | str | Unset):
+        inverter_type (None | str | Unset):
+        inverter_brand (None | str | Unset):
+        inverter_serial_numbers (None | str | Unset):
+        inverter_classification (None | str | Unset):
+        panel_location (None | str | Unset):
+        other_properties (LayoutPostInputModelOtherPropertiesType0 | None | Unset):
     """
 
-    meter: str | Unset = UNSET
-    orientation: int | Unset = UNSET
-    tilt: int | Unset = UNSET
-    wattpeak: float | Unset = UNSET
-    expected_production: float | Unset = UNSET
-    cspi_enabled: bool | Unset = UNSET
-    string_number: str | Unset = UNSET
-    number_of_panels: int | Unset = UNSET
-    wattpeak_per_panel: float | Unset = UNSET
-    panel_brand: str | Unset = UNSET
-    panel_type: str | Unset = UNSET
-    panel_classification: str | Unset = UNSET
-    panel_serial_numbers: str | Unset = UNSET
-    panel_cell_area: str | Unset = UNSET
-    max_inverter_power: str | Unset = UNSET
-    inverter_type: str | Unset = UNSET
-    inverter_brand: str | Unset = UNSET
-    inverter_serial_numbers: str | Unset = UNSET
-    inverter_classification: str | Unset = UNSET
-    panel_location: str | Unset = UNSET
-    other_properties: LayoutPostInputModelOtherProperties | Unset = UNSET
+    meter: None | str | Unset = UNSET
+    orientation: int | None | Unset = UNSET
+    tilt: int | None | Unset = UNSET
+    wattpeak: float | None | Unset = UNSET
+    expected_production: float | None | Unset = UNSET
+    cspi_enabled: bool | None | Unset = UNSET
+    string_number: None | str | Unset = UNSET
+    number_of_panels: int | None | Unset = UNSET
+    wattpeak_per_panel: float | None | Unset = UNSET
+    panel_brand: None | str | Unset = UNSET
+    panel_type: None | str | Unset = UNSET
+    panel_classification: None | str | Unset = UNSET
+    panel_serial_numbers: None | str | Unset = UNSET
+    panel_cell_area: None | str | Unset = UNSET
+    max_inverter_power: None | str | Unset = UNSET
+    inverter_type: None | str | Unset = UNSET
+    inverter_brand: None | str | Unset = UNSET
+    inverter_serial_numbers: None | str | Unset = UNSET
+    inverter_classification: None | str | Unset = UNSET
+    panel_location: None | str | Unset = UNSET
+    other_properties: LayoutPostInputModelOtherPropertiesType0 | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.layout_post_input_model_other_properties import (
-            LayoutPostInputModelOtherProperties,
+        from ..models.layout_post_input_model_other_properties_type_0 import (
+            LayoutPostInputModelOtherPropertiesType0,
         )
 
-        meter = self.meter
+        meter: None | str | Unset
+        if isinstance(self.meter, Unset):
+            meter = UNSET
+        else:
+            meter = self.meter
 
-        orientation = self.orientation
+        orientation: int | None | Unset
+        if isinstance(self.orientation, Unset):
+            orientation = UNSET
+        else:
+            orientation = self.orientation
 
-        tilt = self.tilt
+        tilt: int | None | Unset
+        if isinstance(self.tilt, Unset):
+            tilt = UNSET
+        else:
+            tilt = self.tilt
 
-        wattpeak = self.wattpeak
+        wattpeak: float | None | Unset
+        if isinstance(self.wattpeak, Unset):
+            wattpeak = UNSET
+        else:
+            wattpeak = self.wattpeak
 
-        expected_production = self.expected_production
+        expected_production: float | None | Unset
+        if isinstance(self.expected_production, Unset):
+            expected_production = UNSET
+        else:
+            expected_production = self.expected_production
 
-        cspi_enabled = self.cspi_enabled
+        cspi_enabled: bool | None | Unset
+        if isinstance(self.cspi_enabled, Unset):
+            cspi_enabled = UNSET
+        else:
+            cspi_enabled = self.cspi_enabled
 
-        string_number = self.string_number
+        string_number: None | str | Unset
+        if isinstance(self.string_number, Unset):
+            string_number = UNSET
+        else:
+            string_number = self.string_number
 
-        number_of_panels = self.number_of_panels
+        number_of_panels: int | None | Unset
+        if isinstance(self.number_of_panels, Unset):
+            number_of_panels = UNSET
+        else:
+            number_of_panels = self.number_of_panels
 
-        wattpeak_per_panel = self.wattpeak_per_panel
+        wattpeak_per_panel: float | None | Unset
+        if isinstance(self.wattpeak_per_panel, Unset):
+            wattpeak_per_panel = UNSET
+        else:
+            wattpeak_per_panel = self.wattpeak_per_panel
 
-        panel_brand = self.panel_brand
+        panel_brand: None | str | Unset
+        if isinstance(self.panel_brand, Unset):
+            panel_brand = UNSET
+        else:
+            panel_brand = self.panel_brand
 
-        panel_type = self.panel_type
+        panel_type: None | str | Unset
+        if isinstance(self.panel_type, Unset):
+            panel_type = UNSET
+        else:
+            panel_type = self.panel_type
 
-        panel_classification = self.panel_classification
+        panel_classification: None | str | Unset
+        if isinstance(self.panel_classification, Unset):
+            panel_classification = UNSET
+        else:
+            panel_classification = self.panel_classification
 
-        panel_serial_numbers = self.panel_serial_numbers
+        panel_serial_numbers: None | str | Unset
+        if isinstance(self.panel_serial_numbers, Unset):
+            panel_serial_numbers = UNSET
+        else:
+            panel_serial_numbers = self.panel_serial_numbers
 
-        panel_cell_area = self.panel_cell_area
+        panel_cell_area: None | str | Unset
+        if isinstance(self.panel_cell_area, Unset):
+            panel_cell_area = UNSET
+        else:
+            panel_cell_area = self.panel_cell_area
 
-        max_inverter_power = self.max_inverter_power
+        max_inverter_power: None | str | Unset
+        if isinstance(self.max_inverter_power, Unset):
+            max_inverter_power = UNSET
+        else:
+            max_inverter_power = self.max_inverter_power
 
-        inverter_type = self.inverter_type
+        inverter_type: None | str | Unset
+        if isinstance(self.inverter_type, Unset):
+            inverter_type = UNSET
+        else:
+            inverter_type = self.inverter_type
 
-        inverter_brand = self.inverter_brand
+        inverter_brand: None | str | Unset
+        if isinstance(self.inverter_brand, Unset):
+            inverter_brand = UNSET
+        else:
+            inverter_brand = self.inverter_brand
 
-        inverter_serial_numbers = self.inverter_serial_numbers
+        inverter_serial_numbers: None | str | Unset
+        if isinstance(self.inverter_serial_numbers, Unset):
+            inverter_serial_numbers = UNSET
+        else:
+            inverter_serial_numbers = self.inverter_serial_numbers
 
-        inverter_classification = self.inverter_classification
+        inverter_classification: None | str | Unset
+        if isinstance(self.inverter_classification, Unset):
+            inverter_classification = UNSET
+        else:
+            inverter_classification = self.inverter_classification
 
-        panel_location = self.panel_location
+        panel_location: None | str | Unset
+        if isinstance(self.panel_location, Unset):
+            panel_location = UNSET
+        else:
+            panel_location = self.panel_location
 
-        other_properties: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.other_properties, Unset):
+        other_properties: dict[str, Any] | None | Unset
+        if isinstance(self.other_properties, Unset):
+            other_properties = UNSET
+        elif isinstance(self.other_properties, LayoutPostInputModelOtherPropertiesType0):
             other_properties = self.other_properties.to_dict()
+        else:
+            other_properties = self.other_properties
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -169,57 +253,214 @@ class LayoutPostInputModel:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.layout_post_input_model_other_properties import (
-            LayoutPostInputModelOtherProperties,
+        from ..models.layout_post_input_model_other_properties_type_0 import (
+            LayoutPostInputModelOtherPropertiesType0,
         )
 
         d = dict(src_dict)
-        meter = d.pop("meter", UNSET)
 
-        orientation = d.pop("orientation", UNSET)
+        def _parse_meter(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        tilt = d.pop("tilt", UNSET)
+        meter = _parse_meter(d.pop("meter", UNSET))
 
-        wattpeak = d.pop("wattpeak", UNSET)
+        def _parse_orientation(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
 
-        expected_production = d.pop("expectedProduction", UNSET)
+        orientation = _parse_orientation(d.pop("orientation", UNSET))
 
-        cspi_enabled = d.pop("cspiEnabled", UNSET)
+        def _parse_tilt(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
 
-        string_number = d.pop("stringNumber", UNSET)
+        tilt = _parse_tilt(d.pop("tilt", UNSET))
 
-        number_of_panels = d.pop("numberOfPanels", UNSET)
+        def _parse_wattpeak(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
 
-        wattpeak_per_panel = d.pop("wattpeakPerPanel", UNSET)
+        wattpeak = _parse_wattpeak(d.pop("wattpeak", UNSET))
 
-        panel_brand = d.pop("panelBrand", UNSET)
+        def _parse_expected_production(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
 
-        panel_type = d.pop("panelType", UNSET)
+        expected_production = _parse_expected_production(d.pop("expectedProduction", UNSET))
 
-        panel_classification = d.pop("panelClassification", UNSET)
+        def _parse_cspi_enabled(data: object) -> bool | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(bool | None | Unset, data)
 
-        panel_serial_numbers = d.pop("panelSerialNumbers", UNSET)
+        cspi_enabled = _parse_cspi_enabled(d.pop("cspiEnabled", UNSET))
 
-        panel_cell_area = d.pop("panelCellArea", UNSET)
+        def _parse_string_number(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        max_inverter_power = d.pop("maxInverterPower", UNSET)
+        string_number = _parse_string_number(d.pop("stringNumber", UNSET))
 
-        inverter_type = d.pop("inverterType", UNSET)
+        def _parse_number_of_panels(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
 
-        inverter_brand = d.pop("inverterBrand", UNSET)
+        number_of_panels = _parse_number_of_panels(d.pop("numberOfPanels", UNSET))
 
-        inverter_serial_numbers = d.pop("inverterSerialNumbers", UNSET)
+        def _parse_wattpeak_per_panel(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
 
-        inverter_classification = d.pop("inverterClassification", UNSET)
+        wattpeak_per_panel = _parse_wattpeak_per_panel(d.pop("wattpeakPerPanel", UNSET))
 
-        panel_location = d.pop("panelLocation", UNSET)
+        def _parse_panel_brand(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _other_properties = d.pop("otherProperties", UNSET)
-        other_properties: LayoutPostInputModelOtherProperties | Unset
-        if isinstance(_other_properties, Unset):
-            other_properties = UNSET
-        else:
-            other_properties = LayoutPostInputModelOtherProperties.from_dict(_other_properties)
+        panel_brand = _parse_panel_brand(d.pop("panelBrand", UNSET))
+
+        def _parse_panel_type(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        panel_type = _parse_panel_type(d.pop("panelType", UNSET))
+
+        def _parse_panel_classification(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        panel_classification = _parse_panel_classification(d.pop("panelClassification", UNSET))
+
+        def _parse_panel_serial_numbers(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        panel_serial_numbers = _parse_panel_serial_numbers(d.pop("panelSerialNumbers", UNSET))
+
+        def _parse_panel_cell_area(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        panel_cell_area = _parse_panel_cell_area(d.pop("panelCellArea", UNSET))
+
+        def _parse_max_inverter_power(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        max_inverter_power = _parse_max_inverter_power(d.pop("maxInverterPower", UNSET))
+
+        def _parse_inverter_type(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        inverter_type = _parse_inverter_type(d.pop("inverterType", UNSET))
+
+        def _parse_inverter_brand(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        inverter_brand = _parse_inverter_brand(d.pop("inverterBrand", UNSET))
+
+        def _parse_inverter_serial_numbers(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        inverter_serial_numbers = _parse_inverter_serial_numbers(
+            d.pop("inverterSerialNumbers", UNSET)
+        )
+
+        def _parse_inverter_classification(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        inverter_classification = _parse_inverter_classification(
+            d.pop("inverterClassification", UNSET)
+        )
+
+        def _parse_panel_location(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        panel_location = _parse_panel_location(d.pop("panelLocation", UNSET))
+
+        def _parse_other_properties(
+            data: object,
+        ) -> LayoutPostInputModelOtherPropertiesType0 | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                other_properties_type_0 = LayoutPostInputModelOtherPropertiesType0.from_dict(data)
+
+                return other_properties_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(LayoutPostInputModelOtherPropertiesType0 | None | Unset, data)
+
+        other_properties = _parse_other_properties(d.pop("otherProperties", UNSET))
 
         layout_post_input_model = cls(
             meter=meter,

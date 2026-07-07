@@ -22,10 +22,10 @@ T = TypeVar("T", bound="CommunicatorVerificationOutputListModel")
 class CommunicatorVerificationOutputListModel:
     """
     Attributes:
-        communicator_verifications (list[CommunicatorVerificationOutputModel] | Unset):
+        communicator_verifications (list[CommunicatorVerificationOutputModel] | None | Unset):
     """
 
-    communicator_verifications: list[CommunicatorVerificationOutputModel] | Unset = UNSET
+    communicator_verifications: list[CommunicatorVerificationOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -33,12 +33,19 @@ class CommunicatorVerificationOutputListModel:
             CommunicatorVerificationOutputModel,
         )
 
-        communicator_verifications: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.communicator_verifications, Unset):
+        communicator_verifications: list[dict[str, Any]] | None | Unset
+        if isinstance(self.communicator_verifications, Unset):
+            communicator_verifications = UNSET
+        elif isinstance(self.communicator_verifications, list):
             communicator_verifications = []
-            for communicator_verifications_item_data in self.communicator_verifications:
-                communicator_verifications_item = communicator_verifications_item_data.to_dict()
-                communicator_verifications.append(communicator_verifications_item)
+            for communicator_verifications_type_0_item_data in self.communicator_verifications:
+                communicator_verifications_type_0_item = (
+                    communicator_verifications_type_0_item_data.to_dict()
+                )
+                communicator_verifications.append(communicator_verifications_type_0_item)
+
+        else:
+            communicator_verifications = self.communicator_verifications
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -55,16 +62,38 @@ class CommunicatorVerificationOutputListModel:
         )
 
         d = dict(src_dict)
-        _communicator_verifications = d.pop("communicatorVerifications", UNSET)
-        communicator_verifications: list[CommunicatorVerificationOutputModel] | Unset = UNSET
-        if _communicator_verifications is not UNSET:
-            communicator_verifications = []
-            for communicator_verifications_item_data in _communicator_verifications:
-                communicator_verifications_item = CommunicatorVerificationOutputModel.from_dict(
-                    communicator_verifications_item_data
-                )
 
-                communicator_verifications.append(communicator_verifications_item)
+        def _parse_communicator_verifications(
+            data: object,
+        ) -> list[CommunicatorVerificationOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                communicator_verifications_type_0 = []
+                _communicator_verifications_type_0 = data
+                for (
+                    communicator_verifications_type_0_item_data
+                ) in _communicator_verifications_type_0:
+                    communicator_verifications_type_0_item = (
+                        CommunicatorVerificationOutputModel.from_dict(
+                            communicator_verifications_type_0_item_data
+                        )
+                    )
+
+                    communicator_verifications_type_0.append(communicator_verifications_type_0_item)
+
+                return communicator_verifications_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[CommunicatorVerificationOutputModel] | None | Unset, data)
+
+        communicator_verifications = _parse_communicator_verifications(
+            d.pop("communicatorVerifications", UNSET)
+        )
 
         communicator_verification_output_list_model = cls(
             communicator_verifications=communicator_verifications,

@@ -24,10 +24,10 @@ T = TypeVar("T", bound="SendChannelTypeDefinitionOutputListModel")
 class SendChannelTypeDefinitionOutputListModel:
     """
     Attributes:
-        send_channel_type_definitions (list[SendChannelTypeDefinitionOutputModel] | Unset):
+        send_channel_type_definitions (list[SendChannelTypeDefinitionOutputModel] | None | Unset):
     """
 
-    send_channel_type_definitions: list[SendChannelTypeDefinitionOutputModel] | Unset = UNSET
+    send_channel_type_definitions: list[SendChannelTypeDefinitionOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -35,14 +35,21 @@ class SendChannelTypeDefinitionOutputListModel:
             SendChannelTypeDefinitionOutputModel,
         )
 
-        send_channel_type_definitions: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.send_channel_type_definitions, Unset):
+        send_channel_type_definitions: list[dict[str, Any]] | None | Unset
+        if isinstance(self.send_channel_type_definitions, Unset):
+            send_channel_type_definitions = UNSET
+        elif isinstance(self.send_channel_type_definitions, list):
             send_channel_type_definitions = []
-            for send_channel_type_definitions_item_data in self.send_channel_type_definitions:
-                send_channel_type_definitions_item = (
-                    send_channel_type_definitions_item_data.to_dict()
+            for (
+                send_channel_type_definitions_type_0_item_data
+            ) in self.send_channel_type_definitions:
+                send_channel_type_definitions_type_0_item = (
+                    send_channel_type_definitions_type_0_item_data.to_dict()
                 )
-                send_channel_type_definitions.append(send_channel_type_definitions_item)
+                send_channel_type_definitions.append(send_channel_type_definitions_type_0_item)
+
+        else:
+            send_channel_type_definitions = self.send_channel_type_definitions
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -59,16 +66,40 @@ class SendChannelTypeDefinitionOutputListModel:
         )
 
         d = dict(src_dict)
-        _send_channel_type_definitions = d.pop("sendChannelTypeDefinitions", UNSET)
-        send_channel_type_definitions: list[SendChannelTypeDefinitionOutputModel] | Unset = UNSET
-        if _send_channel_type_definitions is not UNSET:
-            send_channel_type_definitions = []
-            for send_channel_type_definitions_item_data in _send_channel_type_definitions:
-                send_channel_type_definitions_item = SendChannelTypeDefinitionOutputModel.from_dict(
-                    send_channel_type_definitions_item_data
-                )
 
-                send_channel_type_definitions.append(send_channel_type_definitions_item)
+        def _parse_send_channel_type_definitions(
+            data: object,
+        ) -> list[SendChannelTypeDefinitionOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                send_channel_type_definitions_type_0 = []
+                _send_channel_type_definitions_type_0 = data
+                for (
+                    send_channel_type_definitions_type_0_item_data
+                ) in _send_channel_type_definitions_type_0:
+                    send_channel_type_definitions_type_0_item = (
+                        SendChannelTypeDefinitionOutputModel.from_dict(
+                            send_channel_type_definitions_type_0_item_data
+                        )
+                    )
+
+                    send_channel_type_definitions_type_0.append(
+                        send_channel_type_definitions_type_0_item
+                    )
+
+                return send_channel_type_definitions_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[SendChannelTypeDefinitionOutputModel] | None | Unset, data)
+
+        send_channel_type_definitions = _parse_send_channel_type_definitions(
+            d.pop("sendChannelTypeDefinitions", UNSET)
+        )
 
         send_channel_type_definition_output_list_model = cls(
             send_channel_type_definitions=send_channel_type_definitions,

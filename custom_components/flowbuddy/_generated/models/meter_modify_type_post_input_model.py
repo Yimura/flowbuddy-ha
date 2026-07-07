@@ -12,8 +12,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-    from ..models.meter_modify_type_post_input_model_other_properties import (
-        MeterModifyTypePostInputModelOtherProperties,
+    from ..models.meter_modify_type_post_input_model_other_properties_type_0 import (
+        MeterModifyTypePostInputModelOtherPropertiesType0,
     )
 
 
@@ -24,24 +24,32 @@ T = TypeVar("T", bound="MeterModifyTypePostInputModel")
 class MeterModifyTypePostInputModel:
     """
     Attributes:
-        description (str | Unset):
-        other_properties (MeterModifyTypePostInputModelOtherProperties | Unset):
+        description (None | str | Unset):
+        other_properties (MeterModifyTypePostInputModelOtherPropertiesType0 | None | Unset):
     """
 
-    description: str | Unset = UNSET
-    other_properties: MeterModifyTypePostInputModelOtherProperties | Unset = UNSET
+    description: None | str | Unset = UNSET
+    other_properties: MeterModifyTypePostInputModelOtherPropertiesType0 | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.meter_modify_type_post_input_model_other_properties import (
-            MeterModifyTypePostInputModelOtherProperties,
+        from ..models.meter_modify_type_post_input_model_other_properties_type_0 import (
+            MeterModifyTypePostInputModelOtherPropertiesType0,
         )
 
-        description = self.description
+        description: None | str | Unset
+        if isinstance(self.description, Unset):
+            description = UNSET
+        else:
+            description = self.description
 
-        other_properties: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.other_properties, Unset):
+        other_properties: dict[str, Any] | None | Unset
+        if isinstance(self.other_properties, Unset):
+            other_properties = UNSET
+        elif isinstance(self.other_properties, MeterModifyTypePostInputModelOtherPropertiesType0):
             other_properties = self.other_properties.to_dict()
+        else:
+            other_properties = self.other_properties
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -55,21 +63,41 @@ class MeterModifyTypePostInputModel:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.meter_modify_type_post_input_model_other_properties import (
-            MeterModifyTypePostInputModelOtherProperties,
+        from ..models.meter_modify_type_post_input_model_other_properties_type_0 import (
+            MeterModifyTypePostInputModelOtherPropertiesType0,
         )
 
         d = dict(src_dict)
-        description = d.pop("description", UNSET)
 
-        _other_properties = d.pop("otherProperties", UNSET)
-        other_properties: MeterModifyTypePostInputModelOtherProperties | Unset
-        if isinstance(_other_properties, Unset):
-            other_properties = UNSET
-        else:
-            other_properties = MeterModifyTypePostInputModelOtherProperties.from_dict(
-                _other_properties
-            )
+        def _parse_description(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        description = _parse_description(d.pop("description", UNSET))
+
+        def _parse_other_properties(
+            data: object,
+        ) -> MeterModifyTypePostInputModelOtherPropertiesType0 | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                other_properties_type_0 = (
+                    MeterModifyTypePostInputModelOtherPropertiesType0.from_dict(data)
+                )
+
+                return other_properties_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(MeterModifyTypePostInputModelOtherPropertiesType0 | None | Unset, data)
+
+        other_properties = _parse_other_properties(d.pop("otherProperties", UNSET))
 
         meter_modify_type_post_input_model = cls(
             description=description,

@@ -23,54 +23,62 @@ T = TypeVar("T", bound="PvProductionTestOutputModel")
 class PvProductionTestOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
+        resource_uri (None | str | Unset):
         entered_on (datetime.datetime | None | Unset):
-        status (str | Unset):
-        result_message (str | Unset):
+        status (None | str | Unset):
+        result_message (None | str | Unset):
         test_start_on (datetime.datetime | None | Unset): Time of first connection with the `communicator` and start of
             test
         test_end_on (datetime.datetime | None | Unset):
-        breaker_initial_status (str | Unset):
-        start_export_value (float | Unset): Cumulative export value in Wh as reported on the display of `communicator`
-        start_import_value (float | Unset): Cumulative import value in Wh as reported on the display of `communicator`.
-            This value should be close to 0 and lower than the export value. If not, this might indicate incorrect wiring.
-        next_export_value (float | Unset): Cumulative export value that was read from the `communicator` after several
-            minutes. The difference between the start and next value is used to decide if a valid production was measured.
-        next_import_value (float | Unset):
-        average_voltage (float | Unset): Average voltage of the last 10 minutes at the moment of the productiontest. If
-            this value is close to 253V, this might lead to over voltage which might to a shutdown of the inverter.
-        instantaneous_active_power_import (float | Unset): imported power measured by the `communicator` at the moment
-            of productiontest. If this value is greater as 0, the `communicator` might be wired incorrectly.
-        instantaneous_active_power_export (float | Unset): exported power measured by the communicator at the moment of
-            productiontest. If this value is greater as 0, the installation is working as expected.
-        instantaneous_current (float | Unset):
-        external_id (str | Unset):
-        communicator (CommunicatorReferenceModel | Unset):
+        breaker_initial_status (None | str | Unset):
+        start_export_value (float | None | Unset): Cumulative export value in Wh as reported on the display of
+            `communicator`
+        start_import_value (float | None | Unset): Cumulative import value in Wh as reported on the display of
+            `communicator`. This value should be close to 0 and lower than the export value. If not, this might indicate
+            incorrect wiring.
+        next_export_value (float | None | Unset): Cumulative export value that was read from the `communicator` after
+            several minutes. The difference between the start and next value is used to decide if a valid production was
+            measured.
+        next_import_value (float | None | Unset):
+        average_voltage (float | None | Unset): Average voltage of the last 10 minutes at the moment of the
+            productiontest. If this value is close to 253V, this might lead to over voltage which might to a shutdown of the
+            inverter.
+        instantaneous_active_power_import (float | None | Unset): imported power measured by the `communicator` at the
+            moment of productiontest. If this value is greater as 0, the `communicator` might be wired incorrectly.
+        instantaneous_active_power_export (float | None | Unset): exported power measured by the communicator at the
+            moment of productiontest. If this value is greater as 0, the installation is working as expected.
+        instantaneous_current (float | None | Unset):
+        external_id (None | str | Unset):
+        communicator (CommunicatorReferenceModel | None | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
     entered_on: datetime.datetime | None | Unset = UNSET
-    status: str | Unset = UNSET
-    result_message: str | Unset = UNSET
+    status: None | str | Unset = UNSET
+    result_message: None | str | Unset = UNSET
     test_start_on: datetime.datetime | None | Unset = UNSET
     test_end_on: datetime.datetime | None | Unset = UNSET
-    breaker_initial_status: str | Unset = UNSET
-    start_export_value: float | Unset = UNSET
-    start_import_value: float | Unset = UNSET
-    next_export_value: float | Unset = UNSET
-    next_import_value: float | Unset = UNSET
-    average_voltage: float | Unset = UNSET
-    instantaneous_active_power_import: float | Unset = UNSET
-    instantaneous_active_power_export: float | Unset = UNSET
-    instantaneous_current: float | Unset = UNSET
-    external_id: str | Unset = UNSET
-    communicator: CommunicatorReferenceModel | Unset = UNSET
+    breaker_initial_status: None | str | Unset = UNSET
+    start_export_value: float | None | Unset = UNSET
+    start_import_value: float | None | Unset = UNSET
+    next_export_value: float | None | Unset = UNSET
+    next_import_value: float | None | Unset = UNSET
+    average_voltage: float | None | Unset = UNSET
+    instantaneous_active_power_import: float | None | Unset = UNSET
+    instantaneous_active_power_export: float | None | Unset = UNSET
+    instantaneous_current: float | None | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    communicator: CommunicatorReferenceModel | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.communicator_reference_model import CommunicatorReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
         entered_on: None | str | Unset
         if isinstance(self.entered_on, Unset):
@@ -80,9 +88,17 @@ class PvProductionTestOutputModel:
         else:
             entered_on = self.entered_on
 
-        status = self.status
+        status: None | str | Unset
+        if isinstance(self.status, Unset):
+            status = UNSET
+        else:
+            status = self.status
 
-        result_message = self.result_message
+        result_message: None | str | Unset
+        if isinstance(self.result_message, Unset):
+            result_message = UNSET
+        else:
+            result_message = self.result_message
 
         test_start_on: None | str | Unset
         if isinstance(self.test_start_on, Unset):
@@ -100,29 +116,73 @@ class PvProductionTestOutputModel:
         else:
             test_end_on = self.test_end_on
 
-        breaker_initial_status = self.breaker_initial_status
+        breaker_initial_status: None | str | Unset
+        if isinstance(self.breaker_initial_status, Unset):
+            breaker_initial_status = UNSET
+        else:
+            breaker_initial_status = self.breaker_initial_status
 
-        start_export_value = self.start_export_value
+        start_export_value: float | None | Unset
+        if isinstance(self.start_export_value, Unset):
+            start_export_value = UNSET
+        else:
+            start_export_value = self.start_export_value
 
-        start_import_value = self.start_import_value
+        start_import_value: float | None | Unset
+        if isinstance(self.start_import_value, Unset):
+            start_import_value = UNSET
+        else:
+            start_import_value = self.start_import_value
 
-        next_export_value = self.next_export_value
+        next_export_value: float | None | Unset
+        if isinstance(self.next_export_value, Unset):
+            next_export_value = UNSET
+        else:
+            next_export_value = self.next_export_value
 
-        next_import_value = self.next_import_value
+        next_import_value: float | None | Unset
+        if isinstance(self.next_import_value, Unset):
+            next_import_value = UNSET
+        else:
+            next_import_value = self.next_import_value
 
-        average_voltage = self.average_voltage
+        average_voltage: float | None | Unset
+        if isinstance(self.average_voltage, Unset):
+            average_voltage = UNSET
+        else:
+            average_voltage = self.average_voltage
 
-        instantaneous_active_power_import = self.instantaneous_active_power_import
+        instantaneous_active_power_import: float | None | Unset
+        if isinstance(self.instantaneous_active_power_import, Unset):
+            instantaneous_active_power_import = UNSET
+        else:
+            instantaneous_active_power_import = self.instantaneous_active_power_import
 
-        instantaneous_active_power_export = self.instantaneous_active_power_export
+        instantaneous_active_power_export: float | None | Unset
+        if isinstance(self.instantaneous_active_power_export, Unset):
+            instantaneous_active_power_export = UNSET
+        else:
+            instantaneous_active_power_export = self.instantaneous_active_power_export
 
-        instantaneous_current = self.instantaneous_current
+        instantaneous_current: float | None | Unset
+        if isinstance(self.instantaneous_current, Unset):
+            instantaneous_current = UNSET
+        else:
+            instantaneous_current = self.instantaneous_current
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        communicator: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.communicator, Unset):
+        communicator: dict[str, Any] | None | Unset
+        if isinstance(self.communicator, Unset):
+            communicator = UNSET
+        elif isinstance(self.communicator, CommunicatorReferenceModel):
             communicator = self.communicator.to_dict()
+        else:
+            communicator = self.communicator
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -169,7 +229,15 @@ class PvProductionTestOutputModel:
         from ..models.communicator_reference_model import CommunicatorReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
+
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
         def _parse_entered_on(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -188,9 +256,23 @@ class PvProductionTestOutputModel:
 
         entered_on = _parse_entered_on(d.pop("enteredOn", UNSET))
 
-        status = d.pop("status", UNSET)
+        def _parse_status(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        result_message = d.pop("resultMessage", UNSET)
+        status = _parse_status(d.pop("status", UNSET))
+
+        def _parse_result_message(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        result_message = _parse_result_message(d.pop("resultMessage", UNSET))
 
         def _parse_test_start_on(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -226,32 +308,116 @@ class PvProductionTestOutputModel:
 
         test_end_on = _parse_test_end_on(d.pop("testEndOn", UNSET))
 
-        breaker_initial_status = d.pop("breakerInitialStatus", UNSET)
+        def _parse_breaker_initial_status(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        start_export_value = d.pop("startExportValue", UNSET)
+        breaker_initial_status = _parse_breaker_initial_status(d.pop("breakerInitialStatus", UNSET))
 
-        start_import_value = d.pop("startImportValue", UNSET)
+        def _parse_start_export_value(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
 
-        next_export_value = d.pop("nextExportValue", UNSET)
+        start_export_value = _parse_start_export_value(d.pop("startExportValue", UNSET))
 
-        next_import_value = d.pop("nextImportValue", UNSET)
+        def _parse_start_import_value(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
 
-        average_voltage = d.pop("averageVoltage", UNSET)
+        start_import_value = _parse_start_import_value(d.pop("startImportValue", UNSET))
 
-        instantaneous_active_power_import = d.pop("instantaneousActivePowerImport", UNSET)
+        def _parse_next_export_value(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
 
-        instantaneous_active_power_export = d.pop("instantaneousActivePowerExport", UNSET)
+        next_export_value = _parse_next_export_value(d.pop("nextExportValue", UNSET))
 
-        instantaneous_current = d.pop("instantaneousCurrent", UNSET)
+        def _parse_next_import_value(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
 
-        external_id = d.pop("externalId", UNSET)
+        next_import_value = _parse_next_import_value(d.pop("nextImportValue", UNSET))
 
-        _communicator = d.pop("communicator", UNSET)
-        communicator: CommunicatorReferenceModel | Unset
-        if isinstance(_communicator, Unset):
-            communicator = UNSET
-        else:
-            communicator = CommunicatorReferenceModel.from_dict(_communicator)
+        def _parse_average_voltage(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
+
+        average_voltage = _parse_average_voltage(d.pop("averageVoltage", UNSET))
+
+        def _parse_instantaneous_active_power_import(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
+
+        instantaneous_active_power_import = _parse_instantaneous_active_power_import(
+            d.pop("instantaneousActivePowerImport", UNSET)
+        )
+
+        def _parse_instantaneous_active_power_export(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
+
+        instantaneous_active_power_export = _parse_instantaneous_active_power_export(
+            d.pop("instantaneousActivePowerExport", UNSET)
+        )
+
+        def _parse_instantaneous_current(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
+
+        instantaneous_current = _parse_instantaneous_current(d.pop("instantaneousCurrent", UNSET))
+
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
+
+        def _parse_communicator(data: object) -> CommunicatorReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                communicator_type_1 = CommunicatorReferenceModel.from_dict(data)
+
+                return communicator_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(CommunicatorReferenceModel | None | Unset, data)
+
+        communicator = _parse_communicator(d.pop("communicator", UNSET))
 
         pv_production_test_output_model = cls(
             resource_uri=resource_uri,

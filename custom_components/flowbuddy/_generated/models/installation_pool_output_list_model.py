@@ -22,21 +22,26 @@ T = TypeVar("T", bound="InstallationPoolOutputListModel")
 class InstallationPoolOutputListModel:
     """
     Attributes:
-        installation_pools (list[InstallationPoolOutputModel] | Unset):
+        installation_pools (list[InstallationPoolOutputModel] | None | Unset):
     """
 
-    installation_pools: list[InstallationPoolOutputModel] | Unset = UNSET
+    installation_pools: list[InstallationPoolOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.installation_pool_output_model import InstallationPoolOutputModel
 
-        installation_pools: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.installation_pools, Unset):
+        installation_pools: list[dict[str, Any]] | None | Unset
+        if isinstance(self.installation_pools, Unset):
+            installation_pools = UNSET
+        elif isinstance(self.installation_pools, list):
             installation_pools = []
-            for installation_pools_item_data in self.installation_pools:
-                installation_pools_item = installation_pools_item_data.to_dict()
-                installation_pools.append(installation_pools_item)
+            for installation_pools_type_0_item_data in self.installation_pools:
+                installation_pools_type_0_item = installation_pools_type_0_item_data.to_dict()
+                installation_pools.append(installation_pools_type_0_item)
+
+        else:
+            installation_pools = self.installation_pools
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,16 +56,32 @@ class InstallationPoolOutputListModel:
         from ..models.installation_pool_output_model import InstallationPoolOutputModel
 
         d = dict(src_dict)
-        _installation_pools = d.pop("installationPools", UNSET)
-        installation_pools: list[InstallationPoolOutputModel] | Unset = UNSET
-        if _installation_pools is not UNSET:
-            installation_pools = []
-            for installation_pools_item_data in _installation_pools:
-                installation_pools_item = InstallationPoolOutputModel.from_dict(
-                    installation_pools_item_data
-                )
 
-                installation_pools.append(installation_pools_item)
+        def _parse_installation_pools(
+            data: object,
+        ) -> list[InstallationPoolOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                installation_pools_type_0 = []
+                _installation_pools_type_0 = data
+                for installation_pools_type_0_item_data in _installation_pools_type_0:
+                    installation_pools_type_0_item = InstallationPoolOutputModel.from_dict(
+                        installation_pools_type_0_item_data
+                    )
+
+                    installation_pools_type_0.append(installation_pools_type_0_item)
+
+                return installation_pools_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[InstallationPoolOutputModel] | None | Unset, data)
+
+        installation_pools = _parse_installation_pools(d.pop("installationPools", UNSET))
 
         installation_pool_output_list_model = cls(
             installation_pools=installation_pools,

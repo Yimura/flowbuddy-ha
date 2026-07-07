@@ -22,21 +22,26 @@ T = TypeVar("T", bound="MeasurementTypeOutputListModel")
 class MeasurementTypeOutputListModel:
     """
     Attributes:
-        measurement_types (list[MeasurementTypeOutputModel] | Unset):
+        measurement_types (list[MeasurementTypeOutputModel] | None | Unset):
     """
 
-    measurement_types: list[MeasurementTypeOutputModel] | Unset = UNSET
+    measurement_types: list[MeasurementTypeOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.measurement_type_output_model import MeasurementTypeOutputModel
 
-        measurement_types: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.measurement_types, Unset):
+        measurement_types: list[dict[str, Any]] | None | Unset
+        if isinstance(self.measurement_types, Unset):
+            measurement_types = UNSET
+        elif isinstance(self.measurement_types, list):
             measurement_types = []
-            for measurement_types_item_data in self.measurement_types:
-                measurement_types_item = measurement_types_item_data.to_dict()
-                measurement_types.append(measurement_types_item)
+            for measurement_types_type_0_item_data in self.measurement_types:
+                measurement_types_type_0_item = measurement_types_type_0_item_data.to_dict()
+                measurement_types.append(measurement_types_type_0_item)
+
+        else:
+            measurement_types = self.measurement_types
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,16 +56,32 @@ class MeasurementTypeOutputListModel:
         from ..models.measurement_type_output_model import MeasurementTypeOutputModel
 
         d = dict(src_dict)
-        _measurement_types = d.pop("measurementTypes", UNSET)
-        measurement_types: list[MeasurementTypeOutputModel] | Unset = UNSET
-        if _measurement_types is not UNSET:
-            measurement_types = []
-            for measurement_types_item_data in _measurement_types:
-                measurement_types_item = MeasurementTypeOutputModel.from_dict(
-                    measurement_types_item_data
-                )
 
-                measurement_types.append(measurement_types_item)
+        def _parse_measurement_types(
+            data: object,
+        ) -> list[MeasurementTypeOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                measurement_types_type_0 = []
+                _measurement_types_type_0 = data
+                for measurement_types_type_0_item_data in _measurement_types_type_0:
+                    measurement_types_type_0_item = MeasurementTypeOutputModel.from_dict(
+                        measurement_types_type_0_item_data
+                    )
+
+                    measurement_types_type_0.append(measurement_types_type_0_item)
+
+                return measurement_types_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[MeasurementTypeOutputModel] | None | Unset, data)
+
+        measurement_types = _parse_measurement_types(d.pop("measurementTypes", UNSET))
 
         measurement_type_output_list_model = cls(
             measurement_types=measurement_types,

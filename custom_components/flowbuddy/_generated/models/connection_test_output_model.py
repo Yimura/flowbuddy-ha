@@ -23,30 +23,34 @@ T = TypeVar("T", bound="ConnectionTestOutputModel")
 class ConnectionTestOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
+        resource_uri (None | str | Unset):
         entered_on (datetime.datetime | None | Unset):
-        status (str | Unset):
-        result_message (str | Unset):
-        signal_strength (int | Unset):
-        lan_connection_successful (bool | Unset):
-        external_id (str | Unset):
-        communicator (CommunicatorReferenceModel | Unset):
+        status (None | str | Unset):
+        result_message (None | str | Unset):
+        signal_strength (int | None | Unset):
+        lan_connection_successful (bool | None | Unset):
+        external_id (None | str | Unset):
+        communicator (CommunicatorReferenceModel | None | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
     entered_on: datetime.datetime | None | Unset = UNSET
-    status: str | Unset = UNSET
-    result_message: str | Unset = UNSET
-    signal_strength: int | Unset = UNSET
-    lan_connection_successful: bool | Unset = UNSET
-    external_id: str | Unset = UNSET
-    communicator: CommunicatorReferenceModel | Unset = UNSET
+    status: None | str | Unset = UNSET
+    result_message: None | str | Unset = UNSET
+    signal_strength: int | None | Unset = UNSET
+    lan_connection_successful: bool | None | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    communicator: CommunicatorReferenceModel | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.communicator_reference_model import CommunicatorReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
         entered_on: None | str | Unset
         if isinstance(self.entered_on, Unset):
@@ -56,19 +60,43 @@ class ConnectionTestOutputModel:
         else:
             entered_on = self.entered_on
 
-        status = self.status
+        status: None | str | Unset
+        if isinstance(self.status, Unset):
+            status = UNSET
+        else:
+            status = self.status
 
-        result_message = self.result_message
+        result_message: None | str | Unset
+        if isinstance(self.result_message, Unset):
+            result_message = UNSET
+        else:
+            result_message = self.result_message
 
-        signal_strength = self.signal_strength
+        signal_strength: int | None | Unset
+        if isinstance(self.signal_strength, Unset):
+            signal_strength = UNSET
+        else:
+            signal_strength = self.signal_strength
 
-        lan_connection_successful = self.lan_connection_successful
+        lan_connection_successful: bool | None | Unset
+        if isinstance(self.lan_connection_successful, Unset):
+            lan_connection_successful = UNSET
+        else:
+            lan_connection_successful = self.lan_connection_successful
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        communicator: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.communicator, Unset):
+        communicator: dict[str, Any] | None | Unset
+        if isinstance(self.communicator, Unset):
+            communicator = UNSET
+        elif isinstance(self.communicator, CommunicatorReferenceModel):
             communicator = self.communicator.to_dict()
+        else:
+            communicator = self.communicator
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -97,7 +125,15 @@ class ConnectionTestOutputModel:
         from ..models.communicator_reference_model import CommunicatorReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
+
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
         def _parse_entered_on(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -116,22 +152,69 @@ class ConnectionTestOutputModel:
 
         entered_on = _parse_entered_on(d.pop("enteredOn", UNSET))
 
-        status = d.pop("status", UNSET)
+        def _parse_status(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        result_message = d.pop("resultMessage", UNSET)
+        status = _parse_status(d.pop("status", UNSET))
 
-        signal_strength = d.pop("signalStrength", UNSET)
+        def _parse_result_message(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        lan_connection_successful = d.pop("lanConnectionSuccessful", UNSET)
+        result_message = _parse_result_message(d.pop("resultMessage", UNSET))
 
-        external_id = d.pop("externalId", UNSET)
+        def _parse_signal_strength(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
 
-        _communicator = d.pop("communicator", UNSET)
-        communicator: CommunicatorReferenceModel | Unset
-        if isinstance(_communicator, Unset):
-            communicator = UNSET
-        else:
-            communicator = CommunicatorReferenceModel.from_dict(_communicator)
+        signal_strength = _parse_signal_strength(d.pop("signalStrength", UNSET))
+
+        def _parse_lan_connection_successful(data: object) -> bool | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(bool | None | Unset, data)
+
+        lan_connection_successful = _parse_lan_connection_successful(
+            d.pop("lanConnectionSuccessful", UNSET)
+        )
+
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
+
+        def _parse_communicator(data: object) -> CommunicatorReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                communicator_type_1 = CommunicatorReferenceModel.from_dict(data)
+
+                return communicator_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(CommunicatorReferenceModel | None | Unset, data)
+
+        communicator = _parse_communicator(d.pop("communicator", UNSET))
 
         connection_test_output_model = cls(
             resource_uri=resource_uri,

@@ -12,8 +12,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-    from ..models.installation_register_gateway_post_input_model_other_properties import (
-        InstallationRegisterGatewayPostInputModelOtherProperties,
+    from ..models.installation_register_gateway_post_input_model_other_properties_type_0 import (
+        InstallationRegisterGatewayPostInputModelOtherPropertiesType0,
     )
 
 
@@ -24,29 +24,45 @@ T = TypeVar("T", bound="InstallationRegisterGatewayPostInputModel")
 class InstallationRegisterGatewayPostInputModel:
     """
     Attributes:
-        communicator (str | Unset): The communicator serial number starting with **XMX** or **IQ**. If no Communicator
-            is selected, the linked Communicator field of Installation is used as input.
-        initial_polling (str | Unset):
-        other_properties (InstallationRegisterGatewayPostInputModelOtherProperties | Unset):
+        communicator (None | str | Unset): The communicator serial number starting with **XMX** or **IQ**. If no
+            Communicator is selected, the linked Communicator field of Installation is used as input.
+        initial_polling (None | str | Unset):
+        other_properties (InstallationRegisterGatewayPostInputModelOtherPropertiesType0 | None | Unset):
     """
 
-    communicator: str | Unset = UNSET
-    initial_polling: str | Unset = UNSET
-    other_properties: InstallationRegisterGatewayPostInputModelOtherProperties | Unset = UNSET
+    communicator: None | str | Unset = UNSET
+    initial_polling: None | str | Unset = UNSET
+    other_properties: (
+        InstallationRegisterGatewayPostInputModelOtherPropertiesType0 | None | Unset
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.installation_register_gateway_post_input_model_other_properties import (
-            InstallationRegisterGatewayPostInputModelOtherProperties,
+        from ..models.installation_register_gateway_post_input_model_other_properties_type_0 import (
+            InstallationRegisterGatewayPostInputModelOtherPropertiesType0,
         )
 
-        communicator = self.communicator
+        communicator: None | str | Unset
+        if isinstance(self.communicator, Unset):
+            communicator = UNSET
+        else:
+            communicator = self.communicator
 
-        initial_polling = self.initial_polling
+        initial_polling: None | str | Unset
+        if isinstance(self.initial_polling, Unset):
+            initial_polling = UNSET
+        else:
+            initial_polling = self.initial_polling
 
-        other_properties: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.other_properties, Unset):
+        other_properties: dict[str, Any] | None | Unset
+        if isinstance(self.other_properties, Unset):
+            other_properties = UNSET
+        elif isinstance(
+            self.other_properties, InstallationRegisterGatewayPostInputModelOtherPropertiesType0
+        ):
             other_properties = self.other_properties.to_dict()
+        else:
+            other_properties = self.other_properties
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -62,23 +78,52 @@ class InstallationRegisterGatewayPostInputModel:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.installation_register_gateway_post_input_model_other_properties import (
-            InstallationRegisterGatewayPostInputModelOtherProperties,
+        from ..models.installation_register_gateway_post_input_model_other_properties_type_0 import (
+            InstallationRegisterGatewayPostInputModelOtherPropertiesType0,
         )
 
         d = dict(src_dict)
-        communicator = d.pop("communicator", UNSET)
 
-        initial_polling = d.pop("initialPolling", UNSET)
+        def _parse_communicator(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _other_properties = d.pop("otherProperties", UNSET)
-        other_properties: InstallationRegisterGatewayPostInputModelOtherProperties | Unset
-        if isinstance(_other_properties, Unset):
-            other_properties = UNSET
-        else:
-            other_properties = InstallationRegisterGatewayPostInputModelOtherProperties.from_dict(
-                _other_properties
+        communicator = _parse_communicator(d.pop("communicator", UNSET))
+
+        def _parse_initial_polling(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        initial_polling = _parse_initial_polling(d.pop("initialPolling", UNSET))
+
+        def _parse_other_properties(
+            data: object,
+        ) -> InstallationRegisterGatewayPostInputModelOtherPropertiesType0 | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                other_properties_type_0 = (
+                    InstallationRegisterGatewayPostInputModelOtherPropertiesType0.from_dict(data)
+                )
+
+                return other_properties_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(
+                InstallationRegisterGatewayPostInputModelOtherPropertiesType0 | None | Unset, data
             )
+
+        other_properties = _parse_other_properties(d.pop("otherProperties", UNSET))
 
         installation_register_gateway_post_input_model = cls(
             communicator=communicator,

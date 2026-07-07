@@ -9,27 +9,27 @@ from .aggregation_month_value_output_model import AggregationMonthValueOutputMod
 from .aggregation_year_value_output_list_model import AggregationYearValueOutputListModel
 from .aggregation_year_value_output_model import AggregationYearValueOutputModel
 from .alarm_add_comment_post_input_model import AlarmAddCommentPostInputModel
-from .alarm_add_comment_post_input_model_other_properties import (
-    AlarmAddCommentPostInputModelOtherProperties,
+from .alarm_add_comment_post_input_model_other_properties_type_0 import (
+    AlarmAddCommentPostInputModelOtherPropertiesType0,
 )
-from .alarm_add_comment_post_input_model_other_properties_additional_property import (
-    AlarmAddCommentPostInputModelOtherPropertiesAdditionalProperty,
+from .alarm_add_comment_post_input_model_other_properties_type_0_additional_property import (
+    AlarmAddCommentPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .alarm_output_list_model import AlarmOutputListModel
 from .alarm_output_model import AlarmOutputModel
 from .alarm_set_to_closed_post_input_model import AlarmSetToClosedPostInputModel
-from .alarm_set_to_closed_post_input_model_other_properties import (
-    AlarmSetToClosedPostInputModelOtherProperties,
+from .alarm_set_to_closed_post_input_model_other_properties_type_0 import (
+    AlarmSetToClosedPostInputModelOtherPropertiesType0,
 )
-from .alarm_set_to_closed_post_input_model_other_properties_additional_property import (
-    AlarmSetToClosedPostInputModelOtherPropertiesAdditionalProperty,
+from .alarm_set_to_closed_post_input_model_other_properties_type_0_additional_property import (
+    AlarmSetToClosedPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .alarm_set_to_pending_post_input_model import AlarmSetToPendingPostInputModel
-from .alarm_set_to_pending_post_input_model_other_properties import (
-    AlarmSetToPendingPostInputModelOtherProperties,
+from .alarm_set_to_pending_post_input_model_other_properties_type_0 import (
+    AlarmSetToPendingPostInputModelOtherPropertiesType0,
 )
-from .alarm_set_to_pending_post_input_model_other_properties_additional_property import (
-    AlarmSetToPendingPostInputModelOtherPropertiesAdditionalProperty,
+from .alarm_set_to_pending_post_input_model_other_properties_type_0_additional_property import (
+    AlarmSetToPendingPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .api_account_output_list_model import ApiAccountOutputListModel
 from .api_account_output_model import ApiAccountOutputModel
@@ -42,20 +42,20 @@ from .api_measurement_type_reference_model import ApiMeasurementTypeReferenceMod
 from .api_meter_create_remote_device_post_input_model import (
     ApiMeterCreateRemoteDevicePostInputModel,
 )
-from .api_meter_create_remote_device_post_input_model_other_properties import (
-    ApiMeterCreateRemoteDevicePostInputModelOtherProperties,
+from .api_meter_create_remote_device_post_input_model_other_properties_type_0 import (
+    ApiMeterCreateRemoteDevicePostInputModelOtherPropertiesType0,
 )
-from .api_meter_create_remote_device_post_input_model_other_properties_additional_property import (
-    ApiMeterCreateRemoteDevicePostInputModelOtherPropertiesAdditionalProperty,
+from .api_meter_create_remote_device_post_input_model_other_properties_type_0_additional_property import (
+    ApiMeterCreateRemoteDevicePostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .api_meter_output_list_model import ApiMeterOutputListModel
 from .api_meter_output_model import ApiMeterOutputModel
 from .api_meter_pull_remote_device_post_input_model import ApiMeterPullRemoteDevicePostInputModel
-from .api_meter_pull_remote_device_post_input_model_other_properties import (
-    ApiMeterPullRemoteDevicePostInputModelOtherProperties,
+from .api_meter_pull_remote_device_post_input_model_other_properties_type_0 import (
+    ApiMeterPullRemoteDevicePostInputModelOtherPropertiesType0,
 )
-from .api_meter_pull_remote_device_post_input_model_other_properties_additional_property import (
-    ApiMeterPullRemoteDevicePostInputModelOtherPropertiesAdditionalProperty,
+from .api_meter_pull_remote_device_post_input_model_other_properties_type_0_additional_property import (
+    ApiMeterPullRemoteDevicePostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .api_meter_reference_model import ApiMeterReferenceModel
 from .api_meter_type_output_list_model import ApiMeterTypeOutputListModel
@@ -64,11 +64,11 @@ from .api_meter_type_reference_model import ApiMeterTypeReferenceModel
 from .battery_output_list_model import BatteryOutputListModel
 from .battery_output_model import BatteryOutputModel
 from .battery_set_charge_power_post_input_model import BatterySetChargePowerPostInputModel
-from .battery_set_charge_power_post_input_model_other_properties import (
-    BatterySetChargePowerPostInputModelOtherProperties,
+from .battery_set_charge_power_post_input_model_other_properties_type_0 import (
+    BatterySetChargePowerPostInputModelOtherPropertiesType0,
 )
-from .battery_set_charge_power_post_input_model_other_properties_additional_property import (
-    BatterySetChargePowerPostInputModelOtherPropertiesAdditionalProperty,
+from .battery_set_charge_power_post_input_model_other_properties_type_0_additional_property import (
+    BatterySetChargePowerPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .client_user_group_output_list_model import ClientUserGroupOutputListModel
 from .client_user_group_output_model import ClientUserGroupOutputModel
@@ -83,38 +83,38 @@ from .communicator_remote_command_output_model import CommunicatorRemoteCommandO
 from .communicator_request_heat_pump_test_post_input_model import (
     CommunicatorRequestHeatPumpTestPostInputModel,
 )
-from .communicator_request_heat_pump_test_post_input_model_other_properties import (
-    CommunicatorRequestHeatPumpTestPostInputModelOtherProperties,
+from .communicator_request_heat_pump_test_post_input_model_other_properties_type_0 import (
+    CommunicatorRequestHeatPumpTestPostInputModelOtherPropertiesType0,
 )
-from .communicator_request_heat_pump_test_post_input_model_other_properties_additional_property import (
-    CommunicatorRequestHeatPumpTestPostInputModelOtherPropertiesAdditionalProperty,
+from .communicator_request_heat_pump_test_post_input_model_other_properties_type_0_additional_property import (
+    CommunicatorRequestHeatPumpTestPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .communicator_request_modbus_action_post_input_model import (
     CommunicatorRequestModbusActionPostInputModel,
 )
-from .communicator_request_modbus_action_post_input_model_other_properties import (
-    CommunicatorRequestModbusActionPostInputModelOtherProperties,
+from .communicator_request_modbus_action_post_input_model_other_properties_type_0 import (
+    CommunicatorRequestModbusActionPostInputModelOtherPropertiesType0,
 )
-from .communicator_request_modbus_action_post_input_model_other_properties_additional_property import (
-    CommunicatorRequestModbusActionPostInputModelOtherPropertiesAdditionalProperty,
+from .communicator_request_modbus_action_post_input_model_other_properties_type_0_additional_property import (
+    CommunicatorRequestModbusActionPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .communicator_request_switch_io_port_post_input_model import (
     CommunicatorRequestSwitchIoPortPostInputModel,
 )
-from .communicator_request_switch_io_port_post_input_model_other_properties import (
-    CommunicatorRequestSwitchIoPortPostInputModelOtherProperties,
+from .communicator_request_switch_io_port_post_input_model_other_properties_type_0 import (
+    CommunicatorRequestSwitchIoPortPostInputModelOtherPropertiesType0,
 )
-from .communicator_request_switch_io_port_post_input_model_other_properties_additional_property import (
-    CommunicatorRequestSwitchIoPortPostInputModelOtherPropertiesAdditionalProperty,
+from .communicator_request_switch_io_port_post_input_model_other_properties_type_0_additional_property import (
+    CommunicatorRequestSwitchIoPortPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .communicator_request_verification_post_input_model import (
     CommunicatorRequestVerificationPostInputModel,
 )
-from .communicator_request_verification_post_input_model_other_properties import (
-    CommunicatorRequestVerificationPostInputModelOtherProperties,
+from .communicator_request_verification_post_input_model_other_properties_type_0 import (
+    CommunicatorRequestVerificationPostInputModelOtherPropertiesType0,
 )
-from .communicator_request_verification_post_input_model_other_properties_additional_property import (
-    CommunicatorRequestVerificationPostInputModelOtherPropertiesAdditionalProperty,
+from .communicator_request_verification_post_input_model_other_properties_type_0_additional_property import (
+    CommunicatorRequestVerificationPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .communicator_type_output_list_model import CommunicatorTypeOutputListModel
 from .communicator_type_output_model import CommunicatorTypeOutputModel
@@ -138,11 +138,11 @@ from .ems_configuration_output_model import EmsConfigurationOutputModel
 from .ems_configuration_set_user_ems_parameters_post_input_model import (
     EmsConfigurationSetUserEmsParametersPostInputModel,
 )
-from .ems_configuration_set_user_ems_parameters_post_input_model_other_properties import (
-    EmsConfigurationSetUserEmsParametersPostInputModelOtherProperties,
+from .ems_configuration_set_user_ems_parameters_post_input_model_other_properties_type_0 import (
+    EmsConfigurationSetUserEmsParametersPostInputModelOtherPropertiesType0,
 )
-from .ems_configuration_set_user_ems_parameters_post_input_model_other_properties_additional_property import (
-    EmsConfigurationSetUserEmsParametersPostInputModelOtherPropertiesAdditionalProperty,
+from .ems_configuration_set_user_ems_parameters_post_input_model_other_properties_type_0_additional_property import (
+    EmsConfigurationSetUserEmsParametersPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .ems_configuration_update_output_list_model import EmsConfigurationUpdateOutputListModel
 from .ems_configuration_update_output_model import EmsConfigurationUpdateOutputModel
@@ -158,177 +158,183 @@ from .href_model import HrefModel
 from .hvac_output_list_model import HVACOutputListModel
 from .hvac_output_model import HVACOutputModel
 from .hvac_set_cool_temperature_post_input_model import HVACSetCoolTemperaturePostInputModel
-from .hvac_set_cool_temperature_post_input_model_other_properties import (
-    HVACSetCoolTemperaturePostInputModelOtherProperties,
+from .hvac_set_cool_temperature_post_input_model_other_properties_type_0 import (
+    HVACSetCoolTemperaturePostInputModelOtherPropertiesType0,
 )
-from .hvac_set_cool_temperature_post_input_model_other_properties_additional_property import (
-    HVACSetCoolTemperaturePostInputModelOtherPropertiesAdditionalProperty,
+from .hvac_set_cool_temperature_post_input_model_other_properties_type_0_additional_property import (
+    HVACSetCoolTemperaturePostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .hvac_set_heat_temperature_post_input_model import HVACSetHeatTemperaturePostInputModel
-from .hvac_set_heat_temperature_post_input_model_other_properties import (
-    HVACSetHeatTemperaturePostInputModelOtherProperties,
+from .hvac_set_heat_temperature_post_input_model_other_properties_type_0 import (
+    HVACSetHeatTemperaturePostInputModelOtherPropertiesType0,
 )
-from .hvac_set_heat_temperature_post_input_model_other_properties_additional_property import (
-    HVACSetHeatTemperaturePostInputModelOtherPropertiesAdditionalProperty,
+from .hvac_set_heat_temperature_post_input_model_other_properties_type_0_additional_property import (
+    HVACSetHeatTemperaturePostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .installation_assign_to_installation_pool_post_input_model import (
     InstallationAssignToInstallationPoolPostInputModel,
 )
-from .installation_assign_to_installation_pool_post_input_model_other_properties import (
-    InstallationAssignToInstallationPoolPostInputModelOtherProperties,
+from .installation_assign_to_installation_pool_post_input_model_other_properties_type_0 import (
+    InstallationAssignToInstallationPoolPostInputModelOtherPropertiesType0,
 )
-from .installation_assign_to_installation_pool_post_input_model_other_properties_additional_property import (
-    InstallationAssignToInstallationPoolPostInputModelOtherPropertiesAdditionalProperty,
+from .installation_assign_to_installation_pool_post_input_model_other_properties_type_0_additional_property import (
+    InstallationAssignToInstallationPoolPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .installation_create_dashboard_user_post_input_model import (
     InstallationCreateDashboardUserPostInputModel,
 )
-from .installation_create_dashboard_user_post_input_model_other_properties import (
-    InstallationCreateDashboardUserPostInputModelOtherProperties,
+from .installation_create_dashboard_user_post_input_model_other_properties_type_0 import (
+    InstallationCreateDashboardUserPostInputModelOtherPropertiesType0,
 )
-from .installation_create_dashboard_user_post_input_model_other_properties_additional_property import (
-    InstallationCreateDashboardUserPostInputModelOtherPropertiesAdditionalProperty,
+from .installation_create_dashboard_user_post_input_model_other_properties_type_0_additional_property import (
+    InstallationCreateDashboardUserPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .installation_output_list_model import InstallationOutputListModel
 from .installation_output_model import InstallationOutputModel
 from .installation_patch_input_model import InstallationPatchInputModel
-from .installation_patch_input_model_other_properties import (
-    InstallationPatchInputModelOtherProperties,
+from .installation_patch_input_model_other_properties_type_0 import (
+    InstallationPatchInputModelOtherPropertiesType0,
 )
-from .installation_patch_input_model_other_properties_additional_property import (
-    InstallationPatchInputModelOtherPropertiesAdditionalProperty,
+from .installation_patch_input_model_other_properties_type_0_additional_property import (
+    InstallationPatchInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .installation_pool_control_post_input_model import InstallationPoolControlPostInputModel
-from .installation_pool_control_post_input_model_other_properties import (
-    InstallationPoolControlPostInputModelOtherProperties,
+from .installation_pool_control_post_input_model_other_properties_type_0 import (
+    InstallationPoolControlPostInputModelOtherPropertiesType0,
 )
-from .installation_pool_control_post_input_model_other_properties_additional_property import (
-    InstallationPoolControlPostInputModelOtherPropertiesAdditionalProperty,
+from .installation_pool_control_post_input_model_other_properties_type_0_additional_property import (
+    InstallationPoolControlPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .installation_pool_output_list_model import InstallationPoolOutputListModel
 from .installation_pool_output_model import InstallationPoolOutputModel
 from .installation_pool_patch_input_model import InstallationPoolPatchInputModel
-from .installation_pool_patch_input_model_other_properties import (
-    InstallationPoolPatchInputModelOtherProperties,
+from .installation_pool_patch_input_model_other_properties_type_0 import (
+    InstallationPoolPatchInputModelOtherPropertiesType0,
 )
-from .installation_pool_patch_input_model_other_properties_additional_property import (
-    InstallationPoolPatchInputModelOtherPropertiesAdditionalProperty,
+from .installation_pool_patch_input_model_other_properties_type_0_additional_property import (
+    InstallationPoolPatchInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .installation_pool_post_input_model import InstallationPoolPostInputModel
-from .installation_pool_post_input_model_other_properties import (
-    InstallationPoolPostInputModelOtherProperties,
+from .installation_pool_post_input_model_other_properties_type_0 import (
+    InstallationPoolPostInputModelOtherPropertiesType0,
 )
-from .installation_pool_post_input_model_other_properties_additional_property import (
-    InstallationPoolPostInputModelOtherPropertiesAdditionalProperty,
+from .installation_pool_post_input_model_other_properties_type_0_additional_property import (
+    InstallationPoolPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .installation_pool_put_input_model import InstallationPoolPutInputModel
-from .installation_pool_put_input_model_other_properties import (
-    InstallationPoolPutInputModelOtherProperties,
+from .installation_pool_put_input_model_other_properties_type_0 import (
+    InstallationPoolPutInputModelOtherPropertiesType0,
 )
-from .installation_pool_put_input_model_other_properties_additional_property import (
-    InstallationPoolPutInputModelOtherPropertiesAdditionalProperty,
+from .installation_pool_put_input_model_other_properties_type_0_additional_property import (
+    InstallationPoolPutInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .installation_pool_reference_model import InstallationPoolReferenceModel
 from .installation_pool_signal_output_list_model import InstallationPoolSignalOutputListModel
 from .installation_pool_signal_output_model import InstallationPoolSignalOutputModel
 from .installation_post_input_model import InstallationPostInputModel
-from .installation_post_input_model_other_properties import (
-    InstallationPostInputModelOtherProperties,
+from .installation_post_input_model_other_properties_type_0 import (
+    InstallationPostInputModelOtherPropertiesType0,
 )
-from .installation_post_input_model_other_properties_additional_property import (
-    InstallationPostInputModelOtherPropertiesAdditionalProperty,
+from .installation_post_input_model_other_properties_type_0_additional_property import (
+    InstallationPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .installation_put_input_model import InstallationPutInputModel
-from .installation_put_input_model_other_properties import InstallationPutInputModelOtherProperties
-from .installation_put_input_model_other_properties_additional_property import (
-    InstallationPutInputModelOtherPropertiesAdditionalProperty,
+from .installation_put_input_model_other_properties_type_0 import (
+    InstallationPutInputModelOtherPropertiesType0,
+)
+from .installation_put_input_model_other_properties_type_0_additional_property import (
+    InstallationPutInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .installation_reference_model import InstallationReferenceModel
 from .installation_register_api_meter_post_input_model import (
     InstallationRegisterApiMeterPostInputModel,
 )
-from .installation_register_api_meter_post_input_model_other_properties import (
-    InstallationRegisterApiMeterPostInputModelOtherProperties,
+from .installation_register_api_meter_post_input_model_other_properties_type_0 import (
+    InstallationRegisterApiMeterPostInputModelOtherPropertiesType0,
 )
-from .installation_register_api_meter_post_input_model_other_properties_additional_property import (
-    InstallationRegisterApiMeterPostInputModelOtherPropertiesAdditionalProperty,
+from .installation_register_api_meter_post_input_model_other_properties_type_0_additional_property import (
+    InstallationRegisterApiMeterPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .installation_register_gateway_post_input_model import (
     InstallationRegisterGatewayPostInputModel,
 )
-from .installation_register_gateway_post_input_model_other_properties import (
-    InstallationRegisterGatewayPostInputModelOtherProperties,
+from .installation_register_gateway_post_input_model_other_properties_type_0 import (
+    InstallationRegisterGatewayPostInputModelOtherPropertiesType0,
 )
-from .installation_register_gateway_post_input_model_other_properties_additional_property import (
-    InstallationRegisterGatewayPostInputModelOtherPropertiesAdditionalProperty,
+from .installation_register_gateway_post_input_model_other_properties_type_0_additional_property import (
+    InstallationRegisterGatewayPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .installation_register_meter_post_input_model import InstallationRegisterMeterPostInputModel
-from .installation_register_meter_post_input_model_other_properties import (
-    InstallationRegisterMeterPostInputModelOtherProperties,
+from .installation_register_meter_post_input_model_other_properties_type_0 import (
+    InstallationRegisterMeterPostInputModelOtherPropertiesType0,
 )
-from .installation_register_meter_post_input_model_other_properties_additional_property import (
-    InstallationRegisterMeterPostInputModelOtherPropertiesAdditionalProperty,
+from .installation_register_meter_post_input_model_other_properties_type_0_additional_property import (
+    InstallationRegisterMeterPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .installation_type_output_list_model import InstallationTypeOutputListModel
 from .installation_type_output_model import InstallationTypeOutputModel
 from .installation_type_patch_input_model import InstallationTypePatchInputModel
-from .installation_type_patch_input_model_other_properties import (
-    InstallationTypePatchInputModelOtherProperties,
+from .installation_type_patch_input_model_other_properties_type_0 import (
+    InstallationTypePatchInputModelOtherPropertiesType0,
 )
-from .installation_type_patch_input_model_other_properties_additional_property import (
-    InstallationTypePatchInputModelOtherPropertiesAdditionalProperty,
+from .installation_type_patch_input_model_other_properties_type_0_additional_property import (
+    InstallationTypePatchInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .installation_type_post_input_model import InstallationTypePostInputModel
-from .installation_type_post_input_model_other_properties import (
-    InstallationTypePostInputModelOtherProperties,
+from .installation_type_post_input_model_other_properties_type_0 import (
+    InstallationTypePostInputModelOtherPropertiesType0,
 )
-from .installation_type_post_input_model_other_properties_additional_property import (
-    InstallationTypePostInputModelOtherPropertiesAdditionalProperty,
+from .installation_type_post_input_model_other_properties_type_0_additional_property import (
+    InstallationTypePostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .installation_type_put_input_model import InstallationTypePutInputModel
-from .installation_type_put_input_model_other_properties import (
-    InstallationTypePutInputModelOtherProperties,
+from .installation_type_put_input_model_other_properties_type_0 import (
+    InstallationTypePutInputModelOtherPropertiesType0,
 )
-from .installation_type_put_input_model_other_properties_additional_property import (
-    InstallationTypePutInputModelOtherPropertiesAdditionalProperty,
+from .installation_type_put_input_model_other_properties_type_0_additional_property import (
+    InstallationTypePutInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .installation_type_reference_model import InstallationTypeReferenceModel
 from .installation_unregister_installation_post_input_model import (
     InstallationUnregisterInstallationPostInputModel,
 )
-from .installation_unregister_installation_post_input_model_other_properties import (
-    InstallationUnregisterInstallationPostInputModelOtherProperties,
+from .installation_unregister_installation_post_input_model_other_properties_type_0 import (
+    InstallationUnregisterInstallationPostInputModelOtherPropertiesType0,
 )
-from .installation_unregister_installation_post_input_model_other_properties_additional_property import (
-    InstallationUnregisterInstallationPostInputModelOtherPropertiesAdditionalProperty,
+from .installation_unregister_installation_post_input_model_other_properties_type_0_additional_property import (
+    InstallationUnregisterInstallationPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .instant_value_output_list_model import InstantValueOutputListModel
 from .instant_value_output_model import InstantValueOutputModel
 from .inverter_limit_production_post_input_model import InverterLimitProductionPostInputModel
-from .inverter_limit_production_post_input_model_other_properties import (
-    InverterLimitProductionPostInputModelOtherProperties,
+from .inverter_limit_production_post_input_model_other_properties_type_0 import (
+    InverterLimitProductionPostInputModelOtherPropertiesType0,
 )
-from .inverter_limit_production_post_input_model_other_properties_additional_property import (
-    InverterLimitProductionPostInputModelOtherPropertiesAdditionalProperty,
+from .inverter_limit_production_post_input_model_other_properties_type_0_additional_property import (
+    InverterLimitProductionPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .inverter_output_list_model import InverterOutputListModel
 from .inverter_output_model import InverterOutputModel
 from .layout_output_list_model import LayoutOutputListModel
 from .layout_output_model import LayoutOutputModel
 from .layout_patch_input_model import LayoutPatchInputModel
-from .layout_patch_input_model_other_properties import LayoutPatchInputModelOtherProperties
-from .layout_patch_input_model_other_properties_additional_property import (
-    LayoutPatchInputModelOtherPropertiesAdditionalProperty,
+from .layout_patch_input_model_other_properties_type_0 import (
+    LayoutPatchInputModelOtherPropertiesType0,
+)
+from .layout_patch_input_model_other_properties_type_0_additional_property import (
+    LayoutPatchInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .layout_post_input_model import LayoutPostInputModel
-from .layout_post_input_model_other_properties import LayoutPostInputModelOtherProperties
-from .layout_post_input_model_other_properties_additional_property import (
-    LayoutPostInputModelOtherPropertiesAdditionalProperty,
+from .layout_post_input_model_other_properties_type_0 import (
+    LayoutPostInputModelOtherPropertiesType0,
+)
+from .layout_post_input_model_other_properties_type_0_additional_property import (
+    LayoutPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .layout_put_input_model import LayoutPutInputModel
-from .layout_put_input_model_other_properties import LayoutPutInputModelOtherProperties
-from .layout_put_input_model_other_properties_additional_property import (
-    LayoutPutInputModelOtherPropertiesAdditionalProperty,
+from .layout_put_input_model_other_properties_type_0 import LayoutPutInputModelOtherPropertiesType0
+from .layout_put_input_model_other_properties_type_0_additional_property import (
+    LayoutPutInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .links_model import LinksModel
 from .location_reference_model import LocationReferenceModel
@@ -344,49 +350,49 @@ from .measuring_device_output_list_model import MeasuringDeviceOutputListModel
 from .measuring_device_output_model import MeasuringDeviceOutputModel
 from .measuring_device_reference_model import MeasuringDeviceReferenceModel
 from .meter_control_post_input_model import MeterControlPostInputModel
-from .meter_control_post_input_model_other_properties import (
-    MeterControlPostInputModelOtherProperties,
+from .meter_control_post_input_model_other_properties_type_0 import (
+    MeterControlPostInputModelOtherPropertiesType0,
 )
-from .meter_control_post_input_model_other_properties_additional_property import (
-    MeterControlPostInputModelOtherPropertiesAdditionalProperty,
+from .meter_control_post_input_model_other_properties_type_0_additional_property import (
+    MeterControlPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .meter_disable_quality_check_post_input_model import MeterDisableQualityCheckPostInputModel
-from .meter_disable_quality_check_post_input_model_other_properties import (
-    MeterDisableQualityCheckPostInputModelOtherProperties,
+from .meter_disable_quality_check_post_input_model_other_properties_type_0 import (
+    MeterDisableQualityCheckPostInputModelOtherPropertiesType0,
 )
-from .meter_disable_quality_check_post_input_model_other_properties_additional_property import (
-    MeterDisableQualityCheckPostInputModelOtherPropertiesAdditionalProperty,
+from .meter_disable_quality_check_post_input_model_other_properties_type_0_additional_property import (
+    MeterDisableQualityCheckPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .meter_enable_quality_check_post_input_model import MeterEnableQualityCheckPostInputModel
-from .meter_enable_quality_check_post_input_model_other_properties import (
-    MeterEnableQualityCheckPostInputModelOtherProperties,
+from .meter_enable_quality_check_post_input_model_other_properties_type_0 import (
+    MeterEnableQualityCheckPostInputModelOtherPropertiesType0,
 )
-from .meter_enable_quality_check_post_input_model_other_properties_additional_property import (
-    MeterEnableQualityCheckPostInputModelOtherPropertiesAdditionalProperty,
+from .meter_enable_quality_check_post_input_model_other_properties_type_0_additional_property import (
+    MeterEnableQualityCheckPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .meter_modify_type_post_input_model import MeterModifyTypePostInputModel
-from .meter_modify_type_post_input_model_other_properties import (
-    MeterModifyTypePostInputModelOtherProperties,
+from .meter_modify_type_post_input_model_other_properties_type_0 import (
+    MeterModifyTypePostInputModelOtherPropertiesType0,
 )
-from .meter_modify_type_post_input_model_other_properties_additional_property import (
-    MeterModifyTypePostInputModelOtherPropertiesAdditionalProperty,
+from .meter_modify_type_post_input_model_other_properties_type_0_additional_property import (
+    MeterModifyTypePostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .meter_output_list_model import MeterOutputListModel
 from .meter_output_model import MeterOutputModel
 from .meter_reference_model import MeterReferenceModel
 from .meter_register_measurement_post_input_model import MeterRegisterMeasurementPostInputModel
-from .meter_register_measurement_post_input_model_other_properties import (
-    MeterRegisterMeasurementPostInputModelOtherProperties,
+from .meter_register_measurement_post_input_model_other_properties_type_0 import (
+    MeterRegisterMeasurementPostInputModelOtherPropertiesType0,
 )
-from .meter_register_measurement_post_input_model_other_properties_additional_property import (
-    MeterRegisterMeasurementPostInputModelOtherPropertiesAdditionalProperty,
+from .meter_register_measurement_post_input_model_other_properties_type_0_additional_property import (
+    MeterRegisterMeasurementPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .meter_unregister_meter_post_input_model import MeterUnregisterMeterPostInputModel
-from .meter_unregister_meter_post_input_model_other_properties import (
-    MeterUnregisterMeterPostInputModelOtherProperties,
+from .meter_unregister_meter_post_input_model_other_properties_type_0 import (
+    MeterUnregisterMeterPostInputModelOtherPropertiesType0,
 )
-from .meter_unregister_meter_post_input_model_other_properties_additional_property import (
-    MeterUnregisterMeterPostInputModelOtherPropertiesAdditionalProperty,
+from .meter_unregister_meter_post_input_model_other_properties_type_0_additional_property import (
+    MeterUnregisterMeterPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .modbus_action_type_output_list_model import ModbusActionTypeOutputListModel
 from .modbus_action_type_output_model import ModbusActionTypeOutputModel
@@ -527,17 +533,21 @@ from .pv_production_test_output_model import PvProductionTestOutputModel
 from .pv_report_output_list_model import PvReportOutputListModel
 from .pv_report_output_model import PvReportOutputModel
 from .pv_report_patch_input_model import PvReportPatchInputModel
-from .pv_report_patch_input_model_other_properties import PvReportPatchInputModelOtherProperties
-from .pv_report_patch_input_model_other_properties_additional_property import (
-    PvReportPatchInputModelOtherPropertiesAdditionalProperty,
+from .pv_report_patch_input_model_other_properties_type_0 import (
+    PvReportPatchInputModelOtherPropertiesType0,
+)
+from .pv_report_patch_input_model_other_properties_type_0_additional_property import (
+    PvReportPatchInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .pv_report_post_input_model import PvReportPostInputModel
-from .pv_report_post_input_model_other_properties import PvReportPostInputModelOtherProperties
-from .pv_report_post_input_model_other_properties_additional_property import (
-    PvReportPostInputModelOtherPropertiesAdditionalProperty,
+from .pv_report_post_input_model_other_properties_type_0 import (
+    PvReportPostInputModelOtherPropertiesType0,
+)
+from .pv_report_post_input_model_other_properties_type_0_additional_property import (
+    PvReportPostInputModelOtherPropertiesType0AdditionalProperty,
 )
 from .rest_error_response import RestErrorResponse
-from .rest_error_response_extra_info import RestErrorResponseExtraInfo
+from .rest_error_response_extra_info_type_0 import RestErrorResponseExtraInfoType0
 from .send_channel_type_definition_output_list_model import SendChannelTypeDefinitionOutputListModel
 from .send_channel_type_definition_output_model import SendChannelTypeDefinitionOutputModel
 from .send_ct_ratio_output_list_model import SendCtRatioOutputListModel
@@ -561,16 +571,16 @@ __all__ = (
     "AggregationYearValueOutputListModel",
     "AggregationYearValueOutputModel",
     "AlarmAddCommentPostInputModel",
-    "AlarmAddCommentPostInputModelOtherProperties",
-    "AlarmAddCommentPostInputModelOtherPropertiesAdditionalProperty",
+    "AlarmAddCommentPostInputModelOtherPropertiesType0",
+    "AlarmAddCommentPostInputModelOtherPropertiesType0AdditionalProperty",
     "AlarmOutputListModel",
     "AlarmOutputModel",
     "AlarmSetToClosedPostInputModel",
-    "AlarmSetToClosedPostInputModelOtherProperties",
-    "AlarmSetToClosedPostInputModelOtherPropertiesAdditionalProperty",
+    "AlarmSetToClosedPostInputModelOtherPropertiesType0",
+    "AlarmSetToClosedPostInputModelOtherPropertiesType0AdditionalProperty",
     "AlarmSetToPendingPostInputModel",
-    "AlarmSetToPendingPostInputModelOtherProperties",
-    "AlarmSetToPendingPostInputModelOtherPropertiesAdditionalProperty",
+    "AlarmSetToPendingPostInputModelOtherPropertiesType0",
+    "AlarmSetToPendingPostInputModelOtherPropertiesType0AdditionalProperty",
     "ApiAccountOutputListModel",
     "ApiAccountOutputModel",
     "ApiAccountReferenceModel",
@@ -580,13 +590,13 @@ __all__ = (
     "ApiMeasurementTypeOutputModel",
     "ApiMeasurementTypeReferenceModel",
     "ApiMeterCreateRemoteDevicePostInputModel",
-    "ApiMeterCreateRemoteDevicePostInputModelOtherProperties",
-    "ApiMeterCreateRemoteDevicePostInputModelOtherPropertiesAdditionalProperty",
+    "ApiMeterCreateRemoteDevicePostInputModelOtherPropertiesType0",
+    "ApiMeterCreateRemoteDevicePostInputModelOtherPropertiesType0AdditionalProperty",
     "ApiMeterOutputListModel",
     "ApiMeterOutputModel",
     "ApiMeterPullRemoteDevicePostInputModel",
-    "ApiMeterPullRemoteDevicePostInputModelOtherProperties",
-    "ApiMeterPullRemoteDevicePostInputModelOtherPropertiesAdditionalProperty",
+    "ApiMeterPullRemoteDevicePostInputModelOtherPropertiesType0",
+    "ApiMeterPullRemoteDevicePostInputModelOtherPropertiesType0AdditionalProperty",
     "ApiMeterReferenceModel",
     "ApiMeterTypeOutputListModel",
     "ApiMeterTypeOutputModel",
@@ -594,8 +604,8 @@ __all__ = (
     "BatteryOutputListModel",
     "BatteryOutputModel",
     "BatterySetChargePowerPostInputModel",
-    "BatterySetChargePowerPostInputModelOtherProperties",
-    "BatterySetChargePowerPostInputModelOtherPropertiesAdditionalProperty",
+    "BatterySetChargePowerPostInputModelOtherPropertiesType0",
+    "BatterySetChargePowerPostInputModelOtherPropertiesType0AdditionalProperty",
     "ClientUserGroupOutputListModel",
     "ClientUserGroupOutputModel",
     "ClientUserGroupReferenceModel",
@@ -607,17 +617,17 @@ __all__ = (
     "CommunicatorRemoteCommandOutputListModel",
     "CommunicatorRemoteCommandOutputModel",
     "CommunicatorRequestHeatPumpTestPostInputModel",
-    "CommunicatorRequestHeatPumpTestPostInputModelOtherProperties",
-    "CommunicatorRequestHeatPumpTestPostInputModelOtherPropertiesAdditionalProperty",
+    "CommunicatorRequestHeatPumpTestPostInputModelOtherPropertiesType0",
+    "CommunicatorRequestHeatPumpTestPostInputModelOtherPropertiesType0AdditionalProperty",
     "CommunicatorRequestModbusActionPostInputModel",
-    "CommunicatorRequestModbusActionPostInputModelOtherProperties",
-    "CommunicatorRequestModbusActionPostInputModelOtherPropertiesAdditionalProperty",
+    "CommunicatorRequestModbusActionPostInputModelOtherPropertiesType0",
+    "CommunicatorRequestModbusActionPostInputModelOtherPropertiesType0AdditionalProperty",
     "CommunicatorRequestSwitchIoPortPostInputModel",
-    "CommunicatorRequestSwitchIoPortPostInputModelOtherProperties",
-    "CommunicatorRequestSwitchIoPortPostInputModelOtherPropertiesAdditionalProperty",
+    "CommunicatorRequestSwitchIoPortPostInputModelOtherPropertiesType0",
+    "CommunicatorRequestSwitchIoPortPostInputModelOtherPropertiesType0AdditionalProperty",
     "CommunicatorRequestVerificationPostInputModel",
-    "CommunicatorRequestVerificationPostInputModelOtherProperties",
-    "CommunicatorRequestVerificationPostInputModelOtherPropertiesAdditionalProperty",
+    "CommunicatorRequestVerificationPostInputModelOtherPropertiesType0",
+    "CommunicatorRequestVerificationPostInputModelOtherPropertiesType0AdditionalProperty",
     "CommunicatorTypeOutputListModel",
     "CommunicatorTypeOutputModel",
     "CommunicatorTypeReferenceModel",
@@ -638,8 +648,8 @@ __all__ = (
     "EmsConfigurationOutputListModel",
     "EmsConfigurationOutputModel",
     "EmsConfigurationSetUserEmsParametersPostInputModel",
-    "EmsConfigurationSetUserEmsParametersPostInputModelOtherProperties",
-    "EmsConfigurationSetUserEmsParametersPostInputModelOtherPropertiesAdditionalProperty",
+    "EmsConfigurationSetUserEmsParametersPostInputModelOtherPropertiesType0",
+    "EmsConfigurationSetUserEmsParametersPostInputModelOtherPropertiesType0AdditionalProperty",
     "EmsConfigurationUpdateOutputListModel",
     "EmsConfigurationUpdateOutputModel",
     "EnergyTariffReferenceModel",
@@ -654,88 +664,88 @@ __all__ = (
     "HVACOutputListModel",
     "HVACOutputModel",
     "HVACSetCoolTemperaturePostInputModel",
-    "HVACSetCoolTemperaturePostInputModelOtherProperties",
-    "HVACSetCoolTemperaturePostInputModelOtherPropertiesAdditionalProperty",
+    "HVACSetCoolTemperaturePostInputModelOtherPropertiesType0",
+    "HVACSetCoolTemperaturePostInputModelOtherPropertiesType0AdditionalProperty",
     "HVACSetHeatTemperaturePostInputModel",
-    "HVACSetHeatTemperaturePostInputModelOtherProperties",
-    "HVACSetHeatTemperaturePostInputModelOtherPropertiesAdditionalProperty",
+    "HVACSetHeatTemperaturePostInputModelOtherPropertiesType0",
+    "HVACSetHeatTemperaturePostInputModelOtherPropertiesType0AdditionalProperty",
     "InstallationAssignToInstallationPoolPostInputModel",
-    "InstallationAssignToInstallationPoolPostInputModelOtherProperties",
-    "InstallationAssignToInstallationPoolPostInputModelOtherPropertiesAdditionalProperty",
+    "InstallationAssignToInstallationPoolPostInputModelOtherPropertiesType0",
+    "InstallationAssignToInstallationPoolPostInputModelOtherPropertiesType0AdditionalProperty",
     "InstallationCreateDashboardUserPostInputModel",
-    "InstallationCreateDashboardUserPostInputModelOtherProperties",
-    "InstallationCreateDashboardUserPostInputModelOtherPropertiesAdditionalProperty",
+    "InstallationCreateDashboardUserPostInputModelOtherPropertiesType0",
+    "InstallationCreateDashboardUserPostInputModelOtherPropertiesType0AdditionalProperty",
     "InstallationOutputListModel",
     "InstallationOutputModel",
     "InstallationPatchInputModel",
-    "InstallationPatchInputModelOtherProperties",
-    "InstallationPatchInputModelOtherPropertiesAdditionalProperty",
+    "InstallationPatchInputModelOtherPropertiesType0",
+    "InstallationPatchInputModelOtherPropertiesType0AdditionalProperty",
     "InstallationPoolControlPostInputModel",
-    "InstallationPoolControlPostInputModelOtherProperties",
-    "InstallationPoolControlPostInputModelOtherPropertiesAdditionalProperty",
+    "InstallationPoolControlPostInputModelOtherPropertiesType0",
+    "InstallationPoolControlPostInputModelOtherPropertiesType0AdditionalProperty",
     "InstallationPoolOutputListModel",
     "InstallationPoolOutputModel",
     "InstallationPoolPatchInputModel",
-    "InstallationPoolPatchInputModelOtherProperties",
-    "InstallationPoolPatchInputModelOtherPropertiesAdditionalProperty",
+    "InstallationPoolPatchInputModelOtherPropertiesType0",
+    "InstallationPoolPatchInputModelOtherPropertiesType0AdditionalProperty",
     "InstallationPoolPostInputModel",
-    "InstallationPoolPostInputModelOtherProperties",
-    "InstallationPoolPostInputModelOtherPropertiesAdditionalProperty",
+    "InstallationPoolPostInputModelOtherPropertiesType0",
+    "InstallationPoolPostInputModelOtherPropertiesType0AdditionalProperty",
     "InstallationPoolPutInputModel",
-    "InstallationPoolPutInputModelOtherProperties",
-    "InstallationPoolPutInputModelOtherPropertiesAdditionalProperty",
+    "InstallationPoolPutInputModelOtherPropertiesType0",
+    "InstallationPoolPutInputModelOtherPropertiesType0AdditionalProperty",
     "InstallationPoolReferenceModel",
     "InstallationPoolSignalOutputListModel",
     "InstallationPoolSignalOutputModel",
     "InstallationPostInputModel",
-    "InstallationPostInputModelOtherProperties",
-    "InstallationPostInputModelOtherPropertiesAdditionalProperty",
+    "InstallationPostInputModelOtherPropertiesType0",
+    "InstallationPostInputModelOtherPropertiesType0AdditionalProperty",
     "InstallationPutInputModel",
-    "InstallationPutInputModelOtherProperties",
-    "InstallationPutInputModelOtherPropertiesAdditionalProperty",
+    "InstallationPutInputModelOtherPropertiesType0",
+    "InstallationPutInputModelOtherPropertiesType0AdditionalProperty",
     "InstallationReferenceModel",
     "InstallationRegisterApiMeterPostInputModel",
-    "InstallationRegisterApiMeterPostInputModelOtherProperties",
-    "InstallationRegisterApiMeterPostInputModelOtherPropertiesAdditionalProperty",
+    "InstallationRegisterApiMeterPostInputModelOtherPropertiesType0",
+    "InstallationRegisterApiMeterPostInputModelOtherPropertiesType0AdditionalProperty",
     "InstallationRegisterGatewayPostInputModel",
-    "InstallationRegisterGatewayPostInputModelOtherProperties",
-    "InstallationRegisterGatewayPostInputModelOtherPropertiesAdditionalProperty",
+    "InstallationRegisterGatewayPostInputModelOtherPropertiesType0",
+    "InstallationRegisterGatewayPostInputModelOtherPropertiesType0AdditionalProperty",
     "InstallationRegisterMeterPostInputModel",
-    "InstallationRegisterMeterPostInputModelOtherProperties",
-    "InstallationRegisterMeterPostInputModelOtherPropertiesAdditionalProperty",
+    "InstallationRegisterMeterPostInputModelOtherPropertiesType0",
+    "InstallationRegisterMeterPostInputModelOtherPropertiesType0AdditionalProperty",
     "InstallationTypeOutputListModel",
     "InstallationTypeOutputModel",
     "InstallationTypePatchInputModel",
-    "InstallationTypePatchInputModelOtherProperties",
-    "InstallationTypePatchInputModelOtherPropertiesAdditionalProperty",
+    "InstallationTypePatchInputModelOtherPropertiesType0",
+    "InstallationTypePatchInputModelOtherPropertiesType0AdditionalProperty",
     "InstallationTypePostInputModel",
-    "InstallationTypePostInputModelOtherProperties",
-    "InstallationTypePostInputModelOtherPropertiesAdditionalProperty",
+    "InstallationTypePostInputModelOtherPropertiesType0",
+    "InstallationTypePostInputModelOtherPropertiesType0AdditionalProperty",
     "InstallationTypePutInputModel",
-    "InstallationTypePutInputModelOtherProperties",
-    "InstallationTypePutInputModelOtherPropertiesAdditionalProperty",
+    "InstallationTypePutInputModelOtherPropertiesType0",
+    "InstallationTypePutInputModelOtherPropertiesType0AdditionalProperty",
     "InstallationTypeReferenceModel",
     "InstallationUnregisterInstallationPostInputModel",
-    "InstallationUnregisterInstallationPostInputModelOtherProperties",
-    "InstallationUnregisterInstallationPostInputModelOtherPropertiesAdditionalProperty",
+    "InstallationUnregisterInstallationPostInputModelOtherPropertiesType0",
+    "InstallationUnregisterInstallationPostInputModelOtherPropertiesType0AdditionalProperty",
     "InstantValueOutputListModel",
     "InstantValueOutputModel",
     "InverterLimitProductionPostInputModel",
-    "InverterLimitProductionPostInputModelOtherProperties",
-    "InverterLimitProductionPostInputModelOtherPropertiesAdditionalProperty",
+    "InverterLimitProductionPostInputModelOtherPropertiesType0",
+    "InverterLimitProductionPostInputModelOtherPropertiesType0AdditionalProperty",
     "InverterOutputListModel",
     "InverterOutputModel",
     "LayoutOutputListModel",
     "LayoutOutputModel",
     "LayoutPatchInputModel",
-    "LayoutPatchInputModelOtherProperties",
-    "LayoutPatchInputModelOtherPropertiesAdditionalProperty",
+    "LayoutPatchInputModelOtherPropertiesType0",
+    "LayoutPatchInputModelOtherPropertiesType0AdditionalProperty",
     "LayoutPostInputModel",
-    "LayoutPostInputModelOtherProperties",
-    "LayoutPostInputModelOtherPropertiesAdditionalProperty",
+    "LayoutPostInputModelOtherPropertiesType0",
+    "LayoutPostInputModelOtherPropertiesType0AdditionalProperty",
     "LayoutPutInputModel",
-    "LayoutPutInputModelOtherProperties",
-    "LayoutPutInputModelOtherPropertiesAdditionalProperty",
+    "LayoutPutInputModelOtherPropertiesType0",
+    "LayoutPutInputModelOtherPropertiesType0AdditionalProperty",
     "LinksModel",
     "LocationReferenceModel",
     "MeasurementOutputListModel",
@@ -750,26 +760,26 @@ __all__ = (
     "MeasuringDeviceOutputModel",
     "MeasuringDeviceReferenceModel",
     "MeterControlPostInputModel",
-    "MeterControlPostInputModelOtherProperties",
-    "MeterControlPostInputModelOtherPropertiesAdditionalProperty",
+    "MeterControlPostInputModelOtherPropertiesType0",
+    "MeterControlPostInputModelOtherPropertiesType0AdditionalProperty",
     "MeterDisableQualityCheckPostInputModel",
-    "MeterDisableQualityCheckPostInputModelOtherProperties",
-    "MeterDisableQualityCheckPostInputModelOtherPropertiesAdditionalProperty",
+    "MeterDisableQualityCheckPostInputModelOtherPropertiesType0",
+    "MeterDisableQualityCheckPostInputModelOtherPropertiesType0AdditionalProperty",
     "MeterEnableQualityCheckPostInputModel",
-    "MeterEnableQualityCheckPostInputModelOtherProperties",
-    "MeterEnableQualityCheckPostInputModelOtherPropertiesAdditionalProperty",
+    "MeterEnableQualityCheckPostInputModelOtherPropertiesType0",
+    "MeterEnableQualityCheckPostInputModelOtherPropertiesType0AdditionalProperty",
     "MeterModifyTypePostInputModel",
-    "MeterModifyTypePostInputModelOtherProperties",
-    "MeterModifyTypePostInputModelOtherPropertiesAdditionalProperty",
+    "MeterModifyTypePostInputModelOtherPropertiesType0",
+    "MeterModifyTypePostInputModelOtherPropertiesType0AdditionalProperty",
     "MeterOutputListModel",
     "MeterOutputModel",
     "MeterReferenceModel",
     "MeterRegisterMeasurementPostInputModel",
-    "MeterRegisterMeasurementPostInputModelOtherProperties",
-    "MeterRegisterMeasurementPostInputModelOtherPropertiesAdditionalProperty",
+    "MeterRegisterMeasurementPostInputModelOtherPropertiesType0",
+    "MeterRegisterMeasurementPostInputModelOtherPropertiesType0AdditionalProperty",
     "MeterUnregisterMeterPostInputModel",
-    "MeterUnregisterMeterPostInputModelOtherProperties",
-    "MeterUnregisterMeterPostInputModelOtherPropertiesAdditionalProperty",
+    "MeterUnregisterMeterPostInputModelOtherPropertiesType0",
+    "MeterUnregisterMeterPostInputModelOtherPropertiesType0AdditionalProperty",
     "ModbusActionTypeOutputListModel",
     "ModbusActionTypeOutputModel",
     "ModbusDeviceOutputListModel",
@@ -833,13 +843,13 @@ __all__ = (
     "PvReportOutputListModel",
     "PvReportOutputModel",
     "PvReportPatchInputModel",
-    "PvReportPatchInputModelOtherProperties",
-    "PvReportPatchInputModelOtherPropertiesAdditionalProperty",
+    "PvReportPatchInputModelOtherPropertiesType0",
+    "PvReportPatchInputModelOtherPropertiesType0AdditionalProperty",
     "PvReportPostInputModel",
-    "PvReportPostInputModelOtherProperties",
-    "PvReportPostInputModelOtherPropertiesAdditionalProperty",
+    "PvReportPostInputModelOtherPropertiesType0",
+    "PvReportPostInputModelOtherPropertiesType0AdditionalProperty",
     "RestErrorResponse",
-    "RestErrorResponseExtraInfo",
+    "RestErrorResponseExtraInfoType0",
     "SendChannelTypeDefinitionOutputListModel",
     "SendChannelTypeDefinitionOutputModel",
     "SendCtRatioOutputListModel",

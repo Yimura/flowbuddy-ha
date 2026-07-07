@@ -22,21 +22,26 @@ T = TypeVar("T", bound="SendCtRatioOutputListModel")
 class SendCtRatioOutputListModel:
     """
     Attributes:
-        send_ct_ratios (list[SendCtRatioOutputModel] | Unset):
+        send_ct_ratios (list[SendCtRatioOutputModel] | None | Unset):
     """
 
-    send_ct_ratios: list[SendCtRatioOutputModel] | Unset = UNSET
+    send_ct_ratios: list[SendCtRatioOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.send_ct_ratio_output_model import SendCtRatioOutputModel
 
-        send_ct_ratios: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.send_ct_ratios, Unset):
+        send_ct_ratios: list[dict[str, Any]] | None | Unset
+        if isinstance(self.send_ct_ratios, Unset):
+            send_ct_ratios = UNSET
+        elif isinstance(self.send_ct_ratios, list):
             send_ct_ratios = []
-            for send_ct_ratios_item_data in self.send_ct_ratios:
-                send_ct_ratios_item = send_ct_ratios_item_data.to_dict()
-                send_ct_ratios.append(send_ct_ratios_item)
+            for send_ct_ratios_type_0_item_data in self.send_ct_ratios:
+                send_ct_ratios_type_0_item = send_ct_ratios_type_0_item_data.to_dict()
+                send_ct_ratios.append(send_ct_ratios_type_0_item)
+
+        else:
+            send_ct_ratios = self.send_ct_ratios
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,14 +56,30 @@ class SendCtRatioOutputListModel:
         from ..models.send_ct_ratio_output_model import SendCtRatioOutputModel
 
         d = dict(src_dict)
-        _send_ct_ratios = d.pop("sendCtRatios", UNSET)
-        send_ct_ratios: list[SendCtRatioOutputModel] | Unset = UNSET
-        if _send_ct_ratios is not UNSET:
-            send_ct_ratios = []
-            for send_ct_ratios_item_data in _send_ct_ratios:
-                send_ct_ratios_item = SendCtRatioOutputModel.from_dict(send_ct_ratios_item_data)
 
-                send_ct_ratios.append(send_ct_ratios_item)
+        def _parse_send_ct_ratios(data: object) -> list[SendCtRatioOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                send_ct_ratios_type_0 = []
+                _send_ct_ratios_type_0 = data
+                for send_ct_ratios_type_0_item_data in _send_ct_ratios_type_0:
+                    send_ct_ratios_type_0_item = SendCtRatioOutputModel.from_dict(
+                        send_ct_ratios_type_0_item_data
+                    )
+
+                    send_ct_ratios_type_0.append(send_ct_ratios_type_0_item)
+
+                return send_ct_ratios_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[SendCtRatioOutputModel] | None | Unset, data)
+
+        send_ct_ratios = _parse_send_ct_ratios(d.pop("sendCtRatios", UNSET))
 
         send_ct_ratio_output_list_model = cls(
             send_ct_ratios=send_ct_ratios,

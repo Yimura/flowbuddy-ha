@@ -22,21 +22,26 @@ T = TypeVar("T", bound="MeterOutputListModel")
 class MeterOutputListModel:
     """
     Attributes:
-        meters (list[MeterOutputModel] | Unset):
+        meters (list[MeterOutputModel] | None | Unset):
     """
 
-    meters: list[MeterOutputModel] | Unset = UNSET
+    meters: list[MeterOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.meter_output_model import MeterOutputModel
 
-        meters: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.meters, Unset):
+        meters: list[dict[str, Any]] | None | Unset
+        if isinstance(self.meters, Unset):
+            meters = UNSET
+        elif isinstance(self.meters, list):
             meters = []
-            for meters_item_data in self.meters:
-                meters_item = meters_item_data.to_dict()
-                meters.append(meters_item)
+            for meters_type_0_item_data in self.meters:
+                meters_type_0_item = meters_type_0_item_data.to_dict()
+                meters.append(meters_type_0_item)
+
+        else:
+            meters = self.meters
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,14 +56,28 @@ class MeterOutputListModel:
         from ..models.meter_output_model import MeterOutputModel
 
         d = dict(src_dict)
-        _meters = d.pop("meters", UNSET)
-        meters: list[MeterOutputModel] | Unset = UNSET
-        if _meters is not UNSET:
-            meters = []
-            for meters_item_data in _meters:
-                meters_item = MeterOutputModel.from_dict(meters_item_data)
 
-                meters.append(meters_item)
+        def _parse_meters(data: object) -> list[MeterOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                meters_type_0 = []
+                _meters_type_0 = data
+                for meters_type_0_item_data in _meters_type_0:
+                    meters_type_0_item = MeterOutputModel.from_dict(meters_type_0_item_data)
+
+                    meters_type_0.append(meters_type_0_item)
+
+                return meters_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[MeterOutputModel] | None | Unset, data)
+
+        meters = _parse_meters(d.pop("meters", UNSET))
 
         meter_output_list_model = cls(
             meters=meters,

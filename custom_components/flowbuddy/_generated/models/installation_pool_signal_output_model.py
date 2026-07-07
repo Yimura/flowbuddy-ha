@@ -24,19 +24,19 @@ T = TypeVar("T", bound="InstallationPoolSignalOutputModel")
 class InstallationPoolSignalOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
-        external_id (str | Unset):
-        value (str | Unset):
-        installation_pool (InstallationPoolReferenceModel | Unset):
-        control_type (ControlTypeReferenceModel | Unset):
+        resource_uri (None | str | Unset):
+        external_id (None | str | Unset):
+        value (None | str | Unset):
+        installation_pool (InstallationPoolReferenceModel | None | Unset):
+        control_type (ControlTypeReferenceModel | None | Unset):
         created (datetime.datetime | None | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
-    external_id: str | Unset = UNSET
-    value: str | Unset = UNSET
-    installation_pool: InstallationPoolReferenceModel | Unset = UNSET
-    control_type: ControlTypeReferenceModel | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    value: None | str | Unset = UNSET
+    installation_pool: InstallationPoolReferenceModel | None | Unset = UNSET
+    control_type: ControlTypeReferenceModel | None | Unset = UNSET
     created: datetime.datetime | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -44,19 +44,39 @@ class InstallationPoolSignalOutputModel:
         from ..models.control_type_reference_model import ControlTypeReferenceModel
         from ..models.installation_pool_reference_model import InstallationPoolReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        value = self.value
+        value: None | str | Unset
+        if isinstance(self.value, Unset):
+            value = UNSET
+        else:
+            value = self.value
 
-        installation_pool: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.installation_pool, Unset):
+        installation_pool: dict[str, Any] | None | Unset
+        if isinstance(self.installation_pool, Unset):
+            installation_pool = UNSET
+        elif isinstance(self.installation_pool, InstallationPoolReferenceModel):
             installation_pool = self.installation_pool.to_dict()
+        else:
+            installation_pool = self.installation_pool
 
-        control_type: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.control_type, Unset):
+        control_type: dict[str, Any] | None | Unset
+        if isinstance(self.control_type, Unset):
+            control_type = UNSET
+        elif isinstance(self.control_type, ControlTypeReferenceModel):
             control_type = self.control_type.to_dict()
+        else:
+            control_type = self.control_type
 
         created: None | str | Unset
         if isinstance(self.created, Unset):
@@ -90,25 +110,67 @@ class InstallationPoolSignalOutputModel:
         from ..models.installation_pool_reference_model import InstallationPoolReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
 
-        external_id = d.pop("externalId", UNSET)
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        value = d.pop("value", UNSET)
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
-        _installation_pool = d.pop("installationPool", UNSET)
-        installation_pool: InstallationPoolReferenceModel | Unset
-        if isinstance(_installation_pool, Unset):
-            installation_pool = UNSET
-        else:
-            installation_pool = InstallationPoolReferenceModel.from_dict(_installation_pool)
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _control_type = d.pop("controlType", UNSET)
-        control_type: ControlTypeReferenceModel | Unset
-        if isinstance(_control_type, Unset):
-            control_type = UNSET
-        else:
-            control_type = ControlTypeReferenceModel.from_dict(_control_type)
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
+
+        def _parse_value(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        value = _parse_value(d.pop("value", UNSET))
+
+        def _parse_installation_pool(data: object) -> InstallationPoolReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                installation_pool_type_1 = InstallationPoolReferenceModel.from_dict(data)
+
+                return installation_pool_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(InstallationPoolReferenceModel | None | Unset, data)
+
+        installation_pool = _parse_installation_pool(d.pop("installationPool", UNSET))
+
+        def _parse_control_type(data: object) -> ControlTypeReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                control_type_type_1 = ControlTypeReferenceModel.from_dict(data)
+
+                return control_type_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(ControlTypeReferenceModel | None | Unset, data)
+
+        control_type = _parse_control_type(d.pop("controlType", UNSET))
 
         def _parse_created(data: object) -> datetime.datetime | None | Unset:
             if data is None:

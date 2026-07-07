@@ -22,62 +22,110 @@ T = TypeVar("T", bound="ModbusActionTypeOutputModel")
 class ModbusActionTypeOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
-        name (str | Unset):
-        function_code (str | Unset):
-        slave_address (int | Unset):
-        register_address (int | Unset):
-        register_length (int | Unset):
-        value (str | Unset):
-        is_value_required (bool | Unset):
-        is_fixed_value (bool | Unset):
-        protocol (str | Unset):
-        external_id (str | Unset):
-        communicator_type (CommunicatorTypeReferenceModel | Unset):
+        resource_uri (None | str | Unset):
+        name (None | str | Unset):
+        function_code (None | str | Unset):
+        slave_address (int | None | Unset):
+        register_address (int | None | Unset):
+        register_length (int | None | Unset):
+        value (None | str | Unset):
+        is_value_required (bool | None | Unset):
+        is_fixed_value (bool | None | Unset):
+        protocol (None | str | Unset):
+        external_id (None | str | Unset):
+        communicator_type (CommunicatorTypeReferenceModel | None | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
-    name: str | Unset = UNSET
-    function_code: str | Unset = UNSET
-    slave_address: int | Unset = UNSET
-    register_address: int | Unset = UNSET
-    register_length: int | Unset = UNSET
-    value: str | Unset = UNSET
-    is_value_required: bool | Unset = UNSET
-    is_fixed_value: bool | Unset = UNSET
-    protocol: str | Unset = UNSET
-    external_id: str | Unset = UNSET
-    communicator_type: CommunicatorTypeReferenceModel | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
+    name: None | str | Unset = UNSET
+    function_code: None | str | Unset = UNSET
+    slave_address: int | None | Unset = UNSET
+    register_address: int | None | Unset = UNSET
+    register_length: int | None | Unset = UNSET
+    value: None | str | Unset = UNSET
+    is_value_required: bool | None | Unset = UNSET
+    is_fixed_value: bool | None | Unset = UNSET
+    protocol: None | str | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    communicator_type: CommunicatorTypeReferenceModel | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.communicator_type_reference_model import CommunicatorTypeReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
-        name = self.name
+        name: None | str | Unset
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
 
-        function_code = self.function_code
+        function_code: None | str | Unset
+        if isinstance(self.function_code, Unset):
+            function_code = UNSET
+        else:
+            function_code = self.function_code
 
-        slave_address = self.slave_address
+        slave_address: int | None | Unset
+        if isinstance(self.slave_address, Unset):
+            slave_address = UNSET
+        else:
+            slave_address = self.slave_address
 
-        register_address = self.register_address
+        register_address: int | None | Unset
+        if isinstance(self.register_address, Unset):
+            register_address = UNSET
+        else:
+            register_address = self.register_address
 
-        register_length = self.register_length
+        register_length: int | None | Unset
+        if isinstance(self.register_length, Unset):
+            register_length = UNSET
+        else:
+            register_length = self.register_length
 
-        value = self.value
+        value: None | str | Unset
+        if isinstance(self.value, Unset):
+            value = UNSET
+        else:
+            value = self.value
 
-        is_value_required = self.is_value_required
+        is_value_required: bool | None | Unset
+        if isinstance(self.is_value_required, Unset):
+            is_value_required = UNSET
+        else:
+            is_value_required = self.is_value_required
 
-        is_fixed_value = self.is_fixed_value
+        is_fixed_value: bool | None | Unset
+        if isinstance(self.is_fixed_value, Unset):
+            is_fixed_value = UNSET
+        else:
+            is_fixed_value = self.is_fixed_value
 
-        protocol = self.protocol
+        protocol: None | str | Unset
+        if isinstance(self.protocol, Unset):
+            protocol = UNSET
+        else:
+            protocol = self.protocol
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        communicator_type: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.communicator_type, Unset):
+        communicator_type: dict[str, Any] | None | Unset
+        if isinstance(self.communicator_type, Unset):
+            communicator_type = UNSET
+        elif isinstance(self.communicator_type, CommunicatorTypeReferenceModel):
             communicator_type = self.communicator_type.to_dict()
+        else:
+            communicator_type = self.communicator_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -114,34 +162,122 @@ class ModbusActionTypeOutputModel:
         from ..models.communicator_type_reference_model import CommunicatorTypeReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
 
-        name = d.pop("name", UNSET)
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        function_code = d.pop("functionCode", UNSET)
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
-        slave_address = d.pop("slaveAddress", UNSET)
+        def _parse_name(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        register_address = d.pop("registerAddress", UNSET)
+        name = _parse_name(d.pop("name", UNSET))
 
-        register_length = d.pop("registerLength", UNSET)
+        def _parse_function_code(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        value = d.pop("value", UNSET)
+        function_code = _parse_function_code(d.pop("functionCode", UNSET))
 
-        is_value_required = d.pop("isValueRequired", UNSET)
+        def _parse_slave_address(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
 
-        is_fixed_value = d.pop("isFixedValue", UNSET)
+        slave_address = _parse_slave_address(d.pop("slaveAddress", UNSET))
 
-        protocol = d.pop("protocol", UNSET)
+        def _parse_register_address(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
 
-        external_id = d.pop("externalId", UNSET)
+        register_address = _parse_register_address(d.pop("registerAddress", UNSET))
 
-        _communicator_type = d.pop("communicatorType", UNSET)
-        communicator_type: CommunicatorTypeReferenceModel | Unset
-        if isinstance(_communicator_type, Unset):
-            communicator_type = UNSET
-        else:
-            communicator_type = CommunicatorTypeReferenceModel.from_dict(_communicator_type)
+        def _parse_register_length(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
+
+        register_length = _parse_register_length(d.pop("registerLength", UNSET))
+
+        def _parse_value(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        value = _parse_value(d.pop("value", UNSET))
+
+        def _parse_is_value_required(data: object) -> bool | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(bool | None | Unset, data)
+
+        is_value_required = _parse_is_value_required(d.pop("isValueRequired", UNSET))
+
+        def _parse_is_fixed_value(data: object) -> bool | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(bool | None | Unset, data)
+
+        is_fixed_value = _parse_is_fixed_value(d.pop("isFixedValue", UNSET))
+
+        def _parse_protocol(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        protocol = _parse_protocol(d.pop("protocol", UNSET))
+
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
+
+        def _parse_communicator_type(data: object) -> CommunicatorTypeReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                communicator_type_type_1 = CommunicatorTypeReferenceModel.from_dict(data)
+
+                return communicator_type_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(CommunicatorTypeReferenceModel | None | Unset, data)
+
+        communicator_type = _parse_communicator_type(d.pop("communicatorType", UNSET))
 
         modbus_action_type_output_model = cls(
             resource_uri=resource_uri,

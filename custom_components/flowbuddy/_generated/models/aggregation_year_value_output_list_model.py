@@ -22,21 +22,28 @@ T = TypeVar("T", bound="AggregationYearValueOutputListModel")
 class AggregationYearValueOutputListModel:
     """
     Attributes:
-        aggregation_year_values (list[AggregationYearValueOutputModel] | Unset):
+        aggregation_year_values (list[AggregationYearValueOutputModel] | None | Unset):
     """
 
-    aggregation_year_values: list[AggregationYearValueOutputModel] | Unset = UNSET
+    aggregation_year_values: list[AggregationYearValueOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.aggregation_year_value_output_model import AggregationYearValueOutputModel
 
-        aggregation_year_values: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.aggregation_year_values, Unset):
+        aggregation_year_values: list[dict[str, Any]] | None | Unset
+        if isinstance(self.aggregation_year_values, Unset):
+            aggregation_year_values = UNSET
+        elif isinstance(self.aggregation_year_values, list):
             aggregation_year_values = []
-            for aggregation_year_values_item_data in self.aggregation_year_values:
-                aggregation_year_values_item = aggregation_year_values_item_data.to_dict()
-                aggregation_year_values.append(aggregation_year_values_item)
+            for aggregation_year_values_type_0_item_data in self.aggregation_year_values:
+                aggregation_year_values_type_0_item = (
+                    aggregation_year_values_type_0_item_data.to_dict()
+                )
+                aggregation_year_values.append(aggregation_year_values_type_0_item)
+
+        else:
+            aggregation_year_values = self.aggregation_year_values
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,16 +58,34 @@ class AggregationYearValueOutputListModel:
         from ..models.aggregation_year_value_output_model import AggregationYearValueOutputModel
 
         d = dict(src_dict)
-        _aggregation_year_values = d.pop("aggregationYearValues", UNSET)
-        aggregation_year_values: list[AggregationYearValueOutputModel] | Unset = UNSET
-        if _aggregation_year_values is not UNSET:
-            aggregation_year_values = []
-            for aggregation_year_values_item_data in _aggregation_year_values:
-                aggregation_year_values_item = AggregationYearValueOutputModel.from_dict(
-                    aggregation_year_values_item_data
-                )
 
-                aggregation_year_values.append(aggregation_year_values_item)
+        def _parse_aggregation_year_values(
+            data: object,
+        ) -> list[AggregationYearValueOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                aggregation_year_values_type_0 = []
+                _aggregation_year_values_type_0 = data
+                for aggregation_year_values_type_0_item_data in _aggregation_year_values_type_0:
+                    aggregation_year_values_type_0_item = AggregationYearValueOutputModel.from_dict(
+                        aggregation_year_values_type_0_item_data
+                    )
+
+                    aggregation_year_values_type_0.append(aggregation_year_values_type_0_item)
+
+                return aggregation_year_values_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[AggregationYearValueOutputModel] | None | Unset, data)
+
+        aggregation_year_values = _parse_aggregation_year_values(
+            d.pop("aggregationYearValues", UNSET)
+        )
 
         aggregation_year_value_output_list_model = cls(
             aggregation_year_values=aggregation_year_values,

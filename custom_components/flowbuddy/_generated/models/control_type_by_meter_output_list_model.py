@@ -22,21 +22,26 @@ T = TypeVar("T", bound="ControlTypeByMeterOutputListModel")
 class ControlTypeByMeterOutputListModel:
     """
     Attributes:
-        control_types (list[ControlTypeByMeterOutputModel] | Unset):
+        control_types (list[ControlTypeByMeterOutputModel] | None | Unset):
     """
 
-    control_types: list[ControlTypeByMeterOutputModel] | Unset = UNSET
+    control_types: list[ControlTypeByMeterOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.control_type_by_meter_output_model import ControlTypeByMeterOutputModel
 
-        control_types: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.control_types, Unset):
+        control_types: list[dict[str, Any]] | None | Unset
+        if isinstance(self.control_types, Unset):
+            control_types = UNSET
+        elif isinstance(self.control_types, list):
             control_types = []
-            for control_types_item_data in self.control_types:
-                control_types_item = control_types_item_data.to_dict()
-                control_types.append(control_types_item)
+            for control_types_type_0_item_data in self.control_types:
+                control_types_type_0_item = control_types_type_0_item_data.to_dict()
+                control_types.append(control_types_type_0_item)
+
+        else:
+            control_types = self.control_types
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,16 +56,32 @@ class ControlTypeByMeterOutputListModel:
         from ..models.control_type_by_meter_output_model import ControlTypeByMeterOutputModel
 
         d = dict(src_dict)
-        _control_types = d.pop("controlTypes", UNSET)
-        control_types: list[ControlTypeByMeterOutputModel] | Unset = UNSET
-        if _control_types is not UNSET:
-            control_types = []
-            for control_types_item_data in _control_types:
-                control_types_item = ControlTypeByMeterOutputModel.from_dict(
-                    control_types_item_data
-                )
 
-                control_types.append(control_types_item)
+        def _parse_control_types(
+            data: object,
+        ) -> list[ControlTypeByMeterOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                control_types_type_0 = []
+                _control_types_type_0 = data
+                for control_types_type_0_item_data in _control_types_type_0:
+                    control_types_type_0_item = ControlTypeByMeterOutputModel.from_dict(
+                        control_types_type_0_item_data
+                    )
+
+                    control_types_type_0.append(control_types_type_0_item)
+
+                return control_types_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[ControlTypeByMeterOutputModel] | None | Unset, data)
+
+        control_types = _parse_control_types(d.pop("controlTypes", UNSET))
 
         control_type_by_meter_output_list_model = cls(
             control_types=control_types,

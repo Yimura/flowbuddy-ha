@@ -22,30 +22,46 @@ T = TypeVar("T", bound="ControlTypeByMeterOutputModel")
 class ControlTypeByMeterOutputModel:
     """
     Attributes:
-        name (str | Unset):
-        code (str | Unset):
-        unit (UnitOutputModel | Unset):
-        external_id (str | Unset):
+        name (None | str | Unset):
+        code (None | str | Unset):
+        unit (None | UnitOutputModel | Unset):
+        external_id (None | str | Unset):
     """
 
-    name: str | Unset = UNSET
-    code: str | Unset = UNSET
-    unit: UnitOutputModel | Unset = UNSET
-    external_id: str | Unset = UNSET
+    name: None | str | Unset = UNSET
+    code: None | str | Unset = UNSET
+    unit: None | UnitOutputModel | Unset = UNSET
+    external_id: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.unit_output_model import UnitOutputModel
 
-        name = self.name
+        name: None | str | Unset
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
 
-        code = self.code
+        code: None | str | Unset
+        if isinstance(self.code, Unset):
+            code = UNSET
+        else:
+            code = self.code
 
-        unit: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.unit, Unset):
+        unit: dict[str, Any] | None | Unset
+        if isinstance(self.unit, Unset):
+            unit = UNSET
+        elif isinstance(self.unit, UnitOutputModel):
             unit = self.unit.to_dict()
+        else:
+            unit = self.unit
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -66,18 +82,50 @@ class ControlTypeByMeterOutputModel:
         from ..models.unit_output_model import UnitOutputModel
 
         d = dict(src_dict)
-        name = d.pop("name", UNSET)
 
-        code = d.pop("code", UNSET)
+        def _parse_name(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _unit = d.pop("unit", UNSET)
-        unit: UnitOutputModel | Unset
-        if isinstance(_unit, Unset):
-            unit = UNSET
-        else:
-            unit = UnitOutputModel.from_dict(_unit)
+        name = _parse_name(d.pop("name", UNSET))
 
-        external_id = d.pop("externalId", UNSET)
+        def _parse_code(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        code = _parse_code(d.pop("code", UNSET))
+
+        def _parse_unit(data: object) -> None | UnitOutputModel | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                unit_type_1 = UnitOutputModel.from_dict(data)
+
+                return unit_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(None | UnitOutputModel | Unset, data)
+
+        unit = _parse_unit(d.pop("unit", UNSET))
+
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
 
         control_type_by_meter_output_model = cls(
             name=name,

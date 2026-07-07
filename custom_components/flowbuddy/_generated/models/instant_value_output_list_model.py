@@ -22,21 +22,26 @@ T = TypeVar("T", bound="InstantValueOutputListModel")
 class InstantValueOutputListModel:
     """
     Attributes:
-        instant_values (list[InstantValueOutputModel] | Unset):
+        instant_values (list[InstantValueOutputModel] | None | Unset):
     """
 
-    instant_values: list[InstantValueOutputModel] | Unset = UNSET
+    instant_values: list[InstantValueOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.instant_value_output_model import InstantValueOutputModel
 
-        instant_values: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.instant_values, Unset):
+        instant_values: list[dict[str, Any]] | None | Unset
+        if isinstance(self.instant_values, Unset):
+            instant_values = UNSET
+        elif isinstance(self.instant_values, list):
             instant_values = []
-            for instant_values_item_data in self.instant_values:
-                instant_values_item = instant_values_item_data.to_dict()
-                instant_values.append(instant_values_item)
+            for instant_values_type_0_item_data in self.instant_values:
+                instant_values_type_0_item = instant_values_type_0_item_data.to_dict()
+                instant_values.append(instant_values_type_0_item)
+
+        else:
+            instant_values = self.instant_values
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,14 +56,30 @@ class InstantValueOutputListModel:
         from ..models.instant_value_output_model import InstantValueOutputModel
 
         d = dict(src_dict)
-        _instant_values = d.pop("instantValues", UNSET)
-        instant_values: list[InstantValueOutputModel] | Unset = UNSET
-        if _instant_values is not UNSET:
-            instant_values = []
-            for instant_values_item_data in _instant_values:
-                instant_values_item = InstantValueOutputModel.from_dict(instant_values_item_data)
 
-                instant_values.append(instant_values_item)
+        def _parse_instant_values(data: object) -> list[InstantValueOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                instant_values_type_0 = []
+                _instant_values_type_0 = data
+                for instant_values_type_0_item_data in _instant_values_type_0:
+                    instant_values_type_0_item = InstantValueOutputModel.from_dict(
+                        instant_values_type_0_item_data
+                    )
+
+                    instant_values_type_0.append(instant_values_type_0_item)
+
+                return instant_values_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[InstantValueOutputModel] | None | Unset, data)
+
+        instant_values = _parse_instant_values(d.pop("instantValues", UNSET))
 
         instant_value_output_list_model = cls(
             instant_values=instant_values,

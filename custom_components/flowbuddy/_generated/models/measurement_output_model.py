@@ -24,48 +24,56 @@ T = TypeVar("T", bound="MeasurementOutputModel")
 class MeasurementOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
-        status (str | Unset): Registration status of Measurement
+        resource_uri (None | str | Unset):
+        status (None | str | Unset): Registration status of Measurement
         first_registered_on (datetime.datetime | None | Unset): First time when measurement was linked to an meter
-        polling (bool | Unset): Indicates if data is processed for this measurement (overrule from meter)
-        last_polled_value (float | Unset): Last valid meter reading. (correspondig to the latest cumulative value
+        polling (bool | None | Unset): Indicates if data is processed for this measurement (overrule from meter)
+        last_polled_value (float | None | Unset): Last valid meter reading. (correspondig to the latest cumulative value
             registered by the physical device)
         last_polled_time_stamp (datetime.datetime | None | Unset): Last timestamp that was processed
         last_aggregation_on (datetime.datetime | None | Unset): Last timestamp that was aggregated
-        validating_quality (bool | Unset):
+        validating_quality (bool | None | Unset):
         last_run_measurement_quality_engine_on (datetime.datetime | None | Unset):
-        alarm_status (str | Unset):
-        last_polled_realtime_value (float | Unset): Last realtime value that was processed
+        alarm_status (None | str | Unset):
+        last_polled_realtime_value (float | None | Unset): Last realtime value that was processed
         last_polled_realtime_time_stamp (datetime.datetime | None | Unset): Last realtime timestamp that was processed
-        external_id (str | Unset):
-        meter (MeterReferenceModel | Unset):
-        measurement_type (MeasurementTypeReferenceModel | Unset):
+        external_id (None | str | Unset):
+        meter (MeterReferenceModel | None | Unset):
+        measurement_type (MeasurementTypeReferenceModel | None | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
-    status: str | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
+    status: None | str | Unset = UNSET
     first_registered_on: datetime.datetime | None | Unset = UNSET
-    polling: bool | Unset = UNSET
-    last_polled_value: float | Unset = UNSET
+    polling: bool | None | Unset = UNSET
+    last_polled_value: float | None | Unset = UNSET
     last_polled_time_stamp: datetime.datetime | None | Unset = UNSET
     last_aggregation_on: datetime.datetime | None | Unset = UNSET
-    validating_quality: bool | Unset = UNSET
+    validating_quality: bool | None | Unset = UNSET
     last_run_measurement_quality_engine_on: datetime.datetime | None | Unset = UNSET
-    alarm_status: str | Unset = UNSET
-    last_polled_realtime_value: float | Unset = UNSET
+    alarm_status: None | str | Unset = UNSET
+    last_polled_realtime_value: float | None | Unset = UNSET
     last_polled_realtime_time_stamp: datetime.datetime | None | Unset = UNSET
-    external_id: str | Unset = UNSET
-    meter: MeterReferenceModel | Unset = UNSET
-    measurement_type: MeasurementTypeReferenceModel | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    meter: MeterReferenceModel | None | Unset = UNSET
+    measurement_type: MeasurementTypeReferenceModel | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.measurement_type_reference_model import MeasurementTypeReferenceModel
         from ..models.meter_reference_model import MeterReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
-        status = self.status
+        status: None | str | Unset
+        if isinstance(self.status, Unset):
+            status = UNSET
+        else:
+            status = self.status
 
         first_registered_on: None | str | Unset
         if isinstance(self.first_registered_on, Unset):
@@ -75,9 +83,17 @@ class MeasurementOutputModel:
         else:
             first_registered_on = self.first_registered_on
 
-        polling = self.polling
+        polling: bool | None | Unset
+        if isinstance(self.polling, Unset):
+            polling = UNSET
+        else:
+            polling = self.polling
 
-        last_polled_value = self.last_polled_value
+        last_polled_value: float | None | Unset
+        if isinstance(self.last_polled_value, Unset):
+            last_polled_value = UNSET
+        else:
+            last_polled_value = self.last_polled_value
 
         last_polled_time_stamp: None | str | Unset
         if isinstance(self.last_polled_time_stamp, Unset):
@@ -95,7 +111,11 @@ class MeasurementOutputModel:
         else:
             last_aggregation_on = self.last_aggregation_on
 
-        validating_quality = self.validating_quality
+        validating_quality: bool | None | Unset
+        if isinstance(self.validating_quality, Unset):
+            validating_quality = UNSET
+        else:
+            validating_quality = self.validating_quality
 
         last_run_measurement_quality_engine_on: None | str | Unset
         if isinstance(self.last_run_measurement_quality_engine_on, Unset):
@@ -107,9 +127,17 @@ class MeasurementOutputModel:
         else:
             last_run_measurement_quality_engine_on = self.last_run_measurement_quality_engine_on
 
-        alarm_status = self.alarm_status
+        alarm_status: None | str | Unset
+        if isinstance(self.alarm_status, Unset):
+            alarm_status = UNSET
+        else:
+            alarm_status = self.alarm_status
 
-        last_polled_realtime_value = self.last_polled_realtime_value
+        last_polled_realtime_value: float | None | Unset
+        if isinstance(self.last_polled_realtime_value, Unset):
+            last_polled_realtime_value = UNSET
+        else:
+            last_polled_realtime_value = self.last_polled_realtime_value
 
         last_polled_realtime_time_stamp: None | str | Unset
         if isinstance(self.last_polled_realtime_time_stamp, Unset):
@@ -119,15 +147,27 @@ class MeasurementOutputModel:
         else:
             last_polled_realtime_time_stamp = self.last_polled_realtime_time_stamp
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        meter: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.meter, Unset):
+        meter: dict[str, Any] | None | Unset
+        if isinstance(self.meter, Unset):
+            meter = UNSET
+        elif isinstance(self.meter, MeterReferenceModel):
             meter = self.meter.to_dict()
+        else:
+            meter = self.meter
 
-        measurement_type: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.measurement_type, Unset):
+        measurement_type: dict[str, Any] | None | Unset
+        if isinstance(self.measurement_type, Unset):
+            measurement_type = UNSET
+        elif isinstance(self.measurement_type, MeasurementTypeReferenceModel):
             measurement_type = self.measurement_type.to_dict()
+        else:
+            measurement_type = self.measurement_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -171,9 +211,24 @@ class MeasurementOutputModel:
         from ..models.meter_reference_model import MeterReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
 
-        status = d.pop("status", UNSET)
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
+
+        def _parse_status(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        status = _parse_status(d.pop("status", UNSET))
 
         def _parse_first_registered_on(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -192,9 +247,23 @@ class MeasurementOutputModel:
 
         first_registered_on = _parse_first_registered_on(d.pop("firstRegisteredOn", UNSET))
 
-        polling = d.pop("polling", UNSET)
+        def _parse_polling(data: object) -> bool | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(bool | None | Unset, data)
 
-        last_polled_value = d.pop("lastPolledValue", UNSET)
+        polling = _parse_polling(d.pop("polling", UNSET))
+
+        def _parse_last_polled_value(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
+
+        last_polled_value = _parse_last_polled_value(d.pop("lastPolledValue", UNSET))
 
         def _parse_last_polled_time_stamp(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -230,7 +299,14 @@ class MeasurementOutputModel:
 
         last_aggregation_on = _parse_last_aggregation_on(d.pop("lastAggregationOn", UNSET))
 
-        validating_quality = d.pop("validatingQuality", UNSET)
+        def _parse_validating_quality(data: object) -> bool | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(bool | None | Unset, data)
+
+        validating_quality = _parse_validating_quality(d.pop("validatingQuality", UNSET))
 
         def _parse_last_run_measurement_quality_engine_on(
             data: object,
@@ -255,9 +331,25 @@ class MeasurementOutputModel:
             d.pop("lastRunMeasurementQualityEngineOn", UNSET)
         )
 
-        alarm_status = d.pop("alarmStatus", UNSET)
+        def _parse_alarm_status(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        last_polled_realtime_value = d.pop("lastPolledRealtimeValue", UNSET)
+        alarm_status = _parse_alarm_status(d.pop("alarmStatus", UNSET))
+
+        def _parse_last_polled_realtime_value(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
+
+        last_polled_realtime_value = _parse_last_polled_realtime_value(
+            d.pop("lastPolledRealtimeValue", UNSET)
+        )
 
         def _parse_last_polled_realtime_time_stamp(
             data: object,
@@ -280,21 +372,48 @@ class MeasurementOutputModel:
             d.pop("lastPolledRealtimeTimeStamp", UNSET)
         )
 
-        external_id = d.pop("externalId", UNSET)
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _meter = d.pop("meter", UNSET)
-        meter: MeterReferenceModel | Unset
-        if isinstance(_meter, Unset):
-            meter = UNSET
-        else:
-            meter = MeterReferenceModel.from_dict(_meter)
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
 
-        _measurement_type = d.pop("measurementType", UNSET)
-        measurement_type: MeasurementTypeReferenceModel | Unset
-        if isinstance(_measurement_type, Unset):
-            measurement_type = UNSET
-        else:
-            measurement_type = MeasurementTypeReferenceModel.from_dict(_measurement_type)
+        def _parse_meter(data: object) -> MeterReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                meter_type_1 = MeterReferenceModel.from_dict(data)
+
+                return meter_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(MeterReferenceModel | None | Unset, data)
+
+        meter = _parse_meter(d.pop("meter", UNSET))
+
+        def _parse_measurement_type(data: object) -> MeasurementTypeReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                measurement_type_type_1 = MeasurementTypeReferenceModel.from_dict(data)
+
+                return measurement_type_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(MeasurementTypeReferenceModel | None | Unset, data)
+
+        measurement_type = _parse_measurement_type(d.pop("measurementType", UNSET))
 
         measurement_output_model = cls(
             resource_uri=resource_uri,

@@ -22,21 +22,26 @@ T = TypeVar("T", bound="EventOutputListModel")
 class EventOutputListModel:
     """
     Attributes:
-        events (list[EventOutputModel] | Unset):
+        events (list[EventOutputModel] | None | Unset):
     """
 
-    events: list[EventOutputModel] | Unset = UNSET
+    events: list[EventOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.event_output_model import EventOutputModel
 
-        events: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.events, Unset):
+        events: list[dict[str, Any]] | None | Unset
+        if isinstance(self.events, Unset):
+            events = UNSET
+        elif isinstance(self.events, list):
             events = []
-            for events_item_data in self.events:
-                events_item = events_item_data.to_dict()
-                events.append(events_item)
+            for events_type_0_item_data in self.events:
+                events_type_0_item = events_type_0_item_data.to_dict()
+                events.append(events_type_0_item)
+
+        else:
+            events = self.events
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,14 +56,28 @@ class EventOutputListModel:
         from ..models.event_output_model import EventOutputModel
 
         d = dict(src_dict)
-        _events = d.pop("events", UNSET)
-        events: list[EventOutputModel] | Unset = UNSET
-        if _events is not UNSET:
-            events = []
-            for events_item_data in _events:
-                events_item = EventOutputModel.from_dict(events_item_data)
 
-                events.append(events_item)
+        def _parse_events(data: object) -> list[EventOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                events_type_0 = []
+                _events_type_0 = data
+                for events_type_0_item_data in _events_type_0:
+                    events_type_0_item = EventOutputModel.from_dict(events_type_0_item_data)
+
+                    events_type_0.append(events_type_0_item)
+
+                return events_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[EventOutputModel] | None | Unset, data)
+
+        events = _parse_events(d.pop("events", UNSET))
 
         event_output_list_model = cls(
             events=events,

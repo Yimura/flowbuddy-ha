@@ -22,21 +22,28 @@ T = TypeVar("T", bound="AggregationDayValueOutputListModel")
 class AggregationDayValueOutputListModel:
     """
     Attributes:
-        aggregation_day_values (list[AggregationDayValueOutputModel] | Unset):
+        aggregation_day_values (list[AggregationDayValueOutputModel] | None | Unset):
     """
 
-    aggregation_day_values: list[AggregationDayValueOutputModel] | Unset = UNSET
+    aggregation_day_values: list[AggregationDayValueOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.aggregation_day_value_output_model import AggregationDayValueOutputModel
 
-        aggregation_day_values: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.aggregation_day_values, Unset):
+        aggregation_day_values: list[dict[str, Any]] | None | Unset
+        if isinstance(self.aggregation_day_values, Unset):
+            aggregation_day_values = UNSET
+        elif isinstance(self.aggregation_day_values, list):
             aggregation_day_values = []
-            for aggregation_day_values_item_data in self.aggregation_day_values:
-                aggregation_day_values_item = aggregation_day_values_item_data.to_dict()
-                aggregation_day_values.append(aggregation_day_values_item)
+            for aggregation_day_values_type_0_item_data in self.aggregation_day_values:
+                aggregation_day_values_type_0_item = (
+                    aggregation_day_values_type_0_item_data.to_dict()
+                )
+                aggregation_day_values.append(aggregation_day_values_type_0_item)
+
+        else:
+            aggregation_day_values = self.aggregation_day_values
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,16 +58,32 @@ class AggregationDayValueOutputListModel:
         from ..models.aggregation_day_value_output_model import AggregationDayValueOutputModel
 
         d = dict(src_dict)
-        _aggregation_day_values = d.pop("aggregationDayValues", UNSET)
-        aggregation_day_values: list[AggregationDayValueOutputModel] | Unset = UNSET
-        if _aggregation_day_values is not UNSET:
-            aggregation_day_values = []
-            for aggregation_day_values_item_data in _aggregation_day_values:
-                aggregation_day_values_item = AggregationDayValueOutputModel.from_dict(
-                    aggregation_day_values_item_data
-                )
 
-                aggregation_day_values.append(aggregation_day_values_item)
+        def _parse_aggregation_day_values(
+            data: object,
+        ) -> list[AggregationDayValueOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                aggregation_day_values_type_0 = []
+                _aggregation_day_values_type_0 = data
+                for aggregation_day_values_type_0_item_data in _aggregation_day_values_type_0:
+                    aggregation_day_values_type_0_item = AggregationDayValueOutputModel.from_dict(
+                        aggregation_day_values_type_0_item_data
+                    )
+
+                    aggregation_day_values_type_0.append(aggregation_day_values_type_0_item)
+
+                return aggregation_day_values_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[AggregationDayValueOutputModel] | None | Unset, data)
+
+        aggregation_day_values = _parse_aggregation_day_values(d.pop("aggregationDayValues", UNSET))
 
         aggregation_day_value_output_list_model = cls(
             aggregation_day_values=aggregation_day_values,

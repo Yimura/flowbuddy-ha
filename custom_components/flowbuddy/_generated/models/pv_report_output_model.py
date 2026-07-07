@@ -24,29 +24,37 @@ T = TypeVar("T", bound="PvReportOutputModel")
 class PvReportOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
-        create_report (str | Unset):
+        resource_uri (None | str | Unset):
+        create_report (None | str | Unset):
         last_report_sent_date (datetime.datetime | None | Unset):
-        external_id (str | Unset):
-        installation (InstallationReferenceModel | Unset):
-        template (NotifierTemplateReferenceModel | Unset):
+        external_id (None | str | Unset):
+        installation (InstallationReferenceModel | None | Unset):
+        template (None | NotifierTemplateReferenceModel | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
-    create_report: str | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
+    create_report: None | str | Unset = UNSET
     last_report_sent_date: datetime.datetime | None | Unset = UNSET
-    external_id: str | Unset = UNSET
-    installation: InstallationReferenceModel | Unset = UNSET
-    template: NotifierTemplateReferenceModel | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    installation: InstallationReferenceModel | None | Unset = UNSET
+    template: None | NotifierTemplateReferenceModel | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.installation_reference_model import InstallationReferenceModel
         from ..models.notifier_template_reference_model import NotifierTemplateReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
-        create_report = self.create_report
+        create_report: None | str | Unset
+        if isinstance(self.create_report, Unset):
+            create_report = UNSET
+        else:
+            create_report = self.create_report
 
         last_report_sent_date: None | str | Unset
         if isinstance(self.last_report_sent_date, Unset):
@@ -56,15 +64,27 @@ class PvReportOutputModel:
         else:
             last_report_sent_date = self.last_report_sent_date
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        installation: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.installation, Unset):
+        installation: dict[str, Any] | None | Unset
+        if isinstance(self.installation, Unset):
+            installation = UNSET
+        elif isinstance(self.installation, InstallationReferenceModel):
             installation = self.installation.to_dict()
+        else:
+            installation = self.installation
 
-        template: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.template, Unset):
+        template: dict[str, Any] | None | Unset
+        if isinstance(self.template, Unset):
+            template = UNSET
+        elif isinstance(self.template, NotifierTemplateReferenceModel):
             template = self.template.to_dict()
+        else:
+            template = self.template
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -90,9 +110,24 @@ class PvReportOutputModel:
         from ..models.notifier_template_reference_model import NotifierTemplateReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
 
-        create_report = d.pop("createReport", UNSET)
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
+
+        def _parse_create_report(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        create_report = _parse_create_report(d.pop("createReport", UNSET))
 
         def _parse_last_report_sent_date(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -111,21 +146,48 @@ class PvReportOutputModel:
 
         last_report_sent_date = _parse_last_report_sent_date(d.pop("lastReportSentDate", UNSET))
 
-        external_id = d.pop("externalId", UNSET)
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _installation = d.pop("installation", UNSET)
-        installation: InstallationReferenceModel | Unset
-        if isinstance(_installation, Unset):
-            installation = UNSET
-        else:
-            installation = InstallationReferenceModel.from_dict(_installation)
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
 
-        _template = d.pop("template", UNSET)
-        template: NotifierTemplateReferenceModel | Unset
-        if isinstance(_template, Unset):
-            template = UNSET
-        else:
-            template = NotifierTemplateReferenceModel.from_dict(_template)
+        def _parse_installation(data: object) -> InstallationReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                installation_type_1 = InstallationReferenceModel.from_dict(data)
+
+                return installation_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(InstallationReferenceModel | None | Unset, data)
+
+        installation = _parse_installation(d.pop("installation", UNSET))
+
+        def _parse_template(data: object) -> None | NotifierTemplateReferenceModel | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                template_type_1 = NotifierTemplateReferenceModel.from_dict(data)
+
+                return template_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(None | NotifierTemplateReferenceModel | Unset, data)
+
+        template = _parse_template(d.pop("template", UNSET))
 
         pv_report_output_model = cls(
             resource_uri=resource_uri,

@@ -12,8 +12,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-    from ..models.installation_unregister_installation_post_input_model_other_properties import (
-        InstallationUnregisterInstallationPostInputModelOtherProperties,
+    from ..models.installation_unregister_installation_post_input_model_other_properties_type_0 import (
+        InstallationUnregisterInstallationPostInputModelOtherPropertiesType0,
     )
 
 
@@ -24,22 +24,29 @@ T = TypeVar("T", bound="InstallationUnregisterInstallationPostInputModel")
 class InstallationUnregisterInstallationPostInputModel:
     """
     Attributes:
-        other_properties (InstallationUnregisterInstallationPostInputModelOtherProperties | Unset):
+        other_properties (InstallationUnregisterInstallationPostInputModelOtherPropertiesType0 | None | Unset):
     """
 
-    other_properties: InstallationUnregisterInstallationPostInputModelOtherProperties | Unset = (
-        UNSET
-    )
+    other_properties: (
+        InstallationUnregisterInstallationPostInputModelOtherPropertiesType0 | None | Unset
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.installation_unregister_installation_post_input_model_other_properties import (
-            InstallationUnregisterInstallationPostInputModelOtherProperties,
+        from ..models.installation_unregister_installation_post_input_model_other_properties_type_0 import (
+            InstallationUnregisterInstallationPostInputModelOtherPropertiesType0,
         )
 
-        other_properties: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.other_properties, Unset):
+        other_properties: dict[str, Any] | None | Unset
+        if isinstance(self.other_properties, Unset):
+            other_properties = UNSET
+        elif isinstance(
+            self.other_properties,
+            InstallationUnregisterInstallationPostInputModelOtherPropertiesType0,
+        ):
             other_properties = self.other_properties.to_dict()
+        else:
+            other_properties = self.other_properties
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,21 +58,37 @@ class InstallationUnregisterInstallationPostInputModel:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.installation_unregister_installation_post_input_model_other_properties import (
-            InstallationUnregisterInstallationPostInputModelOtherProperties,
+        from ..models.installation_unregister_installation_post_input_model_other_properties_type_0 import (
+            InstallationUnregisterInstallationPostInputModelOtherPropertiesType0,
         )
 
         d = dict(src_dict)
-        _other_properties = d.pop("otherProperties", UNSET)
-        other_properties: InstallationUnregisterInstallationPostInputModelOtherProperties | Unset
-        if isinstance(_other_properties, Unset):
-            other_properties = UNSET
-        else:
-            other_properties = (
-                InstallationUnregisterInstallationPostInputModelOtherProperties.from_dict(
-                    _other_properties
+
+        def _parse_other_properties(
+            data: object,
+        ) -> InstallationUnregisterInstallationPostInputModelOtherPropertiesType0 | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                other_properties_type_0 = (
+                    InstallationUnregisterInstallationPostInputModelOtherPropertiesType0.from_dict(
+                        data
+                    )
                 )
+
+                return other_properties_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(
+                InstallationUnregisterInstallationPostInputModelOtherPropertiesType0 | None | Unset,
+                data,
             )
+
+        other_properties = _parse_other_properties(d.pop("otherProperties", UNSET))
 
         installation_unregister_installation_post_input_model = cls(
             other_properties=other_properties,

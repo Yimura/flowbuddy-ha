@@ -12,8 +12,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-    from ..models.hvac_set_heat_temperature_post_input_model_other_properties import (
-        HVACSetHeatTemperaturePostInputModelOtherProperties,
+    from ..models.hvac_set_heat_temperature_post_input_model_other_properties_type_0 import (
+        HVACSetHeatTemperaturePostInputModelOtherPropertiesType0,
     )
 
 
@@ -24,24 +24,36 @@ T = TypeVar("T", bound="HVACSetHeatTemperaturePostInputModel")
 class HVACSetHeatTemperaturePostInputModel:
     """
     Attributes:
-        value (float | Unset):
-        other_properties (HVACSetHeatTemperaturePostInputModelOtherProperties | Unset):
+        value (float | None | Unset):
+        other_properties (HVACSetHeatTemperaturePostInputModelOtherPropertiesType0 | None | Unset):
     """
 
-    value: float | Unset = UNSET
-    other_properties: HVACSetHeatTemperaturePostInputModelOtherProperties | Unset = UNSET
+    value: float | None | Unset = UNSET
+    other_properties: HVACSetHeatTemperaturePostInputModelOtherPropertiesType0 | None | Unset = (
+        UNSET
+    )
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.hvac_set_heat_temperature_post_input_model_other_properties import (
-            HVACSetHeatTemperaturePostInputModelOtherProperties,
+        from ..models.hvac_set_heat_temperature_post_input_model_other_properties_type_0 import (
+            HVACSetHeatTemperaturePostInputModelOtherPropertiesType0,
         )
 
-        value = self.value
+        value: float | None | Unset
+        if isinstance(self.value, Unset):
+            value = UNSET
+        else:
+            value = self.value
 
-        other_properties: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.other_properties, Unset):
+        other_properties: dict[str, Any] | None | Unset
+        if isinstance(self.other_properties, Unset):
+            other_properties = UNSET
+        elif isinstance(
+            self.other_properties, HVACSetHeatTemperaturePostInputModelOtherPropertiesType0
+        ):
             other_properties = self.other_properties.to_dict()
+        else:
+            other_properties = self.other_properties
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -55,21 +67,43 @@ class HVACSetHeatTemperaturePostInputModel:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.hvac_set_heat_temperature_post_input_model_other_properties import (
-            HVACSetHeatTemperaturePostInputModelOtherProperties,
+        from ..models.hvac_set_heat_temperature_post_input_model_other_properties_type_0 import (
+            HVACSetHeatTemperaturePostInputModelOtherPropertiesType0,
         )
 
         d = dict(src_dict)
-        value = d.pop("value", UNSET)
 
-        _other_properties = d.pop("otherProperties", UNSET)
-        other_properties: HVACSetHeatTemperaturePostInputModelOtherProperties | Unset
-        if isinstance(_other_properties, Unset):
-            other_properties = UNSET
-        else:
-            other_properties = HVACSetHeatTemperaturePostInputModelOtherProperties.from_dict(
-                _other_properties
+        def _parse_value(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
+
+        value = _parse_value(d.pop("value", UNSET))
+
+        def _parse_other_properties(
+            data: object,
+        ) -> HVACSetHeatTemperaturePostInputModelOtherPropertiesType0 | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                other_properties_type_0 = (
+                    HVACSetHeatTemperaturePostInputModelOtherPropertiesType0.from_dict(data)
+                )
+
+                return other_properties_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(
+                HVACSetHeatTemperaturePostInputModelOtherPropertiesType0 | None | Unset, data
             )
+
+        other_properties = _parse_other_properties(d.pop("otherProperties", UNSET))
 
         hvac_set_heat_temperature_post_input_model = cls(
             value=value,

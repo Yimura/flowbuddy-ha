@@ -26,26 +26,26 @@ T = TypeVar("T", bound="EventOutputModel")
 class EventOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
+        resource_uri (None | str | Unset):
         timestamp (datetime.datetime | None | Unset):
-        description (str | Unset):
+        description (None | str | Unset):
         created_on (datetime.datetime | None | Unset):
-        external_id (str | Unset):
-        installation (InstallationReferenceModel | Unset):
-        meter (MeterReferenceModel | Unset):
-        measurement (MeasurementReferenceModel | Unset):
-        event_type (EventTypeReferenceModel | Unset):
+        external_id (None | str | Unset):
+        installation (InstallationReferenceModel | None | Unset):
+        meter (MeterReferenceModel | None | Unset):
+        measurement (MeasurementReferenceModel | None | Unset):
+        event_type (EventTypeReferenceModel | None | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
     timestamp: datetime.datetime | None | Unset = UNSET
-    description: str | Unset = UNSET
+    description: None | str | Unset = UNSET
     created_on: datetime.datetime | None | Unset = UNSET
-    external_id: str | Unset = UNSET
-    installation: InstallationReferenceModel | Unset = UNSET
-    meter: MeterReferenceModel | Unset = UNSET
-    measurement: MeasurementReferenceModel | Unset = UNSET
-    event_type: EventTypeReferenceModel | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    installation: InstallationReferenceModel | None | Unset = UNSET
+    meter: MeterReferenceModel | None | Unset = UNSET
+    measurement: MeasurementReferenceModel | None | Unset = UNSET
+    event_type: EventTypeReferenceModel | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -54,7 +54,11 @@ class EventOutputModel:
         from ..models.measurement_reference_model import MeasurementReferenceModel
         from ..models.meter_reference_model import MeterReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
         timestamp: None | str | Unset
         if isinstance(self.timestamp, Unset):
@@ -64,7 +68,11 @@ class EventOutputModel:
         else:
             timestamp = self.timestamp
 
-        description = self.description
+        description: None | str | Unset
+        if isinstance(self.description, Unset):
+            description = UNSET
+        else:
+            description = self.description
 
         created_on: None | str | Unset
         if isinstance(self.created_on, Unset):
@@ -74,23 +82,43 @@ class EventOutputModel:
         else:
             created_on = self.created_on
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        installation: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.installation, Unset):
+        installation: dict[str, Any] | None | Unset
+        if isinstance(self.installation, Unset):
+            installation = UNSET
+        elif isinstance(self.installation, InstallationReferenceModel):
             installation = self.installation.to_dict()
+        else:
+            installation = self.installation
 
-        meter: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.meter, Unset):
+        meter: dict[str, Any] | None | Unset
+        if isinstance(self.meter, Unset):
+            meter = UNSET
+        elif isinstance(self.meter, MeterReferenceModel):
             meter = self.meter.to_dict()
+        else:
+            meter = self.meter
 
-        measurement: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.measurement, Unset):
+        measurement: dict[str, Any] | None | Unset
+        if isinstance(self.measurement, Unset):
+            measurement = UNSET
+        elif isinstance(self.measurement, MeasurementReferenceModel):
             measurement = self.measurement.to_dict()
+        else:
+            measurement = self.measurement
 
-        event_type: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.event_type, Unset):
+        event_type: dict[str, Any] | None | Unset
+        if isinstance(self.event_type, Unset):
+            event_type = UNSET
+        elif isinstance(self.event_type, EventTypeReferenceModel):
             event_type = self.event_type.to_dict()
+        else:
+            event_type = self.event_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -124,7 +152,15 @@ class EventOutputModel:
         from ..models.meter_reference_model import MeterReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
+
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
         def _parse_timestamp(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -143,7 +179,14 @@ class EventOutputModel:
 
         timestamp = _parse_timestamp(d.pop("timestamp", UNSET))
 
-        description = d.pop("description", UNSET)
+        def _parse_description(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        description = _parse_description(d.pop("description", UNSET))
 
         def _parse_created_on(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -162,35 +205,82 @@ class EventOutputModel:
 
         created_on = _parse_created_on(d.pop("createdOn", UNSET))
 
-        external_id = d.pop("externalId", UNSET)
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _installation = d.pop("installation", UNSET)
-        installation: InstallationReferenceModel | Unset
-        if isinstance(_installation, Unset):
-            installation = UNSET
-        else:
-            installation = InstallationReferenceModel.from_dict(_installation)
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
 
-        _meter = d.pop("meter", UNSET)
-        meter: MeterReferenceModel | Unset
-        if isinstance(_meter, Unset):
-            meter = UNSET
-        else:
-            meter = MeterReferenceModel.from_dict(_meter)
+        def _parse_installation(data: object) -> InstallationReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                installation_type_1 = InstallationReferenceModel.from_dict(data)
 
-        _measurement = d.pop("measurement", UNSET)
-        measurement: MeasurementReferenceModel | Unset
-        if isinstance(_measurement, Unset):
-            measurement = UNSET
-        else:
-            measurement = MeasurementReferenceModel.from_dict(_measurement)
+                return installation_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(InstallationReferenceModel | None | Unset, data)
 
-        _event_type = d.pop("eventType", UNSET)
-        event_type: EventTypeReferenceModel | Unset
-        if isinstance(_event_type, Unset):
-            event_type = UNSET
-        else:
-            event_type = EventTypeReferenceModel.from_dict(_event_type)
+        installation = _parse_installation(d.pop("installation", UNSET))
+
+        def _parse_meter(data: object) -> MeterReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                meter_type_1 = MeterReferenceModel.from_dict(data)
+
+                return meter_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(MeterReferenceModel | None | Unset, data)
+
+        meter = _parse_meter(d.pop("meter", UNSET))
+
+        def _parse_measurement(data: object) -> MeasurementReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                measurement_type_1 = MeasurementReferenceModel.from_dict(data)
+
+                return measurement_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(MeasurementReferenceModel | None | Unset, data)
+
+        measurement = _parse_measurement(d.pop("measurement", UNSET))
+
+        def _parse_event_type(data: object) -> EventTypeReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                event_type_type_1 = EventTypeReferenceModel.from_dict(data)
+
+                return event_type_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(EventTypeReferenceModel | None | Unset, data)
+
+        event_type = _parse_event_type(d.pop("eventType", UNSET))
 
         event_output_model = cls(
             resource_uri=resource_uri,

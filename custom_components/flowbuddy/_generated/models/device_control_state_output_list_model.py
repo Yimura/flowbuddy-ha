@@ -22,21 +22,26 @@ T = TypeVar("T", bound="DeviceControlStateOutputListModel")
 class DeviceControlStateOutputListModel:
     """
     Attributes:
-        device_control_states (list[DeviceControlStateOutputModel] | Unset):
+        device_control_states (list[DeviceControlStateOutputModel] | None | Unset):
     """
 
-    device_control_states: list[DeviceControlStateOutputModel] | Unset = UNSET
+    device_control_states: list[DeviceControlStateOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.device_control_state_output_model import DeviceControlStateOutputModel
 
-        device_control_states: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.device_control_states, Unset):
+        device_control_states: list[dict[str, Any]] | None | Unset
+        if isinstance(self.device_control_states, Unset):
+            device_control_states = UNSET
+        elif isinstance(self.device_control_states, list):
             device_control_states = []
-            for device_control_states_item_data in self.device_control_states:
-                device_control_states_item = device_control_states_item_data.to_dict()
-                device_control_states.append(device_control_states_item)
+            for device_control_states_type_0_item_data in self.device_control_states:
+                device_control_states_type_0_item = device_control_states_type_0_item_data.to_dict()
+                device_control_states.append(device_control_states_type_0_item)
+
+        else:
+            device_control_states = self.device_control_states
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,16 +56,32 @@ class DeviceControlStateOutputListModel:
         from ..models.device_control_state_output_model import DeviceControlStateOutputModel
 
         d = dict(src_dict)
-        _device_control_states = d.pop("deviceControlStates", UNSET)
-        device_control_states: list[DeviceControlStateOutputModel] | Unset = UNSET
-        if _device_control_states is not UNSET:
-            device_control_states = []
-            for device_control_states_item_data in _device_control_states:
-                device_control_states_item = DeviceControlStateOutputModel.from_dict(
-                    device_control_states_item_data
-                )
 
-                device_control_states.append(device_control_states_item)
+        def _parse_device_control_states(
+            data: object,
+        ) -> list[DeviceControlStateOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                device_control_states_type_0 = []
+                _device_control_states_type_0 = data
+                for device_control_states_type_0_item_data in _device_control_states_type_0:
+                    device_control_states_type_0_item = DeviceControlStateOutputModel.from_dict(
+                        device_control_states_type_0_item_data
+                    )
+
+                    device_control_states_type_0.append(device_control_states_type_0_item)
+
+                return device_control_states_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[DeviceControlStateOutputModel] | None | Unset, data)
+
+        device_control_states = _parse_device_control_states(d.pop("deviceControlStates", UNSET))
 
         device_control_state_output_list_model = cls(
             device_control_states=device_control_states,

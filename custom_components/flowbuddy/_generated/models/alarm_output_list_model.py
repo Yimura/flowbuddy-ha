@@ -22,21 +22,26 @@ T = TypeVar("T", bound="AlarmOutputListModel")
 class AlarmOutputListModel:
     """
     Attributes:
-        alarms (list[AlarmOutputModel] | Unset):
+        alarms (list[AlarmOutputModel] | None | Unset):
     """
 
-    alarms: list[AlarmOutputModel] | Unset = UNSET
+    alarms: list[AlarmOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.alarm_output_model import AlarmOutputModel
 
-        alarms: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.alarms, Unset):
+        alarms: list[dict[str, Any]] | None | Unset
+        if isinstance(self.alarms, Unset):
+            alarms = UNSET
+        elif isinstance(self.alarms, list):
             alarms = []
-            for alarms_item_data in self.alarms:
-                alarms_item = alarms_item_data.to_dict()
-                alarms.append(alarms_item)
+            for alarms_type_0_item_data in self.alarms:
+                alarms_type_0_item = alarms_type_0_item_data.to_dict()
+                alarms.append(alarms_type_0_item)
+
+        else:
+            alarms = self.alarms
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,14 +56,28 @@ class AlarmOutputListModel:
         from ..models.alarm_output_model import AlarmOutputModel
 
         d = dict(src_dict)
-        _alarms = d.pop("alarms", UNSET)
-        alarms: list[AlarmOutputModel] | Unset = UNSET
-        if _alarms is not UNSET:
-            alarms = []
-            for alarms_item_data in _alarms:
-                alarms_item = AlarmOutputModel.from_dict(alarms_item_data)
 
-                alarms.append(alarms_item)
+        def _parse_alarms(data: object) -> list[AlarmOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                alarms_type_0 = []
+                _alarms_type_0 = data
+                for alarms_type_0_item_data in _alarms_type_0:
+                    alarms_type_0_item = AlarmOutputModel.from_dict(alarms_type_0_item_data)
+
+                    alarms_type_0.append(alarms_type_0_item)
+
+                return alarms_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[AlarmOutputModel] | None | Unset, data)
+
+        alarms = _parse_alarms(d.pop("alarms", UNSET))
 
         alarm_output_list_model = cls(
             alarms=alarms,

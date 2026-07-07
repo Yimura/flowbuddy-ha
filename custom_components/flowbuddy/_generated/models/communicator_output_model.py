@@ -24,45 +24,57 @@ T = TypeVar("T", bound="CommunicatorOutputModel")
 class CommunicatorOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
-        logical_device_name (str | Unset): Unique identifier of communicator
-        firm_ware_version (str | Unset): Version of the firmware of the device
+        resource_uri (None | str | Unset):
+        logical_device_name (None | str | Unset): Unique identifier of communicator
+        firm_ware_version (None | str | Unset): Version of the firmware of the device
         first_registered_on (datetime.datetime | None | Unset): Time the device was first registered
-        status (str | Unset): Status of registration
+        status (None | str | Unset): Status of registration
         last_successful_polling_on (datetime.datetime | None | Unset): Time of last successful polling of the device
-        last_polling_result (str | Unset): Result of last data retrieval
+        last_polling_result (None | str | Unset): Result of last data retrieval
         last_successful_communication_on (datetime.datetime | None | Unset): Time of last successful communication
         last_communication_attempt_on (datetime.datetime | None | Unset): Time of last communication attempt
         last_time_sync (datetime.datetime | None | Unset): Last time synchronisation
-        external_id (str | Unset):
-        type_ (CommunicatorTypeReferenceModel | Unset):
-        sim (SimReferenceModel | Unset): Connection which can be used for network communication
+        external_id (None | str | Unset):
+        type_ (CommunicatorTypeReferenceModel | None | Unset):
+        sim (None | SimReferenceModel | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
-    logical_device_name: str | Unset = UNSET
-    firm_ware_version: str | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
+    logical_device_name: None | str | Unset = UNSET
+    firm_ware_version: None | str | Unset = UNSET
     first_registered_on: datetime.datetime | None | Unset = UNSET
-    status: str | Unset = UNSET
+    status: None | str | Unset = UNSET
     last_successful_polling_on: datetime.datetime | None | Unset = UNSET
-    last_polling_result: str | Unset = UNSET
+    last_polling_result: None | str | Unset = UNSET
     last_successful_communication_on: datetime.datetime | None | Unset = UNSET
     last_communication_attempt_on: datetime.datetime | None | Unset = UNSET
     last_time_sync: datetime.datetime | None | Unset = UNSET
-    external_id: str | Unset = UNSET
-    type_: CommunicatorTypeReferenceModel | Unset = UNSET
-    sim: SimReferenceModel | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    type_: CommunicatorTypeReferenceModel | None | Unset = UNSET
+    sim: None | SimReferenceModel | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.communicator_type_reference_model import CommunicatorTypeReferenceModel
         from ..models.sim_reference_model import SimReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
-        logical_device_name = self.logical_device_name
+        logical_device_name: None | str | Unset
+        if isinstance(self.logical_device_name, Unset):
+            logical_device_name = UNSET
+        else:
+            logical_device_name = self.logical_device_name
 
-        firm_ware_version = self.firm_ware_version
+        firm_ware_version: None | str | Unset
+        if isinstance(self.firm_ware_version, Unset):
+            firm_ware_version = UNSET
+        else:
+            firm_ware_version = self.firm_ware_version
 
         first_registered_on: None | str | Unset
         if isinstance(self.first_registered_on, Unset):
@@ -72,7 +84,11 @@ class CommunicatorOutputModel:
         else:
             first_registered_on = self.first_registered_on
 
-        status = self.status
+        status: None | str | Unset
+        if isinstance(self.status, Unset):
+            status = UNSET
+        else:
+            status = self.status
 
         last_successful_polling_on: None | str | Unset
         if isinstance(self.last_successful_polling_on, Unset):
@@ -82,7 +98,11 @@ class CommunicatorOutputModel:
         else:
             last_successful_polling_on = self.last_successful_polling_on
 
-        last_polling_result = self.last_polling_result
+        last_polling_result: None | str | Unset
+        if isinstance(self.last_polling_result, Unset):
+            last_polling_result = UNSET
+        else:
+            last_polling_result = self.last_polling_result
 
         last_successful_communication_on: None | str | Unset
         if isinstance(self.last_successful_communication_on, Unset):
@@ -108,15 +128,27 @@ class CommunicatorOutputModel:
         else:
             last_time_sync = self.last_time_sync
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        type_: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.type_, Unset):
+        type_: dict[str, Any] | None | Unset
+        if isinstance(self.type_, Unset):
+            type_ = UNSET
+        elif isinstance(self.type_, CommunicatorTypeReferenceModel):
             type_ = self.type_.to_dict()
+        else:
+            type_ = self.type_
 
-        sim: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.sim, Unset):
+        sim: dict[str, Any] | None | Unset
+        if isinstance(self.sim, Unset):
+            sim = UNSET
+        elif isinstance(self.sim, SimReferenceModel):
             sim = self.sim.to_dict()
+        else:
+            sim = self.sim
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -156,11 +188,33 @@ class CommunicatorOutputModel:
         from ..models.sim_reference_model import SimReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
 
-        logical_device_name = d.pop("logicalDeviceName", UNSET)
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        firm_ware_version = d.pop("firmWareVersion", UNSET)
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
+
+        def _parse_logical_device_name(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        logical_device_name = _parse_logical_device_name(d.pop("logicalDeviceName", UNSET))
+
+        def _parse_firm_ware_version(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        firm_ware_version = _parse_firm_ware_version(d.pop("firmWareVersion", UNSET))
 
         def _parse_first_registered_on(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -179,7 +233,14 @@ class CommunicatorOutputModel:
 
         first_registered_on = _parse_first_registered_on(d.pop("firstRegisteredOn", UNSET))
 
-        status = d.pop("status", UNSET)
+        def _parse_status(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        status = _parse_status(d.pop("status", UNSET))
 
         def _parse_last_successful_polling_on(data: object) -> datetime.datetime | None | Unset:
             if data is None:
@@ -200,7 +261,14 @@ class CommunicatorOutputModel:
             d.pop("lastSuccessfulPollingOn", UNSET)
         )
 
-        last_polling_result = d.pop("lastPollingResult", UNSET)
+        def _parse_last_polling_result(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        last_polling_result = _parse_last_polling_result(d.pop("lastPollingResult", UNSET))
 
         def _parse_last_successful_communication_on(
             data: object,
@@ -259,21 +327,48 @@ class CommunicatorOutputModel:
 
         last_time_sync = _parse_last_time_sync(d.pop("lastTimeSync", UNSET))
 
-        external_id = d.pop("externalId", UNSET)
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        _type_ = d.pop("type", UNSET)
-        type_: CommunicatorTypeReferenceModel | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = CommunicatorTypeReferenceModel.from_dict(_type_)
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
 
-        _sim = d.pop("sim", UNSET)
-        sim: SimReferenceModel | Unset
-        if isinstance(_sim, Unset):
-            sim = UNSET
-        else:
-            sim = SimReferenceModel.from_dict(_sim)
+        def _parse_type_(data: object) -> CommunicatorTypeReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                type_type_1 = CommunicatorTypeReferenceModel.from_dict(data)
+
+                return type_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(CommunicatorTypeReferenceModel | None | Unset, data)
+
+        type_ = _parse_type_(d.pop("type", UNSET))
+
+        def _parse_sim(data: object) -> None | SimReferenceModel | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                sim_type_1 = SimReferenceModel.from_dict(data)
+
+                return sim_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(None | SimReferenceModel | Unset, data)
+
+        sim = _parse_sim(d.pop("sim", UNSET))
 
         communicator_output_model = cls(
             resource_uri=resource_uri,

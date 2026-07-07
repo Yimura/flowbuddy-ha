@@ -22,21 +22,26 @@ T = TypeVar("T", bound="ControlSignalOutputListModel")
 class ControlSignalOutputListModel:
     """
     Attributes:
-        control_signals (list[ControlSignalOutputModel] | Unset):
+        control_signals (list[ControlSignalOutputModel] | None | Unset):
     """
 
-    control_signals: list[ControlSignalOutputModel] | Unset = UNSET
+    control_signals: list[ControlSignalOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.control_signal_output_model import ControlSignalOutputModel
 
-        control_signals: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.control_signals, Unset):
+        control_signals: list[dict[str, Any]] | None | Unset
+        if isinstance(self.control_signals, Unset):
+            control_signals = UNSET
+        elif isinstance(self.control_signals, list):
             control_signals = []
-            for control_signals_item_data in self.control_signals:
-                control_signals_item = control_signals_item_data.to_dict()
-                control_signals.append(control_signals_item)
+            for control_signals_type_0_item_data in self.control_signals:
+                control_signals_type_0_item = control_signals_type_0_item_data.to_dict()
+                control_signals.append(control_signals_type_0_item)
+
+        else:
+            control_signals = self.control_signals
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,14 +56,30 @@ class ControlSignalOutputListModel:
         from ..models.control_signal_output_model import ControlSignalOutputModel
 
         d = dict(src_dict)
-        _control_signals = d.pop("controlSignals", UNSET)
-        control_signals: list[ControlSignalOutputModel] | Unset = UNSET
-        if _control_signals is not UNSET:
-            control_signals = []
-            for control_signals_item_data in _control_signals:
-                control_signals_item = ControlSignalOutputModel.from_dict(control_signals_item_data)
 
-                control_signals.append(control_signals_item)
+        def _parse_control_signals(data: object) -> list[ControlSignalOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                control_signals_type_0 = []
+                _control_signals_type_0 = data
+                for control_signals_type_0_item_data in _control_signals_type_0:
+                    control_signals_type_0_item = ControlSignalOutputModel.from_dict(
+                        control_signals_type_0_item_data
+                    )
+
+                    control_signals_type_0.append(control_signals_type_0_item)
+
+                return control_signals_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[ControlSignalOutputModel] | None | Unset, data)
+
+        control_signals = _parse_control_signals(d.pop("controlSignals", UNSET))
 
         control_signal_output_list_model = cls(
             control_signals=control_signals,

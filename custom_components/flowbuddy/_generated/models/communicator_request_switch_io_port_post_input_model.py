@@ -12,8 +12,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-    from ..models.communicator_request_switch_io_port_post_input_model_other_properties import (
-        CommunicatorRequestSwitchIoPortPostInputModelOtherProperties,
+    from ..models.communicator_request_switch_io_port_post_input_model_other_properties_type_0 import (
+        CommunicatorRequestSwitchIoPortPostInputModelOtherPropertiesType0,
     )
 
 
@@ -24,28 +24,44 @@ T = TypeVar("T", bound="CommunicatorRequestSwitchIoPortPostInputModel")
 class CommunicatorRequestSwitchIoPortPostInputModel:
     """
     Attributes:
-        port (int | Unset):
-        port_on (bool | Unset):
-        other_properties (CommunicatorRequestSwitchIoPortPostInputModelOtherProperties | Unset):
+        port (int | None | Unset):
+        port_on (bool | None | Unset):
+        other_properties (CommunicatorRequestSwitchIoPortPostInputModelOtherPropertiesType0 | None | Unset):
     """
 
-    port: int | Unset = UNSET
-    port_on: bool | Unset = UNSET
-    other_properties: CommunicatorRequestSwitchIoPortPostInputModelOtherProperties | Unset = UNSET
+    port: int | None | Unset = UNSET
+    port_on: bool | None | Unset = UNSET
+    other_properties: (
+        CommunicatorRequestSwitchIoPortPostInputModelOtherPropertiesType0 | None | Unset
+    ) = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.communicator_request_switch_io_port_post_input_model_other_properties import (
-            CommunicatorRequestSwitchIoPortPostInputModelOtherProperties,
+        from ..models.communicator_request_switch_io_port_post_input_model_other_properties_type_0 import (
+            CommunicatorRequestSwitchIoPortPostInputModelOtherPropertiesType0,
         )
 
-        port = self.port
+        port: int | None | Unset
+        if isinstance(self.port, Unset):
+            port = UNSET
+        else:
+            port = self.port
 
-        port_on = self.port_on
+        port_on: bool | None | Unset
+        if isinstance(self.port_on, Unset):
+            port_on = UNSET
+        else:
+            port_on = self.port_on
 
-        other_properties: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.other_properties, Unset):
+        other_properties: dict[str, Any] | None | Unset
+        if isinstance(self.other_properties, Unset):
+            other_properties = UNSET
+        elif isinstance(
+            self.other_properties, CommunicatorRequestSwitchIoPortPostInputModelOtherPropertiesType0
+        ):
             other_properties = self.other_properties.to_dict()
+        else:
+            other_properties = self.other_properties
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -61,25 +77,55 @@ class CommunicatorRequestSwitchIoPortPostInputModel:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.communicator_request_switch_io_port_post_input_model_other_properties import (
-            CommunicatorRequestSwitchIoPortPostInputModelOtherProperties,
+        from ..models.communicator_request_switch_io_port_post_input_model_other_properties_type_0 import (
+            CommunicatorRequestSwitchIoPortPostInputModelOtherPropertiesType0,
         )
 
         d = dict(src_dict)
-        port = d.pop("port", UNSET)
 
-        port_on = d.pop("portOn", UNSET)
+        def _parse_port(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
 
-        _other_properties = d.pop("otherProperties", UNSET)
-        other_properties: CommunicatorRequestSwitchIoPortPostInputModelOtherProperties | Unset
-        if isinstance(_other_properties, Unset):
-            other_properties = UNSET
-        else:
-            other_properties = (
-                CommunicatorRequestSwitchIoPortPostInputModelOtherProperties.from_dict(
-                    _other_properties
+        port = _parse_port(d.pop("port", UNSET))
+
+        def _parse_port_on(data: object) -> bool | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(bool | None | Unset, data)
+
+        port_on = _parse_port_on(d.pop("portOn", UNSET))
+
+        def _parse_other_properties(
+            data: object,
+        ) -> CommunicatorRequestSwitchIoPortPostInputModelOtherPropertiesType0 | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                other_properties_type_0 = (
+                    CommunicatorRequestSwitchIoPortPostInputModelOtherPropertiesType0.from_dict(
+                        data
+                    )
                 )
+
+                return other_properties_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(
+                CommunicatorRequestSwitchIoPortPostInputModelOtherPropertiesType0 | None | Unset,
+                data,
             )
+
+        other_properties = _parse_other_properties(d.pop("otherProperties", UNSET))
 
         communicator_request_switch_io_port_post_input_model = cls(
             port=port,

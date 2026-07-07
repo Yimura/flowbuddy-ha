@@ -9,6 +9,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import cast
 
 
 T = TypeVar("T", bound="CreatedResponse")
@@ -18,14 +19,18 @@ T = TypeVar("T", bound="CreatedResponse")
 class CreatedResponse:
     """
     Attributes:
-        id (str | Unset):
+        id (None | str | Unset):
     """
 
-    id: str | Unset = UNSET
+    id: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        id = self.id
+        id: None | str | Unset
+        if isinstance(self.id, Unset):
+            id = UNSET
+        else:
+            id = self.id
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -38,7 +43,15 @@ class CreatedResponse:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        id = d.pop("id", UNSET)
+
+        def _parse_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        id = _parse_id(d.pop("id", UNSET))
 
         created_response = cls(
             id=id,

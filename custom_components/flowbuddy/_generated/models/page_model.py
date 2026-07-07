@@ -9,6 +9,7 @@ from attrs import field as _attrs_field
 from ..types import UNSET, Unset
 
 from ..types import UNSET, Unset
+from typing import cast
 
 
 T = TypeVar("T", bound="PageModel")
@@ -18,26 +19,42 @@ T = TypeVar("T", bound="PageModel")
 class PageModel:
     """
     Attributes:
-        size (int | Unset):
-        total_elements (int | Unset):
-        total_pages (int | Unset):
-        number (int | Unset):
+        size (int | None | Unset):
+        total_elements (int | None | Unset):
+        total_pages (int | None | Unset):
+        number (int | None | Unset):
     """
 
-    size: int | Unset = UNSET
-    total_elements: int | Unset = UNSET
-    total_pages: int | Unset = UNSET
-    number: int | Unset = UNSET
+    size: int | None | Unset = UNSET
+    total_elements: int | None | Unset = UNSET
+    total_pages: int | None | Unset = UNSET
+    number: int | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        size = self.size
+        size: int | None | Unset
+        if isinstance(self.size, Unset):
+            size = UNSET
+        else:
+            size = self.size
 
-        total_elements = self.total_elements
+        total_elements: int | None | Unset
+        if isinstance(self.total_elements, Unset):
+            total_elements = UNSET
+        else:
+            total_elements = self.total_elements
 
-        total_pages = self.total_pages
+        total_pages: int | None | Unset
+        if isinstance(self.total_pages, Unset):
+            total_pages = UNSET
+        else:
+            total_pages = self.total_pages
 
-        number = self.number
+        number: int | None | Unset
+        if isinstance(self.number, Unset):
+            number = UNSET
+        else:
+            number = self.number
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -56,13 +73,42 @@ class PageModel:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        size = d.pop("size", UNSET)
 
-        total_elements = d.pop("totalElements", UNSET)
+        def _parse_size(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
 
-        total_pages = d.pop("totalPages", UNSET)
+        size = _parse_size(d.pop("size", UNSET))
 
-        number = d.pop("number", UNSET)
+        def _parse_total_elements(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
+
+        total_elements = _parse_total_elements(d.pop("totalElements", UNSET))
+
+        def _parse_total_pages(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
+
+        total_pages = _parse_total_pages(d.pop("totalPages", UNSET))
+
+        def _parse_number(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
+
+        number = _parse_number(d.pop("number", UNSET))
 
         page_model = cls(
             size=size,

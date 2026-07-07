@@ -22,21 +22,26 @@ T = TypeVar("T", bound="MeasurementOutputListModel")
 class MeasurementOutputListModel:
     """
     Attributes:
-        measurements (list[MeasurementOutputModel] | Unset):
+        measurements (list[MeasurementOutputModel] | None | Unset):
     """
 
-    measurements: list[MeasurementOutputModel] | Unset = UNSET
+    measurements: list[MeasurementOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.measurement_output_model import MeasurementOutputModel
 
-        measurements: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.measurements, Unset):
+        measurements: list[dict[str, Any]] | None | Unset
+        if isinstance(self.measurements, Unset):
+            measurements = UNSET
+        elif isinstance(self.measurements, list):
             measurements = []
-            for measurements_item_data in self.measurements:
-                measurements_item = measurements_item_data.to_dict()
-                measurements.append(measurements_item)
+            for measurements_type_0_item_data in self.measurements:
+                measurements_type_0_item = measurements_type_0_item_data.to_dict()
+                measurements.append(measurements_type_0_item)
+
+        else:
+            measurements = self.measurements
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,14 +56,30 @@ class MeasurementOutputListModel:
         from ..models.measurement_output_model import MeasurementOutputModel
 
         d = dict(src_dict)
-        _measurements = d.pop("measurements", UNSET)
-        measurements: list[MeasurementOutputModel] | Unset = UNSET
-        if _measurements is not UNSET:
-            measurements = []
-            for measurements_item_data in _measurements:
-                measurements_item = MeasurementOutputModel.from_dict(measurements_item_data)
 
-                measurements.append(measurements_item)
+        def _parse_measurements(data: object) -> list[MeasurementOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                measurements_type_0 = []
+                _measurements_type_0 = data
+                for measurements_type_0_item_data in _measurements_type_0:
+                    measurements_type_0_item = MeasurementOutputModel.from_dict(
+                        measurements_type_0_item_data
+                    )
+
+                    measurements_type_0.append(measurements_type_0_item)
+
+                return measurements_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[MeasurementOutputModel] | None | Unset, data)
+
+        measurements = _parse_measurements(d.pop("measurements", UNSET))
 
         measurement_output_list_model = cls(
             measurements=measurements,

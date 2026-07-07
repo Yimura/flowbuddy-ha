@@ -12,8 +12,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-    from ..models.installation_type_patch_input_model_other_properties import (
-        InstallationTypePatchInputModelOtherProperties,
+    from ..models.installation_type_patch_input_model_other_properties_type_0 import (
+        InstallationTypePatchInputModelOtherPropertiesType0,
     )
 
 
@@ -24,24 +24,32 @@ T = TypeVar("T", bound="InstallationTypePatchInputModel")
 class InstallationTypePatchInputModel:
     """
     Attributes:
-        name (str | Unset):
-        other_properties (InstallationTypePatchInputModelOtherProperties | Unset):
+        name (None | str | Unset):
+        other_properties (InstallationTypePatchInputModelOtherPropertiesType0 | None | Unset):
     """
 
-    name: str | Unset = UNSET
-    other_properties: InstallationTypePatchInputModelOtherProperties | Unset = UNSET
+    name: None | str | Unset = UNSET
+    other_properties: InstallationTypePatchInputModelOtherPropertiesType0 | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.installation_type_patch_input_model_other_properties import (
-            InstallationTypePatchInputModelOtherProperties,
+        from ..models.installation_type_patch_input_model_other_properties_type_0 import (
+            InstallationTypePatchInputModelOtherPropertiesType0,
         )
 
-        name = self.name
+        name: None | str | Unset
+        if isinstance(self.name, Unset):
+            name = UNSET
+        else:
+            name = self.name
 
-        other_properties: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.other_properties, Unset):
+        other_properties: dict[str, Any] | None | Unset
+        if isinstance(self.other_properties, Unset):
+            other_properties = UNSET
+        elif isinstance(self.other_properties, InstallationTypePatchInputModelOtherPropertiesType0):
             other_properties = self.other_properties.to_dict()
+        else:
+            other_properties = self.other_properties
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -55,21 +63,41 @@ class InstallationTypePatchInputModel:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.installation_type_patch_input_model_other_properties import (
-            InstallationTypePatchInputModelOtherProperties,
+        from ..models.installation_type_patch_input_model_other_properties_type_0 import (
+            InstallationTypePatchInputModelOtherPropertiesType0,
         )
 
         d = dict(src_dict)
-        name = d.pop("name", UNSET)
 
-        _other_properties = d.pop("otherProperties", UNSET)
-        other_properties: InstallationTypePatchInputModelOtherProperties | Unset
-        if isinstance(_other_properties, Unset):
-            other_properties = UNSET
-        else:
-            other_properties = InstallationTypePatchInputModelOtherProperties.from_dict(
-                _other_properties
-            )
+        def _parse_name(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        name = _parse_name(d.pop("name", UNSET))
+
+        def _parse_other_properties(
+            data: object,
+        ) -> InstallationTypePatchInputModelOtherPropertiesType0 | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                other_properties_type_0 = (
+                    InstallationTypePatchInputModelOtherPropertiesType0.from_dict(data)
+                )
+
+                return other_properties_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(InstallationTypePatchInputModelOtherPropertiesType0 | None | Unset, data)
+
+        other_properties = _parse_other_properties(d.pop("otherProperties", UNSET))
 
         installation_type_patch_input_model = cls(
             name=name,

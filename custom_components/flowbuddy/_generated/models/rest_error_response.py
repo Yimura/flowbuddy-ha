@@ -12,7 +12,7 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-    from ..models.rest_error_response_extra_info import RestErrorResponseExtraInfo
+    from ..models.rest_error_response_extra_info_type_0 import RestErrorResponseExtraInfoType0
 
 
 T = TypeVar("T", bound="RestErrorResponse")
@@ -22,38 +22,62 @@ T = TypeVar("T", bound="RestErrorResponse")
 class RestErrorResponse:
     """
     Attributes:
-        type_ (str | Unset):
-        title (str | Unset):
-        status (int | Unset):
-        identifier (str | Unset):
-        code (str | Unset):
-        extra_info (RestErrorResponseExtraInfo | Unset):
+        type_ (None | str | Unset):
+        title (None | str | Unset):
+        status (int | None | Unset):
+        identifier (None | str | Unset):
+        code (None | str | Unset):
+        extra_info (None | RestErrorResponseExtraInfoType0 | Unset):
     """
 
-    type_: str | Unset = UNSET
-    title: str | Unset = UNSET
-    status: int | Unset = UNSET
-    identifier: str | Unset = UNSET
-    code: str | Unset = UNSET
-    extra_info: RestErrorResponseExtraInfo | Unset = UNSET
+    type_: None | str | Unset = UNSET
+    title: None | str | Unset = UNSET
+    status: int | None | Unset = UNSET
+    identifier: None | str | Unset = UNSET
+    code: None | str | Unset = UNSET
+    extra_info: None | RestErrorResponseExtraInfoType0 | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.rest_error_response_extra_info import RestErrorResponseExtraInfo
+        from ..models.rest_error_response_extra_info_type_0 import RestErrorResponseExtraInfoType0
 
-        type_ = self.type_
+        type_: None | str | Unset
+        if isinstance(self.type_, Unset):
+            type_ = UNSET
+        else:
+            type_ = self.type_
 
-        title = self.title
+        title: None | str | Unset
+        if isinstance(self.title, Unset):
+            title = UNSET
+        else:
+            title = self.title
 
-        status = self.status
+        status: int | None | Unset
+        if isinstance(self.status, Unset):
+            status = UNSET
+        else:
+            status = self.status
 
-        identifier = self.identifier
+        identifier: None | str | Unset
+        if isinstance(self.identifier, Unset):
+            identifier = UNSET
+        else:
+            identifier = self.identifier
 
-        code = self.code
+        code: None | str | Unset
+        if isinstance(self.code, Unset):
+            code = UNSET
+        else:
+            code = self.code
 
-        extra_info: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.extra_info, Unset):
+        extra_info: dict[str, Any] | None | Unset
+        if isinstance(self.extra_info, Unset):
+            extra_info = UNSET
+        elif isinstance(self.extra_info, RestErrorResponseExtraInfoType0):
             extra_info = self.extra_info.to_dict()
+        else:
+            extra_info = self.extra_info
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -75,25 +99,71 @@ class RestErrorResponse:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.rest_error_response_extra_info import RestErrorResponseExtraInfo
+        from ..models.rest_error_response_extra_info_type_0 import RestErrorResponseExtraInfoType0
 
         d = dict(src_dict)
-        type_ = d.pop("type", UNSET)
 
-        title = d.pop("title", UNSET)
+        def _parse_type_(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        status = d.pop("status", UNSET)
+        type_ = _parse_type_(d.pop("type", UNSET))
 
-        identifier = d.pop("identifier", UNSET)
+        def _parse_title(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        code = d.pop("code", UNSET)
+        title = _parse_title(d.pop("title", UNSET))
 
-        _extra_info = d.pop("extraInfo", UNSET)
-        extra_info: RestErrorResponseExtraInfo | Unset
-        if isinstance(_extra_info, Unset):
-            extra_info = UNSET
-        else:
-            extra_info = RestErrorResponseExtraInfo.from_dict(_extra_info)
+        def _parse_status(data: object) -> int | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(int | None | Unset, data)
+
+        status = _parse_status(d.pop("status", UNSET))
+
+        def _parse_identifier(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        identifier = _parse_identifier(d.pop("identifier", UNSET))
+
+        def _parse_code(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        code = _parse_code(d.pop("code", UNSET))
+
+        def _parse_extra_info(data: object) -> None | RestErrorResponseExtraInfoType0 | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                extra_info_type_0 = RestErrorResponseExtraInfoType0.from_dict(data)
+
+                return extra_info_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(None | RestErrorResponseExtraInfoType0 | Unset, data)
+
+        extra_info = _parse_extra_info(d.pop("extraInfo", UNSET))
 
         rest_error_response = cls(
             type_=type_,

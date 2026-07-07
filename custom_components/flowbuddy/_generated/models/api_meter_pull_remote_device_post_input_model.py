@@ -12,8 +12,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-    from ..models.api_meter_pull_remote_device_post_input_model_other_properties import (
-        ApiMeterPullRemoteDevicePostInputModelOtherProperties,
+    from ..models.api_meter_pull_remote_device_post_input_model_other_properties_type_0 import (
+        ApiMeterPullRemoteDevicePostInputModelOtherPropertiesType0,
     )
 
 
@@ -24,32 +24,52 @@ T = TypeVar("T", bound="ApiMeterPullRemoteDevicePostInputModel")
 class ApiMeterPullRemoteDevicePostInputModel:
     """
     Attributes:
-        plant_id (str | Unset): The technical reference in the remote portal
-        api_meter_type (str | Unset): SolarEdge or Fluvius
-        api_account (str | Unset): The account to be used to connect to the API
-        other_properties (ApiMeterPullRemoteDevicePostInputModelOtherProperties | Unset):
+        plant_id (None | str | Unset): The technical reference in the remote portal
+        api_meter_type (None | str | Unset): SolarEdge or Fluvius
+        api_account (None | str | Unset): The account to be used to connect to the API
+        other_properties (ApiMeterPullRemoteDevicePostInputModelOtherPropertiesType0 | None | Unset):
     """
 
-    plant_id: str | Unset = UNSET
-    api_meter_type: str | Unset = UNSET
-    api_account: str | Unset = UNSET
-    other_properties: ApiMeterPullRemoteDevicePostInputModelOtherProperties | Unset = UNSET
+    plant_id: None | str | Unset = UNSET
+    api_meter_type: None | str | Unset = UNSET
+    api_account: None | str | Unset = UNSET
+    other_properties: ApiMeterPullRemoteDevicePostInputModelOtherPropertiesType0 | None | Unset = (
+        UNSET
+    )
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.api_meter_pull_remote_device_post_input_model_other_properties import (
-            ApiMeterPullRemoteDevicePostInputModelOtherProperties,
+        from ..models.api_meter_pull_remote_device_post_input_model_other_properties_type_0 import (
+            ApiMeterPullRemoteDevicePostInputModelOtherPropertiesType0,
         )
 
-        plant_id = self.plant_id
+        plant_id: None | str | Unset
+        if isinstance(self.plant_id, Unset):
+            plant_id = UNSET
+        else:
+            plant_id = self.plant_id
 
-        api_meter_type = self.api_meter_type
+        api_meter_type: None | str | Unset
+        if isinstance(self.api_meter_type, Unset):
+            api_meter_type = UNSET
+        else:
+            api_meter_type = self.api_meter_type
 
-        api_account = self.api_account
+        api_account: None | str | Unset
+        if isinstance(self.api_account, Unset):
+            api_account = UNSET
+        else:
+            api_account = self.api_account
 
-        other_properties: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.other_properties, Unset):
+        other_properties: dict[str, Any] | None | Unset
+        if isinstance(self.other_properties, Unset):
+            other_properties = UNSET
+        elif isinstance(
+            self.other_properties, ApiMeterPullRemoteDevicePostInputModelOtherPropertiesType0
+        ):
             other_properties = self.other_properties.to_dict()
+        else:
+            other_properties = self.other_properties
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -67,25 +87,61 @@ class ApiMeterPullRemoteDevicePostInputModel:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.api_meter_pull_remote_device_post_input_model_other_properties import (
-            ApiMeterPullRemoteDevicePostInputModelOtherProperties,
+        from ..models.api_meter_pull_remote_device_post_input_model_other_properties_type_0 import (
+            ApiMeterPullRemoteDevicePostInputModelOtherPropertiesType0,
         )
 
         d = dict(src_dict)
-        plant_id = d.pop("plantId", UNSET)
 
-        api_meter_type = d.pop("apiMeterType", UNSET)
+        def _parse_plant_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        api_account = d.pop("apiAccount", UNSET)
+        plant_id = _parse_plant_id(d.pop("plantId", UNSET))
 
-        _other_properties = d.pop("otherProperties", UNSET)
-        other_properties: ApiMeterPullRemoteDevicePostInputModelOtherProperties | Unset
-        if isinstance(_other_properties, Unset):
-            other_properties = UNSET
-        else:
-            other_properties = ApiMeterPullRemoteDevicePostInputModelOtherProperties.from_dict(
-                _other_properties
+        def _parse_api_meter_type(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        api_meter_type = _parse_api_meter_type(d.pop("apiMeterType", UNSET))
+
+        def _parse_api_account(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        api_account = _parse_api_account(d.pop("apiAccount", UNSET))
+
+        def _parse_other_properties(
+            data: object,
+        ) -> ApiMeterPullRemoteDevicePostInputModelOtherPropertiesType0 | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                other_properties_type_0 = (
+                    ApiMeterPullRemoteDevicePostInputModelOtherPropertiesType0.from_dict(data)
+                )
+
+                return other_properties_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(
+                ApiMeterPullRemoteDevicePostInputModelOtherPropertiesType0 | None | Unset, data
             )
+
+        other_properties = _parse_other_properties(d.pop("otherProperties", UNSET))
 
         api_meter_pull_remote_device_post_input_model = cls(
             plant_id=plant_id,

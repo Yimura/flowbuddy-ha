@@ -22,21 +22,26 @@ T = TypeVar("T", bound="ApiAccountOutputListModel")
 class ApiAccountOutputListModel:
     """
     Attributes:
-        api_accounts (list[ApiAccountOutputModel] | Unset):
+        api_accounts (list[ApiAccountOutputModel] | None | Unset):
     """
 
-    api_accounts: list[ApiAccountOutputModel] | Unset = UNSET
+    api_accounts: list[ApiAccountOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.api_account_output_model import ApiAccountOutputModel
 
-        api_accounts: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.api_accounts, Unset):
+        api_accounts: list[dict[str, Any]] | None | Unset
+        if isinstance(self.api_accounts, Unset):
+            api_accounts = UNSET
+        elif isinstance(self.api_accounts, list):
             api_accounts = []
-            for api_accounts_item_data in self.api_accounts:
-                api_accounts_item = api_accounts_item_data.to_dict()
-                api_accounts.append(api_accounts_item)
+            for api_accounts_type_0_item_data in self.api_accounts:
+                api_accounts_type_0_item = api_accounts_type_0_item_data.to_dict()
+                api_accounts.append(api_accounts_type_0_item)
+
+        else:
+            api_accounts = self.api_accounts
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,14 +56,30 @@ class ApiAccountOutputListModel:
         from ..models.api_account_output_model import ApiAccountOutputModel
 
         d = dict(src_dict)
-        _api_accounts = d.pop("apiAccounts", UNSET)
-        api_accounts: list[ApiAccountOutputModel] | Unset = UNSET
-        if _api_accounts is not UNSET:
-            api_accounts = []
-            for api_accounts_item_data in _api_accounts:
-                api_accounts_item = ApiAccountOutputModel.from_dict(api_accounts_item_data)
 
-                api_accounts.append(api_accounts_item)
+        def _parse_api_accounts(data: object) -> list[ApiAccountOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                api_accounts_type_0 = []
+                _api_accounts_type_0 = data
+                for api_accounts_type_0_item_data in _api_accounts_type_0:
+                    api_accounts_type_0_item = ApiAccountOutputModel.from_dict(
+                        api_accounts_type_0_item_data
+                    )
+
+                    api_accounts_type_0.append(api_accounts_type_0_item)
+
+                return api_accounts_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[ApiAccountOutputModel] | None | Unset, data)
+
+        api_accounts = _parse_api_accounts(d.pop("apiAccounts", UNSET))
 
         api_account_output_list_model = cls(
             api_accounts=api_accounts,

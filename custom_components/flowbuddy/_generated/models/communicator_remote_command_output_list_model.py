@@ -24,10 +24,10 @@ T = TypeVar("T", bound="CommunicatorRemoteCommandOutputListModel")
 class CommunicatorRemoteCommandOutputListModel:
     """
     Attributes:
-        communicator_remote_commands (list[CommunicatorRemoteCommandOutputModel] | Unset):
+        communicator_remote_commands (list[CommunicatorRemoteCommandOutputModel] | None | Unset):
     """
 
-    communicator_remote_commands: list[CommunicatorRemoteCommandOutputModel] | Unset = UNSET
+    communicator_remote_commands: list[CommunicatorRemoteCommandOutputModel] | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -35,12 +35,19 @@ class CommunicatorRemoteCommandOutputListModel:
             CommunicatorRemoteCommandOutputModel,
         )
 
-        communicator_remote_commands: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.communicator_remote_commands, Unset):
+        communicator_remote_commands: list[dict[str, Any]] | None | Unset
+        if isinstance(self.communicator_remote_commands, Unset):
+            communicator_remote_commands = UNSET
+        elif isinstance(self.communicator_remote_commands, list):
             communicator_remote_commands = []
-            for communicator_remote_commands_item_data in self.communicator_remote_commands:
-                communicator_remote_commands_item = communicator_remote_commands_item_data.to_dict()
-                communicator_remote_commands.append(communicator_remote_commands_item)
+            for communicator_remote_commands_type_0_item_data in self.communicator_remote_commands:
+                communicator_remote_commands_type_0_item = (
+                    communicator_remote_commands_type_0_item_data.to_dict()
+                )
+                communicator_remote_commands.append(communicator_remote_commands_type_0_item)
+
+        else:
+            communicator_remote_commands = self.communicator_remote_commands
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -57,16 +64,40 @@ class CommunicatorRemoteCommandOutputListModel:
         )
 
         d = dict(src_dict)
-        _communicator_remote_commands = d.pop("communicatorRemoteCommands", UNSET)
-        communicator_remote_commands: list[CommunicatorRemoteCommandOutputModel] | Unset = UNSET
-        if _communicator_remote_commands is not UNSET:
-            communicator_remote_commands = []
-            for communicator_remote_commands_item_data in _communicator_remote_commands:
-                communicator_remote_commands_item = CommunicatorRemoteCommandOutputModel.from_dict(
-                    communicator_remote_commands_item_data
-                )
 
-                communicator_remote_commands.append(communicator_remote_commands_item)
+        def _parse_communicator_remote_commands(
+            data: object,
+        ) -> list[CommunicatorRemoteCommandOutputModel] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                communicator_remote_commands_type_0 = []
+                _communicator_remote_commands_type_0 = data
+                for (
+                    communicator_remote_commands_type_0_item_data
+                ) in _communicator_remote_commands_type_0:
+                    communicator_remote_commands_type_0_item = (
+                        CommunicatorRemoteCommandOutputModel.from_dict(
+                            communicator_remote_commands_type_0_item_data
+                        )
+                    )
+
+                    communicator_remote_commands_type_0.append(
+                        communicator_remote_commands_type_0_item
+                    )
+
+                return communicator_remote_commands_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[CommunicatorRemoteCommandOutputModel] | None | Unset, data)
+
+        communicator_remote_commands = _parse_communicator_remote_commands(
+            d.pop("communicatorRemoteCommands", UNSET)
+        )
 
         communicator_remote_command_output_list_model = cls(
             communicator_remote_commands=communicator_remote_commands,

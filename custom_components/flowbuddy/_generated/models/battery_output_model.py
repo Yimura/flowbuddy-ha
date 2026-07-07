@@ -22,42 +22,70 @@ T = TypeVar("T", bound="BatteryOutputModel")
 class BatteryOutputModel:
     """
     Attributes:
-        resource_uri (str | Unset):
-        capacity (float | Unset):
-        max_charge_power (float | Unset):
-        max_discharge_power (float | Unset):
-        last_set_charge_power (float | Unset):
-        external_id (str | Unset):
-        info (MeterReferenceModel | Unset):
+        resource_uri (None | str | Unset):
+        capacity (float | None | Unset):
+        max_charge_power (float | None | Unset):
+        max_discharge_power (float | None | Unset):
+        last_set_charge_power (float | None | Unset):
+        external_id (None | str | Unset):
+        info (MeterReferenceModel | None | Unset):
     """
 
-    resource_uri: str | Unset = UNSET
-    capacity: float | Unset = UNSET
-    max_charge_power: float | Unset = UNSET
-    max_discharge_power: float | Unset = UNSET
-    last_set_charge_power: float | Unset = UNSET
-    external_id: str | Unset = UNSET
-    info: MeterReferenceModel | Unset = UNSET
+    resource_uri: None | str | Unset = UNSET
+    capacity: float | None | Unset = UNSET
+    max_charge_power: float | None | Unset = UNSET
+    max_discharge_power: float | None | Unset = UNSET
+    last_set_charge_power: float | None | Unset = UNSET
+    external_id: None | str | Unset = UNSET
+    info: MeterReferenceModel | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.meter_reference_model import MeterReferenceModel
 
-        resource_uri = self.resource_uri
+        resource_uri: None | str | Unset
+        if isinstance(self.resource_uri, Unset):
+            resource_uri = UNSET
+        else:
+            resource_uri = self.resource_uri
 
-        capacity = self.capacity
+        capacity: float | None | Unset
+        if isinstance(self.capacity, Unset):
+            capacity = UNSET
+        else:
+            capacity = self.capacity
 
-        max_charge_power = self.max_charge_power
+        max_charge_power: float | None | Unset
+        if isinstance(self.max_charge_power, Unset):
+            max_charge_power = UNSET
+        else:
+            max_charge_power = self.max_charge_power
 
-        max_discharge_power = self.max_discharge_power
+        max_discharge_power: float | None | Unset
+        if isinstance(self.max_discharge_power, Unset):
+            max_discharge_power = UNSET
+        else:
+            max_discharge_power = self.max_discharge_power
 
-        last_set_charge_power = self.last_set_charge_power
+        last_set_charge_power: float | None | Unset
+        if isinstance(self.last_set_charge_power, Unset):
+            last_set_charge_power = UNSET
+        else:
+            last_set_charge_power = self.last_set_charge_power
 
-        external_id = self.external_id
+        external_id: None | str | Unset
+        if isinstance(self.external_id, Unset):
+            external_id = UNSET
+        else:
+            external_id = self.external_id
 
-        info: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.info, Unset):
+        info: dict[str, Any] | None | Unset
+        if isinstance(self.info, Unset):
+            info = UNSET
+        elif isinstance(self.info, MeterReferenceModel):
             info = self.info.to_dict()
+        else:
+            info = self.info
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -84,24 +112,77 @@ class BatteryOutputModel:
         from ..models.meter_reference_model import MeterReferenceModel
 
         d = dict(src_dict)
-        resource_uri = d.pop("resourceUri", UNSET)
 
-        capacity = d.pop("capacity", UNSET)
+        def _parse_resource_uri(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        max_charge_power = d.pop("maxChargePower", UNSET)
+        resource_uri = _parse_resource_uri(d.pop("resourceUri", UNSET))
 
-        max_discharge_power = d.pop("maxDischargePower", UNSET)
+        def _parse_capacity(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
 
-        last_set_charge_power = d.pop("lastSetChargePower", UNSET)
+        capacity = _parse_capacity(d.pop("capacity", UNSET))
 
-        external_id = d.pop("externalId", UNSET)
+        def _parse_max_charge_power(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
 
-        _info = d.pop("info", UNSET)
-        info: MeterReferenceModel | Unset
-        if isinstance(_info, Unset):
-            info = UNSET
-        else:
-            info = MeterReferenceModel.from_dict(_info)
+        max_charge_power = _parse_max_charge_power(d.pop("maxChargePower", UNSET))
+
+        def _parse_max_discharge_power(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
+
+        max_discharge_power = _parse_max_discharge_power(d.pop("maxDischargePower", UNSET))
+
+        def _parse_last_set_charge_power(data: object) -> float | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(float | None | Unset, data)
+
+        last_set_charge_power = _parse_last_set_charge_power(d.pop("lastSetChargePower", UNSET))
+
+        def _parse_external_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        external_id = _parse_external_id(d.pop("externalId", UNSET))
+
+        def _parse_info(data: object) -> MeterReferenceModel | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                info_type_1 = MeterReferenceModel.from_dict(data)
+
+                return info_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(MeterReferenceModel | None | Unset, data)
+
+        info = _parse_info(d.pop("info", UNSET))
 
         battery_output_model = cls(
             resource_uri=resource_uri,
