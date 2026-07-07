@@ -181,5 +181,8 @@ async def test_unload_entry(hass, load_fixture, respx_mock):
     # deleting them outright (standard HA teardown behavior).
     sensor_states = [hass.states.get(eid) for eid in hass.states.async_entity_ids("sensor")]
     assert sensor_states and all(s.state == "unavailable" for s in sensor_states)
-    assert api._http.is_closed
+    # HA owns the httpx client lifecycle via create_async_httpx_client;
+    # FlowBuddyClient.aclose() is intentionally a no-op so we don't tear
+    # down a client HA reuses across integration reloads.
+    assert not api._http.is_closed
     assert boost_task.cancelled()

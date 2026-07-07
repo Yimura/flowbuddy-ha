@@ -16,6 +16,7 @@ from typing import Any
 import httpx
 import voluptuous as vol
 from homeassistant import config_entries
+from homeassistant.helpers.httpx_client import create_async_httpx_client
 
 from .api import FlowBuddyClient
 from .auth import InvalidCredentialsError, KeycloakTokenProvider
@@ -118,7 +119,12 @@ class FlowBuddyConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         (connection failure, timeout, unexpected 5xx, ...) propagate for the
         caller to map to ``cannot_connect``.
         """
-        http = httpx.AsyncClient()
+        # Direct httpx.AsyncClient() calls ssl.SSLContext.load_verify_locations()
+        # during __init__ — a blocking file read that HA's blocking-call
+        # detector treats as an "unknown error" inside the event loop. Use
+        # HA's helper which returns a client backed by HA's pre-warmed shared
+        # SSL context (context is created once at HA startup off-loop).
+        http = create_async_httpx_client(self.hass)
         try:
             if self._auth_mode == AUTH_MODE_PASSWORD:
                 provider = KeycloakTokenProvider(

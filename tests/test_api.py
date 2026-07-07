@@ -301,6 +301,9 @@ async def test_list_measurements(client, load_fixture, respx_mock):
     assert respx_mock.calls.last.request.url.params["installation"] == iid
 
 
-async def test_aclose_closes_http_client(client):
+async def test_aclose_is_noop_ha_owns_client_lifecycle(client):
+    # HA's create_async_httpx_client returns an auto-cleaned shared client;
+    # FlowBuddyClient.aclose() must NOT close it, otherwise integration
+    # reload tears down a client HA still uses (frame.py:350 warning).
     await client.aclose()
-    assert client._http.is_closed
+    assert not client._http.is_closed

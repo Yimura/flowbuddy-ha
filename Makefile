@@ -22,7 +22,7 @@ regen:
 		--meta none
 	ruff format $(GEN_DIR)
 	ruff check --fix --unsafe-fixes $(GEN_DIR) || true
-	@echo '"""Auto-generated FlexMon v1 client. DO NOT EDIT — run \`make regen\`."""' > $(GEN_DIR)/__init__.py
+	@printf '%s\n' '"""Auto-generated FlexMon v1 client. DO NOT EDIT - run make regen."""' > $(GEN_DIR)/__init__.py
 	@echo 'spec_version = "V1.0.0"' >> $(GEN_DIR)/__init__.py
 	@echo 'spec_sha256 = "'$$(cat $(SPEC).sha256)'"' >> $(GEN_DIR)/__init__.py
 

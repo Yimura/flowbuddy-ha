@@ -22,6 +22,7 @@ import time
 from typing import TYPE_CHECKING, Any
 
 import httpx
+from homeassistant.helpers.httpx_client import create_async_httpx_client
 import voluptuous as vol
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, ServiceCall
@@ -292,22 +293,24 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     # left this decision to P9.A; the call made at the P3 review was to
     # DEFER the shared-client refactor and ship the simpler private-pool
     # version first.
-    http = httpx.AsyncClient()
+    #
+    # Direct httpx.AsyncClient() calls ssl.SSLContext.load_verify_locations()
+    # during __init__ — a blocking file read that HA's blocking-call detector
+    # treats as an error inside the event loop. Use HA's helper which returns
+    # a client backed by HA's pre-warmed shared SSL context.
+    http = create_async_httpx_client(hass)
     api = FlowBuddyClient(http=http, token_provider=_build_token_provider(http, entry.data))
     installation_id = entry.data[CONF_INSTALLATION_ID]
 
     try:
         installations = await api.list_installations()
     except InvalidCredentialsError as exc:
-        await http.aclose()
         raise ConfigEntryAuthFailed(str(exc)) from exc
     except Exception as exc:
-        await http.aclose()
         raise ConfigEntryNotReady(f"Error communicating with FlowBuddy: {exc}") from exc
 
     installation = next((i for i in installations if i.uuid == installation_id), None)
     if installation is None:
-        await http.aclose()
         raise ConfigEntryNotReady(
             f"Installation {installation_id} was not found for these credentials"
         )
@@ -337,10 +340,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             communicators,
         ) = results
     except InvalidCredentialsError as exc:
-        await http.aclose()
         raise ConfigEntryAuthFailed(str(exc)) from exc
     except Exception as exc:
-        await http.aclose()
         raise ConfigEntryNotReady(f"Error communicating with FlowBuddy: {exc}") from exc
 
     entry_data: dict[str, Any] = {
@@ -370,7 +371,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         await entry_data["alarms_coord"].async_config_entry_first_refresh()
     except ConfigEntryNotReady:
         hass.data[DOMAIN].pop(entry.entry_id, None)
-        await http.aclose()
         raise
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
